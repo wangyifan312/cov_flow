@@ -1,0 +1,132 @@
+{
+  "schema_version": "tb_index.v1",
+  "env_root": "tb/env",
+  "sequence_root": "tb/sequences",
+  "base_tests": [
+    {
+      "name": "dma_base_test",
+      "file": "tb/tests/dma_base_test.sv",
+      "extends": "uvm_test",
+      "description": "Base test for all DMA tests. Sets up env, config, and default sequences.",
+      "config_knobs": [
+        "num_channels",
+        "enable_interrupts",
+        "descriptor_mode"
+      ]
+    }
+  ],
+  "sequences": [
+    {
+      "name": "dma_base_seq",
+      "file": "tb/sequences/dma_base_seq.sv",
+      "extends": "uvm_sequence",
+      "description": "Base sequence providing common DMA operations.",
+      "feature_tags": [
+        "dma",
+        "base"
+      ]
+    },
+    {
+      "name": "dma_normal_desc_seq",
+      "file": "tb/sequences/dma_normal_desc_seq.sv",
+      "extends": "dma_base_seq",
+      "description": "Sequence for normal descriptor transfers.",
+      "feature_tags": [
+        "descriptor",
+        "normal_mode"
+      ]
+    },
+    {
+      "name": "dma_desc_base_seq",
+      "file": "tb/sequences/dma_desc_base_seq.sv",
+      "extends": "dma_base_seq",
+      "description": "Base sequence for descriptor operations including linked-list and scatter-gather.",
+      "feature_tags": [
+        "descriptor",
+        "linked_list",
+        "scatter_gather",
+        "chaining"
+      ]
+    },
+    {
+      "name": "dma_interrupt_seq",
+      "file": "tb/sequences/dma_interrupt_seq.sv",
+      "extends": "dma_base_seq",
+      "description": "Sequence for interrupt generation and handling.",
+      "feature_tags": [
+        "interrupt",
+        "error",
+        "coalescing"
+      ]
+    },
+    {
+      "name": "dma_burst_seq",
+      "file": "tb/sequences/dma_burst_seq.sv",
+      "extends": "dma_base_seq",
+      "description": "Sequence for AXI burst operations.",
+      "feature_tags": [
+        "burst",
+        "axi",
+        "wrap"
+      ]
+    },
+    {
+      "name": "dma_power_seq",
+      "file": "tb/sequences/dma_power_seq.sv",
+      "extends": "dma_base_seq",
+      "description": "Sequence for power management operations.",
+      "feature_tags": [
+        "power",
+        "clock_gating",
+        "retention"
+      ]
+    }
+  ],
+  "existing_tests": [
+    {
+      "name": "dma_normal_desc_test",
+      "file": "tb/tests/dma_normal_desc_test.sv",
+      "extends": "dma_base_test",
+      "sequences": [
+        "dma_normal_desc_seq"
+      ],
+      "feature_tags": [
+        "descriptor",
+        "normal_mode"
+      ]
+    },
+    {
+      "name": "dma_single_desc_random_test",
+      "file": "tb/tests/dma_single_desc_random_test.sv",
+      "extends": "dma_base_test",
+      "sequences": [
+        "dma_normal_desc_seq"
+      ],
+      "feature_tags": [
+        "descriptor",
+        "normal_mode",
+        "random"
+      ]
+    }
+  ],
+  "config_knobs": [
+    {
+      "name": "num_channels",
+      "type": "int",
+      "default": 4,
+      "plusarg": "+NUM_CHANNELS=%d"
+    },
+    {
+      "name": "enable_interrupts",
+      "type": "bit",
+      "default": 1,
+      "plusarg": "+EN_INT=%d"
+    },
+    {
+      "name": "descriptor_mode",
+      "type": "string",
+      "default": "normal",
+      "plusarg": "+DESC_MODE=%s"
+    }
+  ]
+}

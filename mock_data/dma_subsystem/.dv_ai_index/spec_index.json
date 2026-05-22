@@ -1,0 +1,126 @@
+{
+  "schema_version": "spec_index.v1",
+  "source": "spec/dma_fs.md",
+  "sections": [
+    {
+      "section_id": "spec_dma_overview",
+      "title": "1. DMA Subsystem Overview",
+      "page_range": "1-5",
+      "feature_tags": [
+        "dma",
+        "overview"
+      ],
+      "summary": "High-level architecture of the DMA subsystem including block diagram, address map, and operating modes."
+    },
+    {
+      "section_id": "spec_dma_descriptor_format",
+      "title": "2. Descriptor Format",
+      "page_range": "6-15",
+      "feature_tags": [
+        "descriptor",
+        "normal_mode",
+        "descriptor_format"
+      ],
+      "summary": "Defines the normal descriptor layout: source address, destination address, transfer size, control flags."
+    },
+    {
+      "section_id": "spec_dma_linked_list",
+      "title": "3. Linked-List Descriptor Mode",
+      "page_range": "16-22",
+      "feature_tags": [
+        "descriptor",
+        "linked_list",
+        "chaining"
+      ],
+      "summary": "Linked-list mode allows chaining multiple descriptors via a next-pointer field. Enabled by DMA_CFG.LL_MODE_EN. Parser transitions to LINK_DESC state when ll_mode_en is asserted."
+    },
+    {
+      "section_id": "spec_dma_scatter_gather",
+      "title": "4. Scatter-Gather Descriptor Mode",
+      "page_range": "23-30",
+      "feature_tags": [
+        "descriptor",
+        "scatter_gather"
+      ],
+      "summary": "Scatter-gather mode supports non-contiguous memory regions. Enabled by DMA_CFG.SG_MODE_EN."
+    },
+    {
+      "section_id": "spec_dma_chaining",
+      "title": "5. Descriptor Chaining",
+      "page_range": "31-38",
+      "feature_tags": [
+        "descriptor",
+        "chaining",
+        "back_to_back"
+      ],
+      "summary": "Descriptor chaining allows back-to-back descriptor processing without CPU intervention. Chain of 3+ descriptors exercises the pipeline depth."
+    },
+    {
+      "section_id": "spec_dma_alignment",
+      "title": "6. Address Alignment Rules",
+      "page_range": "39-42",
+      "feature_tags": [
+        "descriptor",
+        "alignment",
+        "error"
+      ],
+      "summary": "Source and destination addresses must be aligned to transfer size. Misaligned addresses trigger an error interrupt."
+    },
+    {
+      "section_id": "spec_dma_interrupts",
+      "title": "7. Interrupt System",
+      "page_range": "43-55",
+      "feature_tags": [
+        "interrupt",
+        "coalescing",
+        "masking"
+      ],
+      "summary": "DMA supports completion, error, and coalescing interrupts. Coalescing can be by count threshold or timeout. Masked interrupts remain pending until unmasked."
+    },
+    {
+      "section_id": "spec_dma_errors",
+      "title": "8. Error Handling",
+      "page_range": "56-62",
+      "feature_tags": [
+        "error",
+        "interrupt",
+        "bus_error"
+      ],
+      "summary": "Error conditions: bus error, descriptor fetch error, alignment error, timeout. Each generates an error interrupt if unmasked."
+    },
+    {
+      "section_id": "spec_dma_power",
+      "title": "9. Power Management",
+      "page_range": "63-70",
+      "feature_tags": [
+        "power",
+        "clock_gating",
+        "retention"
+      ],
+      "summary": "Clock gating on idle channels. Retention mode preserves register state during power-down. Retention mode is only available in specific silicon revisions."
+    },
+    {
+      "section_id": "spec_dma_burst",
+      "title": "10. AXI Burst Configuration",
+      "page_range": "71-80",
+      "feature_tags": [
+        "burst",
+        "axi",
+        "wrap",
+        "increment"
+      ],
+      "summary": "Supports INCR, WRAP, and FIXED burst types. Max burst length configurable up to 256 beats. WRAP burst wraps at power-of-2 boundaries."
+    },
+    {
+      "section_id": "spec_dma_performance",
+      "title": "11. Performance Characteristics",
+      "page_range": "81-90",
+      "feature_tags": [
+        "performance",
+        "throughput",
+        "back_to_back"
+      ],
+      "summary": "Back-to-back descriptor fetch achieves peak throughput when pipeline is full. Measured via monitor timestamps."
+    }
+  ]
+}

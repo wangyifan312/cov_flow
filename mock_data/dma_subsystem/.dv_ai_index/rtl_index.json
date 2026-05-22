@@ -1,0 +1,308 @@
+{
+  "schema_version": "rtl_index.v1",
+  "source": "text_analysis",
+  "elaborated": false,
+  "modules": [
+    {
+      "name": "dma_subsystem",
+      "file": "rtl/dma_subsystem.sv",
+      "line_range": [
+        1,
+        50
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "axi_aw",
+        "axi_ar",
+        "axi_w",
+        "axi_r",
+        "axi_b",
+        "irq_out"
+      ],
+      "instances": [
+        {
+          "module": "dma_core",
+          "name": "u_dma",
+          "line": 25
+        }
+      ],
+      "parameters": []
+    },
+    {
+      "name": "dma_core",
+      "file": "rtl/dma_core.sv",
+      "line_range": [
+        1,
+        200
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "cfg_if",
+        "desc_if",
+        "axi_m",
+        "irq"
+      ],
+      "instances": [
+        {
+          "module": "dma_desc_parser",
+          "name": "u_desc_parser",
+          "line": 80
+        },
+        {
+          "module": "dma_axi_master",
+          "name": "u_axi_master",
+          "line": 95
+        },
+        {
+          "module": "dma_int_ctrl",
+          "name": "u_int_ctrl",
+          "line": 110
+        },
+        {
+          "module": "dma_power_ctrl",
+          "name": "u_power",
+          "line": 125
+        },
+        {
+          "module": "dma_monitor",
+          "name": "u_monitor",
+          "line": 140
+        }
+      ],
+      "parameters": [
+        {
+          "name": "NUM_CHANNELS",
+          "default": 4
+        }
+      ]
+    },
+    {
+      "name": "dma_desc_parser",
+      "file": "rtl/dma_desc_parser.sv",
+      "line_range": [
+        1,
+        300
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "ll_mode_en",
+        "sg_mode_en",
+        "desc_valid",
+        "desc_data",
+        "chain_valid",
+        "xfer_size",
+        "addr_misaligned",
+        "fetch_ack"
+      ],
+      "signals": [
+        {
+          "name": "ll_mode_en",
+          "type": "logic",
+          "width": 1,
+          "line": 42
+        },
+        {
+          "name": "sg_mode_en",
+          "type": "logic",
+          "width": 1,
+          "line": 43
+        },
+        {
+          "name": "chain_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 60
+        },
+        {
+          "name": "xfer_size",
+          "type": "logic",
+          "width": 16,
+          "line": 75
+        },
+        {
+          "name": "addr_misaligned",
+          "type": "logic",
+          "width": 1,
+          "line": 90
+        },
+        {
+          "name": "fetch_ack",
+          "type": "logic",
+          "width": 1,
+          "line": 110
+        }
+      ],
+      "instances": [],
+      "parameters": [],
+      "fsm_states": [
+        "IDLE",
+        "FETCH_DESC",
+        "PARSE_NORMAL",
+        "PARSE_LINKED",
+        "PARSE_SG",
+        "DONE"
+      ]
+    },
+    {
+      "name": "dma_axi_master",
+      "file": "rtl/dma_axi_master.sv",
+      "line_range": [
+        1,
+        250
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "burst_wrap",
+        "burst_len",
+        "awaddr",
+        "araddr",
+        "wdata",
+        "rdata"
+      ],
+      "signals": [
+        {
+          "name": "burst_wrap",
+          "type": "logic",
+          "width": 1,
+          "line": 35
+        },
+        {
+          "name": "burst_len",
+          "type": "logic",
+          "width": 8,
+          "line": 36
+        }
+      ],
+      "instances": [],
+      "parameters": []
+    },
+    {
+      "name": "dma_int_ctrl",
+      "file": "rtl/dma_int_ctrl.sv",
+      "line_range": [
+        1,
+        180
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "error_irq",
+        "comp_irq",
+        "coal_timer_exp",
+        "coal_count_hit",
+        "masked_irq",
+        "irq_out"
+      ],
+      "signals": [
+        {
+          "name": "error_irq",
+          "type": "logic",
+          "width": 1,
+          "line": 30
+        },
+        {
+          "name": "coal_timer_exp",
+          "type": "logic",
+          "width": 1,
+          "line": 55
+        },
+        {
+          "name": "coal_count_hit",
+          "type": "logic",
+          "width": 1,
+          "line": 70
+        },
+        {
+          "name": "masked_irq",
+          "type": "logic",
+          "width": 4,
+          "line": 90
+        }
+      ],
+      "instances": [],
+      "parameters": []
+    },
+    {
+      "name": "dma_power_ctrl",
+      "file": "rtl/dma_power_ctrl.sv",
+      "line_range": [
+        1,
+        100
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "clk_gate_en",
+        "retention_mode",
+        "idle_detect",
+        "power_state"
+      ],
+      "signals": [
+        {
+          "name": "clk_gate_en",
+          "type": "logic",
+          "width": 1,
+          "line": 25
+        },
+        {
+          "name": "retention_mode",
+          "type": "logic",
+          "width": 1,
+          "line": 30
+        },
+        {
+          "name": "idle_detect",
+          "type": "logic",
+          "width": 4,
+          "line": 45
+        }
+      ],
+      "instances": [],
+      "parameters": []
+    },
+    {
+      "name": "dma_monitor",
+      "file": "rtl/dma_monitor.sv",
+      "line_range": [
+        1,
+        120
+      ],
+      "ports": [
+        "clk",
+        "rst_n",
+        "fetch_timestamp",
+        "desc_valid",
+        "xfer_complete"
+      ],
+      "signals": [
+        {
+          "name": "fetch_timestamp",
+          "type": "logic",
+          "width": 32,
+          "line": 30
+        }
+      ],
+      "instances": [],
+      "parameters": []
+    }
+  ],
+  "hierarchy": {
+    "tb_top": {
+      "u_dut": {
+        "u_dma_subsys": {
+          "u_dma": {
+            "u_desc_parser": {},
+            "u_axi_master": {},
+            "u_int_ctrl": {},
+            "u_power": {},
+            "u_monitor": {}
+          }
+        }
+      }
+    }
+  }
+}

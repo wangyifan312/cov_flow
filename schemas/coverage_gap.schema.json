@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "coverage_gap.schema.json",
+  "title": "Coverage Gap",
+  "description": "A single coverage gap extracted from a coverage report.",
+  "type": "object",
+  "required": [
+    "gap_id",
+    "coverage_type",
+    "covergroup",
+    "coverpoint",
+    "bin",
+    "hit_count",
+    "goal"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "gap_id": {
+      "type": "string",
+      "description": "Stable unique identifier for this gap.",
+      "pattern": "^GAP_[0-9]{4}$"
+    },
+    "coverage_type": {
+      "type": "string",
+      "enum": ["functional", "code", "toggle", "branch", "condition", "fsm"],
+      "description": "Type of coverage."
+    },
+    "covergroup": {
+      "type": "string",
+      "description": "Name of the covergroup containing this gap."
+    },
+    "coverpoint": {
+      "type": "string",
+      "description": "Name of the coverpoint containing this gap."
+    },
+    "bin": {
+      "type": "string",
+      "description": "Name of the uncovered bin."
+    },
+    "hit_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Current hit count for this bin."
+    },
+    "goal": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Target hit count for this bin."
+    },
+    "source_file": {
+      "type": "string",
+      "description": "Path to the coverage model source file."
+    },
+    "source_line": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Line number in the coverage model source."
+    },
+    "cluster_id": {
+      "type": "string",
+      "description": "Cluster identifier for grouping related gaps."
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "Missing Stimulus",
+        "Config Missing",
+        "Constraint Too Tight",
+        "Coverage Model Issue",
+        "Monitor Sampling Issue",
+        "Unreachable Candidate"
+      ],
+      "description": "Gap classification from triage."
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3"],
+      "description": "Priority ranking."
+    },
+    "related_register": {
+      "type": ["string", "null"],
+      "description": "Register field likely controlling this gap, or null if unknown."
+    },
+    "related_spec_section": {
+      "type": ["string", "null"],
+      "description": "Relevant spec section identifier, or null if unknown."
+    },
+    "related_rtl_signal": {
+      "type": ["string", "null"],
+      "description": "Relevant RTL signal, or null if unknown."
+    }
+  }
+}

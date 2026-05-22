@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "testcase_patch.schema.json",
+  "title": "Testcase Patch",
+  "description": "A minimal UVM testcase or sequence patch generated to close a coverage gap.",
+  "type": "object",
+  "required": [
+    "patch_id",
+    "gap_id",
+    "new_files",
+    "modified_files",
+    "base_reuse",
+    "compile_command",
+    "run_command",
+    "coverage_target",
+    "review_checklist"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "patch_id": {
+      "type": "string",
+      "description": "Unique patch identifier.",
+      "pattern": "^PATCH_GAP_[0-9]{4}_[0-9]{3}$"
+    },
+    "gap_id": {
+      "type": "string",
+      "pattern": "^GAP_[0-9]{4}$",
+      "description": "Target gap identifier."
+    },
+    "new_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of new file paths to be created."
+    },
+    "modified_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of existing file paths to be modified (should be empty in MVP)."
+    },
+    "base_reuse": {
+      "type": "object",
+      "required": ["base_test"],
+      "additionalProperties": false,
+      "properties": {
+        "base_test": { "type": "string", "description": "Base test class being extended." },
+        "base_sequence": { "type": "string", "description": "Base sequence class being extended." }
+      }
+    },
+    "compile_command": {
+      "type": "string",
+      "description": "Command to compile the new test.",
+      "examples": ["make compile TEST=dma_linked_list_desc_test"]
+    },
+    "run_command": {
+      "type": "string",
+      "description": "Command to run the new test.",
+      "examples": ["make run TEST=dma_linked_list_desc_test SEED=1"]
+    },
+    "coverage_target": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Coverage targets this patch aims to close (covergroup.coverpoint.bin).",
+      "minItems": 1
+    },
+    "review_checklist": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Items the engineer should verify before merging.",
+      "minItems": 1
+    }
+  }
+}

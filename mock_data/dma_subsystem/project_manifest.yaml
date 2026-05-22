@@ -1,0 +1,47 @@
+project: dma_subsystem
+owner_team: dv_dma
+top_instance: tb_top.u_dut.u_dma
+
+coverage:
+  default_report_id: latest
+  reports_root: coverage/urg_report
+  format: urg_html
+  coverage_model_root: coverage/coverage_model
+
+rtl:
+  filelist: rtl/filelist.f
+  design_db:
+    type: none
+  index_path: .dv_ai_index
+
+spec:
+  fs:
+    path: spec/dma_fs.md
+    index_path: .dv_ai_index
+  micro_arch:
+    path: spec/dma_uarch.md
+    index_path: .dv_ai_index
+
+registers:
+  source:
+    type: yaml
+    path: registers/dma_regs.yaml
+  ral_root: tb/reg_model
+  index_path: .dv_ai_index
+
+testbench:
+  type: uvm
+  env_root: tb/env
+  base_test: dma_base_test
+  sequence_root: tb/sequences
+  index_path: .dv_ai_index
+
+simulation:
+  compile_cmd_template: "make compile TEST={test}"
+  run_cmd_template: "make run TEST={test} SEED={seed}"
+  coverage_cmd_template: "make cov TEST={test}"
+
+policy:
+  allow_direct_file_modification: false
+  allow_running_simulation: true
+  require_human_review_before_commit: true

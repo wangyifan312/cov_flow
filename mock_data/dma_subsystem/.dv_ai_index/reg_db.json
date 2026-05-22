@@ -1,0 +1,216 @@
+{
+  "schema_version": "reg_db.v1",
+  "registers": [
+    {
+      "block": "DMA",
+      "register": "DMA_CFG",
+      "offset": "0x000",
+      "fields": [
+        {
+          "field": "LL_MODE_EN",
+          "bit_range": "[0]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable linked-list descriptor mode",
+          "ral_path": "ral.dma.DMA_CFG.LL_MODE_EN",
+          "feature_tags": [
+            "linked_list",
+            "descriptor"
+          ]
+        },
+        {
+          "field": "SG_MODE_EN",
+          "bit_range": "[1]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable scatter-gather descriptor mode",
+          "ral_path": "ral.dma.DMA_CFG.SG_MODE_EN",
+          "feature_tags": [
+            "scatter_gather",
+            "descriptor"
+          ]
+        },
+        {
+          "field": "CH_ENABLE",
+          "bit_range": "[7:4]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Channel enable bits (4 channels)",
+          "ral_path": "ral.dma.DMA_CFG.CH_ENABLE",
+          "feature_tags": [
+            "channel",
+            "control"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DMA",
+      "register": "DMA_DESC_CTRL",
+      "offset": "0x010",
+      "fields": [
+        {
+          "field": "XFER_SIZE",
+          "bit_range": "[15:0]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Transfer size in bytes (max 4096)",
+          "ral_path": "ral.dma.DMA_DESC_CTRL.XFER_SIZE",
+          "feature_tags": [
+            "descriptor",
+            "transfer"
+          ]
+        },
+        {
+          "field": "DESC_TYPE",
+          "bit_range": "[17:16]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Descriptor type: 0=normal, 1=linked, 2=scatter-gather",
+          "ral_path": "ral.dma.DMA_DESC_CTRL.DESC_TYPE",
+          "feature_tags": [
+            "descriptor"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DMA",
+      "register": "DMA_INT_MASK",
+      "offset": "0x020",
+      "fields": [
+        {
+          "field": "COMP_MASK",
+          "bit_range": "[0]",
+          "access": "RW",
+          "reset": "1",
+          "description": "Mask completion interrupt",
+          "ral_path": "ral.dma.DMA_INT_MASK.COMP_MASK",
+          "feature_tags": [
+            "interrupt",
+            "completion"
+          ]
+        },
+        {
+          "field": "ERROR_MASK",
+          "bit_range": "[1]",
+          "access": "RW",
+          "reset": "1",
+          "description": "Mask error interrupt",
+          "ral_path": "ral.dma.DMA_INT_MASK.ERROR_MASK",
+          "feature_tags": [
+            "interrupt",
+            "error"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DMA",
+      "register": "DMA_INT_COAL",
+      "offset": "0x024",
+      "fields": [
+        {
+          "field": "COUNT_THRESH",
+          "bit_range": "[7:0]",
+          "access": "RW",
+          "reset": "1",
+          "description": "Interrupt coalescing count threshold",
+          "ral_path": "ral.dma.DMA_INT_COAL.COUNT_THRESH",
+          "feature_tags": [
+            "interrupt",
+            "coalescing"
+          ]
+        },
+        {
+          "field": "TIMEOUT_VAL",
+          "bit_range": "[23:8]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Interrupt coalescing timeout value (cycles)",
+          "ral_path": "ral.dma.DMA_INT_COAL.TIMEOUT_VAL",
+          "feature_tags": [
+            "interrupt",
+            "coalescing",
+            "timeout"
+          ]
+        },
+        {
+          "field": "COAL_EN",
+          "bit_range": "[24]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable interrupt coalescing",
+          "ral_path": "ral.dma.DMA_INT_COAL.COAL_EN",
+          "feature_tags": [
+            "interrupt",
+            "coalescing"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DMA",
+      "register": "DMA_POWER",
+      "offset": "0x030",
+      "fields": [
+        {
+          "field": "CLOCK_GATE_EN",
+          "bit_range": "[0]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable clock gating on idle channels",
+          "ral_path": "ral.dma.DMA_POWER.CLOCK_GATE_EN",
+          "feature_tags": [
+            "power",
+            "clock_gating"
+          ]
+        },
+        {
+          "field": "RET_EN",
+          "bit_range": "[1]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable retention mode (silicon rev B+)",
+          "ral_path": "ral.dma.DMA_POWER.RET_EN",
+          "feature_tags": [
+            "power",
+            "retention"
+          ]
+        }
+      ]
+    },
+    {
+      "block": "DMA",
+      "register": "DMA_BURST_CTRL",
+      "offset": "0x040",
+      "fields": [
+        {
+          "field": "WRAP_EN",
+          "bit_range": "[0]",
+          "access": "RW",
+          "reset": "0",
+          "description": "Enable AXI WRAP burst type",
+          "ral_path": "ral.dma.DMA_BURST_CTRL.WRAP_EN",
+          "feature_tags": [
+            "burst",
+            "axi",
+            "wrap"
+          ]
+        },
+        {
+          "field": "MAX_LEN",
+          "bit_range": "[8:1]",
+          "access": "RW",
+          "reset": "16",
+          "description": "Maximum burst length (1-256)",
+          "ral_path": "ral.dma.DMA_BURST_CTRL.MAX_LEN",
+          "feature_tags": [
+            "burst",
+            "axi"
+          ]
+        }
+      ]
+    }
+  ]
+}

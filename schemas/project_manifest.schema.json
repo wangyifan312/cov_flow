@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "project_manifest.schema.json",
+  "title": "DV Project Manifest",
+  "description": "Declares project data locations, index paths, command templates, and policy switches for the DV AI Coverage Closure system.",
+  "type": "object",
+  "required": ["project", "top_instance", "coverage", "rtl", "registers", "testbench", "policy"],
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Project unique identifier, used by MCP tools to locate indexes.",
+      "minLength": 1
+    },
+    "owner_team": {
+      "type": "string",
+      "description": "Team responsible for this project's DV."
+    },
+    "top_instance": {
+      "type": "string",
+      "description": "Default top-level DUT or block instance path (e.g. tb_top.u_dut.u_dma)."
+    },
+    "coverage": {
+      "type": "object",
+      "required": ["reports_root", "coverage_model_root"],
+      "additionalProperties": false,
+      "properties": {
+        "default_report_id": {
+          "type": "string",
+          "description": "Default regression report ID. Use 'latest' for most recent.",
+          "default": "latest"
+        },
+        "reports_root": {
+          "type": "string",
+          "description": "Root directory for coverage reports (e.g. URG HTML output)."
+        },
+        "format": {
+          "type": "string",
+          "enum": ["urg_html", "vcs_xml", "vcs_csv"],
+          "description": "Coverage report format.",
+          "default": "urg_html"
+        },
+        "coverage_model_root": {
+          "type": "string",
+          "description": "Root directory for coverage model SystemVerilog source files."
+        }
+      }
+    },
+    "rtl": {
+      "type": "object",
+      "required": ["filelist"],
+      "additionalProperties": false,
+      "properties": {
+        "filelist": {
+          "type": "string",
+          "description": "Path to the RTL filelist (.f file)."
+        },
+        "design_db": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["verdi_kdb", "vcs_elab", "none"],
+              "description": "Design database type."
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the design database (e.g. simv.daidir)."
+            }
+          }
+        },
+        "index_path": {
+          "type": "string",
+          "description": "Path to the pre-built RTL index directory."
+        }
+      }
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fs": {
+          "$ref": "#/$defs/document_source"
+        },
+        "micro_arch": {
+          "$ref": "#/$defs/document_source"
+        }
+      }
+    },
+    "registers": {
+      "type": "object",
+      "required": ["source"],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "type": "object",
+          "required": ["type", "path"],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["ipxact", "yaml", "csv", "excel", "ral_model"],
+              "description": "Register definition source format."
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the register definition file."
+            }
+          }
+        },
+        "ral_root": {
+          "type": "string",
+          "description": "Root directory for UVM RAL model source files."
+        },
+        "index_path": {
+          "type": "string",
+          "description": "Path to the pre-built register index."
+        }
+      }
+    },
+    "testbench": {
+      "type": "object",
+      "required": ["type", "env_root"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["uvm"],
+          "description": "Testbench methodology type."
+        },
+        "env_root": {
+          "type": "string",
+          "description": "Root directory for the UVM testbench environment."
+        },
+        "base_test": {
+          "type": "string",
+          "description": "Name of the base test class to extend."
+        },
+        "sequence_root": {
+          "type": "string",
+          "description": "Root directory for UVM sequences."
+        },
+        "index_path": {
+          "type": "string",
+          "description": "Path to the pre-built TB index."
+        }
+      }
+    },
+    "simulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "compile_cmd_template": {
+          "type": "string",
+          "description": "Compile command template. Use {test} placeholder.",
+          "examples": ["make compile TEST={test}"]
+        },
+        "run_cmd_template": {
+          "type": "string",
+          "description": "Run command template. Use {test} and {seed} placeholders.",
+          "examples": ["make run TEST={test} SEED={seed}"]
+        },
+        "coverage_cmd_template": {
+          "type": "string",
+          "description": "Coverage collection command template.",
+          "examples": ["make cov TEST={test}"]
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "required": ["allow_direct_file_modification", "allow_running_simulation", "require_human_review_before_commit"],
+      "additionalProperties": false,
+      "properties": {
+        "allow_direct_file_modification": {
+          "type": "boolean",
+          "description": "Whether the agent can directly modify source files. If false, only output diffs/patches."
+        },
+        "allow_running_simulation": {
+          "type": "boolean",
+          "description": "Whether the agent can trigger simulation runs."
+        },
+        "require_human_review_before_commit": {
+          "type": "boolean",
+          "description": "Whether generated outputs require human review before being committed."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "document_source": {
+      "type": "object",
+      "required": ["path"],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path to the document file."
+        },
+        "index_path": {
+          "type": "string",
+          "description": "Path to the pre-built document index."
+        }
+      }
+    }
+  }
+}

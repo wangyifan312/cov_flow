@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "scenario_card.schema.json",
+  "title": "Scenario Card",
+  "description": "A structured verification scenario derived from a coverage gap.",
+  "type": "object",
+  "required": [
+    "gap_id",
+    "target_coverage",
+    "classification",
+    "semantic_interpretation",
+    "required_config",
+    "stimulus",
+    "expected_behavior",
+    "confidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "gap_id": {
+      "type": "string",
+      "pattern": "^GAP_[0-9]{4}$",
+      "description": "Target gap identifier."
+    },
+    "target_coverage": {
+      "type": "object",
+      "required": ["covergroup", "coverpoint", "bin"],
+      "additionalProperties": false,
+      "properties": {
+        "covergroup": { "type": "string" },
+        "coverpoint": { "type": "string" },
+        "bin": { "type": "string" }
+      }
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "Missing Stimulus",
+        "Config Missing",
+        "Constraint Too Tight",
+        "Coverage Model Issue",
+        "Monitor Sampling Issue",
+        "Unreachable Candidate"
+      ]
+    },
+    "semantic_interpretation": {
+      "type": "string",
+      "description": "Human-readable explanation of what the gap means and why it is uncovered.",
+      "minLength": 10
+    },
+    "required_config": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["register", "value"],
+        "properties": {
+          "register": { "type": "string", "description": "Register field or config knob name." },
+          "value": { "description": "Required value (string, int, or constraint expression)." },
+          "constraint": { "type": "string", "description": "Optional constraint description." }
+        }
+      }
+    },
+    "stimulus": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Ordered list of stimulus steps.",
+      "minItems": 1
+    },
+    "expected_behavior": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Expected DUT behavior during/after stimulus.",
+      "minItems": 1
+    },
+    "tb_reuse": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base_test": { "type": "string" },
+        "candidate_sequence": { "type": "string" }
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Confidence level based on available evidence."
+    },
+    "risk": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Open questions or risks."
+    }
+  }
+}
