@@ -1,7 +1,8 @@
-.PHONY: help validate validate-gaps build-indexes test smoke-server run-server lint format typecheck clean
+.PHONY: help validate validate-gaps validate-scenario validate-patch build-indexes test smoke-server run-server lint format typecheck clean
 
 MANIFEST ?= mock_data/dma_subsystem/project_manifest.yaml
 PYTHON ?= python
+FILE ?=
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
@@ -16,6 +17,12 @@ validate: ## Validate the project manifest
 
 validate-gaps: ## Validate coverage_gaps.json
 	$(PYTHON) scripts/validate_coverage_gaps.py --manifest $(MANIFEST)
+
+validate-scenario: ## Validate a scenario card (usage: make validate-scenario FILE=path/to/card.json)
+	$(PYTHON) scripts/validate_scenario_card.py --file $(FILE)
+
+validate-patch: ## Validate a testcase patch (usage: make validate-patch FILE=path/to/patch.json)
+	$(PYTHON) scripts/validate_patch_metadata.py --file $(FILE)
 
 # ---------------------------------------------------------------------------
 # Index building

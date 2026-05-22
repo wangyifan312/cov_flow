@@ -66,13 +66,14 @@ cov_flow/
 
 ## Current Status
 
-**Phase 1 Mock MVP** - all acceptance checks passing.
+**Phase 2a (initial stage)** - all acceptance checks passing.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
 | Phase 0 | Project scaffolding + Manifest schema | **Done** |
 | Phase 1 | Schemas + Mock data + MCP tools + Tests | **Done** |
-| Phase 2 | Full Skills + Sim tools + Eval suite | Not started (out of MVP scope) |
+| Phase 2a | Skill references + Validation scripts + Eval skeleton | **Done** |
+| Phase 2b | Sim tools + Coverage diff + Eval runner | Not started |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -87,6 +88,13 @@ cov_flow/
   - `rtl_find_signal`
 - **82 tests** covering schemas, scripts, and all tools
 - **5 SKILL.md skeletons** for each workflow
+
+### What's included in Phase 2a (initial stage)
+
+- **8 skill reference documents**: workflow, gap classification, scenario card schema guide, testcase generation rules, review checklist, triage policy, gap priority rules, unreachable heuristics
+- **2 validation scripts**: validate_scenario_card.py, validate_patch_metadata.py
+- **1 eval skeleton**: README.md + triage_gap_0001.yaml
+- **14 new tests** (total: 96)
 
 ### What's explicitly NOT included (see CLAUDE.md)
 
@@ -109,11 +117,13 @@ cov_flow/
 |---------|-------------|
 | `make validate` | Schema-validate `project_manifest.yaml` |
 | `make validate-gaps` | Schema-validate `coverage_gaps.json` |
+| `make validate-scenario FILE=path` | Schema-validate a scenario card file |
+| `make validate-patch FILE=path` | Schema-validate a testcase patch file |
 | `make build-indexes` | Generate all 5 mock index files |
-| `make test` | Run all 82 pytest tests |
+| `make test` | Run all pytest tests |
 | `make smoke-server` | Verify server imports and 7 tools registered |
 | `make run-server` | Start MCP server (manual, blocking) |
-| `make accept` | Run all of the above |
+| `make accept` | Run all acceptance checks |
 
 ## License
 
