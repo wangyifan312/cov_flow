@@ -66,7 +66,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 2c** - all acceptance checks passing.
+**Phase 2 complete** - all acceptance checks passing.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -79,7 +79,7 @@ cov_flow/
 ### What's included in Phase 1 Mock MVP
 
 - **4 JSON schemas**: project_manifest, coverage_gap, scenario_card, testcase_patch
-- **15 mock coverage gaps** across 3 covergroups (5 fully traceable end-to-end)
+- **15 mock coverage gaps** across 5 covergroups (5 fully traceable end-to-end)
 - **5 pre-built mock indexes**: coverage, spec, register, RTL, TB
 - **7 MCP tools** (pure Python, no MCP runtime needed for testing):
   - `cov_list_uncovered`, `cov_get_gap_detail`, `cov_get_coverpoint_source`
@@ -125,9 +125,10 @@ cov_flow/
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
 - No real project data (RTL/FS/register docs/UVM/coverage DB)
-- No real coverage report parser
-- No real UVM testcase generation
-- No Phase 2 features
+- No real coverage report parser (Phase 3)
+- No real UVM testcase generation (Phase 4)
+- No real simulation execution (Phase 5)
+- No eval runner LLM execution mode (Phase 6)
 
 ## Technology Stack
 
@@ -150,6 +151,37 @@ cov_flow/
 | `make smoke-server` | Verify server imports and 11 tools registered |
 | `make run-server` | Start MCP server (manual, blocking) |
 | `make accept` | Run all acceptance checks |
+
+## Eval Suite
+
+The `evals/` directory contains YAML evaluation cases for validating skill workflows.
+
+**Validate a single eval case**:
+```bash
+python scripts/run_eval.py --eval evals/triage_gap_0001.yaml --dry-run
+```
+
+**Validate all eval cases in batch**:
+```bash
+python scripts/run_eval.py --eval-dir evals/ --dry-run
+```
+
+The runner performs 6 structure checks: YAML parseable, required fields, valid task_mode, non-empty expected_tools, tool existence, valid classification enum. LLM execution is deferred to Phase 3+.
+
+See `evals/README.md` for details.
+
+## Next Steps
+
+Phase 0–2 are complete. The following are **out of scope** and require explicit approval before starting:
+
+| Phase | Scope | Status |
+|-------|-------|--------|
+| Phase 3 | Real URG HTML/XML coverage report parser | Not started |
+| Phase 4 | Real UVM testcase generation | Not started |
+| Phase 5 | Real simulation tool integration (VCS, Verdi, etc.) | Not started |
+| Phase 6 | Eval runner LLM execution mode | Not started |
+
+See `implementation_plan.md` §13 and CLAUDE.md for constraints.
 
 ## License
 

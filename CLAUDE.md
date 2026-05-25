@@ -14,30 +14,43 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 
 ## Current Implementation Scope
 
-**Only Phase 0 and Phase 1 mock MVP are in scope.** Phase 2 and beyond are explicitly out of scope.
+**Phase 0 + Phase 1 + Phase 2 mock MVP are complete.** Phase 3 (real EDA integration) and beyond require explicit user approval before any work begins.
 
-### Phase 0 — Project Scaffolding
+### Phase 0 — Project Scaffolding (Done)
 - `pyproject.toml`, `Makefile`, `README.md`
 - `schemas/` (all JSON schemas)
 - `scripts/` (offline CLI tools)
 - `lib/` (shared Python library)
-- `mcp/dv_context_server/` (MCP server skeleton and tools)
+- `dv_mcp/dv_context_server/` (MCP server skeleton and tools)
 - `skills/` (skill definitions and references)
 - `mock_data/` (mock project data and pre-built indexes)
-- `examples/` (usage examples)
 - `tests/` (tests for schemas, scripts, and tools)
 
-### Phase 1 — Minimal Runnable Mock MVP
+### Phase 1 — Minimal Runnable Mock MVP (Done)
 - All JSON schemas (`project_manifest`, `coverage_gap`, `scenario_card`, `testcase_patch`)
 - Mock project data (`mock_data/<project>/project_manifest.yaml`, `coverage_gaps.json`, mock index files)
 - Validation scripts (`validate_manifest.py`, `validate_coverage_gaps.py`, `generate_mock_index.py`)
-- MCP server (`server.py`) with mock tools:
+- MCP server (`server.py`) with 7 mock tools:
   - `cov_list_uncovered`, `cov_get_gap_detail`, `cov_get_coverpoint_source`
   - `spec_search`, `reg_find_fields_affecting_feature`
   - `tb_get_existing_tests_for_feature`, `rtl_find_signal`
 - Tests for schemas, scripts, and mock tools
-- `make validate`, `make build-indexes`, `make test`, `make smoke-server` must all work under mock MVP
+- `make validate`, `make build-indexes`, `make test`, `make smoke-server` all work under mock MVP
 - `make run-server` is a manual blocking command; use `make smoke-server` for automated verification
+
+### Phase 2 — Skills, Sim Tools, Eval Suite (Done)
+- **Phase 2a**: 8 skill reference documents (triage/closure workflows), 2 validation scripts (scenario card, patch metadata), eval skeleton (YAML structure + 1 case)
+- **Phase 2b**: 4 new MCP sim tools (`sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`, `cov_get_coverage_diff`), static patch check script, audit logging service, mock simulation data, 2 eval cases
+- **Phase 2c**: Eval runner dry-run mode (`run_eval.py`), 7 additional skill reference documents completing all 5 sub-skill workflows
+- **Total**: 146 tests, 11 MCP tools, 15 skill reference documents, 3 eval cases, make accept clean
+- All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
+
+### Phase 3+ — Real Integration (Out of Scope, Requires Approval)
+- Real URG HTML/XML coverage report parsing
+- Real UVM testcase generation
+- Real simulation tool integration (VCS, Verdi, etc.)
+- Real eval suite LLM execution
+- Multi-project support
 
 ## What Is Allowed
 
@@ -47,14 +60,14 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 
 ## What Is Forbidden
 
-These rules are non-negotiable during Phase 0/1:
+These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration is not.
 
 1. **No real EDA tool integration.** Do not implement real Verdi, VCS, KDB, NPI, VPI, FSDB, or any other EDA tool interfaces. All EDA-related capabilities must be implemented as adapter/stub only.
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.
 3. **No bulk-loading.** Do not bulk-load RTL/FS/TB content into the Agent context. MCP tools must return bounded, structured results.
 4. **No automatic waivers or formal conclusions.** Do not implement automatic waiver generation or formal unreachable conclusions. Those require human sign-off.
 5. **No auto-commits.** Neither the coding agent nor the review Claude may commit code without explicit user instruction. The review Claude may execute `git add` and `git commit` when the user explicitly approves a specific commit.
-6. **No Phase 2 implementation.** Do not implement real coverage report parsers, real UVM testcase generation, real simulation runners, or eval suites.
+6. **No Phase 3+ implementation without approval.** Do not implement real coverage report parsers, real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 3 work.
 7. **No complex frameworks.** Use stdlib + the declared dependencies only (see `pyproject.toml`). Python 3.11+.
 
 ## Implementation Principles
@@ -70,8 +83,10 @@ When deciding where to put a capability, follow this split (from `implementation
 
 ## Testing Policy
 
-- Run `pytest` after modifying code in `lib/`, `scripts/`, `mcp/`, or `tests/`.
+- Run `pytest` after modifying code in `lib/`, `scripts/`, `dv_mcp/`, or `tests/`.
 - Run `make validate` after modifying schemas or mock manifests.
+- Run `make smoke-server` after modifying MCP server code or tools.
+- Run `scripts/run_eval.py --eval-dir evals/ --dry-run` after modifying eval YAML files or the eval runner.
 - If a change cannot be tested immediately (e.g., missing dependency), state the reason explicitly rather than skipping silently.
 
 ## Architecture Summary
