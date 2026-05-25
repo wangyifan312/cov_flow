@@ -66,7 +66,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 2b** - all acceptance checks passing.
+**Phase 2c** - all acceptance checks passing.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -74,6 +74,7 @@ cov_flow/
 | Phase 1 | Schemas + Mock data + MCP tools + Tests | **Done** |
 | Phase 2a | Skill references + Validation scripts + Eval skeleton | **Done** |
 | Phase 2b | Sim tools + Coverage diff + Static patch check + Evals | **Done** |
+| Phase 2c | Eval runner + Remaining skill references | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -109,6 +110,16 @@ cov_flow/
 - **2 eval cases**: scenario_gen_0001.yaml, simulation_feedback_0001.yaml
 - **Manifest extensions**: simulation_config, policy, get_simulation_command
 - **20+ new tests** (total: ≥116)
+
+### What's included in Phase 2c
+
+- **Eval runner** (scripts/run_eval.py): dry-run YAML structure validator with 6 checks
+- **7 skill reference documents** completing all workflow references:
+  - Scenario generation: scenario_patterns.md, protocol_scenario_templates.md
+  - Testcase generation: uvm_generation_rules.md, patch_rules.md, compile_check_rules.md
+  - Simulation feedback: coverage_diff_rules.md, log_analysis_rules.md
+- **10 new tests** for eval runner (total: ≥146)
+- **Shared coverage_diff module** in lib/ (eliminated sys.path hack from Phase 2b)
 
 ### What's explicitly NOT included (see CLAUDE.md)
 

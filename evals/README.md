@@ -11,7 +11,44 @@ Eval cases verify that the Skills correctly:
 
 ## Current Status
 
-**Manual review stage.** Eval runner is not yet implemented (planned for Phase 2C).
+**Eval runner dry-run mode implemented.** The runner validates eval YAML structure without LLM execution.
+
+## How to Use (Current)
+
+### Manual Review (without runner)
+
+1. Copy the eval YAML
+2. Paste the `prompt` into Claude Code
+3. Verify the tool calls match `expected_tools`
+4. Verify the output contains `expected_output_keys`
+5. Verify the classification matches `expected_classification`
+
+### Automated Validation (with runner)
+
+**Single eval**:
+```bash
+python scripts/run_eval.py --eval evals/triage_gap_0001.yaml --dry-run
+```
+
+**Batch mode** (all evals in directory):
+```bash
+python scripts/run_eval.py --eval-dir evals/ --dry-run
+```
+
+**Output to file**:
+```bash
+python scripts/run_eval.py --eval evals/triage_gap_0001.yaml --out report.json
+```
+
+The runner validates:
+1. YAML is parseable
+2. Required fields exist: eval_id, task_mode, prompt, expected_tools
+3. task_mode is valid enum: triage, scenario, generate-case, feedback
+4. expected_tools is non-empty
+5. Each tool in expected_tools exists in registered tools
+6. expected_classification (if present) is valid enum
+
+**Note**: LLM execution is deferred to Phase 3+.
 
 ## YAML Structure
 
@@ -26,22 +63,6 @@ Each eval file is a YAML document with the following fields:
 | `expected_classification` | string | no | Expected gap classification (for triage evals) |
 | `expected_output_keys` | list | no | Expected keys in the output |
 | `notes` | string | no | Additional context or expected behaviors |
-
-## How to Use (Current)
-
-1. Copy the eval YAML
-2. Paste the `prompt` into Claude Code
-3. Verify the tool calls match `expected_tools`
-4. Verify the output contains `expected_output_keys`
-5. Verify the classification matches `expected_classification`
-
-## Future: Automated Eval Runner
-
-Phase 2C will implement an eval runner that:
-- Executes each eval YAML automatically
-- Captures tool calls and outputs
-- Compares against expected values
-- Generates a quality report
 
 ## Adding New Evals
 
