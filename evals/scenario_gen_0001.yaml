@@ -1,0 +1,35 @@
+eval_id: scenario_gen_0001
+task_mode: scenario
+description: Generate scenario card for a DMA linked list descriptor coverage gap
+
+prompt: |
+  I need to create a scenario card for GAP_0001 which is a missing stimulus gap
+  in the DMA linked list descriptor handling feature. The gap shows 0% coverage
+  on the descriptor_type bin in the dma_descriptor_cov covergroup.
+
+expected_tools:
+  - cov_get_gap_detail
+  - cov_get_coverpoint_source
+  - spec_search
+  - reg_find_fields_affecting_feature
+  - tb_get_existing_tests_for_feature
+
+expected_classification: Missing Stimulus
+
+expected_output_keys:
+  - gap_id
+  - target_coverage
+  - required_config
+  - stimulus
+  - confidence
+  - risk
+  - expected_coverage_impact
+
+notes: |
+  This eval tests the scenario generation workflow. The agent should:
+  1. Query gap detail to understand the coverage gap
+  2. Get coverpoint source to understand sampling logic
+  3. Search spec for DMA descriptor requirements
+  4. Find register fields that control descriptor behavior
+  5. Check existing tests to avoid duplication
+  6. Generate a scenario card with all required fields

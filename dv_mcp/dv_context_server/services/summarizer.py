@@ -39,12 +39,14 @@ def envelope(
     evidence: list[dict[str, Any]],
     truncated: bool = False,
     next_actions: list[str] | None = None,
+    audit: dict[str, Any] | None = None,
+    safety: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Build the standard MCP tool response envelope.
 
     All MCP tools return this format for consistency and traceability.
     """
-    return {
+    resp: dict[str, Any] = {
         "ok": True,
         "tool": tool,
         "project": project,
@@ -53,6 +55,11 @@ def envelope(
         "truncated": truncated,
         "next_actions": next_actions or [],
     }
+    if audit is not None:
+        resp["audit"] = audit
+    if safety is not None:
+        resp["safety"] = safety
+    return resp
 
 
 def error_envelope(

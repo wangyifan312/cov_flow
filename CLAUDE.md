@@ -53,7 +53,7 @@ These rules are non-negotiable during Phase 0/1:
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.
 3. **No bulk-loading.** Do not bulk-load RTL/FS/TB content into the Agent context. MCP tools must return bounded, structured results.
 4. **No automatic waivers or formal conclusions.** Do not implement automatic waiver generation or formal unreachable conclusions. Those require human sign-off.
-5. **No auto-commits.** Do not commit code without explicit user instruction.
+5. **No auto-commits.** Neither the coding agent nor the review Claude may commit code without explicit user instruction. The review Claude may execute `git add` and `git commit` when the user explicitly approves a specific commit.
 6. **No Phase 2 implementation.** Do not implement real coverage report parsers, real UVM testcase generation, real simulation runners, or eval suites.
 7. **No complex frameworks.** Use stdlib + the declared dependencies only (see `pyproject.toml`). Python 3.11+.
 

@@ -66,14 +66,14 @@ cov_flow/
 
 ## Current Status
 
-**Phase 2a (initial stage)** - all acceptance checks passing.
+**Phase 2b** - all acceptance checks passing.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
 | Phase 0 | Project scaffolding + Manifest schema | **Done** |
 | Phase 1 | Schemas + Mock data + MCP tools + Tests | **Done** |
 | Phase 2a | Skill references + Validation scripts + Eval skeleton | **Done** |
-| Phase 2b | Sim tools + Coverage diff + Eval runner | Not started |
+| Phase 2b | Sim tools + Coverage diff + Static patch check + Evals | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -95,6 +95,20 @@ cov_flow/
 - **2 validation scripts**: validate_scenario_card.py, validate_patch_metadata.py
 - **1 eval skeleton**: README.md + triage_gap_0001.yaml
 - **14 new tests** (total: 96)
+
+### What's included in Phase 2b
+
+- **1 static patch check script**: static_patch_check.py with 6 deterministic checks
+- **2 simulation scripts**: sim_runner.py (mock dry-run), coverage_diff.py (before/after DB comparison)
+- **4 new MCP tools** (total: 11):
+  - `sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`
+  - `cov_get_coverage_diff`
+- **Audit logging service**: 5-field audit records (user, project, tool, arg_hash, timestamp, result_size)
+- **Safety field** for simulation execution: policy_checked, confirmed, command_template_used
+- **Mock simulation data**: coverage_db_before.json, coverage_db_after.json, sim_logs/
+- **2 eval cases**: scenario_gen_0001.yaml, simulation_feedback_0001.yaml
+- **Manifest extensions**: simulation_config, policy, get_simulation_command
+- **20+ new tests** (total: ≥116)
 
 ### What's explicitly NOT included (see CLAUDE.md)
 
@@ -119,9 +133,10 @@ cov_flow/
 | `make validate-gaps` | Schema-validate `coverage_gaps.json` |
 | `make validate-scenario FILE=path` | Schema-validate a scenario card file |
 | `make validate-patch FILE=path` | Schema-validate a testcase patch file |
+| `make static-check FILE=path` | Run 6 static patch checks |
 | `make build-indexes` | Generate all 5 mock index files |
 | `make test` | Run all pytest tests |
-| `make smoke-server` | Verify server imports and 7 tools registered |
+| `make smoke-server` | Verify server imports and 11 tools registered |
 | `make run-server` | Start MCP server (manual, blocking) |
 | `make accept` | Run all acceptance checks |
 

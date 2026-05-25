@@ -45,16 +45,54 @@ def check_paths(manifest: Manifest) -> tuple[list[dict], list[dict]]:
     return found, missing
 
 
+def check_simulation_block(manifest: Manifest) -> list[dict]:
+    """Validate the simulation block if policy allows running simulations.
+
+    Returns:
+        List of error dicts (empty if valid).
+    """
+    errors: list[dict] = []
+    policy = manifest.policy
+    sim_config = manifest.simulation_config
+
+    allow_sim = policy.get("allow_running_simulation", False)
+
+    if allow_sim and not sim_config:
+        errors.append({
+            "path": "simulation",
+            "message": "policy.allow_running_simulation is true but simulation block is missing",
+            "validator": "simulation_block",
+        })
+        return errors
+
+    if sim_config:
+        # Check that command templates are non-empty
+        for template_key in ["compile_cmd_template", "run_cmd_template", "coverage_cmd_template"]:
+            template = sim_config.get(template_key, "")
+            if not template or not template.strip():
+                errors.append({
+                    "path": f"simulation.{template_key}",
+                    "message": f"Simulation template '{template_key}' is empty or missing",
+                    "validator": "simulation_block",
+                })
+
+    return errors
+
+
 def build_report(
     manifest_path: Path,
     schema_errors: list[dict],
     found_paths: list[dict],
     missing_paths: list[dict],
+    simulation_errors: list[dict] | None = None,
 ) -> dict:
     """Build the validation report as a structured dict."""
-    ok = len(schema_errors) == 0
+    all_errors = list(schema_errors)
+    if simulation_errors:
+        all_errors.extend(simulation_errors)
+
+    ok = len(all_errors) == 0
     warnings = []
-    errors = list(schema_errors)
 
     # Missing paths are warnings (some may not exist yet, e.g. indexes)
     for mp in missing_paths:
@@ -68,7 +106,7 @@ def build_report(
     return {
         "ok": ok,
         "manifest": str(manifest_path),
-        "errors": errors,
+        "errors": all_errors,
         "warnings": warnings,
         "paths_found": found_paths,
         "paths_missing": missing_paths,
@@ -136,8 +174,11 @@ def main() -> int:
     # Step 3: Path existence checks
     found_paths, missing_paths = check_paths(manifest)
 
-    # Step 4: Build and output report
-    report = build_report(manifest_path, schema_errors, found_paths, missing_paths)
+    # Step 4: Simulation block validation
+    simulation_errors = check_simulation_block(manifest)
+
+    # Step 5: Build and output report
+    report = build_report(manifest_path, schema_errors, found_paths, missing_paths, simulation_errors)
     _output(report, args.out)
 
     return 0 if report["ok"] else 1

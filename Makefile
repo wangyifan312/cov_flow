@@ -1,4 +1,4 @@
-.PHONY: help validate validate-gaps validate-scenario validate-patch build-indexes test smoke-server run-server lint format typecheck clean
+.PHONY: help validate validate-gaps validate-scenario validate-patch static-check build-indexes test smoke-server run-server lint format typecheck clean
 
 MANIFEST ?= mock_data/dma_subsystem/project_manifest.yaml
 PYTHON ?= python
@@ -23,6 +23,9 @@ validate-scenario: ## Validate a scenario card (usage: make validate-scenario FI
 
 validate-patch: ## Validate a testcase patch (usage: make validate-patch FILE=path/to/patch.json)
 	$(PYTHON) scripts/validate_patch_metadata.py --file $(FILE)
+
+static-check: ## Run static patch checks (usage: make static-check FILE=path/to/patch.json MANIFEST=path/to/manifest.yaml)
+	$(PYTHON) scripts/static_patch_check.py --file $(FILE) --manifest $(MANIFEST)
 
 # ---------------------------------------------------------------------------
 # Index building

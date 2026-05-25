@@ -1,0 +1,17 @@
+UVM_INFO @ 0: reporter [SIM] Starting test: dma_linked_list_desc_test
+UVM_INFO @ 0: reporter [SIM] Seed: 1
+UVM_INFO @ 100: uvm_test_top.u_dma_env [ENV] DMA environment initialized
+UVM_INFO @ 200: uvm_test_top.u_dma_env.agent [AGT] Agent configured for channel 0
+UVM_INFO @ 300: uvm_test_top.u_dma_env.agent.sequencer [SEQ] Starting dma_linked_list_desc_seq
+UVM_INFO @ 400: uvm_test_top.u_dma_env.agent.sequencer [SEQ] Configuring LL_MODE_EN = 1
+UVM_INFO @ 500: uvm_test_top.u_dma_env.agent.driver [DRV] Writing descriptor base address: 0x1000
+UVM_INFO @ 600: uvm_test_top.u_dma_env.agent.driver [DRV] Building descriptor 0: next_ptr = 0x1040
+UVM_INFO @ 700: uvm_test_top.u_dma_env.agent.driver [DRV] Building descriptor 1: next_ptr = 0x0000 (end)
+UVM_INFO @ 800: uvm_test_top.u_dma_env.agent.driver [DRV] Starting DMA channel 0
+UVM_INFO @ 1000: uvm_test_top.u_dma_env.agent.monitor [MON] Descriptor fetch: addr=0x1000, type=linked_list
+UVM_INFO @ 1200: uvm_test_top.u_dma_env.agent.monitor [MON] Descriptor fetch: addr=0x1040, type=linked_list
+UVM_INFO @ 1500: uvm_test_top.u_dma_env [COV] dma_desc_cg.desc_mode_cp.linked_list sampled (hit_count: 5)
+UVM_INFO @ 1800: uvm_test_top.u_dma_env.agent.monitor [MON] DMA transfer complete, status=SUCCESS
+UVM_WARNING @ 1900: uvm_test_top.u_dma_env [CHECK] Completion interrupt latency: 400 cycles (threshold: 300)
+UVM_INFO @ 2000: reporter [SIM] Test PASSED
+UVM_INFO @ 2000: reporter [SIM] Coverage report: mock_cov_report_001

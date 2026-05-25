@@ -15,6 +15,8 @@ Default behavior:
 
 The reviewer may create or update `REVIEW_GUIDE.md` itself, as it is the reviewer's own work standard.
 
+**Git permissions**: The reviewer may execute `git add` and `git commit` when the user explicitly approves a specific commit. The reviewer must not push, force-push, amend, or reset without separate explicit approval.
+
 ## 2. Review Scope
 
 Default scope: **Phase 0 / Phase 1 mock MVP only.**

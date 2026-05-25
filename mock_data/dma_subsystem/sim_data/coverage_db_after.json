@@ -1,0 +1,21 @@
+{
+  "report_id": "after_regression_001",
+  "schema_version": "coverage_db.v1",
+  "gaps": [
+    {"gap_id": "GAP_0001", "covergroup": "dma_desc_cg", "coverpoint": "desc_mode_cp", "bin": "linked_list", "hit_count": 5},
+    {"gap_id": "GAP_0002", "covergroup": "dma_desc_cg", "coverpoint": "desc_mode_cp", "bin": "scatter_gather", "hit_count": 0},
+    {"gap_id": "GAP_0003", "covergroup": "dma_desc_cg", "coverpoint": "desc_chaining_cp", "bin": "chain_of_3", "hit_count": 2},
+    {"gap_id": "GAP_0004", "covergroup": "dma_desc_cg", "coverpoint": "desc_alignment_cp", "bin": "misaligned_4byte", "hit_count": 0},
+    {"gap_id": "GAP_0005", "covergroup": "dma_desc_cg", "coverpoint": "desc_size_cp", "bin": "max_size_4k", "hit_count": 0},
+    {"gap_id": "GAP_0006", "covergroup": "dma_desc_cg", "coverpoint": "desc_fetch_cross", "bin": "back_to_back_cross", "hit_count": 0},
+    {"gap_id": "GAP_0007", "covergroup": "dma_interrupt_cg", "coverpoint": "int_type_cp", "bin": "error_interrupt", "hit_count": 1},
+    {"gap_id": "GAP_0008", "covergroup": "dma_interrupt_cg", "coverpoint": "int_coalesce_cp", "bin": "coalesce_timeout", "hit_count": 0},
+    {"gap_id": "GAP_0009", "covergroup": "dma_interrupt_cg", "coverpoint": "int_coalesce_cp", "bin": "coalesce_count", "hit_count": 0},
+    {"gap_id": "GAP_0010", "covergroup": "dma_interrupt_cg", "coverpoint": "int_masking_cp", "bin": "masked_pending", "hit_count": 0},
+    {"gap_id": "GAP_0011", "covergroup": "dma_power_cg", "coverpoint": "clock_gate_cp", "bin": "idle_gate", "hit_count": 0},
+    {"gap_id": "GAP_0012", "covergroup": "dma_power_cg", "coverpoint": "power_state_cp", "bin": "retention_mode", "hit_count": 0},
+    {"gap_id": "GAP_0013", "covergroup": "dma_burst_cg", "coverpoint": "burst_type_cp", "bin": "wrap_burst", "hit_count": 0},
+    {"gap_id": "GAP_0014", "covergroup": "dma_burst_cg", "coverpoint": "burst_length_cp", "bin": "max_len_256", "hit_count": 0},
+    {"gap_id": "GAP_0015", "covergroup": "dma_monitor_cg", "coverpoint": "desc_fetch_timing_cp", "bin": "back_to_back", "hit_count": 0}
+  ]
+}

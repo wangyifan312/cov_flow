@@ -1,0 +1,29 @@
+eval_id: simulation_feedback_0001
+task_mode: feedback
+description: Interpret simulation results and update coverage gap status
+
+prompt: |
+  I just ran the dma_linked_list_desc_test with seed 1 and it passed.
+  Can you check if this closed GAP_0001 and update the gap status accordingly?
+
+expected_tools:
+  - sim_get_test_result
+  - cov_get_coverage_diff
+  - cov_get_gap_detail
+
+expected_classification: null
+
+expected_output_keys:
+  - gap_id
+  - before_status
+  - after_status
+  - simulation_result
+  - coverage_delta
+  - recommendation
+
+notes: |
+  This eval tests the simulation feedback workflow. The agent should:
+  1. Query the simulation result to confirm pass/fail
+  2. Compute coverage diff to see if the gap was closed
+  3. Get gap detail for context
+  4. Provide a structured recommendation on next steps

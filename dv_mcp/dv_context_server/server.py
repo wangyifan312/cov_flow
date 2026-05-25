@@ -18,6 +18,12 @@ from dv_mcp.dv_context_server.tools.coverage_tools import (
 )
 from dv_mcp.dv_context_server.tools.register_tools import reg_find_fields_affecting_feature
 from dv_mcp.dv_context_server.tools.rtl_tools import rtl_find_signal
+from dv_mcp.dv_context_server.tools.sim_tools import (
+    cov_get_coverage_diff,
+    sim_get_test_result,
+    sim_run_targeted_test,
+    sim_search_log,
+)
 from dv_mcp.dv_context_server.tools.spec_tools import spec_search
 from dv_mcp.dv_context_server.tools.tb_tools import tb_get_existing_tests_for_feature
 
@@ -118,6 +124,54 @@ def tool_rtl_find_signal(
 ) -> dict:
     """Find RTL signals matching a name pattern."""
     return rtl_find_signal(project, signal_name, module_filter=module_filter)
+
+
+# ---------------------------------------------------------------------------
+# Simulation tools
+# ---------------------------------------------------------------------------
+
+@mcp.tool()
+def tool_sim_run_targeted_test(
+    project: str,
+    test: str,
+    seed: int,
+    confirm: bool = False,
+) -> dict:
+    """Run a targeted simulation test (mock: dry-run only).
+
+    Requires confirm=true. Checks manifest policy before rendering commands.
+    """
+    return sim_run_targeted_test(project, test, seed, confirm=confirm)
+
+
+@mcp.tool()
+def tool_sim_get_test_result(
+    project: str,
+    test: str,
+    seed: int | None = None,
+) -> dict:
+    """Get simulation result for a test."""
+    return sim_get_test_result(project, test, seed=seed)
+
+
+@mcp.tool()
+def tool_sim_search_log(
+    project: str,
+    test: str,
+    seed: int,
+    keyword: str,
+) -> dict:
+    """Search simulation log for a keyword."""
+    return sim_search_log(project, test, seed, keyword)
+
+
+@mcp.tool()
+def tool_cov_get_coverage_diff(
+    project: str,
+    gap_id: str | None = None,
+) -> dict:
+    """Compute coverage diff between before/after databases."""
+    return cov_get_coverage_diff(project, gap_id=gap_id)
 
 
 # ---------------------------------------------------------------------------

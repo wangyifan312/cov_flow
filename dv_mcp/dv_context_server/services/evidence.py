@@ -80,3 +80,13 @@ def tb_evidence(component_type: str, name: str, source_ref: str, summary: str) -
         source_ref,
         summary,
     )
+
+
+def simulation_evidence(test: str, seed: int, source_ref: str, summary: str) -> dict[str, Any]:
+    """Create a simulation-type evidence entry."""
+    return make_evidence(
+        f"sim:{test}:{seed}",
+        "simulation",
+        source_ref,
+        summary,
+    )

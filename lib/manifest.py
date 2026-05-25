@@ -92,7 +92,6 @@ class Manifest:
         """
         if not path_str:
             return None
-        # Expand environment variables
         expanded = os.path.expandvars(str(path_str))
         p = Path(expanded)
         if p.is_absolute():
@@ -152,3 +151,33 @@ class Manifest:
             paths[label] = self.get_path(*keys)
 
         return paths
+
+    @property
+    def simulation_config(self) -> dict[str, Any]:
+        """Return the simulation configuration block."""
+        return self._data.get("simulation", {})
+
+    @property
+    def policy(self) -> dict[str, Any]:
+        """Return the policy configuration block."""
+        return self._data.get("policy", {})
+
+    def get_simulation_command(self, cmd_type: str, test: str, seed: int) -> str:
+        """Render a simulation command from manifest templates.
+
+        Args:
+            cmd_type: One of "compile", "run", or "coverage"
+            test: Test name to substitute into the template
+            seed: Seed value to substitute into the template
+
+        Returns:
+            Rendered command string
+
+        Raises:
+            KeyError: If the command template is not found
+        """
+        template_key = f"{cmd_type}_cmd_template"
+        template = self.simulation_config.get(template_key)
+        if not template:
+            raise KeyError(f"Missing simulation template: {template_key}")
+        return template.format(test=test, seed=seed)
