@@ -63,7 +63,10 @@ def rtl_find_signal(
                 }
                 matches.append(match)
                 evidence_list.append(
-                    rtl_evidence(mod_name, port, f"{mod.get('file', '?')}", f"Port {port} in {mod_name}")
+                    rtl_evidence(
+                        mod_name, port, f"{mod.get('file', '?')}",
+                        f"Port {port} in {mod_name}",
+                    )
                 )
 
         # Search signals

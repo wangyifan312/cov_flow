@@ -75,7 +75,12 @@ def tb_get_existing_tests_for_feature(
                 "relevance": min(s / 10.0, 1.0),
             })
             seq_evidence.append(
-                tb_evidence("sequence", seq.get("name", "unknown"), seq.get("file", ""), seq.get("description", ""))
+                tb_evidence(
+                    "sequence",
+                    seq.get("name", "unknown"),
+                    seq.get("file", ""),
+                    seq.get("description", ""),
+                )
             )
 
     # Search existing tests
@@ -93,7 +98,12 @@ def tb_get_existing_tests_for_feature(
                 "relevance": min(s / 10.0, 1.0),
             })
             test_evidence.append(
-                tb_evidence("test", test.get("name", "unknown"), test.get("file", ""), f"Existing test for {feature}")
+                tb_evidence(
+                    "test",
+                    test.get("name", "unknown"),
+                    test.get("file", ""),
+                    f"Existing test for {feature}",
+                )
             )
 
     # Sort by relevance

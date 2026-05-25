@@ -4,9 +4,6 @@ import json
 import tempfile
 from pathlib import Path
 
-import pytest
-import yaml
-
 from scripts.run_eval import run_eval_batch, run_eval_single, validate_eval
 
 

@@ -28,6 +28,10 @@ make validate-gaps
 # Build all indexes from mock data
 make build-indexes
 
+# Lint and typecheck
+make lint
+make typecheck
+
 # Run tests
 make test
 
@@ -45,6 +49,7 @@ make run-server
 
 ```
 cov_flow/
+├── .mcp.json              Claude Code MCP client configuration
 ├── schemas/              JSON Schema definitions for all outputs
 ├── scripts/              Offline indexer CLIs and validators
 ├── lib/                  Shared Python library (manifest, schema validation)
@@ -60,7 +65,8 @@ cov_flow/
 │       ├── project_manifest.yaml
 │       ├── coverage_gaps.json
 │       └── .dv_ai_index/      Pre-built mock indexes (committed as fixtures)
-├── examples/             Usage examples (planned)
+├── examples/             End-to-end usage walkthroughs
+├── evals/                Eval YAML cases (4 cases: triage, scenario, generate-case, feedback)
 └── tests/                Tests for schemas, scripts, and tools
 ```
 
@@ -121,6 +127,15 @@ cov_flow/
 - **10 new tests** for eval runner (total: ≥146)
 - **Shared coverage_diff module** in lib/ (eliminated sys.path hack from Phase 2b)
 
+### What's included in Phase 2 收尾 (cleanup)
+
+- **pip install fix**: hatch build targets for `lib`, `dv_mcp`, `scripts` packages
+- **.mcp.json**: Claude Code MCP client configuration for auto-connecting the DV Context server
+- **ruff 95→0**: E501 line wraps, E402 noqa for sys.path pattern, UP015/UP017/UP037/I001/F401/E741 fixes
+- **mypy 18→0**: no-any-return, import-untyped stubs (types-PyYAML, types-jsonschema), var-annotated
+- **4th eval case**: generate_case_0001.yaml (completing all 4 task_modes: triage, scenario, generate-case, feedback)
+- **3 example walkthroughs**: triage, full end-to-end closure, MCP server setup guide
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
@@ -147,6 +162,8 @@ cov_flow/
 | `make validate-patch FILE=path` | Schema-validate a testcase patch file |
 | `make static-check FILE=path` | Run 6 static patch checks |
 | `make build-indexes` | Generate all 5 mock index files |
+| `make lint` | Run ruff linter (0 issues required) |
+| `make typecheck` | Run mypy type checker (0 errors required) |
 | `make test` | Run all pytest tests |
 | `make smoke-server` | Verify server imports and 11 tools registered |
 | `make run-server` | Start MCP server (manual, blocking) |
@@ -167,7 +184,6 @@ python scripts/run_eval.py --eval-dir evals/ --dry-run
 ```
 
 The runner performs 6 structure checks: YAML parseable, required fields, valid task_mode, non-empty expected_tools, tool existence, valid classification enum. LLM execution is deferred to Phase 3+.
-
 See `evals/README.md` for details.
 
 ## Next Steps

@@ -5,8 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 PROJECT_ROOT = Path(__file__).parent.parent
 MOCK_MANIFEST = PROJECT_ROOT / "mock_data" / "dma_subsystem" / "project_manifest.yaml"
 

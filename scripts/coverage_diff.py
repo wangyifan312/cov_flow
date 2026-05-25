@@ -18,7 +18,7 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.coverage_diff import compute_diff
+from lib.coverage_diff import compute_diff  # noqa: E402
 
 
 def main() -> int:
@@ -42,9 +42,9 @@ def main() -> int:
         _output(report, args.out)
         return 1
 
-    with open(before_path, "r", encoding="utf-8") as f:
+    with open(before_path, encoding="utf-8") as f:
         before = json.load(f)
-    with open(after_path, "r", encoding="utf-8") as f:
+    with open(after_path, encoding="utf-8") as f:
         after = json.load(f)
 
     result = compute_diff(before, after, gap_id_filter=args.gap_id)

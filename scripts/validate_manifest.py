@@ -18,8 +18,8 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.manifest import Manifest, ManifestError
-from lib.schema_validator import load_schema, validate
+from lib.manifest import Manifest, ManifestError  # noqa: E402
+from lib.schema_validator import load_schema, validate  # noqa: E402
 
 
 def check_paths(manifest: Manifest) -> tuple[list[dict], list[dict]]:
@@ -178,7 +178,9 @@ def main() -> int:
     simulation_errors = check_simulation_block(manifest)
 
     # Step 5: Build and output report
-    report = build_report(manifest_path, schema_errors, found_paths, missing_paths, simulation_errors)
+    report = build_report(
+        manifest_path, schema_errors, found_paths, missing_paths, simulation_errors,
+    )
     _output(report, args.out)
 
     return 0 if report["ok"] else 1

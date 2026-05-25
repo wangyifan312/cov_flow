@@ -17,7 +17,7 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.schema_validator import load_schema, validate
+from lib.schema_validator import load_schema, validate  # noqa: E402
 
 
 def main() -> int:
@@ -42,7 +42,7 @@ def main() -> int:
         return 1
 
     # Load the data file
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         if file_path.suffix in (".yaml", ".yml"):
             import yaml
             data = yaml.safe_load(f)

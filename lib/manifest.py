@@ -48,7 +48,7 @@ class Manifest:
             raise ManifestError(f"Manifest path is not a file: {path}")
 
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, encoding="utf-8") as f:
                 data = yaml.safe_load(f)
         except yaml.YAMLError as e:
             raise ManifestError(f"Failed to parse YAML: {e}") from e
@@ -76,12 +76,12 @@ class Manifest:
     @property
     def project(self) -> str:
         """Return the project identifier."""
-        return self._data.get("project", "")
+        return str(self._data.get("project", ""))
 
     @property
     def top_instance(self) -> str:
         """Return the top-level DUT instance path."""
-        return self._data.get("top_instance", "")
+        return str(self._data.get("top_instance", ""))
 
     def resolve_path(self, path_str: str | None) -> Path | None:
         """Resolve a path string from the manifest against the base directory.
@@ -155,12 +155,12 @@ class Manifest:
     @property
     def simulation_config(self) -> dict[str, Any]:
         """Return the simulation configuration block."""
-        return self._data.get("simulation", {})
+        return dict(self._data.get("simulation", {}))
 
     @property
     def policy(self) -> dict[str, Any]:
         """Return the policy configuration block."""
-        return self._data.get("policy", {})
+        return dict(self._data.get("policy", {}))
 
     def get_simulation_command(self, cmd_type: str, test: str, seed: int) -> str:
         """Render a simulation command from manifest templates.
@@ -180,4 +180,4 @@ class Manifest:
         template = self.simulation_config.get(template_key)
         if not template:
             raise KeyError(f"Missing simulation template: {template_key}")
-        return template.format(test=test, seed=seed)
+        return str(template.format(test=test, seed=seed))

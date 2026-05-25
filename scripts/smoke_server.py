@@ -42,7 +42,7 @@ def _get_registered_tools(mcp_instance) -> dict:
 
     # Fallback: known private API (FastMCP internals)
     try:
-        return mcp_instance._tool_manager._tools  # noqa: SLF001
+        return dict(mcp_instance._tool_manager._tools)  # noqa: SLF001
     except AttributeError:
         pass
 

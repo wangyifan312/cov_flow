@@ -8,7 +8,6 @@ Tools:
 
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Any
 
 from dv_mcp.dv_context_server.indexes.readers import IndexNotFoundError
@@ -79,14 +78,19 @@ def cov_list_uncovered(
         coverage_evidence(
             "list", "list",
             data.get("report_id", "unknown"),
-            f"Top {len(summaries)} uncovered {coverage_type} gaps from report {data.get('report_id')}"
+            f"Top {len(summaries)} uncovered {coverage_type} gaps "
+            f"from report {data.get('report_id')}"
         )
     ]
 
     return envelope(
         tool=tool,
         project=project,
-        result={"gaps": summaries, "total_uncovered": len(gaps), "report_id": data.get("report_id")},
+        result={
+            "gaps": summaries,
+            "total_uncovered": len(gaps),
+            "report_id": data.get("report_id"),
+        },
         evidence=evidence,
         truncated=was_truncated,
         next_actions=["cov_get_gap_detail", "cov_get_coverpoint_source"],
@@ -130,7 +134,9 @@ def cov_get_gap_detail(project: str, gap_id: str) -> dict[str, Any]:
         result=gap,
         evidence=evidence,
         truncated=False,
-        next_actions=["cov_get_coverpoint_source", "spec_search", "reg_find_fields_affecting_feature"],
+        next_actions=[
+            "cov_get_coverpoint_source", "spec_search", "reg_find_fields_affecting_feature",
+        ],
     )
 
 

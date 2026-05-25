@@ -7,14 +7,12 @@ coverage diffs. All functions return the standard envelope format.
 from __future__ import annotations
 
 import json
-from pathlib import Path
 from typing import Any
 
 from dv_mcp.dv_context_server.services.audit import audit_record
 from dv_mcp.dv_context_server.services.evidence import simulation_evidence
 from dv_mcp.dv_context_server.services.project_loader import get_manifest
 from dv_mcp.dv_context_server.services.summarizer import envelope, error_envelope, truncate_list
-
 from lib.coverage_diff import compute_diff
 
 
@@ -133,9 +131,11 @@ def sim_get_test_result(
     if log_path and log_path.exists():
         lines = log_path.read_text(encoding="utf-8").strip().splitlines()
         # Extract key lines
-        pass_lines = [l for l in lines if "PASSED" in l or "FAILED" in l]
+        pass_lines = [
+            line for line in lines if "PASSED" in line or "FAILED" in line
+        ]
         log_summary = pass_lines[-1] if pass_lines else f"Log has {len(lines)} lines"
-        sim_status = "pass" if any("PASSED" in l for l in lines) else "unknown"
+        sim_status = "pass" if any("PASSED" in line for line in lines) else "unknown"
     else:
         sim_status = "not_found"
         log_summary = f"No log found for test={test} seed={seed}"
@@ -231,17 +231,19 @@ def cov_get_coverage_diff(
     if not after_path.exists():
         return error_envelope(tool_name, project, f"After DB not found: {after_path}")
 
-    with open(before_path, "r", encoding="utf-8") as f:
+    with open(before_path, encoding="utf-8") as f:
         before = json.load(f)
-    with open(after_path, "r", encoding="utf-8") as f:
+    with open(after_path, encoding="utf-8") as f:
         after = json.load(f)
 
     diff_result = compute_diff(before, after, gap_id_filter=gap_id)
 
+    summary_msg = (
+        f"Coverage diff: {diff_result['summary']['newly_covered']} newly covered, "
+        f"{diff_result['summary']['regressed']} regressed"
+    )
     evidence = [
-        simulation_evidence("coverage_diff", 0, str(after_path),
-                            f"Coverage diff: {diff_result['summary']['newly_covered']} newly covered, "
-                            f"{diff_result['summary']['regressed']} regressed"),
+        simulation_evidence("coverage_diff", 0, str(after_path), summary_msg),
     ]
 
     audit = audit_record(tool_name, project, args)

@@ -2,7 +2,8 @@
 """Validate coverage_gaps.json against its JSON Schema.
 
 Usage:
-    python scripts/validate_coverage_gaps.py --manifest mock_data/dma_subsystem/project_manifest.yaml
+    python scripts/validate_coverage_gaps.py \
+        --manifest mock_data/dma_subsystem/project_manifest.yaml
 """
 
 from __future__ import annotations
@@ -16,8 +17,8 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.manifest import Manifest, ManifestError
-from lib.schema_validator import load_schema, validate
+from lib.manifest import Manifest  # noqa: E402
+from lib.schema_validator import load_schema, validate  # noqa: E402
 
 
 def main() -> int:
@@ -40,7 +41,7 @@ def main() -> int:
         _output(report, args.out)
         return 1
 
-    with open(gaps_path, "r", encoding="utf-8") as f:
+    with open(gaps_path, encoding="utf-8") as f:
         data = json.load(f)
 
     schema = load_schema("coverage_gap.schema.json")

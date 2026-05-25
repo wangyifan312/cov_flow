@@ -19,7 +19,6 @@ from typing import Any
 
 import yaml
 
-
 VALID_TASK_MODES = {"triage", "scenario", "generate-case", "feedback"}
 
 VALID_CLASSIFICATIONS = {
@@ -106,7 +105,7 @@ def run_eval_single(eval_path: Path, dry_run: bool = True) -> dict[str, Any]:
     """
     # Load YAML
     try:
-        with open(eval_path, "r", encoding="utf-8") as f:
+        with open(eval_path, encoding="utf-8") as f:
             eval_data = yaml.safe_load(f)
     except FileNotFoundError:
         return {

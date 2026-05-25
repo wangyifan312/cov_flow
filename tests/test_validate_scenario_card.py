@@ -3,10 +3,7 @@
 import json
 import subprocess
 import sys
-import tempfile
 from pathlib import Path
-
-import pytest
 
 SCRIPT = "scripts/validate_scenario_card.py"
 PYTHON = sys.executable

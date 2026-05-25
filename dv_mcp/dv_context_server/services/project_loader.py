@@ -3,16 +3,13 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
+from dv_mcp.dv_context_server.indexes.readers import IndexReader
 from lib.index_paths import INDEX_DIR_NAME
 from lib.manifest import Manifest
 
-from dv_mcp.dv_context_server.indexes.readers import IndexReader
-
-
 # Global registry of loaded projects
-_project_cache: dict[str, "_ProjectContext"] = {}
+_project_cache: dict[str, _ProjectContext] = {}
 
 
 class _ProjectContext:

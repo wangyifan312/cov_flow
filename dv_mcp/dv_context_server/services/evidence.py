@@ -32,7 +32,9 @@ def make_evidence(
     }
 
 
-def coverage_evidence(gap_id: str, detail_type: str, source_ref: str, summary: str) -> dict[str, Any]:
+def coverage_evidence(
+    gap_id: str, detail_type: str, source_ref: str, summary: str,
+) -> dict[str, Any]:
     """Create a coverage-type evidence entry."""
     return make_evidence(
         f"cov:{gap_id}:{detail_type}",

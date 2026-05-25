@@ -5,8 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 SCRIPT = "scripts/coverage_diff.py"
 PYTHON = sys.executable
 BEFORE = "mock_data/dma_subsystem/sim_data/coverage_db_before.json"
@@ -47,11 +45,21 @@ class TestCoverageDiff:
         # Create custom before/after where hit_count goes down
         before_data = {
             "report_id": "before",
-            "gaps": [{"gap_id": "GAP_0099", "covergroup": "cg", "coverpoint": "cp", "bin": "b", "hit_count": 10}]
+            "gaps": [
+                {
+                    "gap_id": "GAP_0099", "covergroup": "cg",
+                    "coverpoint": "cp", "bin": "b", "hit_count": 10,
+                },
+            ]
         }
         after_data = {
             "report_id": "after",
-            "gaps": [{"gap_id": "GAP_0099", "covergroup": "cg", "coverpoint": "cp", "bin": "b", "hit_count": 5}]
+            "gaps": [
+                {
+                    "gap_id": "GAP_0099", "covergroup": "cg",
+                    "coverpoint": "cp", "bin": "b", "hit_count": 5,
+                },
+            ]
         }
         before_path = tmp_path / "before.json"
         after_path = tmp_path / "after.json"

@@ -1,0 +1,36 @@
+eval_id: generate_case_0001
+task_mode: generate-case
+description: Generate UVM testcase patch for a DMA linked list descriptor gap
+
+prompt: |
+  使用 dv-testcase-generation。
+  项目：{project}
+  Gap：GAP_0001
+  Scenario card：GAP_0001 linked-list descriptor mode scenario
+  任务：基于 scenario card 和现有 base test/sequence 生成最小 UVM patch。
+  要求：复用 dma_base_test 和 dma_desc_base_seq；输出新文件列表、compile/run 命令和 review checklist。
+
+expected_tools:
+  - tb_get_existing_tests_for_feature
+  - reg_find_fields_affecting_feature
+  - cov_get_gap_detail
+
+expected_output_keys:
+  - patch_id
+  - gap_id
+  - new_files
+  - modified_files
+  - base_reuse
+  - compile_command
+  - run_command
+  - coverage_target
+  - review_checklist
+
+notes: |
+  This eval tests the testcase generation workflow. The agent should:
+  1. Read the scenario card context for GAP_0001
+  2. Query tb_get_existing_tests_for_feature for reusable base test/sequence
+  3. Query reg_find_fields_affecting_feature for RAL paths
+  4. Generate a minimal patch with new sequence file
+  5. Output compile/run commands from manifest templates
+  6. Include a review checklist

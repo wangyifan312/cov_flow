@@ -23,8 +23,7 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.manifest import Manifest
-
+from lib.manifest import Manifest  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Mock spec index
@@ -38,77 +37,116 @@ MOCK_SPEC_INDEX = {
             "title": "1. DMA Subsystem Overview",
             "page_range": "1-5",
             "feature_tags": ["dma", "overview"],
-            "summary": "High-level architecture of the DMA subsystem including block diagram, address map, and operating modes."
+            "summary": (
+                "High-level architecture of the DMA subsystem including "
+                "block diagram, address map, and operating modes."
+            )
         },
         {
             "section_id": "spec_dma_descriptor_format",
             "title": "2. Descriptor Format",
             "page_range": "6-15",
             "feature_tags": ["descriptor", "normal_mode", "descriptor_format"],
-            "summary": "Defines the normal descriptor layout: source address, destination address, transfer size, control flags."
+            "summary": (
+                "Defines the normal descriptor layout: source address, "
+                "destination address, transfer size, control flags."
+            )
         },
         {
             "section_id": "spec_dma_linked_list",
             "title": "3. Linked-List Descriptor Mode",
             "page_range": "16-22",
             "feature_tags": ["descriptor", "linked_list", "chaining"],
-            "summary": "Linked-list mode allows chaining multiple descriptors via a next-pointer field. Enabled by DMA_CFG.LL_MODE_EN. Parser transitions to LINK_DESC state when ll_mode_en is asserted."
+            "summary": (
+                "Linked-list mode allows chaining multiple descriptors via a "
+                "next-pointer field. Enabled by DMA_CFG.LL_MODE_EN. Parser "
+                "transitions to LINK_DESC state when ll_mode_en is asserted."
+            )
         },
         {
             "section_id": "spec_dma_scatter_gather",
             "title": "4. Scatter-Gather Descriptor Mode",
             "page_range": "23-30",
             "feature_tags": ["descriptor", "scatter_gather"],
-            "summary": "Scatter-gather mode supports non-contiguous memory regions. Enabled by DMA_CFG.SG_MODE_EN."
+            "summary": (
+                "Scatter-gather mode supports non-contiguous memory regions. "
+                "Enabled by DMA_CFG.SG_MODE_EN."
+            )
         },
         {
             "section_id": "spec_dma_chaining",
             "title": "5. Descriptor Chaining",
             "page_range": "31-38",
             "feature_tags": ["descriptor", "chaining", "back_to_back"],
-            "summary": "Descriptor chaining allows back-to-back descriptor processing without CPU intervention. Chain of 3+ descriptors exercises the pipeline depth."
+            "summary": (
+                "Descriptor chaining allows back-to-back descriptor processing "
+                "without CPU intervention. Chain of 3+ descriptors exercises "
+                "the pipeline depth."
+            )
         },
         {
             "section_id": "spec_dma_alignment",
             "title": "6. Address Alignment Rules",
             "page_range": "39-42",
             "feature_tags": ["descriptor", "alignment", "error"],
-            "summary": "Source and destination addresses must be aligned to transfer size. Misaligned addresses trigger an error interrupt."
+            "summary": (
+                "Source and destination addresses must be aligned to transfer "
+                "size. Misaligned addresses trigger an error interrupt."
+            )
         },
         {
             "section_id": "spec_dma_interrupts",
             "title": "7. Interrupt System",
             "page_range": "43-55",
             "feature_tags": ["interrupt", "coalescing", "masking"],
-            "summary": "DMA supports completion, error, and coalescing interrupts. Coalescing can be by count threshold or timeout. Masked interrupts remain pending until unmasked."
+            "summary": (
+                "DMA supports completion, error, and coalescing interrupts. "
+                "Coalescing can be by count threshold or timeout. Masked "
+                "interrupts remain pending until unmasked."
+            )
         },
         {
             "section_id": "spec_dma_errors",
             "title": "8. Error Handling",
             "page_range": "56-62",
             "feature_tags": ["error", "interrupt", "bus_error"],
-            "summary": "Error conditions: bus error, descriptor fetch error, alignment error, timeout. Each generates an error interrupt if unmasked."
+            "summary": (
+                "Error conditions: bus error, descriptor fetch error, "
+                "alignment error, timeout. Each generates an error "
+                "interrupt if unmasked."
+            )
         },
         {
             "section_id": "spec_dma_power",
             "title": "9. Power Management",
             "page_range": "63-70",
             "feature_tags": ["power", "clock_gating", "retention"],
-            "summary": "Clock gating on idle channels. Retention mode preserves register state during power-down. Retention mode is only available in specific silicon revisions."
+            "summary": (
+                "Clock gating on idle channels. Retention mode preserves "
+                "register state during power-down. Retention mode is only "
+                "available in specific silicon revisions."
+            )
         },
         {
             "section_id": "spec_dma_burst",
             "title": "10. AXI Burst Configuration",
             "page_range": "71-80",
             "feature_tags": ["burst", "axi", "wrap", "increment"],
-            "summary": "Supports INCR, WRAP, and FIXED burst types. Max burst length configurable up to 256 beats. WRAP burst wraps at power-of-2 boundaries."
+            "summary": (
+                "Supports INCR, WRAP, and FIXED burst types. Max burst length "
+                "configurable up to 256 beats. WRAP burst wraps at power-of-2 "
+                "boundaries."
+            )
         },
         {
             "section_id": "spec_dma_performance",
             "title": "11. Performance Characteristics",
             "page_range": "81-90",
             "feature_tags": ["performance", "throughput", "back_to_back"],
-            "summary": "Back-to-back descriptor fetch achieves peak throughput when pipeline is full. Measured via monitor timestamps."
+            "summary": (
+                "Back-to-back descriptor fetch achieves peak throughput when "
+                "pipeline is full. Measured via monitor timestamps."
+            )
         }
     ]
 }
@@ -434,7 +472,10 @@ MOCK_TB_INDEX = {
             "name": "dma_base_test",
             "file": "tb/tests/dma_base_test.sv",
             "extends": "uvm_test",
-            "description": "Base test for all DMA tests. Sets up env, config, and default sequences.",
+            "description": (
+                "Base test for all DMA tests. Sets up env, config, "
+                "and default sequences."
+            ),
             "config_knobs": ["num_channels", "enable_interrupts", "descriptor_mode"]
         }
     ],
@@ -457,7 +498,10 @@ MOCK_TB_INDEX = {
             "name": "dma_desc_base_seq",
             "file": "tb/sequences/dma_desc_base_seq.sv",
             "extends": "dma_base_seq",
-            "description": "Base sequence for descriptor operations including linked-list and scatter-gather.",
+            "description": (
+                "Base sequence for descriptor operations including "
+                "linked-list and scatter-gather."
+            ),
             "feature_tags": ["descriptor", "linked_list", "scatter_gather", "chaining"]
         },
         {
@@ -501,7 +545,12 @@ MOCK_TB_INDEX = {
     "config_knobs": [
         {"name": "num_channels", "type": "int", "default": 4, "plusarg": "+NUM_CHANNELS=%d"},
         {"name": "enable_interrupts", "type": "bit", "default": 1, "plusarg": "+EN_INT=%d"},
-        {"name": "descriptor_mode", "type": "string", "default": "normal", "plusarg": "+DESC_MODE=%s"}
+        {
+            "name": "descriptor_mode",
+            "type": "string",
+            "default": "normal",
+            "plusarg": "+DESC_MODE=%s",
+        },
     ]
 }
 
@@ -514,12 +563,18 @@ def generate_coverage_index(gaps_data: dict) -> dict:
         "schema_version": "coverage_index.v1",
         "gaps": gaps_data.get("gaps", []),
         "total_gaps": len(gaps_data.get("gaps", [])),
-        "clusters": list({g.get("cluster_id", "unknown") for g in gaps_data.get("gaps", []) if g.get("cluster_id")}),
+        "clusters": list({
+            g.get("cluster_id", "unknown")
+            for g in gaps_data.get("gaps", [])
+            if g.get("cluster_id")
+        }),
     }
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate mock index files for DV AI Coverage Closure.")
+    parser = argparse.ArgumentParser(
+        description="Generate mock index files for DV AI Coverage Closure.",
+    )
     parser.add_argument("--manifest", required=True, help="Path to project_manifest.yaml")
     args = parser.parse_args()
 
@@ -532,7 +587,7 @@ def main() -> int:
         print(f"Error: coverage_gaps.json not found at {gaps_path}", file=sys.stderr)
         return 1
 
-    with open(gaps_path, "r", encoding="utf-8") as f:
+    with open(gaps_path, encoding="utf-8") as f:
         gaps_data = json.load(f)
 
     # Index output directory

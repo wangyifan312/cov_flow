@@ -5,8 +5,10 @@ In mock MVP mode, sim_runner.py does NOT execute shell commands. It validates
 the manifest policy, renders command templates, and produces a mock sim_result.json.
 
 Usage:
-    python scripts/sim_runner.py --manifest manifest.yaml --test my_test --seed 1 --out result.json
-    python scripts/sim_runner.py --manifest manifest.yaml --test my_test --seed 1 --out result.json --dry-run
+    python scripts/sim_runner.py --manifest manifest.yaml --test my_test \
+        --seed 1 --out result.json
+    python scripts/sim_runner.py --manifest manifest.yaml --test my_test \
+        --seed 1 --out result.json --dry-run
 """
 
 from __future__ import annotations
@@ -20,7 +22,7 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.manifest import Manifest, ManifestError
+from lib.manifest import Manifest, ManifestError  # noqa: E402
 
 
 def render_commands(manifest: Manifest, test: str, seed: int) -> dict[str, str]:
@@ -66,7 +68,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Simulation runner (mock MVP).")
     parser.add_argument("--manifest", required=True, help="Path to project_manifest.yaml")
     parser.add_argument("--test", required=True, help="Test name")
-    parser.add_argument("--seed", required=True, type=int, help="Random seed (non-negative integer)")
+    parser.add_argument(
+        "--seed", required=True, type=int, help="Random seed (non-negative integer)",
+    )
     parser.add_argument("--out", required=True, help="Output path for sim result JSON")
     parser.add_argument("--dry-run", action="store_true", default=True,
                         help="Dry-run mode (default: true in mock MVP)")
@@ -123,7 +127,9 @@ def main() -> int:
 
     # Render commands and build mock result
     commands = render_commands(manifest, args.test, args.seed)
-    result = build_sim_result(args.test, args.seed, commands, policy_checked=True, dry_run=args.dry_run)
+    result = build_sim_result(
+        args.test, args.seed, commands, policy_checked=True, dry_run=args.dry_run,
+    )
     _output(result, args.out)
     return 0
 

@@ -1,6 +1,5 @@
 """Tests for JSON Schema definitions."""
 
-import json
 from pathlib import Path
 
 import pytest
@@ -39,7 +38,9 @@ def valid_scenario_card() -> dict:
         "required_config": [
             {"register": "DMA_CFG.LL_MODE_EN", "value": 1}
         ],
-        "stimulus": ["Enable linked-list mode", "Build two linked descriptors", "Start DMA channel"],
+        "stimulus": [
+            "Enable linked-list mode", "Build two linked descriptors", "Start DMA channel",
+        ],
         "expected_behavior": ["Parser enters LINK_DESC state", "Next descriptor fetched"],
         "confidence": "medium",
     }

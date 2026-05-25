@@ -5,8 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 SCRIPT = "scripts/validate_patch_metadata.py"
 PYTHON = sys.executable
 

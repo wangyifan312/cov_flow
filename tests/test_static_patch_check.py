@@ -5,8 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 SCRIPT = "scripts/static_patch_check.py"
 PYTHON = sys.executable
 MANIFEST = "mock_data/dma_subsystem/project_manifest.yaml"
@@ -43,7 +41,11 @@ def _write_json(data: dict, tmpdir: Path, name: str = "patch.json") -> Path:
     return path
 
 
-def _run(patch_path: Path, manifest: str = MANIFEST, out_path: Path | None = None) -> subprocess.CompletedProcess:
+def _run(
+    patch_path: Path,
+    manifest: str = MANIFEST,
+    out_path: Path | None = None,
+) -> subprocess.CompletedProcess:
     cmd = [PYTHON, SCRIPT, "--file", str(patch_path), "--manifest", manifest]
     if out_path:
         cmd.extend(["--out", str(out_path)])

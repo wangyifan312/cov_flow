@@ -5,8 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
-
 PROJECT_ROOT = Path(__file__).parent.parent
 MOCK_MANIFEST = PROJECT_ROOT / "mock_data" / "dma_subsystem" / "project_manifest.yaml"
 INDEX_DIR = PROJECT_ROOT / "mock_data" / "dma_subsystem" / ".dv_ai_index"
@@ -88,7 +86,10 @@ class TestGenerateMockIndex:
         assert gap["bin"] == "linked_list"
 
         # Related spec section exists
-        spec_section = next(s for s in spec["sections"] if s["section_id"] == "spec_dma_linked_list")
+        spec_section = next(
+            s for s in spec["sections"]
+            if s["section_id"] == "spec_dma_linked_list"
+        )
         assert "linked_list" in spec_section["feature_tags"]
 
         # Related register field exists

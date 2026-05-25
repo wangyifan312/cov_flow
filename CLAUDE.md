@@ -42,7 +42,8 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - **Phase 2a**: 8 skill reference documents (triage/closure workflows), 2 validation scripts (scenario card, patch metadata), eval skeleton (YAML structure + 1 case)
 - **Phase 2b**: 4 new MCP sim tools (`sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`, `cov_get_coverage_diff`), static patch check script, audit logging service, mock simulation data, 2 eval cases
 - **Phase 2c**: Eval runner dry-run mode (`run_eval.py`), 7 additional skill reference documents completing all 5 sub-skill workflows
-- **Total**: 146 tests, 11 MCP tools, 15 skill reference documents, 3 eval cases, make accept clean
+- **Phase 2 收尾**: `pip install -e ".[dev]"` fix (hatch build targets), `.mcp.json` Claude Code MCP config, ruff 95→0 issues, mypy 18→0 errors, 4th eval case (`generate_case_0001.yaml` completing all 4 task_modes), 3 example walkthroughs (triage, full closure, MCP setup)
+- **Total**: 146 tests, 11 MCP tools, 15 skill reference documents, 4 eval cases, ruff 0, mypy 0, make accept clean
 - All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
 
 ### Phase 3+ — Real Integration (Out of Scope, Requires Approval)
@@ -86,6 +87,7 @@ When deciding where to put a capability, follow this split (from `implementation
 - Run `pytest` after modifying code in `lib/`, `scripts/`, `dv_mcp/`, or `tests/`.
 - Run `make validate` after modifying schemas or mock manifests.
 - Run `make smoke-server` after modifying MCP server code or tools.
+- Run `make lint` and `make typecheck` after any Python code change — ruff 0 and mypy 0 are required.
 - Run `scripts/run_eval.py --eval-dir evals/ --dry-run` after modifying eval YAML files or the eval runner.
 - If a change cannot be tested immediately (e.g., missing dependency), state the reason explicitly rather than skipping silently.
 

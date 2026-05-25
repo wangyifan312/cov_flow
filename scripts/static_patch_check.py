@@ -6,7 +6,8 @@ MCP runtime or simulation execution.
 
 Usage:
     python scripts/static_patch_check.py --file patch.json --manifest manifest.yaml
-    python scripts/static_patch_check.py --file patch.json --manifest manifest.yaml --out report.json
+    python scripts/static_patch_check.py --file patch.json --manifest manifest.yaml \
+        --out report.json
 """
 
 from __future__ import annotations
@@ -20,8 +21,8 @@ _SCRIPT_DIR = Path(__file__).parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 sys.path.insert(0, str(_PROJECT_ROOT))
 
-from lib.manifest import Manifest, ManifestError
-from lib.index_paths import INDEX_DIR_NAME
+from lib.index_paths import INDEX_DIR_NAME  # noqa: E402
+from lib.manifest import Manifest, ManifestError  # noqa: E402
 
 
 def _check_new_files(patch: dict, base_dir: Path) -> list[dict]:
@@ -58,51 +59,72 @@ def _check_modified_files(patch: dict, base_dir: Path) -> list[dict]:
 
 def _check_base_test(patch: dict, tb_index: dict) -> list[dict]:
     """Check that base_reuse.base_test exists in tb_index."""
-    checks = []
+    checks: list[dict] = []
     base_test = patch.get("base_reuse", {}).get("base_test")
     if not base_test:
         return checks
 
     test_names = [t["name"] for t in tb_index.get("base_tests", [])]
     found = base_test in test_names
+    if found:
+        msg = f"Found in tb_index: {found}"
+    else:
+        msg = (
+            f"base_test '{base_test}' not in tb_index base_tests: "
+            f"{test_names}"
+        )
     checks.append({
         "check": "base_test_in_index",
         "target": base_test,
         "passed": found,
-        "message": f"Found in tb_index: {found}" if found else f"base_test '{base_test}' not in tb_index base_tests: {test_names}",
+        "message": msg,
     })
     return checks
 
 
 def _check_base_sequence(patch: dict, tb_index: dict) -> list[dict]:
     """Check that base_reuse.base_sequence exists in tb_index."""
-    checks = []
+    checks: list[dict] = []
     base_seq = patch.get("base_reuse", {}).get("base_sequence")
     if not base_seq:
         return checks
 
     seq_names = [s["name"] for s in tb_index.get("sequences", [])]
     found = base_seq in seq_names
+    if found:
+        msg = f"Found in tb_index: {found}"
+    else:
+        msg = (
+            f"base_sequence '{base_seq}' not in tb_index sequences: "
+            f"{seq_names}"
+        )
     checks.append({
         "check": "base_sequence_in_index",
         "target": base_seq,
         "passed": found,
-        "message": f"Found in tb_index: {found}" if found else f"base_sequence '{base_seq}' not in tb_index sequences: {seq_names}",
+        "message": msg,
     })
     return checks
 
 
 def _check_coverage_targets(patch: dict) -> list[dict]:
     """Check that coverage_target entries have valid dot-separated format (≥3 segments)."""
-    checks = []
+    checks: list[dict] = []
     for target in patch.get("coverage_target", []):
         parts = target.split(".")
         valid = len(parts) >= 3 and all(p for p in parts)
+        if valid:
+            msg = f"Format valid (≥3 segments): {valid}"
+        else:
+            msg = (
+                f"Invalid format '{target}': expected "
+                f"covergroup.coverpoint.bin (≥3 dot-separated segments)"
+            )
         checks.append({
             "check": "coverage_target_format",
             "target": target,
             "passed": valid,
-            "message": f"Format valid (≥3 segments): {valid}" if valid else f"Invalid format '{target}': expected covergroup.coverpoint.bin (≥3 dot-separated segments)",
+            "message": msg,
         })
     return checks
 
@@ -111,11 +133,15 @@ def _check_review_checklist(patch: dict) -> list[dict]:
     """Check that review_checklist is non-empty."""
     checklist = patch.get("review_checklist", [])
     passed = len(checklist) > 0
+    if passed:
+        msg = f"Checklist has {len(checklist)} item(s)"
+    else:
+        msg = "review_checklist is empty"
     return [{
         "check": "review_checklist_non_empty",
         "target": "review_checklist",
         "passed": passed,
-        "message": f"Checklist has {len(checklist)} item(s)" if passed else "review_checklist is empty",
+        "message": msg,
     }]
 
 
@@ -169,7 +195,7 @@ def main() -> int:
         _output(report, args.out)
         return 1
 
-    with open(patch_path, "r", encoding="utf-8") as f:
+    with open(patch_path, encoding="utf-8") as f:
         patch = json.load(f)
 
     # Load tb_index
@@ -185,7 +211,7 @@ def main() -> int:
         _output(report, args.out)
         return 1
 
-    with open(tb_index_path, "r", encoding="utf-8") as f:
+    with open(tb_index_path, encoding="utf-8") as f:
         tb_index = json.load(f)
 
     # Run checks

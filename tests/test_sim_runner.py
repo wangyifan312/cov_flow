@@ -5,7 +5,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-import pytest
 import yaml
 
 SCRIPT = "scripts/sim_runner.py"
@@ -38,7 +37,7 @@ class TestSimRunner:
 
     def test_policy_blocks_when_false(self, tmp_path: Path) -> None:
         # Create a manifest with allow_running_simulation: false
-        with open(MANIFEST, "r", encoding="utf-8") as f:
+        with open(MANIFEST, encoding="utf-8") as f:
             manifest_data = yaml.safe_load(f)
         manifest_data["policy"]["allow_running_simulation"] = False
 
@@ -61,7 +60,7 @@ class TestSimRunner:
         assert "42" in data["run_command"]
 
     def test_manifest_missing_simulation_block(self, tmp_path: Path) -> None:
-        with open(MANIFEST, "r", encoding="utf-8") as f:
+        with open(MANIFEST, encoding="utf-8") as f:
             manifest_data = yaml.safe_load(f)
         del manifest_data["simulation"]
 

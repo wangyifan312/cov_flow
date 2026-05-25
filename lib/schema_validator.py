@@ -10,9 +10,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from jsonschema import Draft7Validator, ValidationError
-from jsonschema.exceptions import best_match
-
+from jsonschema import Draft7Validator
 
 # Default schemas directory
 _SCHEMAS_DIR = Path(__file__).parent.parent / "schemas"
@@ -46,8 +44,9 @@ def load_schema(schema_name: str, schemas_dir: Path | None = None) -> dict[str, 
     schema_path = base_dir / schema_name
     if not schema_path.exists():
         raise FileNotFoundError(f"Schema file not found: {schema_path}")
-    with open(schema_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    with open(schema_path, encoding="utf-8") as f:
+        result: dict[str, Any] = json.load(f)
+        return result
 
 
 def validate(
@@ -112,7 +111,7 @@ def validate_file(
     if not data_path.exists():
         raise FileNotFoundError(f"Data file not found: {data_path}")
 
-    with open(data_path, "r", encoding="utf-8") as f:
+    with open(data_path, encoding="utf-8") as f:
         if data_path.suffix in (".yaml", ".yml"):
             data = yaml.safe_load(f)
         else:

@@ -34,14 +34,14 @@ class IndexReader:
             IndexNotFoundError: If the index file does not exist.
         """
         if index_name in self._cache:
-            return self._cache[index_name]
+            return dict(self._cache[index_name])
 
         path = self._index_dir / index_name
         if not path.exists():
             raise IndexNotFoundError(f"Index file not found: {path}")
 
-        with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        with open(path, encoding="utf-8") as f:
+            data: dict[str, Any] = json.load(f)
 
         self._cache[index_name] = data
         return data
