@@ -28,6 +28,10 @@ VALID_CLASSIFICATIONS = {
     "Coverage Model Issue",
     "Monitor Sampling Issue",
     "Unreachable Candidate",
+    "Dead Code",
+    "Defensive Code",
+    "Unreachable State",
+    "Insufficient Toggle",
 }
 
 REGISTERED_TOOLS = {

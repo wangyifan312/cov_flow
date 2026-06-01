@@ -34,6 +34,7 @@ cov_list_uncovered(project, scope, coverage_type, top_n)
 - Always get gap detail + coverpoint source before attempting classification
 - Only query spec/reg/tb/rtl after initial classification suggests they are needed (see context routing table in `gap_classification.md`)
 - Each tool call must have a clear purpose; do not speculatively query all tools for every gap
+- Use `coverage_type="all"` in `cov_list_uncovered` to include both functional and code coverage gaps in the triage scope; use specific type filters (e.g., `"line"`, `"fsm"`) when focusing on a single coverage category
 
 ## Triage Report Template
 
@@ -53,10 +54,11 @@ Date: {date}
 
 ## Ranked Gaps
 
-| Rank | Gap ID | Covergroup | Coverpoint | Bin | Classification | Priority | Recommended Action |
-|------|--------|------------|------------|-----|----------------|----------|-------------------|
-| 1    | GAP_XXXX | {cg} | {cp} | {bin} | {class} | P0 | {action} |
-| ...  | ... | ... | ... | ... | ... | ... | ... |
+| Rank | Gap ID | Type | Identifier | Classification | Priority | Recommended Action |
+|------|--------|------|------------|----------------|----------|-------------------|
+| 1    | GAP_XXXX | functional | {cg}.{cp}.{bin} | {class} | P0 | {action} |
+| 2    | GAP_L001 | line | {file}:{line} | {class} | P1 | {action} |
+| ...  | ... | ... | ... | ... | ... | ... |
 
 ## Evidence Detail
 

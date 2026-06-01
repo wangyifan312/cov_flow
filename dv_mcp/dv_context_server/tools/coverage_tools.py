@@ -18,6 +18,35 @@ from dv_mcp.dv_context_server.services.summarizer import envelope, error_envelop
 _COVERAGE_INDEX = "coverage_index.json"
 
 
+def _gap_summary(g: dict) -> dict:
+    """Build a summary dict for a gap, including type-specific fields."""
+    summary: dict[str, Any] = {
+        "gap_id": g.get("gap_id"),
+        "coverage_type": g.get("coverage_type", "functional"),
+        "hit_count": g.get("hit_count"),
+        "goal": g.get("goal"),
+        "priority": g.get("priority"),
+        "classification": g.get("classification"),
+    }
+    cov_type = g.get("coverage_type", "functional")
+    if cov_type == "functional":
+        summary["covergroup"] = g.get("covergroup")
+        summary["coverpoint"] = g.get("coverpoint")
+        summary["bin"] = g.get("bin")
+    elif cov_type in ("line", "branch", "condition", "assert"):
+        summary["source_file"] = g.get("source_file")
+        summary["source_line"] = g.get("source_line")
+    elif cov_type == "toggle":
+        summary["signal"] = g.get("signal")
+        summary["module"] = g.get("module")
+        summary["toggle_dir"] = g.get("toggle_dir")
+    elif cov_type == "fsm":
+        summary["module"] = g.get("module")
+        summary["fsm_name"] = g.get("fsm_name")
+        summary["state"] = g.get("state")
+    return summary
+
+
 def cov_list_uncovered(
     project: str,
     scope: str | None = None,
@@ -44,8 +73,9 @@ def cov_list_uncovered(
 
     gaps = data.get("gaps", [])
 
-    # Filter by coverage type
-    gaps = [g for g in gaps if g.get("coverage_type") == coverage_type]
+    # Filter by coverage type (skip filter when "all")
+    if coverage_type != "all":
+        gaps = [g for g in gaps if g.get("coverage_type") == coverage_type]
 
     # Filter by scope if provided (match in source_file or related signals)
     if scope:
@@ -61,18 +91,7 @@ def cov_list_uncovered(
     result_gaps, was_truncated = truncate_list(gaps, top_n)
 
     # Summary view for each gap
-    summaries = []
-    for g in result_gaps:
-        summaries.append({
-            "gap_id": g.get("gap_id"),
-            "covergroup": g.get("covergroup"),
-            "coverpoint": g.get("coverpoint"),
-            "bin": g.get("bin"),
-            "hit_count": g.get("hit_count"),
-            "goal": g.get("goal"),
-            "priority": g.get("priority"),
-            "classification": g.get("classification"),
-        })
+    summaries = [_gap_summary(g) for g in result_gaps]
 
     evidence = [
         coverage_evidence(
@@ -120,13 +139,57 @@ def cov_get_gap_detail(project: str, gap_id: str) -> dict[str, Any]:
     if gap is None:
         return error_envelope(tool, project, f"Gap not found: {gap_id}")
 
+    cov_type = gap.get("coverage_type", "functional")
+    if cov_type == "functional":
+        desc = (
+            f"Gap detail for {gap.get('covergroup')}."
+            f"{gap.get('coverpoint')}.{gap.get('bin')}"
+        )
+    elif cov_type == "line":
+        desc = f"Gap detail for line {gap.get('source_file')}:{gap.get('source_line')}"
+    elif cov_type == "branch":
+        desc = (
+            f"Gap detail for branch at {gap.get('source_file')}:"
+            f"{gap.get('source_line')} ({gap.get('branch_type')}/{gap.get('direction')})"
+        )
+    elif cov_type == "condition":
+        desc = (
+            f"Gap detail for condition '{gap.get('condition_expr')}' at "
+            f"{gap.get('source_file')}:{gap.get('source_line')}"
+        )
+    elif cov_type == "toggle":
+        desc = (
+            f"Gap detail for toggle {gap.get('module')}."
+            f"{gap.get('signal')} ({gap.get('toggle_dir')})"
+        )
+    elif cov_type == "fsm":
+        desc = (
+            f"Gap detail for FSM {gap.get('fsm_name')} state "
+            f"'{gap.get('state')}' in {gap.get('module')}"
+        )
+    elif cov_type == "assert":
+        desc = (
+            f"Gap detail for assertion '{gap.get('assert_name')}' at "
+            f"{gap.get('source_file')}:{gap.get('source_line')}"
+        )
+    else:
+        desc = f"Gap detail for {gap.get('gap_id')}"
+
     evidence = [
         coverage_evidence(
             gap_id, "detail",
             f"{gap.get('source_file', '?')}:{gap.get('source_line', '?')}",
-            f"Gap detail for {gap.get('covergroup')}.{gap.get('coverpoint')}.{gap.get('bin')}"
+            desc,
         )
     ]
+
+    next_actions: list[str] = ["cov_get_coverpoint_source", "spec_search"]
+    if cov_type == "functional":
+        next_actions.append("reg_find_fields_affecting_feature")
+    elif cov_type in ("toggle", "fsm"):
+        next_actions.append("rtl_find_signal")
+    elif cov_type in ("line", "branch", "condition", "assert"):
+        next_actions.extend(["reg_find_fields_affecting_feature", "rtl_find_signal"])
 
     return envelope(
         tool=tool,
@@ -134,9 +197,7 @@ def cov_get_gap_detail(project: str, gap_id: str) -> dict[str, Any]:
         result=gap,
         evidence=evidence,
         truncated=False,
-        next_actions=[
-            "cov_get_coverpoint_source", "spec_search", "reg_find_fields_affecting_feature",
-        ],
+        next_actions=next_actions,
     )
 
 
@@ -176,18 +237,70 @@ def cov_get_coverpoint_source(
 
     # In mock MVP, we return a reference rather than actual source content.
     # Real implementation would read the coverage model file.
-    mock_source = (
-        f"// Mock coverage model source for {gap.get('covergroup')}.{gap.get('coverpoint')}\n"
-        f"// Source: {source_file}:{source_line}\n"
-        f"// In production, this would contain the actual coverpoint/bin definition\n"
-        f"// from the coverage model SystemVerilog file.\n"
-        f"\n"
-        f"covergroup {gap.get('covergroup')} @(posedge clk);\n"
-        f"  {gap.get('coverpoint')}: coverpoint <signal> {{\n"
-        f"    bins {gap.get('bin')} = {{<value>}};\n"
-        f"  }}\n"
-        f"endgroup"
-    )
+    cov_type = gap.get("coverage_type", "functional")
+
+    if cov_type == "functional":
+        mock_source = (
+            f"covergroup {gap.get('covergroup')} @(posedge clk);\n"
+            f"  {gap.get('coverpoint')}: coverpoint <signal> {{\n"
+            f"    bins {gap.get('bin')} = {{<value>}};\n"
+            f"  }}\n"
+            f"endgroup"
+        )
+    elif cov_type == "line":
+        mock_source = (
+            f"// Mock line coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Unexecuted line in RTL module\n"
+            f"// Line {source_line}: <statement not executed>"
+        )
+    elif cov_type == "branch":
+        mock_source = (
+            f"// Mock branch coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Branch type: {gap.get('branch_type')}, "
+            f"direction: {gap.get('direction')}\n"
+            f"if (<condition>) begin\n"
+            f"  // true branch\n"
+            f"end else begin\n"
+            f"  // false branch NOT taken\n"
+            f"end"
+        )
+    elif cov_type == "condition":
+        mock_source = (
+            f"// Mock condition coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Condition: {gap.get('condition_expr')}\n"
+            f"// Missed combination: {gap.get('combination')}"
+        )
+    elif cov_type == "toggle":
+        mock_source = (
+            f"// Mock toggle coverage source\n"
+            f"// Module: {gap.get('module')}\n"
+            f"// Signal: {gap.get('signal')}\n"
+            f"// Toggle direction: {gap.get('toggle_dir')}"
+        )
+    elif cov_type == "fsm":
+        transition = gap.get("transition")
+        mock_source = (
+            f"// Mock FSM coverage source\n"
+            f"// Module: {gap.get('module')}\n"
+            f"// FSM: {gap.get('fsm_name')}\n"
+            f"// Uncovered state: {gap.get('state')}\n"
+            + (f"// Transition: {transition}\n" if transition else "")
+        )
+    elif cov_type == "assert":
+        mock_source = (
+            f"// Mock assertion coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Assertion: {gap.get('assert_name')}\n"
+            f"// Vacuous: {gap.get('vacuous', 'N/A')}"
+        )
+    else:
+        mock_source = (
+            f"// Mock coverage source for {gap_id}\n"
+            f"// Source: {source_file}:{source_line}"
+        )
 
     evidence = [
         coverage_evidence(

@@ -52,6 +52,7 @@ def tool_cov_list_uncovered(
     """List top uncovered coverage gaps for a project.
 
     Returns gap summaries sorted by priority.
+    Use coverage_type='all' to include all coverage types.
     """
     return cov_list_uncovered(project, scope=scope, coverage_type=coverage_type, top_n=top_n)
 

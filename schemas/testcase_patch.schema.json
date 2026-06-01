@@ -20,12 +20,17 @@
     "patch_id": {
       "type": "string",
       "description": "Unique patch identifier.",
-      "pattern": "^PATCH_GAP_[0-9]{4}_[0-9]{3}$"
+      "pattern": "^PATCH_GAP_(?:[A-Z][0-9]{3}|[0-9]{4})_[0-9]{3}$"
     },
     "gap_id": {
       "type": "string",
-      "pattern": "^GAP_[0-9]{4}$",
+      "pattern": "^GAP_(?:[A-Z][0-9]{3}|[0-9]{4})$",
       "description": "Target gap identifier."
+    },
+    "coverage_type": {
+      "type": "string",
+      "enum": ["functional", "line", "toggle", "branch", "condition", "fsm", "assert"],
+      "description": "Coverage type of the target gap."
     },
     "new_files": {
       "type": "array",
@@ -59,7 +64,7 @@
     "coverage_target": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "Coverage targets this patch aims to close (covergroup.coverpoint.bin).",
+      "description": "Coverage targets this patch aims to close. Format depends on coverage_type: 'covergroup.coverpoint.bin' for functional; 'source_file:line' for line; 'module.signal[toggle_dir]' for toggle; 'module.fsm_name.state' for fsm; etc.",
       "minItems": 1
     },
     "review_checklist": {

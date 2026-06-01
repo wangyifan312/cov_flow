@@ -22,7 +22,7 @@ the stimulus described in a scenario card, reusing existing TB templates.
 ## Workflow Summary
 
 1. Read the scenario card; confirm generation target (sequence/test/config).
-2. Call `tb_get_base_test_template` to get the base test structure.
+2. Call `tb_get_existing_tests_for_feature` to identify the base test structure.
 3. Call `tb_get_existing_tests_for_feature` to find reusable sequences.
 4. Call `reg_find_fields_affecting_feature` for RAL access paths.
 5. Generate minimal patch: new sequence or test file, or config override.
@@ -31,10 +31,15 @@ the stimulus described in a scenario card, reusing existing TB templates.
 
 ## MCP Tool Policy
 
-- `tb_get_base_test_template` — required before generation.
+- `tb_get_existing_tests_for_feature` — required before generation (identifies base test and reusable sequences).
 - `tb_get_existing_tests_for_feature` — required to avoid duplication.
 - `reg_find_fields_affecting_feature` — required for RAL paths.
 - `rtl_find_signal` — only for signal-level verification.
+
+## Coverage Type Support
+
+Generates testcase patches targeting both functional and code coverage gaps.
+Coverage target format varies by type: `covergroup.coverpoint.bin` (functional), `source_file:line` (line/branch/condition), `module.signal[direction]` (toggle), `module.fsm_name.state` (fsm).
 
 ## Hard Restrictions
 

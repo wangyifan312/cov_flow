@@ -18,31 +18,43 @@ A testcase patch is a JSON document describing new and modified files for a cove
 | `modified_files` | array | List of modified file paths |
 | `compile_command` | string | Command to compile the patch |
 | `run_command` | string | Command to run the patch |
-| `coverage_targets` | array | List of coverage targets |
+| `coverage_target` | array | Coverage targets this patch aims to close |
 | `review_checklist` | array | Pre-review checks |
 
 ## Field-by-Field Rules
 
 ### patch_id
 
-**Format**: `patch_{gap_id}_{timestamp}` or `patch_{gap_id}_{seq}`
+**Format**: `PATCH_GAP_(XXXX|XNNN)_NNN`
 
 ```json
-"patch_id": "patch_GAP_0001_001"
+"patch_id": "PATCH_GAP_0001_001"
+```
+
+For code coverage gaps, the gap_id portion uses a letter prefix:
+```json
+"patch_id": "PATCH_GAP_L001_001"
 ```
 
 **Rules**:
-- Must start with `patch_`
+- Must match pattern: `^PATCH_GAP_(?:[A-Z][0-9]{3}|[0-9]{4})_[0-9]{3}$`
 - Must reference the gap_id
 - Must be unique across all patches
 
 ### gap_id
 
-**Format**: `GAP_NNNN` (matches coverage_gaps.json)
+**Format**: `GAP_XXXX` (functional) or `GAP_XNNN` (code coverage)
 
 ```json
 "gap_id": "GAP_0001"
 ```
+
+For code coverage gaps, use letter prefix:
+```json
+"gap_id": "GAP_L001"
+```
+
+Pattern: `^GAP_(?:[A-Z][0-9]{3}|[0-9]{4})$`
 
 **Rules**:
 - Must exist in coverage_gaps.json
@@ -50,16 +62,18 @@ A testcase patch is a JSON document describing new and modified files for a cove
 
 ### classification
 
-**Enum**: One of the 6 valid classifications
+**Note**: `classification` is not a schema-required field in `testcase_patch.schema.json`. It is an optional descriptive field carried over from the scenario card for human review context.
+
+**Enum**: One of the 10 valid classifications
 
 ```json
 "classification": "Missing Stimulus"
 ```
 
 **Rules**:
-- Must match the gap's classification from triage
-- Must be one of: Missing Stimulus, Config Missing, Constraint Too Tight,
-  Coverage Model Issue, Monitor Sampling Issue, Unreachable Candidate
+- Should match the gap's classification from triage
+- Functional: Missing Stimulus, Config Missing, Constraint Too Tight, Coverage Model Issue, Monitor Sampling Issue, Unreachable Candidate
+- Code coverage: Dead Code, Defensive Code, Unreachable State, Insufficient Toggle
 
 ### base_reuse
 
@@ -128,25 +142,35 @@ A testcase patch is a JSON document describing new and modified files for a cove
 - static_patch_check verifies these are non-empty
 - Commands must match manifest templates
 
-### coverage_targets
+### coverage_target
 
-**Structure**: Array of coverage target objects
+**Structure**: Array of coverage target strings. Format depends on coverage_type.
 
+For functional coverage (default):
 ```json
-"coverage_targets": [
-  {
-    "covergroup": "dma_descriptor_cov",
-    "coverpoint": "descriptor_type",
-    "bin": "linked_list_desc"
-  }
-]
+"coverage_target": ["dma_desc_cg.desc_mode_cp.linked_list"]
 ```
 
 **Rules**:
-- Each target must have at least 3 dot-separated segments
-  (covergroup.coverpoint.bin or covergroup.cross.bin)
+- Functional targets must have at least 3 dot-separated segments (covergroup.coverpoint.bin)
 - Must reference the gap's coverage target
 - Use `cov_get_gap_detail` to get the correct hierarchy
+
+#### Code Coverage Target Formats
+
+For code coverage gaps, `coverage_target` uses type-specific string formats instead of covergroup.coverpoint.bin:
+
+| coverage_type | Target Format | Example |
+|---------------|--------------|---------|
+| `functional` | `covergroup.coverpoint.bin` | `dma_desc_cg.desc_mode_cp.linked_list` |
+| `line` | `source_file:line` | `rtl/dma_desc_parser.sv:142` |
+| `branch` | `source_file:line` | `rtl/dma_desc_parser.sv:78` |
+| `condition` | `source_file:line` | `rtl/dma_desc_parser.sv:65` |
+| `toggle` | `module.signal[direction]` | `dma_axi_master.burst_wrap[1to0]` |
+| `fsm` | `module.fsm_name.state` | `dma_desc_parser.parser_fsm.PARSE_SG` |
+| `assert` | `source_file:assert_name` | `rtl/dma_desc_parser.sv:dma_desc_align_chk` |
+
+Include `coverage_type` in the patch metadata to enable format-specific validation by `static_patch_check.py`.
 
 ### review_checklist
 
@@ -226,16 +250,11 @@ of breaking existing tests and require more careful review.
 ### Mistake: Coverage target with insufficient segments
 
 ```json
-"coverage_targets": [
-  {
-    "covergroup": "dma_cov",
-    "coverpoint": "type"
-    // Missing: bin
-  }
-]
+"coverage_target": ["dma_cov.type"]
 ```
 
-**Fix**: Include all 3 segments: covergroup, coverpoint, bin.
+**Fix**: Include all 3 segments for functional coverage: `dma_cov.type.bin_name`.
+For code coverage, use the correct type-specific format (see table above).
 
 ### Mistake: Hardcoded commands instead of templates
 

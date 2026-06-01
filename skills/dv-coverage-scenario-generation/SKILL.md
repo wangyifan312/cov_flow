@@ -37,6 +37,11 @@ that describes what stimulus is needed to close the gap.
 - `tb_get_existing_tests_for_feature` — required to avoid duplication.
 - `rtl_find_signal` — optional, only when controllability is unclear.
 
+## Coverage Type Support
+
+Generates scenario cards for both functional and code coverage gaps.
+For code coverage, use type-specific `target_coverage` fields (source_file/source_line for line/branch/condition, signal/module for toggle, module/fsm_name/state for fsm).
+
 ## Hard Restrictions
 
 - Lower confidence when evidence is insufficient.

@@ -23,10 +23,16 @@ class TestRunEval:
         result = run_eval_batch(Path("evals/"), dry_run=True)
         assert result["ok"] is True
         assert result["tool"] == "run_eval"
-        assert len(result["evals"]) >= 3
-        assert result["summary"]["total"] >= 3
-        assert result["summary"]["valid"] >= 3
+        assert len(result["evals"]) >= 5
+        assert result["summary"]["total"] >= 5
+        assert result["summary"]["valid"] >= 5
         assert result["summary"]["invalid"] == 0
+
+    def test_code_coverage_eval_valid(self) -> None:
+        result = run_eval_single(Path("evals/triage_code_coverage_line.yaml"), dry_run=True)
+        assert result["ok"] is True
+        assert result["task_mode"] == "triage"
+        assert result["validation"]["yaml_valid"] is True
 
     def test_invalid_yaml(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

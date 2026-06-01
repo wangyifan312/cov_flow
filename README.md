@@ -66,7 +66,7 @@ cov_flow/
 │       ├── coverage_gaps.json
 │       └── .dv_ai_index/      Pre-built mock indexes (committed as fixtures)
 ├── examples/             End-to-end usage walkthroughs
-├── evals/                Eval YAML cases (4 cases: triage, scenario, generate-case, feedback)
+├── evals/                Eval YAML cases (6 cases: triage, scenario, generate-case, feedback, code coverage)
 └── tests/                Tests for schemas, scripts, and tools
 ```
 
@@ -81,6 +81,7 @@ cov_flow/
 | Phase 2a | Skill references + Validation scripts + Eval skeleton | **Done** |
 | Phase 2b | Sim tools + Coverage diff + Static patch check + Evals | **Done** |
 | Phase 2c | Eval runner + Remaining skill references | **Done** |
+| Phase 2d | Code coverage extension (7 types, 27 gaps, 181 tests) | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -136,6 +137,19 @@ cov_flow/
 - **4th eval case**: generate_case_0001.yaml (completing all 4 task_modes: triage, scenario, generate-case, feedback)
 - **3 example walkthroughs**: triage, full end-to-end closure, MCP server setup guide
 
+### What's included in Phase 2d (Code Coverage Extension)
+
+- **7 coverage types**: functional, line, branch, condition, toggle, fsm, assert
+- **Unified schema**: `anyOf` conditional required fields per coverage type, backward-compatible with existing functional gaps
+- **Extended gap IDs**: `GAP_XXXX` (functional) + `GAP_XNNN` (code coverage: L/B/C/T/M/A prefix)
+- **4 new classifications**: Dead Code, Defensive Code, Unreachable State, Insufficient Toggle (10 total)
+- **27 mock gaps**: 15 functional + 12 code coverage (2 per type)
+- **Type-aware MCP tools**: `cov_list_uncovered` with `coverage_type="all"` filter, type-specific summaries, evidence, and mock source snippets
+- **Type-aware diff**: `coverage_diff.py` produces per-type delta fields and `by_type` summary breakdown
+- **Type-aware validation**: `static_patch_check.py` validates coverage target format per type
+- **35 new tests** (total: 181), **2 new eval cases** (total: 6)
+- **12 updated skill documents** covering all workflow references
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
@@ -144,6 +158,18 @@ cov_flow/
 - No real UVM testcase generation (Phase 4)
 - No real simulation execution (Phase 5)
 - No eval runner LLM execution mode (Phase 6)
+
+## Coverage Types
+
+| Type | Gap ID Prefix | Schema Required Fields | Classification Examples |
+|------|--------------|----------------------|------------------------|
+| functional | `GAP_XXXX` | covergroup, coverpoint, bin | Missing Stimulus, Config Missing |
+| line | `GAP_LNNN` | source_file, source_line | Dead Code, Defensive Code |
+| branch | `GAP_BNNN` | source_file, source_line, branch_type, direction | Missing Stimulus, Defensive Code |
+| condition | `GAP_CNNN` | source_file, source_line, condition_expr, combination | Missing Stimulus |
+| toggle | `GAP_TNNN` | signal, toggle_dir, module | Insufficient Toggle |
+| fsm | `GAP_MNNN` | module, fsm_name, state | Unreachable State, Config Missing |
+| assert | `GAP_ANNN` | assert_name, source_file, source_line | Dead Code |
 
 ## Technology Stack
 

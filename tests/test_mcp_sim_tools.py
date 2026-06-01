@@ -95,8 +95,8 @@ class TestCovGetCoverageDiff:
     def test_full_diff(self) -> None:
         result = cov_get_coverage_diff(PROJECT)
         assert result["ok"] is True
-        assert result["result"]["summary"]["total_gaps"] == 15
-        assert result["result"]["summary"]["newly_covered"] == 3
+        assert result["result"]["summary"]["total_gaps"] == 27
+        assert result["result"]["summary"]["newly_covered"] == 5
 
     def test_filter_by_gap_id(self) -> None:
         result = cov_get_coverage_diff(PROJECT, gap_id="GAP_0001")
@@ -107,3 +107,13 @@ class TestCovGetCoverageDiff:
     def test_has_audit(self) -> None:
         result = cov_get_coverage_diff(PROJECT)
         assert "audit" in result
+
+    def test_diff_includes_code_coverage_types(self) -> None:
+        result = cov_get_coverage_diff(PROJECT)
+        assert result["ok"] is True
+        by_type = result["result"]["summary"]["by_type"]
+        assert "line" in by_type
+        assert "branch" in by_type
+        assert "toggle" in by_type
+        assert "fsm" in by_type
+        assert "assert" in by_type

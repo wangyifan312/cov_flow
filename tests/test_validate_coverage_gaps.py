@@ -21,8 +21,8 @@ class TestValidateCoverageGaps:
         assert result.returncode == 0
         report = json.loads(result.stdout)
         assert report["ok"] is True
-        assert report["summary"]["gaps_count"] == 15
-        assert report["summary"]["unique_gap_ids"] == 15
+        assert report["summary"]["gaps_count"] == 27
+        assert report["summary"]["unique_gap_ids"] == 27
 
     def test_output_to_file(self, tmp_path: Path) -> None:
         out_file = tmp_path / "report.json"

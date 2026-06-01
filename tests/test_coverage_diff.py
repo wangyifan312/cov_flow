@@ -94,14 +94,55 @@ class TestCoverageDiff:
         assert out_path.exists()
         report = json.loads(out_path.read_text(encoding="utf-8"))
         assert report["ok"] is True
-        assert report["summary"]["total_gaps"] == 15
+        assert report["summary"]["total_gaps"] == 27
 
     def test_summary_counts(self) -> None:
         result = _run()
         assert result.returncode == 0
         report = json.loads(result.stdout)
         summary = report["summary"]
-        assert summary["total_gaps"] == 15
-        assert summary["newly_covered"] == 3  # GAP_0001, GAP_0003, GAP_0007
-        assert summary["unchanged"] == 12
+        assert summary["total_gaps"] == 27
+        assert summary["newly_covered"] == 5  # GAP_0001, GAP_0003, GAP_0007, GAP_B001, GAP_T001
+        assert summary["unchanged"] == 22
         assert summary["regressed"] == 0
+
+    def test_code_gap_closed(self) -> None:
+        """GAP_B001 (branch) should be closed in after DB."""
+        result = _run()
+        assert result.returncode == 0
+        report = json.loads(result.stdout)
+        gap_b001 = [d for d in report["gap_deltas"] if d["gap_id"] == "GAP_B001"][0]
+        assert gap_b001["closed"] is True
+        assert gap_b001["coverage_type"] == "branch"
+        assert gap_b001["after_hit_count"] == 3
+
+    def test_type_specific_delta_fields(self) -> None:
+        """Code coverage deltas should have type-specific identifier fields."""
+        result = _run()
+        report = json.loads(result.stdout)
+        # Toggle gap should have signal/module/toggle_dir
+        gap_t001 = [d for d in report["gap_deltas"] if d["gap_id"] == "GAP_T001"][0]
+        assert gap_t001["coverage_type"] == "toggle"
+        assert "signal" in gap_t001
+        assert gap_t001["signal"] == "burst_wrap"
+        assert "module" in gap_t001
+        # FSM gap should have module/fsm_name/state
+        gap_m001 = [d for d in report["gap_deltas"] if d["gap_id"] == "GAP_M001"][0]
+        assert gap_m001["coverage_type"] == "fsm"
+        assert "fsm_name" in gap_m001
+
+    def test_by_type_summary(self) -> None:
+        """Summary should include by_type breakdown."""
+        result = _run()
+        report = json.loads(result.stdout)
+        by_type = report["summary"]["by_type"]
+        assert "functional" in by_type
+        assert "line" in by_type
+        assert "branch" in by_type
+        assert "toggle" in by_type
+        # Branch should have 1 newly_covered (GAP_B001)
+        assert by_type["branch"]["newly_covered"] == 1
+        # Toggle should have 1 newly_covered (GAP_T001)
+        assert by_type["toggle"]["newly_covered"] == 1
+        # Functional should have 3 newly_covered
+        assert by_type["functional"]["newly_covered"] == 3

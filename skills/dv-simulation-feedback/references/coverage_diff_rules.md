@@ -57,19 +57,57 @@ The coverage_diff.py tool produces:
   "gap_deltas": [
     {
       "gap_id": "GAP_0001",
+      "coverage_type": "functional",
       "before_hit_count": 0,
       "after_hit_count": 5,
       "closed": true,
-      "covergroup": "dma_descriptor_cov",
-      "coverpoint": "descriptor_type",
-      "bin": "linked_list_desc"
+      "covergroup": "dma_desc_cg",
+      "coverpoint": "desc_mode_cp",
+      "bin": "linked_list"
     }
   ],
   "summary": {
-    "total_gaps": 15,
-    "newly_covered": 3,
+    "total_gaps": 27,
+    "newly_covered": 5,
     "regressed": 0,
-    "unchanged": 12
+    "unchanged": 22
+  }
+}
+```
+
+### Code Coverage Delta Example
+
+Code coverage gaps produce type-specific identifier fields in the delta:
+
+```json
+{
+  "gap_id": "GAP_B001",
+  "coverage_type": "branch",
+  "before_hit_count": 0,
+  "after_hit_count": 3,
+  "closed": true,
+  "source_file": "rtl/dma_desc_parser.sv",
+  "source_line": 78,
+  "branch_type": "if",
+  "direction": "false"
+}
+```
+
+The summary section includes a by_type breakdown:
+
+```json
+{
+  "summary": {
+    "total_gaps": 27,
+    "newly_covered": 5,
+    "regressed": 0,
+    "unchanged": 22,
+    "by_type": {
+      "functional": {"total": 15, "newly_covered": 3, "regressed": 0, "unchanged": 12},
+      "branch": {"total": 2, "newly_covered": 1, "regressed": 0, "unchanged": 1},
+      "toggle": {"total": 2, "newly_covered": 1, "regressed": 0, "unchanged": 1},
+      "line": {"total": 2, "newly_covered": 0, "regressed": 0, "unchanged": 2}
+    }
   }
 }
 ```
@@ -80,7 +118,7 @@ The coverage_diff.py tool produces:
 
 1. **Check gap state**: Look at the `closed`, `regressed`, or `unchanged` flag
 2. **Review hit counts**: Compare before_hit_count vs after_hit_count
-3. **Verify coverage target**: Confirm covergroup/coverpoint/bin match the gap
+3. **Verify coverage target**: Confirm type-specific identifier matches the gap (covergroup/coverpoint/bin for functional; source_file/line for code coverage; signal/module for toggle)
 4. **Determine next action**: Based on state (see below)
 
 ### Multi-Gap Analysis

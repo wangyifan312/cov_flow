@@ -33,9 +33,14 @@ Routes tasks to the appropriate sub-skill based on the user's request.
 
 ## MCP Tool Policy
 
-- Call `manifest_validate` before any other tool.
+- Confirm the project manifest resolves correctly before any other tool calls.
 - Never read full RTL/FS/TB files.
 - Use summary-first tools; expand source snippets only when evidence is required.
+
+## Coverage Type Support
+
+Supports 7 coverage types: functional, line, branch, condition, toggle, fsm, assert.
+Code coverage gaps use type-specific classifications (Dead Code, Defensive Code, Unreachable State, Insufficient Toggle) and gap ID prefixes (GAP_L/B/C/T/M/A).
 
 ## Hard Restrictions
 

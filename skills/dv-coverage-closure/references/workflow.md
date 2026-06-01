@@ -25,6 +25,15 @@ The orchestrator skill (`dv-coverage-closure`) routes to sub-skills based on `ta
 4. Feedback      →  after simulation, analyze results and coverage diff
 ```
 
+## Coverage Type Support
+
+The workflow supports 7 coverage types: `functional`, `line`, `branch`, `condition`, `toggle`, `fsm`, `assert`. Each type has type-specific:
+- **Schema fields**: Conditional required fields via JSON Schema `anyOf`
+- **Gap identifiers**: `GAP_XXXX` (functional) or `GAP_XNNN` (code coverage: L/B/C/T/M/A prefix)
+- **MCP tool responses**: Type-aware summary fields, evidence descriptions, and mock source snippets
+- **Classifications**: 6 functional + 4 code coverage classifications (Dead Code, Defensive Code, Unreachable State, Insufficient Toggle)
+- **Diff tracking**: Per-type delta fields and `by_type` summary breakdown
+
 ## Context Budget Rules
 
 | Scope | Budget | Example |
@@ -42,6 +51,7 @@ Before any tool calls:
 2. Use summary-first tools (`cov_list_uncovered`, `spec_search`) before detail tools
 3. Never request full file content — use bounded snippet tools only
 4. Each tool call must have a clear purpose tied to the current task_mode
+5. Use `coverage_type="all"` in `cov_list_uncovered` when triaging both functional and code coverage gaps; use specific type filters for focused analysis
 
 ## Prohibited Operations
 

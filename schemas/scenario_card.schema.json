@@ -18,17 +18,29 @@
   "properties": {
     "gap_id": {
       "type": "string",
-      "pattern": "^GAP_[0-9]{4}$",
+      "pattern": "^GAP_(?:[A-Z][0-9]{3}|[0-9]{4})$",
       "description": "Target gap identifier."
+    },
+    "coverage_type": {
+      "type": "string",
+      "enum": ["functional", "line", "toggle", "branch", "condition", "fsm", "assert"],
+      "description": "Coverage type of the target gap."
     },
     "target_coverage": {
       "type": "object",
-      "required": ["covergroup", "coverpoint", "bin"],
       "additionalProperties": false,
       "properties": {
         "covergroup": { "type": "string" },
         "coverpoint": { "type": "string" },
-        "bin": { "type": "string" }
+        "bin": { "type": "string" },
+        "source_file": { "type": "string" },
+        "source_line": { "type": "integer" },
+        "signal": { "type": "string" },
+        "module": { "type": "string" },
+        "fsm_name": { "type": "string" },
+        "state": { "type": "string" },
+        "assert_name": { "type": "string" },
+        "description": { "type": "string", "description": "Human-readable description of the coverage target." }
       }
     },
     "classification": {
@@ -39,7 +51,11 @@
         "Constraint Too Tight",
         "Coverage Model Issue",
         "Monitor Sampling Issue",
-        "Unreachable Candidate"
+        "Unreachable Candidate",
+        "Dead Code",
+        "Defensive Code",
+        "Unreachable State",
+        "Insufficient Toggle"
       ]
     },
     "semantic_interpretation": {

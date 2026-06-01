@@ -145,3 +145,55 @@ class TestStaticPatchCheck:
         report = json.loads(result.stdout)
         failed = [c for c in report["checks"] if not c["passed"]]
         assert any(c["check"] == "coverage_target_format" for c in failed)
+
+    def test_line_coverage_target_valid(self, tmp_path: Path) -> None:
+        patch = _valid_patch()
+        patch["coverage_type"] = "line"
+        patch["coverage_target"] = ["rtl/dma_desc_parser.sv:142"]
+        path = _write_json(patch, tmp_path)
+        result = _run(path)
+        assert result.returncode == 0
+        report = json.loads(result.stdout)
+        assert report["ok"] is True
+
+    def test_toggle_coverage_target_valid(self, tmp_path: Path) -> None:
+        patch = _valid_patch()
+        patch["coverage_type"] = "toggle"
+        patch["coverage_target"] = ["dma_axi_master.burst_wrap[1to0]"]
+        path = _write_json(patch, tmp_path)
+        result = _run(path)
+        assert result.returncode == 0
+        report = json.loads(result.stdout)
+        assert report["ok"] is True
+
+    def test_fsm_coverage_target_valid(self, tmp_path: Path) -> None:
+        patch = _valid_patch()
+        patch["coverage_type"] = "fsm"
+        patch["coverage_target"] = ["dma_desc_parser.parser_fsm.PARSE_SG"]
+        path = _write_json(patch, tmp_path)
+        result = _run(path)
+        assert result.returncode == 0
+        report = json.loads(result.stdout)
+        assert report["ok"] is True
+
+    def test_line_coverage_target_invalid(self, tmp_path: Path) -> None:
+        patch = _valid_patch()
+        patch["coverage_type"] = "line"
+        patch["coverage_target"] = ["rtl/dma_desc_parser.sv"]  # missing :line
+        path = _write_json(patch, tmp_path)
+        result = _run(path)
+        assert result.returncode == 1
+        report = json.loads(result.stdout)
+        failed = [c for c in report["checks"] if not c["passed"]]
+        assert any(c["check"] == "coverage_target_format" for c in failed)
+
+    def test_toggle_coverage_target_invalid(self, tmp_path: Path) -> None:
+        patch = _valid_patch()
+        patch["coverage_type"] = "toggle"
+        patch["coverage_target"] = ["burst_wrap"]  # missing module. and [direction]
+        path = _write_json(patch, tmp_path)
+        result = _run(path)
+        assert result.returncode == 1
+        report = json.loads(result.stdout)
+        failed = [c for c in report["checks"] if not c["passed"]]
+        assert any(c["check"] == "coverage_target_format" for c in failed)

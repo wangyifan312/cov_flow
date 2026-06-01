@@ -25,9 +25,10 @@ classification, priority ranking, root cause hypothesis, and next action.
 1. Load manifest and validate context sources.
 2. Call `cov_list_uncovered` to get top gaps.
 3. For each gap, call `cov_get_gap_detail` + `cov_get_coverpoint_source`.
-4. Classify each gap into one of: Missing Stimulus, Config Missing,
-   Constraint Too Tight, Coverage Model Issue, Monitor Sampling Issue,
-   Unreachable Candidate.
+4. Classify each gap into one of:
+   - Functional: Missing Stimulus, Config Missing, Constraint Too Tight,
+     Coverage Model Issue, Monitor Sampling Issue, Unreachable Candidate
+   - Code coverage: Dead Code, Defensive Code, Unreachable State, Insufficient Toggle
 5. Assign priority (P0–P3) based on coverage impact and fix complexity.
 6. Output triage report.
 
@@ -36,7 +37,7 @@ classification, priority ranking, root cause hypothesis, and next action.
 - `cov_list_uncovered` — required, first call.
 - `cov_get_gap_detail` — required per gap.
 - `cov_get_coverpoint_source` — required per gap.
-- `cov_get_hit_history` — optional, for trend context.
+- `cov_get_coverage_diff` — optional, for comparing before/after coverage databases.
 - `spec_search`, `reg_find_fields_affecting_feature` — only when needed for classification.
 
 ## Hard Restrictions

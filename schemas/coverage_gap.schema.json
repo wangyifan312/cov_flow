@@ -7,9 +7,6 @@
   "required": [
     "gap_id",
     "coverage_type",
-    "covergroup",
-    "coverpoint",
-    "bin",
     "hit_count",
     "goal"
   ],
@@ -18,11 +15,11 @@
     "gap_id": {
       "type": "string",
       "description": "Stable unique identifier for this gap.",
-      "pattern": "^GAP_[0-9]{4}$"
+      "pattern": "^GAP_(?:[A-Z][0-9]{3}|[0-9]{4})$"
     },
     "coverage_type": {
       "type": "string",
-      "enum": ["functional", "code", "toggle", "branch", "condition", "fsm"],
+      "enum": ["functional", "line", "toggle", "branch", "condition", "fsm", "assert"],
       "description": "Type of coverage."
     },
     "covergroup": {
@@ -68,7 +65,11 @@
         "Constraint Too Tight",
         "Coverage Model Issue",
         "Monitor Sampling Issue",
-        "Unreachable Candidate"
+        "Unreachable Candidate",
+        "Dead Code",
+        "Defensive Code",
+        "Unreachable State",
+        "Insufficient Toggle"
       ],
       "description": "Gap classification from triage."
     },
@@ -88,6 +89,100 @@
     "related_rtl_signal": {
       "type": ["string", "null"],
       "description": "Relevant RTL signal, or null if unknown."
+    },
+    "signal": {
+      "type": "string",
+      "description": "Signal name for toggle coverage."
+    },
+    "toggle_dir": {
+      "type": "string",
+      "enum": ["0to1", "1to0"],
+      "description": "Toggle direction."
+    },
+    "module": {
+      "type": "string",
+      "description": "Module containing the signal or FSM."
+    },
+    "branch_type": {
+      "type": "string",
+      "enum": ["if", "else", "case", "ternary"],
+      "description": "Branch construct type."
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["true", "false"],
+      "description": "Branch direction not taken."
+    },
+    "condition_expr": {
+      "type": "string",
+      "description": "Boolean expression being covered."
+    },
+    "combination": {
+      "type": "string",
+      "description": "Specific truth-table combination missed."
+    },
+    "fsm_name": {
+      "type": "string",
+      "description": "FSM identifier name."
+    },
+    "state": {
+      "type": "string",
+      "description": "FSM state not reached."
+    },
+    "transition": {
+      "type": "string",
+      "pattern": "^.+->.+$",
+      "description": "Optional state transition (from->to)."
+    },
+    "assert_name": {
+      "type": "string",
+      "description": "Assertion name."
+    },
+    "fail_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of assertion failures."
+    },
+    "vacuous": {
+      "type": "boolean",
+      "description": "Whether the assertion is vacuous."
     }
-  }
+  },
+  "anyOf": [
+    {
+      "description": "Functional coverage: covergroup/coverpoint/bin",
+      "properties": { "coverage_type": { "const": "functional" } },
+      "required": ["covergroup", "coverpoint", "bin"]
+    },
+    {
+      "description": "Line coverage: source_file/source_line",
+      "properties": { "coverage_type": { "const": "line" } },
+      "required": ["source_file", "source_line"]
+    },
+    {
+      "description": "Branch coverage: source_file/source_line/branch_type/direction",
+      "properties": { "coverage_type": { "const": "branch" } },
+      "required": ["source_file", "source_line", "branch_type", "direction"]
+    },
+    {
+      "description": "Condition coverage: source_file/source_line/condition_expr/combination",
+      "properties": { "coverage_type": { "const": "condition" } },
+      "required": ["source_file", "source_line", "condition_expr", "combination"]
+    },
+    {
+      "description": "Toggle coverage: signal/toggle_dir/module",
+      "properties": { "coverage_type": { "const": "toggle" } },
+      "required": ["signal", "toggle_dir", "module"]
+    },
+    {
+      "description": "FSM coverage: module/fsm_name/state",
+      "properties": { "coverage_type": { "const": "fsm" } },
+      "required": ["module", "fsm_name", "state"]
+    },
+    {
+      "description": "Assert coverage: assert_name/source_file/source_line",
+      "properties": { "coverage_type": { "const": "assert" } },
+      "required": ["assert_name", "source_file", "source_line"]
+    }
+  ]
 }

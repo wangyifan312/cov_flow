@@ -39,6 +39,18 @@ A coverage point depends on an external signal or interface that is not active i
 - **Example**: Coverage of AXI response types that require a specific slave model not present in the testbench
 - **Evidence**: Check testbench configuration and connected IP/models
 
+### 6. FSM Dead State
+An FSM state that cannot be reached because the transition path is gated by a parameter or constant.
+- **Example**: `parser_fsm` has state `PARSE_SG` reachable only when `SG_MODE_EN=1`; if the parameter defaults to 0, the state is structurally dead
+- **Evidence**: Check FSM definition and transition guards; verify parameter values in elaboration
+- **Classification**: Use `Unreachable State` for FSM-specific dead states
+
+### 7. Unused Code Line
+A line of RTL code that is never executed because the surrounding condition is always false.
+- **Example**: An error-handling branch `if (desc_error)` where `desc_error` is never asserted by upstream logic
+- **Evidence**: Check toggle coverage of the controlling signal; verify no upstream driver asserts the condition
+- **Classification**: Use `Dead Code` for lines that are structurally unreachable; use `Defensive Code` for safety/error-handling paths that are intentionally rare
+
 ## Evidence Checklist for Unreachable Candidates
 
 Before marking a gap as Unreachable Candidate, collect:

@@ -26,7 +26,7 @@ All generated code must **reuse existing testbench infrastructure**. Never gener
 
 ### patch_id
 Unique identifier for the patch.
-- Format: `PATCH_GAP_XXXX_NNN` where XXXX = gap number, NNN = patch variant (starting from 001)
+- Format: `PATCH_GAP_(XXXX|XNNN)_NNN` where XXXX = 4-digit functional gap number, XNNN = letter-prefixed code coverage gap (L/B/C/T/M/A), NNN = patch variant (starting from 001)
 
 ### gap_id
 The coverage gap this patch targets. Must match the scenario card's gap_id.
@@ -53,8 +53,12 @@ The simulation run command. Must follow the manifest's `run_cmd_template`.
 - Example: `make run TEST=<new_test_name> SEED=1`
 
 ### coverage_target
-List of coverage targets this patch aims to hit.
-- Format: `<covergroup>.<coverpoint>.<bin>`
+List of coverage targets this patch aims to hit. Format depends on coverage type:
+- Functional: `<covergroup>.<coverpoint>.<bin>`
+- Line/Branch/Condition: `<source_file>:<line>`
+- Toggle: `<module>.<signal>[<direction>]`
+- FSM: `<module>.<fsm_name>.<state>`
+- Assert: `<source_file>:<assert_name>`
 - Minimum 1 item
 
 ### review_checklist
@@ -75,8 +79,8 @@ Before presenting a patch for review, verify:
 ## Generation Output Structure
 
 ```yaml
-patch_id: PATCH_GAP_XXXX_NNN
-gap_id: GAP_XXXX
+patch_id: PATCH_GAP_(XXXX|XNNN)_NNN
+gap_id: GAP_(XXXX|XNNN)
 new_files:
   - tb/sequences/<new_sequence>.sv
   - tb/tests/<new_test>.sv
@@ -87,7 +91,10 @@ base_reuse:
 compile_command: make compile TEST=<new_test>
 run_command: make run TEST=<new_test> SEED=1
 coverage_target:
-  - <covergroup>.<coverpoint>.<bin>
+  - <covergroup>.<coverpoint>.<bin>  # functional
+  # or <source_file>:<line>          # line/branch/condition
+  # or <module>.<signal>[<dir>]      # toggle
+  # or <module>.<fsm_name>.<state>   # fsm
 review_checklist:
   - confirm RAL path for <register.field>
   - confirm <helper> supports <feature>

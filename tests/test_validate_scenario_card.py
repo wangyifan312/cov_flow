@@ -135,3 +135,25 @@ class TestValidateScenarioCard:
         report = json.loads(result.stdout)
         assert report["ok"] is False
         assert "File not found" in report["errors"][0]["message"]
+
+    def test_code_coverage_scenario_card(self, tmp_path: Path) -> None:
+        """Scenario card targeting a line coverage gap should validate."""
+        card = _valid_card()
+        card["gap_id"] = "GAP_L001"
+        card["coverage_type"] = "line"
+        card["target_coverage"] = {
+            "source_file": "rtl/dma_desc_parser.sv",
+            "source_line": 142,
+        }
+        card["classification"] = "Dead Code"
+        card["semantic_interpretation"] = (
+            "Line 142 in dma_desc_parser is unreachable under normal operation. "
+            "This is dead code that may be removed or requires specific error injection."
+        )
+        card["stimulus"] = ["inject descriptor parse error"]
+        card["expected_behavior"] = ["error handling path is exercised"]
+        path = _write_json(card, tmp_path)
+        result = _run(path)
+        assert result.returncode == 0
+        report = json.loads(result.stdout)
+        assert report["ok"] is True

@@ -1,6 +1,6 @@
 # Gap Classification Guide
 
-Definitions and criteria for classifying coverage gaps into one of six categories.
+Definitions and criteria for classifying coverage gaps into one of ten categories (6 functional + 4 code coverage).
 
 ## Classification Categories
 
@@ -34,6 +34,30 @@ The coverage point may be structurally unreachable given the current design conf
 - **Indicators**: RTL analysis suggests the signal path is gated by a constant, a `generate` condition, or a parameter that prevents the state from being reached.
 - **Typical fix**: Requires formal verification or engineer sign-off. **Never auto-waive.** Mark as candidate only.
 
+## Code Coverage Classifications
+
+The following 4 classifications apply to code coverage gaps (line, branch, condition, toggle, FSM, assert). They complement the 6 functional coverage classifications above.
+
+### Dead Code
+Code that is structurally unreachable or no longer used in the design.
+- **Indicators**: Line or branch has never been executed across all regressions; RTL analysis shows the code path is gated by a constant or removed by synthesis.
+- **Typical fix**: Confirm with formal analysis; if truly dead, request engineer waiver. Do not generate stimulus.
+
+### Defensive Code
+Error-handling or safety code that is difficult to trigger under normal operation.
+- **Indicators**: Code path exists for error injection, bus fault, or overflow handling; stimulus required is highly specific or requires fault injection.
+- **Typical fix**: Add directed error-injection stimulus or request waiver with documented safety rationale.
+
+### Unreachable State
+An FSM state that cannot be reached given the current design configuration or parameter settings.
+- **Indicators**: FSM analysis shows the state transition is gated by a parameter, generate condition, or external signal not present in the testbench.
+- **Typical fix**: Verify parameter settings; if structurally unreachable, request formal proof and engineer waiver.
+
+### Insufficient Toggle
+A signal toggle direction (0→1 or 1→0) that has not been observed in simulation.
+- **Indicators**: Signal toggles in one direction but not the other; may indicate missing stimulus, disabled feature, or constant-driven signal.
+- **Typical fix**: Add stimulus that exercises the missing toggle direction; check if the signal is controllable from the testbench.
+
 ## Context Routing Table
 
 For each classification, query only the context needed. Avoid loading unnecessary data.
@@ -46,6 +70,10 @@ For each classification, query only the context needed. Avoid loading unnecessar
 | Coverage Model Issue | Coverage model source, FS spec section | Full RTL, waveforms |
 | Monitor Sampling Issue | Monitor code, sampling conditions, simulation log | Full register doc |
 | Unreachable Candidate | RTL fanin, formal evidence, generate conditions | All testcases |
+| Dead Code | RTL source, synthesis constraints, formal evidence | Testcases, sequences |
+| Defensive Code | Error injection points, fault models, RTL source | Full UVM env |
+| Unreachable State | FSM definition, parameter settings, RTL fanin | Testcases |
+| Insufficient Toggle | RTL signal drivers, toggle coverage report | Full FS, register doc |
 
 ## Compound Classifications
 
@@ -65,3 +93,7 @@ List the primary classification first, followed by secondary factors.
 | Coverage Model Issue | Flag for engineer review; do not generate testcase |
 | Monitor Sampling Issue | Flag for engineer review; do not generate testcase |
 | Unreachable Candidate | Flag for formal/human review; do not generate testcase |
+| Dead Code | Flag for formal/human review; do not generate testcase |
+| Defensive Code | Generate error-injection scenario if feasible; otherwise flag for review |
+| Unreachable State | Flag for formal/human review; do not generate testcase |
+| Insufficient Toggle | Proceed to scenario generation with directed toggle stimulus |

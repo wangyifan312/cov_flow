@@ -1,0 +1,30 @@
+eval_id: triage_code_coverage_line
+task_mode: triage
+
+prompt: |
+  使用 dv-coverage-closure。
+  项目：{project}
+  回归：latest
+  范围：{scope}
+  任务：分析 GAP_L001 的分类和优先级。
+  要求：不修改代码；输出 gap 分类、优先级、是否适合生成 case 和下一步建议。
+
+expected_tools:
+  - cov_get_gap_detail
+  - cov_get_coverpoint_source
+
+expected_classification: "Dead Code"
+
+expected_output_keys:
+  - classification
+  - priority
+  - recommended_action
+
+notes: |
+  GAP_L001 is a line coverage gap at rtl/dma_desc_parser.sv:142.
+  The agent should:
+  1. Call cov_get_gap_detail to get the gap facts (coverage_type=line)
+  2. Call cov_get_coverpoint_source to see the mock source snippet
+  3. Classify as "Dead Code" (unexecuted error handling line)
+  4. Assign P2 or P3 priority (defensive code, not critical path)
+  5. Recommend waiver or acceptance as dead code

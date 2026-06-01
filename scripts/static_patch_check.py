@@ -108,18 +108,72 @@ def _check_base_sequence(patch: dict, tb_index: dict) -> list[dict]:
 
 
 def _check_coverage_targets(patch: dict) -> list[dict]:
-    """Check that coverage_target entries have valid dot-separated format (≥3 segments)."""
+    """Check that coverage_target entries have valid format per coverage_type."""
     checks: list[dict] = []
+    cov_type = patch.get("coverage_type", "functional")
+
     for target in patch.get("coverage_target", []):
-        parts = target.split(".")
-        valid = len(parts) >= 3 and all(p for p in parts)
-        if valid:
-            msg = f"Format valid (≥3 segments): {valid}"
+        if cov_type == "functional":
+            parts = target.split(".")
+            valid = len(parts) >= 3 and all(p for p in parts)
+            if valid:
+                msg = f"Format valid (≥3 segments): {valid}"
+            else:
+                msg = (
+                    f"Invalid format '{target}': expected "
+                    f"covergroup.coverpoint.bin (≥3 dot-separated segments)"
+                )
+        elif cov_type == "line":
+            valid = ":" in target and target.split(":")[-1].isdigit()
+            if valid:
+                msg = f"Line format valid: {valid}"
+            else:
+                msg = (
+                    f"Invalid line format '{target}': expected source_file:line"
+                )
+        elif cov_type == "toggle":
+            valid = "[" in target and "]" in target and "." in target
+            if valid:
+                msg = f"Toggle format valid: {valid}"
+            else:
+                msg = (
+                    f"Invalid toggle format '{target}': "
+                    f"expected module.signal[direction]"
+                )
+        elif cov_type in ("branch", "condition"):
+            valid = ":" in target
+            if valid:
+                msg = f"Source format valid: {valid}"
+            else:
+                msg = (
+                    f"Invalid format '{target}': expected source_file:line"
+                )
+        elif cov_type == "fsm":
+            parts = target.split(".")
+            valid = len(parts) >= 3 and all(p for p in parts)
+            if valid:
+                msg = f"FSM format valid: {valid}"
+            else:
+                msg = (
+                    f"Invalid FSM format '{target}': "
+                    f"expected module.fsm_name.state"
+                )
+        elif cov_type == "assert":
+            valid = ":" in target
+            if valid:
+                msg = f"Assert format valid: {valid}"
+            else:
+                msg = (
+                    f"Invalid assert format '{target}': "
+                    f"expected source_file:assert_name"
+                )
         else:
+            valid = len(target) > 0
             msg = (
-                f"Invalid format '{target}': expected "
-                f"covergroup.coverpoint.bin (≥3 dot-separated segments)"
+                f"Unknown coverage_type '{cov_type}'; "
+                f"target non-empty: {valid}"
             )
+
         checks.append({
             "check": "coverage_target_format",
             "target": target,

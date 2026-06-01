@@ -38,6 +38,11 @@ whether a target gap was closed and what to do next.
 - `cov_get_coverage_diff` — required when sim passes.
 - `cov_get_gap_detail` — for re-checking gap context.
 
+## Coverage Type Support
+
+Analyzes coverage diffs for both functional and code coverage gaps.
+The `cov_get_coverage_diff` tool returns type-specific delta fields and a `by_type` summary breakdown across all 7 coverage types.
+
 ## Hard Restrictions
 
 - Must distinguish between stimulus/config/sampling/sim-failure causes.

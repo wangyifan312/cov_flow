@@ -6,7 +6,13 @@ Human-readable guide for filling in scenario card fields. This complements (not 
 
 ### gap_id
 The coverage gap identifier this scenario targets. Must match an existing gap in `coverage_gaps.json`.
-- Format: `GAP_XXXX` (4-digit zero-padded number)
+- Format: `GAP_XXXX` (4-digit zero-padded number) or `GAP_XNNN` (letter-prefixed for code coverage: L=line, B=branch, C=condition, T=toggle, M=FSM, A=assert)
+
+### coverage_type (optional)
+The type of coverage this scenario targets. One of:
+`functional` | `line` | `branch` | `condition` | `toggle` | `fsm` | `assert`
+
+When omitted, defaults to `functional`. Include this field when targeting code coverage gaps.
 
 ### target_coverage
 The specific coverage point this scenario aims to hit.
@@ -19,9 +25,23 @@ The specific coverage point this scenario aims to hit.
 
 Map these directly from the gap detail returned by `cov_get_gap_detail`.
 
+For **code coverage** gaps, use type-specific fields instead of covergroup/coverpoint/bin:
+
+| Sub-field | Applicable Types | Description |
+|-----------|-----------------|-------------|
+| `source_file` | line, branch, condition, assert | RTL source file path |
+| `source_line` | line, branch, condition, assert | Line number in source |
+| `signal` | toggle | Signal name |
+| `module` | toggle, fsm | Module containing the signal or FSM |
+| `fsm_name` | fsm | FSM identifier |
+| `state` | fsm | Target FSM state |
+| `assert_name` | assert | Assertion name |
+| `description` | any | Human-readable description of the coverage target |
+
 ### classification
 The gap classification from triage. Must be one of:
-`Missing Stimulus` | `Config Missing` | `Constraint Too Tight` | `Coverage Model Issue` | `Monitor Sampling Issue` | `Unreachable Candidate`
+`Missing Stimulus` | `Config Missing` | `Constraint Too Tight` | `Coverage Model Issue` | `Monitor Sampling Issue` | `Unreachable Candidate` |
+`Dead Code` | `Defensive Code` | `Unreachable State` | `Insufficient Toggle`
 
 Compound labels allowed (e.g., `Config Missing + Missing Stimulus`).
 
@@ -106,4 +126,30 @@ tb_reuse:
 confidence: high | medium | low
 risk:
   - <risk factor 1>
+```
+
+## Code Coverage Example
+
+```yaml
+gap_id: GAP_L001
+coverage_type: line
+target_coverage:
+  source_file: rtl/dma_desc_parser.sv
+  source_line: 142
+  description: "Error handling path in descriptor parser"
+classification: Dead Code
+semantic_interpretation: |
+  Line 142 in dma_desc_parser is an error handling branch that is
+  structurally unreachable under normal DMA configuration. The descriptor
+  error flag is never asserted by the upstream block in current integration.
+required_config: []
+stimulus:
+  - inject descriptor parse error via fault injection
+expected_behavior:
+  - error handling path is exercised
+  - error interrupt is raised
+confidence: low
+risk:
+  - fault injection mechanism may not be available in current TB
+  - confirm with RTL owner that line is truly dead code
 ```

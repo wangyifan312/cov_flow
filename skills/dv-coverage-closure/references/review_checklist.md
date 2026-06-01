@@ -26,7 +26,7 @@ These apply to all task modes:
 
 | Check | Description |
 |-------|-------------|
-| Target coverage accuracy | covergroup/coverpoint/bin match the gap detail exactly |
+| Target coverage accuracy | Type-specific fields match the gap detail exactly (covergroup/coverpoint/bin for functional; source_file/source_line for line/branch/condition; signal/module for toggle; module/fsm_name/state for FSM; assert_name/source_file for assert) |
 | Semantic interpretation | Accurately synthesizes evidence from multiple sources |
 | Config completeness | All required register writes are listed with correct RAL paths |
 | Stimulus feasibility | Stimulus steps are achievable with existing testbench infrastructure |

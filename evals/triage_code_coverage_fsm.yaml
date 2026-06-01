@@ -1,0 +1,30 @@
+eval_id: triage_code_coverage_fsm
+task_mode: triage
+
+prompt: |
+  使用 dv-coverage-closure。
+  项目：{project}
+  回归：latest
+  范围：{scope}
+  任务：分析 GAP_M001 的分类和优先级。
+  要求：不修改代码；输出 gap 分类、优先级、是否适合生成 case 和下一步建议。
+
+expected_tools:
+  - cov_get_gap_detail
+  - cov_get_coverpoint_source
+
+expected_classification: "Config Missing"
+
+expected_output_keys:
+  - classification
+  - priority
+  - recommended_action
+
+notes: |
+  GAP_M001 is an FSM coverage gap: parser_fsm state PARSE_SG not reached.
+  The agent should:
+  1. Call cov_get_gap_detail to get the gap facts (coverage_type=fsm)
+  2. Call cov_get_coverpoint_source to see the mock FSM source
+  3. Classify as "Config Missing" (scatter-gather mode needs enabling)
+  4. Assign P1 priority (critical parser state)
+  5. Recommend proceeding to scenario generation with SG mode config

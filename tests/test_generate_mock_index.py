@@ -36,8 +36,23 @@ class TestGenerateMockIndex:
         data = json.loads((INDEX_DIR / "coverage_index.json").read_text())
         assert data["project"] == "dma_subsystem"
         assert "gaps" in data
-        assert len(data["gaps"]) == 15
+        assert len(data["gaps"]) == 27
         assert "clusters" in data
+
+    def test_code_coverage_gaps_present(self) -> None:
+        """Code coverage gaps should be in the coverage index."""
+        data = json.loads((INDEX_DIR / "coverage_index.json").read_text())
+        gap_ids = [g["gap_id"] for g in data["gaps"]]
+        for code_gap_id in ["GAP_L001", "GAP_B001", "GAP_C001", "GAP_T001", "GAP_M001", "GAP_A001"]:
+            assert code_gap_id in gap_ids, f"Missing code coverage gap: {code_gap_id}"
+
+    def test_code_coverage_gap_has_type(self) -> None:
+        """Code coverage gaps should have coverage_type field."""
+        data = json.loads((INDEX_DIR / "coverage_index.json").read_text())
+        gap_l001 = next(g for g in data["gaps"] if g["gap_id"] == "GAP_L001")
+        assert gap_l001["coverage_type"] == "line"
+        gap_m001 = next(g for g in data["gaps"] if g["gap_id"] == "GAP_M001")
+        assert gap_m001["coverage_type"] == "fsm"
 
     def test_spec_index_structure(self) -> None:
         data = json.loads((INDEX_DIR / "spec_index.json").read_text())

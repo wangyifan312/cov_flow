@@ -85,6 +85,167 @@ class TestCoverageGapSchema:
         errors = validate(valid_gap, schema, raise_on_error=False)
         assert errors == []
 
+    def test_valid_line_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_L001",
+            "coverage_type": "line",
+            "source_file": "rtl/dma_desc_parser.sv",
+            "source_line": 142,
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_valid_branch_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_B001",
+            "coverage_type": "branch",
+            "source_file": "rtl/dma_desc_parser.sv",
+            "source_line": 78,
+            "branch_type": "if",
+            "direction": "false",
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_valid_condition_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_C001",
+            "coverage_type": "condition",
+            "source_file": "rtl/dma_desc_parser.sv",
+            "source_line": 65,
+            "condition_expr": "desc_valid && !desc_error",
+            "combination": "01",
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_valid_toggle_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_T001",
+            "coverage_type": "toggle",
+            "signal": "burst_wrap",
+            "module": "dma_axi_master",
+            "toggle_dir": "1to0",
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_valid_fsm_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_M001",
+            "coverage_type": "fsm",
+            "module": "dma_desc_parser",
+            "fsm_name": "parser_fsm",
+            "state": "PARSE_SG",
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_valid_assert_gap(self) -> None:
+        gap = {
+            "gap_id": "GAP_A001",
+            "coverage_type": "assert",
+            "assert_name": "dma_desc_align_chk",
+            "source_file": "rtl/dma_desc_parser.sv",
+            "source_line": 200,
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert errors == []
+
+    def test_line_gap_missing_source_file(self) -> None:
+        """Line gap without source_file should fail anyOf."""
+        gap = {
+            "gap_id": "GAP_L099",
+            "coverage_type": "line",
+            "source_line": 100,
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert len(errors) > 0
+
+    def test_functional_gap_missing_covergroup(self) -> None:
+        """Functional gap without covergroup should fail anyOf."""
+        gap = {
+            "gap_id": "GAP_0099",
+            "coverage_type": "functional",
+            "coverpoint": "cp",
+            "bin": "b",
+            "hit_count": 0,
+            "goal": 1,
+        }
+        schema = load_schema("coverage_gap.schema.json")
+        errors = validate(gap, schema, raise_on_error=False)
+        assert len(errors) > 0
+
+    def test_code_coverage_classifications(self) -> None:
+        """All 4 new classifications should be valid."""
+        schema = load_schema("coverage_gap.schema.json")
+        for cls in ["Dead Code", "Defensive Code", "Unreachable State", "Insufficient Toggle"]:
+            gap = {
+                "gap_id": "GAP_L001",
+                "coverage_type": "line",
+                "source_file": "rtl/test.sv",
+                "source_line": 1,
+                "hit_count": 0,
+                "goal": 1,
+                "classification": cls,
+            }
+            errors = validate(gap, schema, raise_on_error=False)
+            assert errors == [], f"Classification '{cls}' should be valid, got errors: {errors}"
+
+    def test_new_gap_id_formats(self) -> None:
+        """All new letter-prefixed gap IDs should be valid."""
+        schema = load_schema("coverage_gap.schema.json")
+        for gid, cov_type, extra in [
+            ("GAP_L001", "line", {"source_file": "a.sv", "source_line": 1}),
+            (
+                "GAP_B001", "branch",
+                {"source_file": "a.sv", "source_line": 1, "branch_type": "if", "direction": "true"},
+            ),
+            ("GAP_T001", "toggle", {"signal": "s", "toggle_dir": "0to1", "module": "m"}),
+            ("GAP_M001", "fsm", {"module": "m", "fsm_name": "f", "state": "s"}),
+            (
+                "GAP_A001", "assert",
+                {"assert_name": "a", "source_file": "a.sv", "source_line": 1},
+            ),
+            (
+                "GAP_C001", "condition",
+                {
+                    "source_file": "a.sv", "source_line": 1,
+                    "condition_expr": "a && b", "combination": "01",
+                },
+            ),
+        ]:
+            gap = {
+                "gap_id": gid,
+                "coverage_type": cov_type,
+                "hit_count": 0,
+                "goal": 1,
+                **extra,
+            }
+            errors = validate(gap, schema, raise_on_error=False)
+            assert errors == [], f"Gap ID '{gid}' should be valid, got errors: {errors}"
+
     def test_null_related_fields_allowed(self, valid_gap: dict) -> None:
         valid_gap["related_register"] = None
         valid_gap["related_spec_section"] = None

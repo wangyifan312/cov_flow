@@ -43,7 +43,8 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - **Phase 2b**: 4 new MCP sim tools (`sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`, `cov_get_coverage_diff`), static patch check script, audit logging service, mock simulation data, 2 eval cases
 - **Phase 2c**: Eval runner dry-run mode (`run_eval.py`), 7 additional skill reference documents completing all 5 sub-skill workflows
 - **Phase 2 收尾**: `pip install -e ".[dev]"` fix (hatch build targets), `.mcp.json` Claude Code MCP config, ruff 95→0 issues, mypy 18→0 errors, 4th eval case (`generate_case_0001.yaml` completing all 4 task_modes), 3 example walkthroughs (triage, full closure, MCP setup)
-- **Total**: 146 tests, 11 MCP tools, 15 skill reference documents, 4 eval cases, ruff 0, mypy 0, make accept clean
+- **Phase 2d**: Code coverage extension — 7 coverage types (functional, line, branch, condition, toggle, fsm, assert), unified schema with `anyOf` conditional required fields, type-aware MCP tools and diff computation, 12 new mock gaps (27 total), 4 new classifications (10 total), 35 new tests (181 total), 2 new eval cases (6 total)
+- **Total**: 181 tests, 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
 - All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
 
 ### Phase 3+ — Real Integration (Out of Scope, Requires Approval)
@@ -100,13 +101,23 @@ Four layers, strict separation:
 3. **Project Context Indexer** (offline scripts) — converts raw project data into structured indexes before Agent execution.
 4. **Project Manifest** — YAML declaring data locations, index paths, command templates, and policy switches.
 
+### Coverage Types and Gap IDs
+
+7 coverage types supported: `functional`, `line`, `branch`, `condition`, `toggle`, `fsm`, `assert`.
+Gap ID format: `GAP_XXXX` (functional, 4-digit) or `GAP_XNNN` (code coverage, letter prefix: L=line, B=branch, C=condition, T=toggle, M=FSM, A=assert).
+Schema uses JSON Schema `anyOf` for conditional required fields per type.
+
 ## Context Budget Rules
 
 Single-gap context: normal 20–50 KB, complex gaps up to 100 KB. MB-scale reads of RTL/FS/UVM/waveform data are forbidden.
 
 ## Gap Classification
 
-Gaps are classified into: Missing Stimulus, Config Missing, Constraint Too Tight, Coverage Model Issue, Monitor Sampling Issue, Unreachable Candidate. Each drives a different context retrieval strategy.
+Gaps are classified into two groups:
+- **Functional coverage**: Missing Stimulus, Config Missing, Constraint Too Tight, Coverage Model Issue, Monitor Sampling Issue, Unreachable Candidate
+- **Code coverage**: Dead Code, Defensive Code, Unreachable State, Insufficient Toggle
+
+Each classification drives a different context retrieval strategy. Code coverage types apply to line, branch, condition, toggle, FSM, and assertion coverage gaps.
 
 ## Security Boundaries
 
