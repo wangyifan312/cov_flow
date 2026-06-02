@@ -1,0 +1,13 @@
+# projects.yaml — project name → manifest path registry
+# Place this file at:
+#   1. ./projects.yaml (repo root)
+#   2. ~/.cov_flow/projects.yaml (user home)
+#   3. Or set COV_FLOW_PROJECTS environment variable
+
+projects:
+  dma_subsystem:
+    manifest: mock_data/dma_subsystem/project_manifest.yaml
+    description: "Mock DMA project (Phase 0-2 demo)"
+  axi2ahb:
+    manifest: mock_data/axi2ahb/project_manifest.yaml
+    description: "Sample AXI2AHB bridge URG report (Phase 3 demo)"

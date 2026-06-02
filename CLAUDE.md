@@ -12,6 +12,14 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 
 `implementation_plan.md` is the authoritative design document. All architecture decisions, module boundaries, workflow definitions, schema shapes, and safety rules must be traced back to it. When in doubt, read the relevant section of `implementation_plan.md` before writing code.
 
+**Phase numbering note**: The phase definitions in `implementation_plan.md` §13 are the original design plan. The project has redefined phases during actual implementation:
+- Phase 0: Project scaffolding
+- Phase 1: Mock MVP (schemas, mock data, MCP tools, tests)
+- Phase 2: Skills, eval dry-run, validation scripts
+- Phase 3: URG HTML coverage report parser
+
+For current phase status, refer to the README.md status table. The `implementation_plan.md` remains authoritative for architecture, module boundaries, and schema definitions, but not for phase numbering.
+
 ## Current Implementation Scope
 
 **Phase 0 + Phase 1 + Phase 2 mock MVP + Phase 3 URG parser are complete.** Phase 4+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
@@ -44,7 +52,7 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - **Phase 2c**: Eval runner dry-run mode (`run_eval.py`), 7 additional skill reference documents completing all 5 sub-skill workflows
 - **Phase 2 收尾**: `pip install -e ".[dev]"` fix (hatch build targets), `.mcp.json` Claude Code MCP config, ruff 95→0 issues, mypy 18→0 errors, 4th eval case (`generate_case_0001.yaml` completing all 4 task_modes), 3 example walkthroughs (triage, full closure, MCP setup)
 - **Phase 2d**: Code coverage extension — 7 coverage types (functional, line, branch, condition, toggle, fsm, assert), unified schema with `anyOf` conditional required fields, type-aware MCP tools and diff computation, 12 new mock gaps (27 total), 4 new classifications (10 total), 35 new tests (181 total), 2 new eval cases (6 total)
-- **Total**: 181 tests, 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
+- **Total**: 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
 - All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
 
 ### Phase 3 — Real URG Coverage Report Parser (Done)
@@ -56,7 +64,7 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
   - `gap_assembler.py` — gap ID assignment, path normalization, schema filtering
   - `index_builder.py` — coverage_index.json and coverage_gaps.json output
 - **CLI script** (`scripts/build_coverage_index.py`): `--manifest PATH` orchestrates full parse pipeline
-- **Demo project** (`mock_data/axi2ahb/`): real AXI2AHB bridge UVM verification project
+- **Demo project** (`mock_data/axi2ahb/`): sample AXI2AHB bridge URG report (public/sanitized demo data)
   - 982 schema-compliant gaps across all 7 coverage types
   - Synopsys library file filtering (`/opt/synopsys/` paths excluded)
   - Source file path normalization (absolute → relative)
@@ -64,11 +72,20 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - **Makefile target**: `make build-real-index`
 - All sim tools remain **mock/dry-run only** — no real shell execution
 
-### Phase 4+ — Real Integration (Out of Scope, Requires Approval)
+### Phase 4 — Source Resolver + Project Registry + EDA Adapters (Done)
+- **Bounded Source Snippet Resolver** (`lib/source_resolver.py`): reads real SV source snippets with security boundaries (path traversal protection, allowlist, max_lines/max_bytes)
+- **Project Registry** (`lib/project_registry.py`): resolves project names to manifest paths via `projects.yaml` or `COV_FLOW_PROJECTS` env var
+- **EDA Adapter Skeleton** (`lib/eda_adapters/`): abstract base class + MockVerdiAdapter + MockVCSAdapter (stub data, no real EDA integration)
+- **Contract Tests** (`tests/test_tool_contracts.py`): envelope format validation for all 11 MCP tools
+- **Large Dataset Tests** (`tests/test_large_dataset.py`): truncation and context budget validation with axi2ahb 982-gap dataset
+- **`cov_get_coverpoint_source` upgraded**: now returns `source_mode: "real"` when reading from coverage_model_root, falls back to `source_mode: "mock_fallback"` when file unavailable
+- **MCP tools support project name input**: `cov_list_uncovered(project="dma_subsystem")` works without manifest path
+
+### Phase 5+ — Real Integration (Out of Scope, Requires Approval)
 - Real UVM testcase generation
 - Real simulation tool integration (VCS, Verdi, etc.)
 - Real eval suite LLM execution
-- Multi-project support
+- Multi-project support (beyond registry lookup)
 
 ## What Is Allowed
 
@@ -86,7 +103,7 @@ These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data
 3. **No bulk-loading.** Do not bulk-load RTL/FS/TB content into the Agent context. MCP tools must return bounded, structured results.
 4. **No automatic waivers or formal conclusions.** Do not implement automatic waiver generation or formal unreachable conclusions. Those require human sign-off.
 5. **No auto-commits.** Neither the coding agent nor the review Claude may commit code without explicit user instruction. The review Claude may execute `git add` and `git commit` when the user explicitly approves a specific commit.
-6. **No Phase 4+ implementation without approval.** Do not implement real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 4+ work.
+6. **No Phase 5+ implementation without approval.** Do not implement real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 5+ work.
 7. **No complex frameworks.** Use stdlib + the declared dependencies only (see `pyproject.toml`). Python 3.11+.
 
 ## Implementation Principles

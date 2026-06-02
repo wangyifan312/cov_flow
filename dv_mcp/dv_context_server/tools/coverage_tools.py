@@ -12,8 +12,9 @@ from typing import Any
 
 from dv_mcp.dv_context_server.indexes.readers import IndexNotFoundError
 from dv_mcp.dv_context_server.services.evidence import coverage_evidence
-from dv_mcp.dv_context_server.services.project_loader import get_index_reader
+from dv_mcp.dv_context_server.services.project_loader import get_index_reader, get_manifest
 from dv_mcp.dv_context_server.services.summarizer import envelope, error_envelope, truncate_list
+from lib.source_resolver import SourceResolver, SourceSnippet
 
 _COVERAGE_INDEX = "coverage_index.json"
 
@@ -208,8 +209,9 @@ def cov_get_coverpoint_source(
 ) -> dict[str, Any]:
     """Get the coverage model source snippet for a coverpoint.
 
-    In MVP mode, returns the source file/line reference from the index
-    without reading actual files (mock data does not include real SV sources).
+    Tries to read a real source file snippet via SourceResolver if
+    coverage_model_root is configured in the manifest. Falls back to
+    generated mock snippets when real files are unavailable.
 
     Args:
         project: Project ID or manifest path.
@@ -217,7 +219,7 @@ def cov_get_coverpoint_source(
         max_lines: Maximum lines to return (default: 40).
 
     Returns:
-        Envelope with source reference information.
+        Envelope with source snippet and source_mode indicator.
     """
     tool = "cov_get_coverpoint_source"
     try:
@@ -234,73 +236,41 @@ def cov_get_coverpoint_source(
 
     source_file = gap.get("source_file", "unknown")
     source_line = gap.get("source_line", 0)
-
-    # In mock MVP, we return a reference rather than actual source content.
-    # Real implementation would read the coverage model file.
     cov_type = gap.get("coverage_type", "functional")
 
-    if cov_type == "functional":
-        mock_source = (
-            f"covergroup {gap.get('covergroup')} @(posedge clk);\n"
-            f"  {gap.get('coverpoint')}: coverpoint <signal> {{\n"
-            f"    bins {gap.get('bin')} = {{<value>}};\n"
-            f"  }}\n"
-            f"endgroup"
+    # Try to resolve real source via SourceResolver
+    snippet: SourceSnippet | None = None
+    source_mode = "mock_fallback"
+
+    try:
+        manifest = get_manifest(project)
+        cov_model_root = manifest.get_path("coverage", "coverage_model_root")
+        if cov_model_root is not None and cov_model_root.is_dir():
+            resolver = SourceResolver(
+                allowed_roots=[cov_model_root],
+                max_lines=max_lines,
+            )
+            snippet = resolver.resolve(source_file, source_line, context_lines=5)
+            if snippet.status == "ok":
+                source_mode = "real"
+    except (FileNotFoundError, Exception):
+        # Manifest load failure — proceed with mock fallback
+        snippet = None
+        source_mode = "mock_fallback"
+
+    # Build the source snippet content
+    if source_mode == "real" and snippet is not None:
+        source_content = snippet.content
+        note = (
+            f"Real source snippet from {snippet.file} "
+            f"(lines {snippet.start_line}-{snippet.end_line})"
         )
-    elif cov_type == "line":
-        mock_source = (
-            f"// Mock line coverage source\n"
-            f"// Source: {source_file}:{source_line}\n"
-            f"// Unexecuted line in RTL module\n"
-            f"// Line {source_line}: <statement not executed>"
-        )
-    elif cov_type == "branch":
-        mock_source = (
-            f"// Mock branch coverage source\n"
-            f"// Source: {source_file}:{source_line}\n"
-            f"// Branch type: {gap.get('branch_type')}, "
-            f"direction: {gap.get('direction')}\n"
-            f"if (<condition>) begin\n"
-            f"  // true branch\n"
-            f"end else begin\n"
-            f"  // false branch NOT taken\n"
-            f"end"
-        )
-    elif cov_type == "condition":
-        mock_source = (
-            f"// Mock condition coverage source\n"
-            f"// Source: {source_file}:{source_line}\n"
-            f"// Condition: {gap.get('condition_expr')}\n"
-            f"// Missed combination: {gap.get('combination')}"
-        )
-    elif cov_type == "toggle":
-        mock_source = (
-            f"// Mock toggle coverage source\n"
-            f"// Module: {gap.get('module')}\n"
-            f"// Signal: {gap.get('signal')}\n"
-            f"// Toggle direction: {gap.get('toggle_dir')}"
-        )
-    elif cov_type == "fsm":
-        transition = gap.get("transition")
-        mock_source = (
-            f"// Mock FSM coverage source\n"
-            f"// Module: {gap.get('module')}\n"
-            f"// FSM: {gap.get('fsm_name')}\n"
-            f"// Uncovered state: {gap.get('state')}\n"
-            + (f"// Transition: {transition}\n" if transition else "")
-        )
-    elif cov_type == "assert":
-        mock_source = (
-            f"// Mock assertion coverage source\n"
-            f"// Source: {source_file}:{source_line}\n"
-            f"// Assertion: {gap.get('assert_name')}\n"
-            f"// Vacuous: {gap.get('vacuous', 'N/A')}"
-        )
+        was_truncated = snippet.truncated
     else:
-        mock_source = (
-            f"// Mock coverage source for {gap_id}\n"
-            f"// Source: {source_file}:{source_line}"
-        )
+        # Mock fallback — original MVP behavior
+        source_content = _generate_mock_source(gap, cov_type, source_file, source_line)
+        note = "Mock MVP: source snippet is generated, not read from actual file."
+        was_truncated = False
 
     evidence = [
         coverage_evidence(
@@ -317,11 +287,82 @@ def cov_get_coverpoint_source(
             "gap_id": gap_id,
             "source_file": source_file,
             "source_line": source_line,
-            "source_snippet": mock_source,
+            "source_snippet": source_content,
+            "source_mode": source_mode,
             "max_lines": max_lines,
-            "note": "Mock MVP: source snippet is generated, not read from actual file.",
+            "note": note,
         },
         evidence=evidence,
-        truncated=False,
+        truncated=was_truncated,
         next_actions=["spec_search", "reg_find_fields_affecting_feature", "rtl_find_signal"],
+    )
+
+
+def _generate_mock_source(
+    gap: dict[str, Any],
+    cov_type: str,
+    source_file: str,
+    source_line: int,
+) -> str:
+    """Generate a mock source snippet for MVP fallback."""
+    if cov_type == "functional":
+        return (
+            f"covergroup {gap.get('covergroup')} @(posedge clk);\n"
+            f"  {gap.get('coverpoint')}: coverpoint <signal> {{\n"
+            f"    bins {gap.get('bin')} = {{<value>}};\n"
+            f"  }}\n"
+            f"endgroup"
+        )
+    if cov_type == "line":
+        return (
+            f"// Mock line coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Unexecuted line in RTL module\n"
+            f"// Line {source_line}: <statement not executed>"
+        )
+    if cov_type == "branch":
+        return (
+            f"// Mock branch coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Branch type: {gap.get('branch_type')}, "
+            f"direction: {gap.get('direction')}\n"
+            f"if (<condition>) begin\n"
+            f"  // true branch\n"
+            f"end else begin\n"
+            f"  // false branch NOT taken\n"
+            f"end"
+        )
+    if cov_type == "condition":
+        return (
+            f"// Mock condition coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Condition: {gap.get('condition_expr')}\n"
+            f"// Missed combination: {gap.get('combination')}"
+        )
+    if cov_type == "toggle":
+        return (
+            f"// Mock toggle coverage source\n"
+            f"// Module: {gap.get('module')}\n"
+            f"// Signal: {gap.get('signal')}\n"
+            f"// Toggle direction: {gap.get('toggle_dir')}"
+        )
+    if cov_type == "fsm":
+        transition = gap.get("transition")
+        return (
+            f"// Mock FSM coverage source\n"
+            f"// Module: {gap.get('module')}\n"
+            f"// FSM: {gap.get('fsm_name')}\n"
+            f"// Uncovered state: {gap.get('state')}\n"
+            + (f"// Transition: {transition}\n" if transition else "")
+        )
+    if cov_type == "assert":
+        return (
+            f"// Mock assertion coverage source\n"
+            f"// Source: {source_file}:{source_line}\n"
+            f"// Assertion: {gap.get('assert_name')}\n"
+            f"// Vacuous: {gap.get('vacuous', 'N/A')}"
+        )
+    return (
+        f"// Mock coverage source for {gap.get('gap_id', 'unknown')}\n"
+        f"// Source: {source_file}:{source_line}"
     )

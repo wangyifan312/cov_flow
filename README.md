@@ -65,7 +65,7 @@ cov_flow/
 │   │   ├── project_manifest.yaml
 │   │   ├── coverage_gaps.json
 │   │   └── .dv_ai_index/      Pre-built mock indexes (committed as fixtures)
-│   └── axi2ahb/          Real AXI2AHB bridge project (Phase 3)
+│   └── axi2ahb/          Sample AXI2AHB URG report (sanitized demo data, Phase 3)
 │       ├── project_manifest.yaml
 │       ├── urg_report/         URG HTML coverage report
 │       ├── coverage_gaps.json  Parsed gaps (982 gaps, 7 types)
@@ -77,7 +77,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 3 complete** - URG HTML coverage report parser fully integrated.
+**Phase 4 complete** - Source resolver + Project registry + EDA adapter skeleton fully integrated.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -86,8 +86,9 @@ cov_flow/
 | Phase 2a | Skill references + Validation scripts + Eval skeleton | **Done** |
 | Phase 2b | Sim tools + Coverage diff + Static patch check + Evals | **Done** |
 | Phase 2c | Eval runner + Remaining skill references | **Done** |
-| Phase 2d | Code coverage extension (7 types, 27 gaps, 181 tests) | **Done** |
+| Phase 2d | Code coverage extension (7 types, 27 gaps) | **Done** |
 | Phase 3 | Real URG HTML coverage report parser + MCP integration | **Done** |
+| Phase 4 | Source resolver + Project registry + EDA adapter skeleton | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -166,17 +167,27 @@ cov_flow/
   - `gap_assembler.py` — gap ID assignment, path normalization, schema filtering
   - `index_builder.py` — coverage_index.json and coverage_gaps.json output (MCP-compatible)
 - **CLI script** (`scripts/build_coverage_index.py`): orchestrates full parse pipeline from URG HTML to structured JSON
-- **Demo project** (`mock_data/axi2ahb/`): real AXI2AHB bridge UVM verification project
+- **Demo project** (`mock_data/axi2ahb/`): sample AXI2AHB bridge URG report (public/sanitized demo data)
   - 982 schema-compliant gaps across all 7 coverage types (functional 16, line 126, branch 40, condition 32, toggle 763, fsm 1, assert 4)
   - Synopsys library file filtering (`/opt/synopsys/` paths excluded)
   - Source file path normalization (absolute → relative)
 - **MCP integration**: coverage_index.json includes `gaps` field, all 3 coverage tools can query real project data
 - **Makefile target**: `make build-real-index`
 
+### What's included in Phase 4 (Source Resolver + Project Registry + EDA Adapters)
+
+- **Bounded Source Snippet Resolver** (`lib/source_resolver.py`): reads real SV source snippets with security boundaries (path traversal protection, allowlist, max_lines/max_bytes)
+- **Project Registry** (`lib/project_registry.py`): resolves project names to manifest paths via `projects.yaml` or `COV_FLOW_PROJECTS` env var
+- **EDA Adapter Skeleton** (`lib/eda_adapters/`): abstract base class + MockVerdiAdapter + MockVCSAdapter (stub data, no real EDA integration)
+- **Contract Tests** (`tests/test_tool_contracts.py`): envelope format validation for all 11 MCP tools
+- **Large Dataset Tests** (`tests/test_large_dataset.py`): truncation and context budget validation with axi2ahb 982-gap dataset
+- **`cov_get_coverpoint_source` upgraded**: now returns `source_mode: "real"` when reading from coverage_model_root, falls back to `source_mode: "mock_fallback"` when file unavailable
+- **MCP tools support project name input**: `cov_list_uncovered(project="dma_subsystem")` works without manifest path
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
-- No real project data (RTL/FS/register docs/UVM/coverage DB) — except the URG report used as parser demo
+- No real project data (RTL/FS/register docs/UVM/coverage DB) — the URG report is sanitized demo data only
 - No real UVM testcase generation (Phase 4)
 - No real simulation execution (Phase 5)
 - No eval runner LLM execution mode (Phase 6)
@@ -232,7 +243,7 @@ python scripts/run_eval.py --eval evals/triage_gap_0001.yaml --dry-run
 python scripts/run_eval.py --eval-dir evals/ --dry-run
 ```
 
-The runner performs 6 structure checks: YAML parseable, required fields, valid task_mode, non-empty expected_tools, tool existence, valid classification enum. LLM execution is deferred to Phase 3+.
+The runner performs 6 structure checks: YAML parseable, required fields, valid task_mode, non-empty expected_tools, tool existence, valid classification enum. LLM execution is deferred to Phase 6.
 See `evals/README.md` for details.
 
 ## Next Steps

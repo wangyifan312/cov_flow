@@ -1,7 +1,7 @@
 {
   "project": "axi2ahb",
   "report_id": "urgReport_seed_1",
-  "generated_at": "2026-06-02T10:27:19.148529",
+  "generated_at": "2026-06-02T15:45:42.612138",
   "gaps": [
     {
       "coverage_type": "functional",

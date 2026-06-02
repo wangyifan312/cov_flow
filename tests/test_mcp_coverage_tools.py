@@ -142,23 +142,55 @@ class TestCovGetCoverpointSource:
         result = cov_get_coverpoint_source(PROJECT, "GAP_9999")
         assert result["ok"] is False
 
-    def test_mock_note_present(self) -> None:
+    def test_functional_gap_real_source(self) -> None:
+        """GAP_0001 source_file (tb/cov/dma_cov.sv) is under coverage_model_root."""
         result = cov_get_coverpoint_source(PROJECT, "GAP_0001")
-        assert "Mock MVP" in result["result"]["note"]
+        assert result["ok"] is True
+        assert result["result"]["source_mode"] == "real"
+        assert "dma_desc_cg" in result["result"]["source_snippet"]
+        assert "desc_mode_cp" in result["result"]["source_snippet"]
 
-    def test_line_gap_source(self) -> None:
+    def test_code_coverage_gap_mock_fallback(self) -> None:
+        """GAP_L001 source_file (rtl/dma_desc_parser.sv) is not under coverage_model_root."""
         result = cov_get_coverpoint_source(PROJECT, "GAP_L001")
         assert result["ok"] is True
+        assert result["result"]["source_mode"] == "mock_fallback"
         assert "Mock line coverage source" in result["result"]["source_snippet"]
+
+    def test_source_mode_field_present(self) -> None:
+        result = cov_get_coverpoint_source(PROJECT, "GAP_0001")
+        assert "source_mode" in result["result"]
+        assert result["result"]["source_mode"] in ("real", "mock_fallback")
 
     def test_toggle_gap_source(self) -> None:
         result = cov_get_coverpoint_source(PROJECT, "GAP_T001")
         assert result["ok"] is True
+        assert result["result"]["source_mode"] == "mock_fallback"
         assert "Mock toggle coverage source" in result["result"]["source_snippet"]
         assert "burst_wrap" in result["result"]["source_snippet"]
 
     def test_fsm_gap_source(self) -> None:
         result = cov_get_coverpoint_source(PROJECT, "GAP_M001")
         assert result["ok"] is True
+        assert result["result"]["source_mode"] == "mock_fallback"
         assert "Mock FSM coverage source" in result["result"]["source_snippet"]
         assert "PARSE_SG" in result["result"]["source_snippet"]
+
+
+AXI2AHB_PROJECT = "mock_data/axi2ahb/project_manifest.yaml"
+
+
+class TestCovGetCoverpointSourceAxi2ahb:
+    """Test source resolver behavior with axi2ahb (coverage_model_root=null)."""
+
+    def test_mock_fallback_when_no_coverage_model_root(self) -> None:
+        """axi2ahb has coverage_model_root=null, so all gaps use mock_fallback."""
+        result = cov_get_coverpoint_source(AXI2AHB_PROJECT, "GAP_L001")
+        assert result["ok"] is True
+        assert result["result"]["source_mode"] == "mock_fallback"
+        assert "Mock" in result["result"]["source_snippet"]
+
+    def test_functional_gap_mock_fallback(self) -> None:
+        result = cov_get_coverpoint_source(AXI2AHB_PROJECT, "GAP_0001")
+        assert result["ok"] is True
+        assert result["result"]["source_mode"] == "mock_fallback"
