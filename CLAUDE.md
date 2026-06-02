@@ -17,12 +17,13 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - Phase 1: Mock MVP (schemas, mock data, MCP tools, tests)
 - Phase 2: Skills, eval dry-run, validation scripts
 - Phase 3: URG HTML coverage report parser
+- Phase 4: Source resolver + Project registry + EDA adapter skeleton
 
 For current phase status, refer to the README.md status table. The `implementation_plan.md` remains authoritative for architecture, module boundaries, and schema definitions, but not for phase numbering.
 
 ## Current Implementation Scope
 
-**Phase 0 + Phase 1 + Phase 2 mock MVP + Phase 3 URG parser are complete.** Phase 4+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
+**Phase 0 through Phase 4 are complete.** Phase 5+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
 
 ### Phase 0 — Project Scaffolding (Done)
 - `pyproject.toml`, `Makefile`, `README.md`
@@ -51,7 +52,9 @@ For current phase status, refer to the README.md status table. The `implementati
 - **Phase 2b**: 4 new MCP sim tools (`sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`, `cov_get_coverage_diff`), static patch check script, audit logging service, mock simulation data, 2 eval cases
 - **Phase 2c**: Eval runner dry-run mode (`run_eval.py`), 7 additional skill reference documents completing all 5 sub-skill workflows
 - **Phase 2 收尾**: `pip install -e ".[dev]"` fix (hatch build targets), `.mcp.json` Claude Code MCP config, ruff 95→0 issues, mypy 18→0 errors, 4th eval case (`generate_case_0001.yaml` completing all 4 task_modes), 3 example walkthroughs (triage, full closure, MCP setup)
-- **Phase 2d**: Code coverage extension — 7 coverage types (functional, line, branch, condition, toggle, fsm, assert), unified schema with `anyOf` conditional required fields, type-aware MCP tools and diff computation, 12 new mock gaps (27 total), 4 new classifications (10 total), 35 new tests (181 total), 2 new eval cases (6 total)
+- **Phase 2d**: Code coverage extension — 7 coverage types (functional, line, branch, condition, toggle, fsm, assert), unified schema with `anyOf` conditional required fields, type-aware MCP tools and diff computation, 12 new mock gaps (27 total), 4 new classifications (10 total), 35 new tests, 2 new eval cases (6 total)
+- **Phase 3**: URG HTML parser — 982 real gaps from axi2ahb URG report
+- **Phase 4**: Source resolver + registry + EDA adapters — 90 new tests (271 total), 11 MCP tools
 - **Total**: 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
 - All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
 
@@ -96,7 +99,7 @@ For current phase status, refer to the README.md status table. The `implementati
 
 ## What Is Forbidden
 
-These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser is not.
+These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser and SourceResolver is not.
 
 1. **No real EDA tool integration.** Do not implement real Verdi, VCS, KDB, NPI, VPI, FSDB, or any other EDA tool interfaces. All EDA-related capabilities must be implemented as adapter/stub only.
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.

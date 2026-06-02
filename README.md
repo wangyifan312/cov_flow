@@ -49,10 +49,11 @@ make run-server
 
 ```
 cov_flow/
-├── .mcp.json              Claude Code MCP client configuration
+├── .mcp.json.example      MCP client configuration template (copy to .mcp.json)
+├── projects.yaml          Project name → manifest path registry
 ├── schemas/              JSON Schema definitions for all outputs
 ├── scripts/              Offline indexer CLIs and validators
-├── lib/                  Shared Python library (manifest, schema validation)
+├── lib/                  Shared Python library (manifest, URG parser, source resolver, registry, EDA adapters)
 ├── dv_mcp/               DV Context MCP Server (FastMCP-based)
 │   └── dv_context_server/
 │       ├── server.py          FastMCP entry point (thin wrapper)
@@ -102,7 +103,7 @@ cov_flow/
   - `tb_get_existing_tests_for_feature`
   - `rtl_find_signal`
 - **82 tests** covering schemas, scripts, and all tools
-- **5 SKILL.md skeletons** for each workflow
+- **5 SKILL.md definitions** for each workflow (orchestrator + 4 sub-skills)
 
 ### What's included in Phase 2a (initial stage)
 
@@ -156,6 +157,7 @@ cov_flow/
 - **Type-aware validation**: `static_patch_check.py` validates coverage target format per type
 - **35 new tests** (total: 181), **2 new eval cases** (total: 6)
 - **12 updated skill documents** covering all workflow references
+- Running total after Phase 2d: 181 tests, 27 gaps (15 functional + 12 code coverage)
 
 ### What's included in Phase 3 (URG Coverage Report Parser)
 
@@ -186,9 +188,9 @@ cov_flow/
 
 ### What's explicitly NOT included (see CLAUDE.md)
 
-- No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
+- No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB) — EDA adapters are mock/stub only
 - No real project data (RTL/FS/register docs/UVM/coverage DB) — the URG report is sanitized demo data only
-- No real UVM testcase generation (Phase 4)
+- No real UVM testcase generation (Phase 5)
 - No real simulation execution (Phase 5)
 - No eval runner LLM execution mode (Phase 6)
 
@@ -248,12 +250,11 @@ See `evals/README.md` for details.
 
 ## Next Steps
 
-Phase 0–3 are complete. The following are **out of scope** and require explicit approval before starting:
+Phase 0–4 are complete. The following are **out of scope** and require explicit approval before starting:
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| Phase 4 | Real UVM testcase generation | Not started |
-| Phase 5 | Real simulation tool integration (VCS, Verdi, etc.) | Not started |
+| Phase 5 | Real UVM testcase generation + Real simulation tool integration | Not started |
 | Phase 6 | Eval runner LLM execution mode | Not started |
 
 See `implementation_plan.md` §13 and CLAUDE.md for constraints.
