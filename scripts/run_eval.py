@@ -6,7 +6,7 @@ Usage:
     python scripts/run_eval.py --eval-dir evals/ --dry-run
     python scripts/run_eval.py --eval evals/triage_gap_0001.yaml --out report.json
 
-Note: This is a dry-run validator. LLM execution is deferred to Phase 3+.
+Note: This is a dry-run validator. LLM execution is deferred to Phase 6.
 """
 
 from __future__ import annotations
@@ -160,7 +160,7 @@ def run_eval_single(eval_path: Path, dry_run: bool = True) -> dict[str, Any]:
 
     if dry_run:
         report["status"] = "dry_run_complete"
-        report["message"] = "Eval case validated. LLM execution deferred to Phase 3+."
+        report["message"] = "Eval case validated. LLM execution deferred to Phase 6."
 
     return report
 

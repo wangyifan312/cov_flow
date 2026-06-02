@@ -48,7 +48,7 @@ The runner validates:
 5. Each tool in expected_tools exists in registered tools
 6. expected_classification (if present) is valid enum
 
-**Note**: LLM execution is deferred to Phase 3+.
+**Note**: LLM execution is deferred to Phase 6.
 
 ## YAML Structure
 

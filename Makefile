@@ -1,7 +1,7 @@
 .PHONY: help validate validate-gaps validate-scenario validate-patch static-check build-indexes build-real-index test smoke-server run-server lint format typecheck clean
 
 MANIFEST ?= mock_data/dma_subsystem/project_manifest.yaml
-PYTHON ?= python
+PYTHON ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python3)
 FILE ?=
 
 help: ## Show this help
@@ -70,7 +70,7 @@ typecheck: ## Run mypy type checker
 # Full acceptance
 # ---------------------------------------------------------------------------
 
-accept: validate validate-gaps build-indexes test smoke-server ## Run all acceptance checks
+accept: validate validate-gaps build-indexes build-real-index lint typecheck test smoke-server ## Run all acceptance checks
 
 # ---------------------------------------------------------------------------
 # Cleanup

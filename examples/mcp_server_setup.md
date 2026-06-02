@@ -10,7 +10,14 @@ Closure Skill Pack.
 
 ## Step 1 — Configure `.mcp.json`
 
-Place this file in the project root:
+Copy `.mcp.json.example` from the project root and adjust the Python path:
+
+```bash
+cp .mcp.json.example .mcp.json
+# Edit .mcp.json: replace <VENV_PATH> with your venv path (e.g., .venv)
+```
+
+The resulting `.mcp.json` should look like:
 
 ```json
 {
