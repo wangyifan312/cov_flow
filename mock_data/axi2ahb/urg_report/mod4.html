@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="<username>"> <meta name="GENERATOR" content="urg/version [en] (platform name) [urg]">
+<title>Unified Coverage Report :: Module :: ahb_beat_executor</title>
+<link type="text/css" rel="stylesheet" href="css/.urg.css">
+<link type="text/css" rel="stylesheet" href="css/.layout.css">
+<link type="text/css" rel="stylesheet" href="css/.breadcrumb.css">
+<script type="text/javascript" src="js/.jquery.js"></script>
+<script type="text/javascript" src="js/.jquery-ui.js"></script>
+<script type="text/javascript" src="js/.sortable.js"></script>
+<script type="text/javascript" src="js/.layout.js"></script>
+<script type="text/javascript" src="js/.breadcrumb.js"></script>
+<script type="text/javascript">
+var layout, westLayout, centerLayout;
+$(document).ready(function () {
+  if ($("#north-bread-crumb")) {
+    $("#north-bread-crumb").jBreadCrumb({easing:'swing'})
+  }
+  layout = $("body").layout({ 
+    resizable: true,
+    spacing_open: 4,
+    spacing_closed: 4,
+    north: {
+      size: 76
+    },
+    south: {
+      size: 45,
+      initClosed: true
+    },
+    west: {
+      size: 500,
+      resizable: true,
+      initClosed: false
+    }
+  });
+  centerLayout = $('div.ui-layout-center').layout({
+    north__paneSelector: ".ui-layout-center-inner-north",
+    center__paneSelector: ".ui-layout-center-inner-center", 
+    north__size: 50,
+    spacing_open: 4,
+    spacing_closed: 4
+  });
+});
+</script>
+</head>
+<body onLoad="initPage();"><div class="ui-layout-north">
+<div class="logo"></div>
+<center class="pagetitle">Module Definition</center>
+<div align="center"><a href="dashboard.html" ><b>dashboard</b></a> | <a href="hierarchy.html" ><b>hierarchy</b></a> | <a href="modlist.html" ><b>modlist</b></a> | <a href="groups.html" ><b>groups</b></a> | <a href="tests.html" ><b>tests</b></a> | <a href="asserts.html" ><b>asserts</b></a></div>
+
+</div>
+<div class="ui-layout-west">
+<div name='tag_ahb_beat_executor'>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module : <a href="#"  onclick="showContent('tag_ahb_beat_executor')">ahb_beat_executor</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 78.75</td>
+<td class="s8 cl rt"><a href="mod4.html#Line" > 82.88</a></td>
+<td class="s9 cl rt"><a href="mod4.html#Cond" > 94.12</a></td>
+<td class="s6 cl rt"><a href="mod4.html#Toggle" > 68.76</a></td>
+<td class="wht cl rt"></td>
+<td class="s6 cl rt"><a href="mod4.html#Branch" > 69.23</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<span class=repname>Source File(s) : </span>
+<br clear=all>
+<a href="javascript:void(0);"  onclick="openSrcFile('/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/ahb_backend/ahb_beat_executor.sv')">/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/ahb_backend/ahb_beat_executor.sv</a><br clear=all>
+<br clear=all>
+<span class=repname>Module self-instances :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="wht cl wordwrap"><a href="mod4.html#inst_tag_4"  onclick="showContent('inst_tag_4')">top_tb.dut.u_ahb_backend.u_ahb_beat_executor</a></td>
+<td class="s7 cl rt"> 78.75</td>
+<td class="s8 cl rt"><a href="mod4.html#Line" > 82.88</a></td>
+<td class="s9 cl rt"><a href="mod4.html#Cond" > 94.12</a></td>
+<td class="s6 cl rt"><a href="mod4.html#Toggle" > 68.76</a></td>
+<td class="wht cl rt"></td>
+<td class="s6 cl rt"><a href="mod4.html#Branch" > 69.23</a></td>
+<td class="wht cl rt"></td>
+</tr></table></div>
+</div>
+<br clear=all>
+<div name='tag_ahb_beat_executor'>
+<hr>
+<a name="inst_tag_4"></a>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module Instance : <a href="hierarchy.html#tag_urg_inst_4" >top_tb.dut.u_ahb_backend.u_ahb_beat_executor</a></span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Instance :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 78.75</td>
+<td class="s8 cl rt"><a href="mod4.html#Line" > 82.88</a></td>
+<td class="s9 cl rt"><a href="mod4.html#Cond" > 94.12</a></td>
+<td class="s6 cl rt"><a href="mod4.html#Toggle" > 68.76</a></td>
+<td class="wht cl rt"></td>
+<td class="s6 cl rt"><a href="mod4.html#Branch" > 69.23</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Instance's subtree :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 78.75</td>
+<td class="s8 cl rt"> 82.88</td>
+<td class="s9 cl rt"> 94.12</td>
+<td class="s6 cl rt"> 68.76</td>
+<td class="wht cl rt"></td>
+<td class="s6 cl rt"> 69.23</td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Parent : </span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td><td class="alfsrt">NAME</td></tr><tr>
+<td class="s8 cl rt"> 89.17</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="s8 cl rt"> 89.17</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td><a href="mod6.html#inst_tag_6" >u_ahb_backend</a></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Subtrees :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td colspan=8>no children</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<hr>
+Since this is the module's only instance, the coverage report is the same as for the module.</div>
+<div class="ui-layout-center">
+<div class="ui-layout-center-inner-center">
+<div name='tag_ahb_beat_executor'>
+<a name="Line"></a>
+Line Coverage for Module : <a href="mod4.html" >ahb_beat_executor</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="4" width="82">
+<tr><th></th><th>Line No.</th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s8"><td class="lf">TOTAL</td><td></td><td>111</td><td>92</td><td>82.88</td></tr>
+<tr class="s5"><td class="lf">INITIAL</td><td>94</td><td>10</td><td>5</td><td>50.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>120</td><td>10</td><td>10</td><td>100.00</td></tr>
+<tr class="s5"><td class="lf">ALWAYS</td><td>147</td><td>13</td><td>7</td><td>53.85</td></tr>
+<tr class="s7"><td class="lf">ALWAYS</td><td>166</td><td>30</td><td>22</td><td>73.33</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>207</td><td>11</td><td>11</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>227</td><td>10</td><td>10</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>244</td><td>27</td><td>27</td><td>100.00</td></tr>
+</table>
+<pre class="code"><br clear=all>
+93                        initial begin
+94         1/1              if (DATA_WIDTH &lt;= 0) begin
+95         <font color = "red">0/1     ==>        $error(&quot;ahb_beat_executor: DATA_WIDTH must be &gt; 0, got %0d&quot;, DATA_WIDTH);</font>
+96                          end
+                        MISSING_ELSE
+97         1/1              if ((DATA_WIDTH % 8) != 0) begin
+98         <font color = "red">0/1     ==>        $error(&quot;ahb_beat_executor: DATA_WIDTH (%0d) must be byte-aligned&quot;, DATA_WIDTH);</font>
+99                          end
+                        MISSING_ELSE
+100        1/1              if (STRB_WIDTH != (DATA_WIDTH / 8)) begin
+101        <font color = "red">0/1     ==>        $error(&quot;ahb_beat_executor: STRB_WIDTH (%0d) must equal DATA_WIDTH/8 (%0d)&quot;, STRB_WIDTH, (DATA_WIDTH / 8));</font>
+102                         end
+                        MISSING_ELSE
+103        1/1              if (STRB_WIDTH == 0) begin
+104        <font color = "red">0/1     ==>        $error(&quot;ahb_beat_executor: STRB_WIDTH must be &gt; 0&quot;);</font>
+105                         end
+                        MISSING_ELSE
+106        1/1              if ((STRB_WIDTH &amp; (STRB_WIDTH - 1)) != 0) begin
+107        <font color = "red">0/1     ==>        $error(&quot;ahb_beat_executor: STRB_WIDTH (%0d) must be a power of 2 for AHB byte-lane mapping&quot;, STRB_WIDTH);</font>
+108                         end
+                        MISSING_ELSE
+109                       end
+110                     
+111                       function automatic logic [STRB_WIDTH-1:0] gen_hstrb(
+112                         input logic [OFFSET_W-1:0]     addr_lsb,
+113                         input logic [2:0]              size,
+114                         input logic [STRB_WIDTH-1:0]   wstrb
+115                       );
+116                         logic [STRB_WIDTH-1:0] narrow_mask;
+117                         int unsigned active_bytes;
+118                         int unsigned lane_shift;
+119                         begin
+120        1/1                narrow_mask  = '0;
+121        1/1                active_bytes = 1;
+122        1/1                active_bytes = active_bytes &lt;&lt; size;
+123        1/1                lane_shift   = int'(addr_lsb);
+124                     
+125        1/1                if (active_bytes &gt;= STRB_WIDTH) begin
+126        1/1                  narrow_mask = '1;
+127                           end
+128                           else begin
+129        1/1                  for (int i = 0; i &lt; STRB_WIDTH; i++) begin
+130        1/1                    if ((i &gt;= lane_shift) &amp;&amp; (i &lt; (lane_shift + active_bytes))) begin
+131        1/1                      narrow_mask[i] = 1'b1;
+132                               end
+                        MISSING_ELSE
+133                             end
+134                           end
+135                     
+136        1/1                gen_hstrb = narrow_mask &amp; wstrb;
+137                         end
+138                       endfunction
+139                     
+140                       assign req_ready     = hready;
+141                       assign accept_req    = req_valid &amp;&amp; req_ready;
+142                       assign complete_beat = data_valid &amp;&amp; hready;
+143                       assign bus_valid     = addr_valid || req_valid;
+144                       assign busy          = bus_valid || data_valid;
+145                     
+146                       always_comb begin
+147        1/1              if (addr_valid) begin
+148        <font color = "red">0/1     ==>        bus_write = addr_write;</font>
+149        <font color = "red">0/1     ==>        bus_first = addr_first;</font>
+150        <font color = "red">0/1     ==>        bus_addr  = addr_reg;</font>
+151        <font color = "red">0/1     ==>        bus_size  = size_reg;</font>
+152        <font color = "red">0/1     ==>        bus_wdata = wdata_reg;</font>
+153        <font color = "red">0/1     ==>        bus_wstrb = wstrb_reg;</font>
+154                         end
+155                         else begin
+156        1/1                bus_write = req_write;
+157        1/1                bus_first = req_first;
+158        1/1                bus_addr  = req_addr;
+159        1/1                bus_size  = req_size;
+160        1/1                bus_wdata = req_wdata;
+161        1/1                bus_wstrb = req_wstrb;
+162                         end
+163                       end
+164                     
+165                       always_comb begin
+166        1/1              addr_valid_n = addr_valid;
+167        1/1              addr_write_n = addr_write;
+168        1/1              addr_first_n = addr_first;
+169        1/1              addr_reg_n   = addr_reg;
+170        1/1              size_reg_n   = size_reg;
+171        1/1              wdata_reg_n  = wdata_reg;
+172        1/1              wstrb_reg_n  = wstrb_reg;
+173                     
+174        1/1              data_valid_n = data_valid;
+175        1/1              data_write_n = data_write;
+176        1/1              data_addr_n  = data_addr;
+177        1/1              data_size_n  = data_size;
+178        1/1              data_wdata_n = data_wdata;
+179        1/1              data_wstrb_n = data_wstrb;
+180                     
+181        1/1              if (hready) begin
+182        1/1                data_valid_n = bus_valid;
+183        1/1                data_write_n = bus_write;
+184        1/1                data_addr_n  = bus_addr;
+185        1/1                data_size_n  = bus_size;
+186        1/1                data_wdata_n = bus_wdata;
+187        1/1                data_wstrb_n = bus_wstrb;
+188                     
+189        1/1                if (addr_valid) begin
+190        <font color = "red">0/1     ==>          addr_valid_n = accept_req;</font>
+191        <font color = "red">0/1     ==>          if (accept_req) begin</font>
+192        <font color = "red">0/1     ==>            addr_write_n = req_write;</font>
+193        <font color = "red">0/1     ==>            addr_first_n = req_first;</font>
+194        <font color = "red">0/1     ==>            addr_reg_n   = req_addr;</font>
+195        <font color = "red">0/1     ==>            size_reg_n   = req_size;</font>
+196        <font color = "red">0/1     ==>            wdata_reg_n  = req_wdata;</font>
+197        <font color = "red">0/1     ==>            wstrb_reg_n  = req_wstrb;</font>
+198                             end
+                   <font color = "red">==>  MISSING_ELSE</font>
+199                           end
+200                           else begin
+201        1/1                  addr_valid_n = 1'b0;
+202                           end
+203                         end
+                        MISSING_ELSE
+204                       end
+205                     
+206                       always_comb begin
+207        1/1              haddr  = bus_addr;
+208        1/1              hwrite = bus_write;
+209        1/1              hsize  = bus_size;
+210        1/1              hburst = HBURST_SINGLE;
+211        1/1              hwdata = data_wdata;
+212        1/1              hstrb  = '0;
+213                     
+214        1/1              if (data_valid &amp;&amp; data_write) begin
+215        1/1                hstrb = gen_hstrb(data_addr[OFFSET_W-1:0], data_size, data_wstrb);
+216                         end
+                        MISSING_ELSE
+217                     
+218        1/1              if (bus_valid) begin
+219        1/1                htrans = bus_first ? HTRANS_NONSEQ : HTRANS_SEQ;
+220                         end
+221                         else begin
+222        1/1                htrans = HTRANS_IDLE;
+223                         end
+224                       end
+225                     
+226                       always_comb begin
+227        1/1              rsp_valid       = 1'b0;
+228        1/1              rsp_error       = 1'b0;
+229        1/1              rsp_rdata_valid = 1'b0;
+230        1/1              rsp_rdata       = hrdata;
+231                     
+232        1/1              if (complete_beat) begin
+233        1/1                rsp_valid = 1'b1;
+234        1/1                rsp_error = hresp;
+235                     
+236        1/1                if (!data_write) begin
+237        1/1                  rsp_rdata_valid = 1'b1;
+238        1/1                  rsp_rdata       = hrdata;
+239                           end
+                        MISSING_ELSE
+240                         end
+                        MISSING_ELSE
+241                       end
+242                     
+243                       always_ff @(posedge clk or negedge rstn) begin
+244        1/1              if (!rstn) begin
+245        1/1                addr_valid &lt;= 1'b0;
+246        1/1                addr_write &lt;= 1'b0;
+247        1/1                addr_first &lt;= 1'b1;
+248        1/1                addr_reg   &lt;= '0;
+249        1/1                size_reg   &lt;= '0;
+250        1/1                wdata_reg  &lt;= '0;
+251        1/1                wstrb_reg  &lt;= '0;
+252        1/1                data_valid &lt;= 1'b0;
+253        1/1                data_write &lt;= 1'b0;
+254        1/1                data_addr  &lt;= '0;
+255        1/1                data_size  &lt;= '0;
+256        1/1                data_wdata &lt;= '0;
+257        1/1                data_wstrb &lt;= '0;
+258                         end
+259                         else begin
+260        1/1                addr_valid &lt;= addr_valid_n;
+261        1/1                addr_write &lt;= addr_write_n;
+262        1/1                addr_first &lt;= addr_first_n;
+263        1/1                addr_reg   &lt;= addr_reg_n;
+264        1/1                size_reg   &lt;= size_reg_n;
+265        1/1                wdata_reg  &lt;= wdata_reg_n;
+266        1/1                wstrb_reg  &lt;= wstrb_reg_n;
+267        1/1                data_valid &lt;= data_valid_n;
+268        1/1                data_write &lt;= data_write_n;
+269        1/1                data_addr  &lt;= data_addr_n;
+270        1/1                data_size  &lt;= data_size_n;
+271        1/1                data_wdata &lt;= data_wdata_n;
+272        1/1                data_wstrb &lt;= data_wstrb_n;
+</pre>
+<hr>
+<a name="Cond"></a>
+Cond Coverage for Module : <a href="mod4.html" >ahb_beat_executor</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="3" width="82">
+<tr><th></th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s9"><td class="lf">Conditions</td><td>17</td><td>16</td><td>94.12</td></tr>
+<tr class="s9"><td class="lf">Logical</td><td>17</td><td>16</td><td>94.12</td></tr>
+<tr class="wht"><td class="lf">Non-Logical</td><td>0</td><td>0</td><td></td></tr>
+<tr class="wht"><td class="lf">Event</td><td>0</td><td>0</td><td></td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       141
+ EXPRESSION (req_valid &amp;&amp; req_ready)
+             ----1----    ----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       142
+ EXPRESSION (data_valid &amp;&amp; hready)
+             -----1----    ---2--
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       143
+ EXPRESSION (addr_valid || req_valid)
+             -----1----    ----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       144
+ EXPRESSION (bus_valid || data_valid)
+             ----1----    -----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       214
+ EXPRESSION (data_valid &amp;&amp; data_write)
+             -----1----    -----2----
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       219
+ EXPRESSION (bus_first ? HTRANS_NONSEQ : HTRANS_SEQ)
+             ----1----
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<hr>
+<a name="Toggle"></a>
+Toggle Coverage for Module : <a href="mod4.html" >ahb_beat_executor</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s6">
+<td>Totals</td>
+<td class="rt">68</td>
+<td class="rt">41</td>
+<td class="rt">60.29 </td>
+</tr><tr class="s6">
+<td>Total Bits</td>
+<td class="rt">2042</td>
+<td class="rt">1404</td>
+<td class="rt">68.76 </td>
+</tr><tr class="s6">
+<td nowrap>Total Bits 0->1</td>
+<td class="rt">1021</td>
+<td class="rt">702</td>
+<td class="rt">68.76 </td>
+</tr><tr class="s6">
+<td nowrap>Total Bits 1->0</td>
+<td class="rt">1021</td>
+<td class="rt">702</td>
+<td class="rt">68.76 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s7">
+<td>Ports</td>
+<td class="rt">33</td>
+<td class="rt">26</td>
+<td class="rt">78.79 </td>
+</tr><tr class="s8">
+<td>Port Bits</td>
+<td class="rt">942</td>
+<td class="rt">840</td>
+<td class="rt">89.17 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 0->1</td>
+<td class="rt">471</td>
+<td class="rt">420</td>
+<td class="rt">89.17 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 1->0</td>
+<td class="rt">471</td>
+<td class="rt">420</td>
+<td class="rt">89.17 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s4">
+<td>Signals</td>
+<td class="rt">35</td>
+<td class="rt">15</td>
+<td class="rt">42.86 </td>
+</tr><tr class="s5">
+<td>Signal Bits</td>
+<td class="rt">1100</td>
+<td class="rt">564</td>
+<td class="rt">51.27 </td>
+</tr><tr class="s5">
+<td nowrap>Signal Bits 0->1</td>
+<td class="rt">550</td>
+<td class="rt">282</td>
+<td class="rt">51.27 </td>
+</tr><tr class="s5">
+<td nowrap>Signal Bits 1->0</td>
+<td class="rt">550</td>
+<td class="rt">282</td>
+<td class="rt">51.27 </td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Port Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td><td class="alfsrt">Direction</td></tr><tr>
+<td>clk</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>rstn</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_ready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>req_write</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_first</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_wdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>req_wstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>rsp_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>rsp_error</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>rsp_rdata_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>rsp_rdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>busy</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>haddr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>haddr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>htrans[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hwrite</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hsize[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hsize[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hburst[2:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hwdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>hrdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>hready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>hresp</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>inflight_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>accepted_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>completed_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_addr_dbg[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_addr_dbg[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_write_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_size_dbg[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_size_dbg[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_wdata_dbg[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_wstrb_dbg[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Signal Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td></tr><tr>
+<td>addr_valid</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_valid_n</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_write</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_write_n</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_first</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_first_n</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_reg[31:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_reg_n[31:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>size_reg[2:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>size_reg_n[2:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wdata_reg[63:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wdata_reg_n[63:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wstrb_reg[7:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wstrb_reg_n[7:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>data_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_valid_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_write</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_write_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>data_addr_n[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_addr_n[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>data_size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>data_size_n[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_size_n[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>data_wdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_wdata_n[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_wstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>data_wstrb_n[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>accept_req</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>complete_beat</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_write</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_first</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>bus_size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>bus_wdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>bus_wstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr></table><br clear=all>
+<hr>
+<a name="Branch"></a>
+Branch Coverage for Module : <a href="mod4.html" >ahb_beat_executor</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Line No.</th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s6">
+<td>Branches</td>
+<td></td>
+<td class="rt">26</td>
+<td class="rt">18</td>
+<td class="rt">69.23 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">94</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">97</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">100</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">103</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">106</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">147</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s5">
+<td>IF</td>
+<td class="rt">181</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">50.00 </td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">214</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">218</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">232</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">244</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+94             if (DATA_WIDTH <= 0) begin
+               <font color = "red">-1-</font>  
+95               $error("ahb_beat_executor: DATA_WIDTH must be > 0, got %0d", DATA_WIDTH);
+           <font color = "red">      ==></font>
+96             end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+97             if ((DATA_WIDTH % 8) != 0) begin
+               <font color = "red">-1-</font>  
+98               $error("ahb_beat_executor: DATA_WIDTH (%0d) must be byte-aligned", DATA_WIDTH);
+           <font color = "red">      ==></font>
+99             end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+100            if (STRB_WIDTH != (DATA_WIDTH / 8)) begin
+               <font color = "red">-1-</font>  
+101              $error("ahb_beat_executor: STRB_WIDTH (%0d) must equal DATA_WIDTH/8 (%0d)", STRB_WIDTH, (DATA_WIDTH / 8));
+           <font color = "red">      ==></font>
+102            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+103            if (STRB_WIDTH == 0) begin
+               <font color = "red">-1-</font>  
+104              $error("ahb_beat_executor: STRB_WIDTH must be > 0");
+           <font color = "red">      ==></font>
+105            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+106            if ((STRB_WIDTH & (STRB_WIDTH - 1)) != 0) begin
+               <font color = "red">-1-</font>  
+107              $error("ahb_beat_executor: STRB_WIDTH (%0d) must be a power of 2 for AHB byte-lane mapping", STRB_WIDTH);
+           <font color = "red">      ==></font>
+108            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+147            if (addr_valid) begin
+               <font color = "red">-1-</font>  
+148              bus_write = addr_write;
+           <font color = "red">      ==></font>
+149              bus_first = addr_first;
+150              bus_addr  = addr_reg;
+151              bus_size  = size_reg;
+152              bus_wdata = wdata_reg;
+153              bus_wstrb = wstrb_reg;
+154            end
+155            else begin
+156              bus_write = req_write;
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+181            if (hready) begin
+               <font color = "green">-1-</font>  
+182              data_valid_n = bus_valid;
+183              data_write_n = bus_write;
+184              data_addr_n  = bus_addr;
+185              data_size_n  = bus_size;
+186              data_wdata_n = bus_wdata;
+187              data_wstrb_n = bus_wstrb;
+188        
+189              if (addr_valid) begin
+                 <font color = "red">-2-</font>  
+190                addr_valid_n = accept_req;
+191                if (accept_req) begin
+                   <font color = "red">-3-</font>  
+192                  addr_write_n = req_write;
+           <font color = "red">          ==></font>
+193                  addr_first_n = req_first;
+194                  addr_reg_n   = req_addr;
+195                  size_reg_n   = req_size;
+196                  wdata_reg_n  = req_wdata;
+197                  wstrb_reg_n  = req_wstrb;
+198                end
+                   MISSING_ELSE
+           <font color = "red">        ==></font>
+199              end
+200              else begin
+201                addr_valid_n = 1'b0;
+           <font color = "green">        ==></font>
+202              end
+203            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>Status</th></tr><tr class="uRed">
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+214            if (data_valid && data_write) begin
+               <font color = "green">-1-</font>  
+215              hstrb = gen_hstrb(data_addr[OFFSET_W-1:0], data_size, data_wstrb);
+           <font color = "green">      ==></font>
+216            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+218            if (bus_valid) begin
+               <font color = "green">-1-</font>  
+219              htrans = bus_first ? HTRANS_NONSEQ : HTRANS_SEQ;
+                                    <font color = "green">-2-</font>  
+                                    <font color = "green">==></font>  
+                                    <font color = "green">==></font>  
+220            end
+221            else begin
+222              htrans = HTRANS_IDLE;
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+232            if (complete_beat) begin
+               <font color = "green">-1-</font>  
+233              rsp_valid = 1'b1;
+234              rsp_error = hresp;
+235        
+236              if (!data_write) begin
+                 <font color = "green">-2-</font>  
+237                rsp_rdata_valid = 1'b1;
+           <font color = "green">        ==></font>
+238                rsp_rdata       = hrdata;
+239              end
+                 MISSING_ELSE
+           <font color = "green">      ==></font>
+240            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+244            if (!rstn) begin
+               <font color = "green">-1-</font>  
+245              addr_valid <= 1'b0;
+           <font color = "green">      ==></font>
+246              addr_write <= 1'b0;
+247              addr_first <= 1'b1;
+248              addr_reg   <= '0;
+249              size_reg   <= '0;
+250              wdata_reg  <= '0;
+251              wstrb_reg  <= '0;
+252              data_valid <= 1'b0;
+253              data_write <= 1'b0;
+254              data_addr  <= '0;
+255              data_size  <= '0;
+256              data_wdata <= '0;
+257              data_wstrb <= '0;
+258            end
+259            else begin
+260              addr_valid <= addr_valid_n;
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center-inner-north">
+<div id="center-bread-crumb" class="breadCrumb module urg-margin-bottom">
+  <ul name="inst_tag_4">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+  <ul name="tag_ahb_beat_executor">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="ui-layout-south">
+<table align=center><tr><td class="s0 cl">0%</td>
+<td class="s1 cl">10%</td>
+<td class="s2 cl">20%</td>
+<td class="s3 cl">30%</td>
+<td class="s4 cl">40%</td>
+<td class="s5 cl">50%</td>
+<td class="s6 cl">60%</td>
+<td class="s7 cl">70%</td>
+<td class="s8 cl">80%</td>
+<td class="s9 cl">90%</td>
+<td class="s10 cl">100%</td></tr></table></div>
+</body>
+</html>

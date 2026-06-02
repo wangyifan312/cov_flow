@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="<username>"> <meta name="GENERATOR" content="urg/version [en] (platform name) [urg]">
+<title>Unified Coverage Report :: Group :: axi2ahb_pkg::axi2ahb_coverage::ahb_cg</title>
+<link type="text/css" rel="stylesheet" href="css/.urg.css">
+<link type="text/css" rel="stylesheet" href="css/.layout.css">
+<link type="text/css" rel="stylesheet" href="css/.breadcrumb.css">
+<script type="text/javascript" src="js/.jquery.js"></script>
+<script type="text/javascript" src="js/.jquery-ui.js"></script>
+<script type="text/javascript" src="js/.sortable.js"></script>
+<script type="text/javascript" src="js/.layout.js"></script>
+<script type="text/javascript" src="js/.breadcrumb.js"></script>
+<script type="text/javascript">
+var layout, westLayout, centerLayout;
+$(document).ready(function () {
+  if ($("#north-bread-crumb")) {
+    $("#north-bread-crumb").jBreadCrumb({easing:'swing'})
+  }
+  layout = $("body").layout({ 
+    resizable: true,
+    spacing_open: 4,
+    spacing_closed: 4,
+    north: {
+      size: 76
+    },
+    south: {
+      size: 45,
+      initClosed: true
+    },
+    west: {
+      size: 500,
+      resizable: true,
+      initClosed: false
+    }
+  });
+  centerLayout = $('div.ui-layout-center').layout({
+    north__paneSelector: ".ui-layout-center-inner-north",
+    center__paneSelector: ".ui-layout-center-inner-center", 
+    north__size: 50,
+    spacing_open: 4,
+    spacing_closed: 4
+  });
+});
+</script>
+</head>
+<body onLoad="initPage();"><div class="ui-layout-north">
+<div class="logo"></div>
+<center class="pagetitle">Group : axi2ahb_pkg::axi2ahb_coverage::ahb_cg</center>
+<div align="center"><a href="dashboard.html" ><b>dashboard</b></a> | <a href="hierarchy.html" ><b>hierarchy</b></a> | <a href="modlist.html" ><b>modlist</b></a> | <a href="groups.html" ><b>groups</b></a> | <a href="tests.html" ><b>tests</b></a> | <a href="asserts.html" ><b>asserts</b></a></div>
+
+</div>
+<div class="ui-layout-west">
+<div>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Group : <a href="#"  onclick="showContent('axi2ahb_pkg::axi2ahb_coverage::ahb_cg')">axi2ahb_pkg::axi2ahb_coverage::ahb_cg</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td><b>SCORE</b></td><td>INSTANCES</td><td>WEIGHT</td><td>GOAL</td><td>AT LEAST</td><td>PER INSTANCE</td><td>AUTO BIN MAX</td><td>PRINT MISSING</td></tr><tr>
+<td class="s6 cl rt"> 65.48</td>
+<td class="s6 cl rt"> 65.48</td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">100   </td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">64    </td>
+<td class="wht cl rt">64    </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Source File(s) : </span>
+<br clear=all>
+<a href="javascript:void(0);"  onclick="openSrcFile('/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../env/axi2ahb_cov.sv')">/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../env/axi2ahb_cov.sv</a><br clear=all>
+<br clear=all>
+<span class=repname>1 Instances:</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td><b>SCORE</b></td><td>WEIGHT</td><td>GOAL</td><td>AT LEAST</td><td>AUTO BIN MAX</td><td>PRINT MISSING</td></tr><tr>
+<td class="wht cl wordwrap"><a href="grp0.html#inst_tag_top_tb.me.obj.ahb_cg"  onclick="showContent('top_tb.me.obj.ahb_cg')">top_tb.me.obj.ahb_cg</a></td>
+<td class="s6 cl rt"> 65.48</td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">100   </td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">64    </td>
+<td class="wht cl rt">64    </td>
+</tr></table><br clear=all>
+<br clear=all>
+</div>
+<hr>
+<br clear=all>
+<span class=repname>Summary for Group   axi2ahb_pkg::axi2ahb_coverage::ahb_cg
+</span>
+<br clear=all>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s5">
+<td><a href="#var_tbl_axi2ahb_pkg::axi2ahb_coverage::ahb_cg" >Variables</a></td>
+<td class="rt">28</td>
+<td class="rt">13</td>
+<td class="rt">15</td>
+<td class="rt">68.98 </td>
+</tr><tr class="s4">
+<td><a href="#crs_tbl_axi2ahb_pkg::axi2ahb_coverage::ahb_cg" >Crosses</a></td>
+<td class="rt">38</td>
+<td class="rt">20</td>
+<td class="rt">18</td>
+<td class="rt">59.17 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class="repname" id="var_tbl_axi2ahb_pkg::axi2ahb_coverage::ahb_cg">Variables for Group  axi2ahb_pkg::axi2ahb_coverage::ahb_cg
+</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">VARIABLE</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>GOAL</td><td>WEIGHT</td><td>AT LEAST</td><td>AUTO BIN MAX</td><td>COMMENT</td></tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_rw"  onclick="checkLink(this)" target="detailFrame">cp_ahb_rw</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s3">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_trans"  onclick="checkLink(this)" target="detailFrame">cp_ahb_trans</a></td>
+<td class="rt">3</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">33.33 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s1">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_burst"  onclick="checkLink(this)" target="detailFrame">cp_ahb_burst</a></td>
+<td class="rt">8</td>
+<td class="rt">7</td>
+<td class="rt">1</td>
+<td class="rt">12.50 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_size"  onclick="checkLink(this)" target="detailFrame">cp_ahb_size</a></td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_resp"  onclick="checkLink(this)" target="detailFrame">cp_ahb_resp</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s5">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait"  onclick="checkLink(this)" target="detailFrame">cp_ahb_wait</a></td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s2">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait_delay"  onclick="checkLink(this)" target="detailFrame">cp_ahb_wait_delay</a></td>
+<td class="rt">4</td>
+<td class="rt">3</td>
+<td class="rt">1</td>
+<td class="rt">25.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_error"  onclick="checkLink(this)" target="detailFrame">cp_ahb_error</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_addr_aligned"  onclick="checkLink(this)" target="detailFrame">cp_ahb_addr_aligned</a></td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class="repname" id="crs_tbl_axi2ahb_pkg::axi2ahb_coverage::ahb_cg">Crosses for Group  axi2ahb_pkg::axi2ahb_coverage::ahb_cg
+</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">CROSS</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>GOAL</td><td>WEIGHT</td><td>AT LEAST</td><td>PRINT MISSING</td><td>COMMENT</td></tr><tr class="s1">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_burst"  onclick="checkLink(this)" target="detailFrame">cr_ahb_rw_burst</a></td>
+<td class="rt">16</td>
+<td class="rt">14</td>
+<td class="rt">2</td>
+<td class="rt">12.50 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_size"  onclick="checkLink(this)" target="detailFrame">cr_ahb_rw_size</a></td>
+<td class="rt">8</td>
+<td class="rt">0</td>
+<td class="rt">8</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_resp_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_resp_rw</a></td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s5">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_wait_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_wait_rw</a></td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">50.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s3">
+<td><a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_trans_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_trans_rw</a></td>
+<td class="rt">6</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">33.33 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr></table><br clear=all>
+</div>
+<div name='top_tb.me.obj.ahb_cg'>
+<a name="inst_tag_top_tb.me.obj.ahb_cg"></a>
+<hr>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Group Instance : <a href="groups.html#tag_top_tb.me.obj.ahb_cg" >top_tb.me.obj.ahb_cg</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td><b>SCORE</b></td><td>WEIGHT</td><td>GOAL</td><td>AT LEAST</td><td>AUTO BIN MAX</td><td>PRINT MISSING</td></tr><tr>
+<td class="s6 cl rt"> 65.48</td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">100   </td>
+<td class="wht cl rt">1     </td>
+<td class="wht cl rt">64    </td>
+<td class="wht cl rt">64    </td>
+</tr></table><br clear=all>
+<br clear=all>
+</div>
+<hr>
+<br clear=all>
+<span class=repname>Summary for Group Instance   top_tb.me.obj.ahb_cg
+</span>
+<br clear=all>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s5">
+<td><a href="#var_tbl_top_tb.me.obj.ahb_cg" >Variables</a></td>
+<td class="rt">28</td>
+<td class="rt">13</td>
+<td class="rt">15</td>
+<td class="rt">68.98 </td>
+</tr><tr class="s4">
+<td><a href="#crs_tbl_top_tb.me.obj.ahb_cg" >Crosses</a></td>
+<td class="rt">38</td>
+<td class="rt">20</td>
+<td class="rt">18</td>
+<td class="rt">59.17 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class="repname" id="var_tbl_top_tb.me.obj.ahb_cg">Variables for Group Instance  top_tb.me.obj.ahb_cg
+</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">VARIABLE</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>GOAL</td><td>WEIGHT</td><td>AT LEAST</td><td>AUTO BIN MAX</td><td>COMMENT</td></tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_rw"  onclick="checkLink(this)" target="detailFrame">cp_ahb_rw</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s3">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_trans"  onclick="checkLink(this)" target="detailFrame">cp_ahb_trans</a></td>
+<td class="rt">3</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">33.33 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s1">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_burst"  onclick="checkLink(this)" target="detailFrame">cp_ahb_burst</a></td>
+<td class="rt">8</td>
+<td class="rt">7</td>
+<td class="rt">1</td>
+<td class="rt">12.50 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_size"  onclick="checkLink(this)" target="detailFrame">cp_ahb_size</a></td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_resp"  onclick="checkLink(this)" target="detailFrame">cp_ahb_resp</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s5">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait"  onclick="checkLink(this)" target="detailFrame">cp_ahb_wait</a></td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s2">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait_delay"  onclick="checkLink(this)" target="detailFrame">cp_ahb_wait_delay</a></td>
+<td class="rt">4</td>
+<td class="rt">3</td>
+<td class="rt">1</td>
+<td class="rt">25.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_error"  onclick="checkLink(this)" target="detailFrame">cp_ahb_error</a></td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_addr_aligned"  onclick="checkLink(this)" target="detailFrame">cp_ahb_addr_aligned</a></td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class="repname" id="crs_tbl_top_tb.me.obj.ahb_cg">Crosses for Group Instance  top_tb.me.obj.ahb_cg
+</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">CROSS</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>GOAL</td><td>WEIGHT</td><td>AT LEAST</td><td>PRINT MISSING</td><td>COMMENT</td></tr><tr class="s1">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_burst"  onclick="checkLink(this)" target="detailFrame">cr_ahb_rw_burst</a></td>
+<td class="rt">16</td>
+<td class="rt">14</td>
+<td class="rt">2</td>
+<td class="rt">12.50 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_size"  onclick="checkLink(this)" target="detailFrame">cr_ahb_rw_size</a></td>
+<td class="rt">8</td>
+<td class="rt">0</td>
+<td class="rt">8</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s10">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_resp_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_resp_rw</a></td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s5">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_wait_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_wait_rw</a></td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">50.00 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr><tr class="s3">
+<td><a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_trans_rw"  onclick="checkLink(this)" target="detailFrame">cr_ahb_trans_rw</a></td>
+<td class="rt">6</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">33.33 </td>
+<td class="rt">100</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td></td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center">
+<div class="ui-layout-center-inner-center">
+<div name='axi2ahb_pkg::axi2ahb_coverage::ahb_cg'>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_rw"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_rw">Summary for Variable cp_ahb_rw</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_trans"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_trans">Summary for Variable cp_ahb_trans</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s3">
+<td>User Defined Bins</td>
+<td class="rt">3</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">33.33 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_trans</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>seq</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>nonseq</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>idle_busy</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>idle</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_burst"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_burst">Summary for Variable cp_ahb_burst</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s1">
+<td>User Defined Bins</td>
+<td class="rt">8</td>
+<td class="rt">7</td>
+<td class="rt">1</td>
+<td class="rt">12.50 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_burst</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>incr16</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap16</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr8</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap8</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr4</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap4</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>single</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_size"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_size">Summary for Variable cp_ahb_size</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_size</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>unsupported</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>size_8b</td>
+<td class="rt">2020</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_4b</td>
+<td class="rt">1329</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_2b</td>
+<td class="rt">835</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_1b</td>
+<td class="rt">1642</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_resp"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_resp">Summary for Variable cp_ahb_resp</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_resp</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>split_retry</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>error</td>
+<td class="rt">599</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>okay</td>
+<td class="rt">5227</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait">Summary for Variable cp_ahb_wait</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s5">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_wait</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>waited</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>no_wait</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait_delay"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait_delay">Summary for Variable cp_ahb_wait_delay</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s2">
+<td>User Defined Bins</td>
+<td class="rt">4</td>
+<td class="rt">3</td>
+<td class="rt">1</td>
+<td class="rt">25.00 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_wait_delay</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>wait_6_max</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wait_3_5</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wait_1_2</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>zero</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_error"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_error">Summary for Variable cp_ahb_error</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_error</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>error</td>
+<td class="rt">599</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>no_error</td>
+<td class="rt">5227</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_addr_aligned"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_addr_aligned">Summary for Variable cp_ahb_addr_aligned</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_addr_aligned</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>misaligned</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>aligned</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_burst"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_burst">Summary for Cross cr_ahb_rw_burst</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_burst<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s1">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">16</td>
+<td class="rt">14</td>
+<td class="rt">2</td>
+<td class="rt">12.50 </td>
+<td class="rt">14</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_rw_burst</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_burst</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td align=center>*</td>
+<td>[incr16 , wrap16 , incr8 , wrap8 , incr4 , wrap4 , incr]</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">14</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_burst</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>single</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>single</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_size"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_size">Summary for Cross cr_ahb_rw_size</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_size<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s10">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">8</td>
+<td class="rt">0</td>
+<td class="rt">8</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_rw_size</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_size</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>size_8b</td>
+<td class="rt">884</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_4b</td>
+<td class="rt">640</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_2b</td>
+<td class="rt">445</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_1b</td>
+<td class="rt">955</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_8b</td>
+<td class="rt">1136</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_4b</td>
+<td class="rt">689</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_2b</td>
+<td class="rt">390</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_1b</td>
+<td class="rt">687</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_resp_rw"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_resp_rw">Summary for Cross cr_ahb_resp_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_resp<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s10">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_resp_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_resp</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>error</td>
+<td class="rt">358</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>okay</td>
+<td class="rt">2566</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>error</td>
+<td class="rt">241</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>okay</td>
+<td class="rt">2661</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_wait_rw"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_wait_rw">Summary for Cross cr_ahb_wait_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_wait<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s5">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">50.00 </td>
+<td class="rt">2</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_wait_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_wait</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td align=center>*</td>
+<td>[waited]</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">2</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_wait</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>no_wait</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>no_wait</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_trans_rw"></a><span class="repname" id="inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_trans_rw">Summary for Cross cr_ahb_trans_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_trans cp_ahb_rw<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s3">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">6</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">33.33 </td>
+<td class="rt">4</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_trans_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_trans</td><td class="alfsrt">cp_ahb_rw</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>[seq , nonseq]</td>
+<td align=center>*</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">4</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_trans</td><td class="alfsrt">cp_ahb_rw</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>idle</td>
+<td>write</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>idle</td>
+<td>read</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+</div>
+<div name='top_tb.me.obj.ahb_cg'>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_rw"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_rw">Summary for Variable cp_ahb_rw</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_trans"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_trans">Summary for Variable cp_ahb_trans</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s3">
+<td>User Defined Bins</td>
+<td class="rt">3</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">33.33 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_trans</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>seq</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>nonseq</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>idle_busy</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>idle</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_burst"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_burst">Summary for Variable cp_ahb_burst</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s1">
+<td>User Defined Bins</td>
+<td class="rt">8</td>
+<td class="rt">7</td>
+<td class="rt">1</td>
+<td class="rt">12.50 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_burst</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>incr16</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap16</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr8</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap8</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr4</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wrap4</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>incr</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>single</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_size"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_size">Summary for Variable cp_ahb_size</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_size</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>unsupported</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>size_8b</td>
+<td class="rt">2020</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_4b</td>
+<td class="rt">1329</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_2b</td>
+<td class="rt">835</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>size_1b</td>
+<td class="rt">1642</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_resp"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_resp">Summary for Variable cp_ahb_resp</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_resp</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>split_retry</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>error</td>
+<td class="rt">599</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>okay</td>
+<td class="rt">5227</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait">Summary for Variable cp_ahb_wait</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s5">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+<td class="rt">50.00 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_wait</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>waited</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>no_wait</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait_delay"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait_delay">Summary for Variable cp_ahb_wait_delay</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s2">
+<td>User Defined Bins</td>
+<td class="rt">4</td>
+<td class="rt">3</td>
+<td class="rt">1</td>
+<td class="rt">25.00 </td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_wait_delay</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Uncovered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>wait_6_max</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wait_3_5</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr><tr class="s3">
+<td>wait_1_2</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>zero</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_error"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_error">Summary for Variable cp_ahb_error</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">2</td>
+<td class="rt">0</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_error</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>error</td>
+<td class="rt">599</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>no_error</td>
+<td class="rt">5227</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_addr_aligned"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_addr_aligned">Summary for Variable cp_ahb_addr_aligned</span>
+<br clear=all>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td></tr><tr class="s10">
+<td>User Defined Bins</td>
+<td class="rt">1</td>
+<td class="rt">0</td>
+<td class="rt">1</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>User Defined Bins for cp_ahb_addr_aligned</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Excluded/Illegal bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td class="alfsrt">STATUS</td></tr><tr class="wht">
+<td>misaligned</td>
+<td class="rt">0</td>
+<td>Illegal</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>aligned</td>
+<td class="rt">5826</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_burst"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_burst">Summary for Cross cr_ahb_rw_burst</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_burst<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s1">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">16</td>
+<td class="rt">14</td>
+<td class="rt">2</td>
+<td class="rt">12.50 </td>
+<td class="rt">14</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_rw_burst</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_burst</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td align=center>*</td>
+<td>[incr16 , wrap16 , incr8 , wrap8 , incr4 , wrap4 , incr]</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">14</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_burst</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>single</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>single</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_size"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_size">Summary for Cross cr_ahb_rw_size</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_size<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s10">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">8</td>
+<td class="rt">0</td>
+<td class="rt">8</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_rw_size</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_size</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>size_8b</td>
+<td class="rt">884</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_4b</td>
+<td class="rt">640</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_2b</td>
+<td class="rt">445</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>size_1b</td>
+<td class="rt">955</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_8b</td>
+<td class="rt">1136</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_4b</td>
+<td class="rt">689</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_2b</td>
+<td class="rt">390</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>size_1b</td>
+<td class="rt">687</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_resp_rw"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_resp_rw">Summary for Cross cr_ahb_resp_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_resp<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s10">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">4</td>
+<td class="rt">0</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_resp_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_resp</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>error</td>
+<td class="rt">358</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>write</td>
+<td>okay</td>
+<td class="rt">2566</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>error</td>
+<td class="rt">241</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>okay</td>
+<td class="rt">2661</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_wait_rw"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_wait_rw">Summary for Cross cr_ahb_wait_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_rw cp_ahb_wait<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s5">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">50.00 </td>
+<td class="rt">2</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_wait_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_wait</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td align=center>*</td>
+<td>[waited]</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">2</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_rw</td><td class="alfsrt">cp_ahb_wait</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>write</td>
+<td>no_wait</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>read</td>
+<td>no_wait</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+<hr>
+<br clear=all>
+<a name="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_trans_rw"></a><span class="repname" id="inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_trans_rw">Summary for Cross cr_ahb_trans_rw</span>
+<br clear=all>
+<br clear=all>
+Samples crossed: cp_ahb_trans cp_ahb_rw<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">CATEGORY</td><td>EXPECTED</td><td>UNCOVERED</td><td>COVERED</td><td>PERCENT</td><td>MISSING</td></tr><tr class="s3">
+<td>Automatically Generated Cross Bins</td>
+<td class="rt">6</td>
+<td class="rt">4</td>
+<td class="rt">2</td>
+<td class="rt">33.33 </td>
+<td class="rt">4</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Automatically Generated Cross Bins for cr_ahb_trans_rw</span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Element holes</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_trans</td><td class="alfsrt">cp_ahb_rw</td><td>COUNT</td><td>AT LEAST</td><td>NUMBER</td></tr><tr class="s3">
+<td>[seq , nonseq]</td>
+<td align=center>*</td>
+<td align=center nowrap>--</td>
+<td align=center nowrap>--</td>
+<td class="rt">4</td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Covered bins</span>
+<br clear=all>
+<table align=left class="sortable">
+<tr class="sortablehead">
+<td class="alfsrt">cp_ahb_trans</td><td class="alfsrt">cp_ahb_rw</td><td>COUNT</td><td>AT LEAST</td></tr><tr class="s10">
+<td>idle</td>
+<td>write</td>
+<td class="rt">2924</td>
+<td class="rt">1</td>
+</tr><tr class="s10">
+<td>idle</td>
+<td>read</td>
+<td class="rt">2902</td>
+<td class="rt">1</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center-inner-north">
+<div id="center-bread-crumb" class="breadCrumb module urg-margin-bottom">
+  <ul name="axi2ahb_pkg::axi2ahb_coverage::ahb_cg">
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_rw">Variable : cp_ahb_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_trans">Variable : cp_ahb_trans</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_burst">Variable : cp_ahb_burst</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_size">Variable : cp_ahb_size</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_resp">Variable : cp_ahb_resp</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait">Variable : cp_ahb_wait</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_wait_delay">Variable : cp_ahb_wait_delay</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_error">Variable : cp_ahb_error</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cp_ahb_addr_aligned">Variable : cp_ahb_addr_aligned</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_burst">Cross : cr_ahb_rw_burst</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_rw_size">Cross : cr_ahb_rw_size</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_resp_rw">Cross : cr_ahb_resp_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_wait_rw">Cross : cr_ahb_wait_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_axi2ahb_pkg::axi2ahb_coverage::ahb_cg.cr_ahb_trans_rw">Cross : cr_ahb_trans_rw</a>    </li>
+  </ul>
+  <ul name="top_tb.me.obj.ahb_cg">
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_rw">Variable : cp_ahb_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_trans">Variable : cp_ahb_trans</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_burst">Variable : cp_ahb_burst</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_size">Variable : cp_ahb_size</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_resp">Variable : cp_ahb_resp</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait">Variable : cp_ahb_wait</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_wait_delay">Variable : cp_ahb_wait_delay</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_error">Variable : cp_ahb_error</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cp_ahb_addr_aligned">Variable : cp_ahb_addr_aligned</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_burst">Cross : cr_ahb_rw_burst</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_rw_size">Cross : cr_ahb_rw_size</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_resp_rw">Cross : cr_ahb_resp_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_wait_rw">Cross : cr_ahb_wait_rw</a>    </li>
+    <li>
+      <a href="#inst_tag_top_tb.me.obj.ahb_cg.cr_ahb_trans_rw">Cross : cr_ahb_trans_rw</a>    </li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="ui-layout-south">
+<table align=center><tr><td class="s0 cl">0%</td>
+<td class="s1 cl">10%</td>
+<td class="s2 cl">20%</td>
+<td class="s3 cl">30%</td>
+<td class="s4 cl">40%</td>
+<td class="s5 cl">50%</td>
+<td class="s6 cl">60%</td>
+<td class="s7 cl">70%</td>
+<td class="s8 cl">80%</td>
+<td class="s9 cl">90%</td>
+<td class="s10 cl">100%</td></tr></table></div>
+</body>
+</html>

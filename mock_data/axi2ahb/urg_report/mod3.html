@@ -1,0 +1,3160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="<username>"> <meta name="GENERATOR" content="urg/version [en] (platform name) [urg]">
+<title>Unified Coverage Report :: Module :: bridge_controller</title>
+<link type="text/css" rel="stylesheet" href="css/.urg.css">
+<link type="text/css" rel="stylesheet" href="css/.layout.css">
+<link type="text/css" rel="stylesheet" href="css/.breadcrumb.css">
+<script type="text/javascript" src="js/.jquery.js"></script>
+<script type="text/javascript" src="js/.jquery-ui.js"></script>
+<script type="text/javascript" src="js/.sortable.js"></script>
+<script type="text/javascript" src="js/.layout.js"></script>
+<script type="text/javascript" src="js/.breadcrumb.js"></script>
+<script type="text/javascript">
+var layout, westLayout, centerLayout;
+$(document).ready(function () {
+  if ($("#north-bread-crumb")) {
+    $("#north-bread-crumb").jBreadCrumb({easing:'swing'})
+  }
+  layout = $("body").layout({ 
+    resizable: true,
+    spacing_open: 4,
+    spacing_closed: 4,
+    north: {
+      size: 76
+    },
+    south: {
+      size: 45,
+      initClosed: true
+    },
+    west: {
+      size: 500,
+      resizable: true,
+      initClosed: false
+    }
+  });
+  centerLayout = $('div.ui-layout-center').layout({
+    north__paneSelector: ".ui-layout-center-inner-north",
+    center__paneSelector: ".ui-layout-center-inner-center", 
+    north__size: 50,
+    spacing_open: 4,
+    spacing_closed: 4
+  });
+});
+</script>
+</head>
+<body onLoad="initPage();"><div class="ui-layout-north">
+<div class="logo"></div>
+<center class="pagetitle">Module Definition</center>
+<div align="center"><a href="dashboard.html" ><b>dashboard</b></a> | <a href="hierarchy.html" ><b>hierarchy</b></a> | <a href="modlist.html" ><b>modlist</b></a> | <a href="groups.html" ><b>groups</b></a> | <a href="tests.html" ><b>tests</b></a> | <a href="asserts.html" ><b>asserts</b></a></div>
+
+</div>
+<div class="ui-layout-west">
+<div name='tag_bridge_controller'>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module : <a href="#"  onclick="showContent('tag_bridge_controller')">bridge_controller</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 70.22</td>
+<td class="s7 cl rt"><a href="mod3.html#Line" > 79.13</a></td>
+<td class="s5 cl rt"><a href="mod3.html#Cond" > 58.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Toggle" > 67.82</a></td>
+<td class="s8 cl rt"><a href="mod3.html#FSM" > 83.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Branch" > 62.50</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<span class=repname>Source File(s) : </span>
+<br clear=all>
+<a href="javascript:void(0);"  onclick="openSrcFile('/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/bridge_core/bridge_controller.sv')">/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/bridge_core/bridge_controller.sv</a><br clear=all>
+<br clear=all>
+<span class=repname>Module self-instances :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="wht cl wordwrap"><a href="mod3.html#inst_tag_3"  onclick="showContent('inst_tag_3')">top_tb.dut.u_bridge_core.u_bridge_controller</a></td>
+<td class="s7 cl rt"> 70.22</td>
+<td class="s7 cl rt"><a href="mod3.html#Line" > 79.13</a></td>
+<td class="s5 cl rt"><a href="mod3.html#Cond" > 58.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Toggle" > 67.82</a></td>
+<td class="s8 cl rt"><a href="mod3.html#FSM" > 83.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Branch" > 62.50</a></td>
+<td class="wht cl rt"></td>
+</tr></table></div>
+</div>
+<br clear=all>
+<div name='tag_bridge_controller'>
+<hr>
+<a name="inst_tag_3"></a>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module Instance : <a href="hierarchy.html#tag_urg_inst_3" >top_tb.dut.u_bridge_core.u_bridge_controller</a></span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Instance :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 70.22</td>
+<td class="s7 cl rt"><a href="mod3.html#Line" > 79.13</a></td>
+<td class="s5 cl rt"><a href="mod3.html#Cond" > 58.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Toggle" > 67.82</a></td>
+<td class="s8 cl rt"><a href="mod3.html#FSM" > 83.33</a></td>
+<td class="s6 cl rt"><a href="mod3.html#Branch" > 62.50</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Instance's subtree :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s7 cl rt"> 70.22</td>
+<td class="s7 cl rt"> 79.13</td>
+<td class="s5 cl rt"> 58.33</td>
+<td class="s6 cl rt"> 67.82</td>
+<td class="s8 cl rt"> 83.33</td>
+<td class="s6 cl rt"> 62.50</td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Parent : </span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td><td class="alfsrt">NAME</td></tr><tr>
+<td class="s8 cl rt"> 83.18</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="s8 cl rt"> 83.18</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td><a href="mod14.html#inst_tag_14" >u_bridge_core</a></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Subtrees :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td colspan=8>no children</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<hr>
+Since this is the module's only instance, the coverage report is the same as for the module.</div>
+<div class="ui-layout-center">
+<div class="ui-layout-center-inner-center">
+<div name='tag_bridge_controller'>
+<a name="Line"></a>
+Line Coverage for Module : <a href="mod3.html" >bridge_controller</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="4" width="82">
+<tr><th></th><th>Line No.</th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s7"><td class="lf">TOTAL</td><td></td><td>230</td><td>182</td><td>79.13</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>122</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>128</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s6"><td class="lf">ROUTINE</td><td>132</td><td>3</td><td>2</td><td>66.67</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>145</td><td>5</td><td>5</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>157</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>189</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s7"><td class="lf">ROUTINE</td><td>203</td><td>4</td><td>3</td><td>75.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>219</td><td>5</td><td>5</td><td>100.00</td></tr>
+<tr class="s7"><td class="lf">ALWAYS</td><td>242</td><td>162</td><td>116</td><td>71.60</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>488</td><td>35</td><td>35</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>531</td><td>12</td><td>12</td><td>100.00</td></tr>
+</table>
+<pre class="code"><br clear=all>
+121                       function automatic logic burst_supported(input logic [1:0] burst);
+122        1/1              burst_supported = (burst == BURST_FIXED)
+123                                        || (burst == BURST_INCR)
+124                                        || (burst == BURST_WRAP);
+125                       endfunction
+126                     
+127                       function automatic logic size_supported(input logic [2:0] size);
+128        1/1              size_supported = (int'(size) &lt;= MAX_SIZE);
+129                       endfunction
+130                     
+131                       function automatic int unsigned beat_bytes(input logic [2:0] size);
+132        1/1              if (!size_supported(size))
+133        <font color = "red">0/1     ==>        beat_bytes = 0;</font>
+134                         else
+135        1/1                beat_bytes = 1 &lt;&lt; size;
+136                       endfunction
+137                     
+138                       function automatic logic is_aligned(
+139                         input logic [ADDR_WIDTH-1:0] addr,
+140                         input logic [2:0]            size
+141                       );
+142                         logic [ADDR_WIDTH-1:0] mask;
+143                         int unsigned bytes;
+144                         begin
+145        1/1                bytes = beat_bytes(size);
+146        1/1                if (bytes == 0) begin
+147        1/1                  is_aligned = 1'b0;
+148                           end
+149                           else begin
+150        1/1                  mask       = ADDR_WIDTH'(bytes - 1);
+151        1/1                  is_aligned = ((addr &amp; mask) == '0);
+152                           end
+153                         end
+154                       endfunction
+155                     
+156                       function automatic logic wrap_len_supported(input logic [3:0] len);
+157        1/1              wrap_len_supported = (len == 4'd1)
+158                                           || (len == 4'd3)
+159                                           || (len == 4'd7)
+160                                           || (len == 4'd15);
+161                       endfunction
+162                     
+163                       function automatic logic wrap_start_aligned(
+164                         input logic [ADDR_WIDTH-1:0] addr,
+165                         input logic [2:0]            size,
+166                         input logic [3:0]            len
+167                       );
+168                         logic [ADDR_WIDTH-1:0] mask;
+169                         int unsigned total_bytes;
+170                         begin
+171                           total_bytes = beat_bytes(size) * (int'(len) + 1);
+172                           if (total_bytes == 0) begin
+173                             wrap_start_aligned = 1'b0;
+174                           end
+175                           else begin
+176                             mask               = ADDR_WIDTH'(total_bytes - 1);
+177                             wrap_start_aligned = ((addr &amp; mask) == '0);
+178                           end
+179                         end
+180                       endfunction
+181                     
+182                       function automatic logic req_illegal(
+183                         input logic [ADDR_WIDTH-1:0] addr,
+184                         input logic [2:0]            size,
+185                         input logic [3:0]            len,
+186                         input logic [1:0]            burst
+187                       );
+188                         begin
+189        1/1                req_illegal = !burst_supported(burst)
+190                                      || !size_supported(size)
+191                                      || !is_aligned(addr, size)
+192                                      || ((burst == BURST_WRAP)
+193                                          &amp;&amp; (!wrap_len_supported(len)));
+194                         end
+195                       endfunction
+196                     
+197                       function automatic logic [ADDR_WIDTH-1:0] calc_wrap_mask(
+198                         input logic [2:0] size,
+199                         input logic [3:0] len
+200                       );
+201                         int unsigned total_bytes;
+202                         begin
+203        1/1                total_bytes = beat_bytes(size) * (int'(len) + 1);
+204        1/1                if (total_bytes == 0)
+205        <font color = "red">0/1     ==>          calc_wrap_mask = '0;</font>
+206                           else
+207        1/1                  calc_wrap_mask = ADDR_WIDTH'(total_bytes - 1);
+208                         end
+209                       endfunction
+210                     
+211                       function automatic logic [ADDR_WIDTH-1:0] calc_next_addr(
+212                         input logic [ADDR_WIDTH-1:0] cur_addr_i,
+213                         input logic [ADDR_WIDTH-1:0] addr_step_i,
+214                         input logic [1:0]            burst_i,
+215                         input logic [ADDR_WIDTH-1:0] wrap_mask_i
+216                       );
+217                         logic [ADDR_WIDTH-1:0] linear_next;
+218                         begin
+219        1/1                linear_next = cur_addr_i + addr_step_i;
+220                     
+221        1/1                unique case (burst_i)
+222        1/1                  BURST_FIXED: calc_next_addr = cur_addr_i;
+223        1/1                  BURST_WRAP:  calc_next_addr = (cur_addr_i &amp; ~wrap_mask_i) | (linear_next &amp; wrap_mask_i);
+224        1/1                  default:     calc_next_addr = linear_next;
+225                           endcase
+226                         end
+227                       endfunction
+228                     
+229                       assign beat_launch_fire           = beat_req_valid &amp;&amp; beat_req_ready;
+230                       assign beat_complete_fire         = beat_rsp_valid;
+231                       assign exec_issue_need_more_beats = (beat_issue_idx &lt; beat_total);
+232                       assign exec_complete_last_beat    = (beat_complete_idx + 5'd1 == beat_total);
+233                     
+234                       assign aw_req_illegal = req_illegal(aw_head.addr, aw_head.size, aw_head.len, aw_head.burst)
+235                                            || (1'b0 &amp; aw_head.illegal);
+236                       assign ar_req_illegal = req_illegal(ar_head.addr, ar_head.size, ar_head.len, ar_head.burst)
+237                                            || (1'b0 &amp; ar_head.illegal);
+238                       assign write_drain_illegal = (active_dir == DIR_WR) &amp;&amp; (active_illegal || (!w_empty &amp;&amp; w_head.illegal));
+239                       assign next_exec_addr      = calc_next_addr(cur_addr, addr_step, active_burst, wrap_mask);
+240                     
+241                       always_comb begin
+242        1/1              grant_accept   = 1'b0 | (1'b0 &amp; grant_rd);
+243        1/1              ctrl_busy      = (state != ST_IDLE);
+244                     
+245        1/1              aw_pop         = 1'b0;
+246        1/1              ar_pop         = 1'b0;
+247        1/1              w_pop          = 1'b0;
+248        1/1              r_push         = 1'b0;
+249        1/1              r_wdata        = '0;
+250                     
+251        1/1              b_set_valid    = 1'b0;
+252        1/1              b_set_resp     = final_bresp;
+253                     
+254        1/1              beat_req_valid = 1'b0 | (1'b0 &amp; w_head.last);
+255        1/1              beat_req_write = (active_dir == DIR_WR);
+256        1/1              beat_req_first = (beat_issue_idx == 5'd0);
+257        1/1              beat_req_addr  = cur_addr;
+258        1/1              beat_req_size  = active_size;
+259        1/1              beat_req_wdata = w_head.data;
+260        1/1              beat_req_wstrb = w_head.strb;
+261                     
+262        1/1              state_n              = state;
+263        1/1              active_dir_n         = active_dir;
+264        1/1              cur_addr_n           = cur_addr;
+265        1/1              addr_step_n          = addr_step;
+266        1/1              wrap_mask_n          = wrap_mask;
+267        1/1              active_burst_n       = active_burst;
+268        1/1              active_size_n        = active_size;
+269        1/1              beat_total_n         = beat_total;
+270        1/1              beat_issue_idx_n     = beat_issue_idx;
+271        1/1              beat_complete_idx_n  = beat_complete_idx;
+272        1/1              active_illegal_n     = active_illegal;
+273        1/1              error_seen_n         = error_seen;
+274        1/1              beat_inflight_n      = beat_inflight;
+275        1/1              final_bresp_n        = final_bresp;
+276        1/1              load_is_write_n      = load_is_write;
+277                     
+278        1/1              contract_violation_n = contract_violation;
+279        1/1              violation_code_n     = violation_code;
+280                     
+281        1/1              unique case (state)
+282                           ST_IDLE: begin
+283        1/1                  if (grant_valid) begin
+284        1/1                    grant_accept    = 1'b1;
+285        1/1                    load_is_write_n = grant_wr;
+286        1/1                    state_n         = ST_LOAD;
+287                             end
+                        MISSING_ELSE
+288                           end
+289                     
+290                           ST_LOAD: begin
+291        1/1                  if (load_is_write) begin
+292        1/1                    if (aw_empty) begin
+293        <font color = "red">0/1     ==>              contract_violation_n = 1'b1;</font>
+294        <font color = "red">0/1     ==>              violation_code_n     = VIO_LOAD_AW_EMPTY;</font>
+295        <font color = "red">0/1     ==>              state_n              = ST_IDLE;</font>
+296                               end
+297                               else begin
+298        1/1                      aw_pop               = 1'b1;
+299        1/1                      active_dir_n         = DIR_WR;
+300        1/1                      cur_addr_n           = aw_head.addr;
+301        1/1                      addr_step_n          = ADDR_WIDTH'(beat_bytes(aw_head.size));
+302        1/1                      wrap_mask_n          = calc_wrap_mask(aw_head.size, aw_head.len);
+303        1/1                      active_burst_n       = aw_head.burst;
+304        1/1                      active_size_n        = aw_head.size;
+305        1/1                      beat_total_n         = {1'b0, aw_head.len} + 5'd1;
+306        1/1                      beat_issue_idx_n     = 5'd0;
+307        1/1                      beat_complete_idx_n  = 5'd0;
+308        1/1                      active_illegal_n     = aw_req_illegal;
+309        1/1                      error_seen_n         = aw_req_illegal;
+310        1/1                      beat_inflight_n      = 1'b0;
+311        1/1                      final_bresp_n        = aw_req_illegal ? RESP_SLVERR : RESP_OKAY;
+312        1/1                      state_n              = ST_EXEC;
+313                               end
+314                             end
+315                             else begin
+316        1/1                    if (ar_empty) begin
+317        <font color = "red">0/1     ==>              contract_violation_n = 1'b1;</font>
+318        <font color = "red">0/1     ==>              violation_code_n     = VIO_LOAD_AR_EMPTY;</font>
+319        <font color = "red">0/1     ==>              state_n              = ST_IDLE;</font>
+320                               end
+321        1/1                    else if (ar_req_illegal) begin
+322        <font color = "red">0/1     ==>              if (r_full) begin</font>
+323        <font color = "red">0/1     ==>                contract_violation_n = 1'b1;</font>
+324        <font color = "red">0/1     ==>                violation_code_n     = VIO_EXEC_R_FULL;</font>
+325        <font color = "red">0/1     ==>                state_n              = ST_IDLE;</font>
+326                                 end
+327                                 else begin
+328        <font color = "red">0/1     ==>                ar_pop          = 1'b1;</font>
+329        <font color = "red">0/1     ==>                r_push          = 1'b1;</font>
+330        <font color = "red">0/1     ==>                r_wdata.data    = '0;</font>
+331        <font color = "red">0/1     ==>                r_wdata.resp    = RESP_SLVERR;</font>
+332        <font color = "red">0/1     ==>                r_wdata.last    = 1'b1;</font>
+333        <font color = "red">0/1     ==>                r_wdata.illegal = 1'b1;</font>
+334        <font color = "red">0/1     ==>                state_n         = ST_IDLE;</font>
+335                                 end
+336                               end
+337                               else begin
+338        1/1                      ar_pop               = 1'b1;
+339        1/1                      active_dir_n         = DIR_RD;
+340        1/1                      cur_addr_n           = ar_head.addr;
+341        1/1                      addr_step_n          = ADDR_WIDTH'(beat_bytes(ar_head.size));
+342        1/1                      wrap_mask_n          = calc_wrap_mask(ar_head.size, ar_head.len);
+343        1/1                      active_burst_n       = ar_head.burst;
+344        1/1                      active_size_n        = ar_head.size;
+345        1/1                      beat_total_n         = {1'b0, ar_head.len} + 5'd1;
+346        1/1                      beat_issue_idx_n     = 5'd0;
+347        1/1                      beat_complete_idx_n  = 5'd0;
+348        1/1                      active_illegal_n     = 1'b0;
+349        1/1                      error_seen_n         = 1'b0;
+350        1/1                      beat_inflight_n      = 1'b0;
+351        1/1                      final_bresp_n        = RESP_OKAY;
+352        1/1                      state_n              = ST_EXEC;
+353                               end
+354                             end
+355                           end
+356                     
+357                           ST_EXEC: begin
+358        1/1                  if (active_illegal &amp;&amp; (active_dir == DIR_RD)) begin
+359        <font color = "red">0/1     ==>            contract_violation_n = 1'b1;</font>
+360        <font color = "red">0/1     ==>            violation_code_n     = VIO_ILLEGAL_RD_EXEC;</font>
+361        <font color = "red">0/1     ==>            state_n              = ST_IDLE;</font>
+362                             end
+363                             else begin
+364        1/1                    if (beat_complete_fire) begin
+365        1/1                      if (!beat_inflight) begin
+366        <font color = "red">0/1     ==>                contract_violation_n = 1'b1;</font>
+367        <font color = "red">0/1     ==>                violation_code_n     = VIO_SPURIOUS_RSP;</font>
+368        <font color = "red">0/1     ==>                state_n              = ST_IDLE;</font>
+369                                 end
+370                                 else begin
+371        1/1                        beat_inflight_n = 1'b0;
+372                     
+373        1/1                        if (active_dir == DIR_WR) begin
+374        1/1                          if (beat_rsp_error) begin
+375        1/1                            error_seen_n  = 1'b1;
+376        1/1                            final_bresp_n = RESP_SLVERR;
+377                                     end
+                        MISSING_ELSE
+378                     
+379        1/1                          if (exec_complete_last_beat) begin
+380        1/1                            state_n = ST_WRITE_RESP;
+381                                     end
+382                                     else begin
+383        1/1                            beat_complete_idx_n = beat_complete_idx + 5'd1;
+384                                     end
+385                                   end
+386                                   else begin
+387        1/1                          if (r_full) begin
+388        <font color = "red">0/1     ==>                    contract_violation_n = 1'b1;</font>
+389        <font color = "red">0/1     ==>                    violation_code_n     = VIO_EXEC_R_FULL;</font>
+390        <font color = "red">0/1     ==>                    state_n              = ST_IDLE;</font>
+391                                     end
+392        1/1                          else if (!beat_rsp_rdata_valid) begin
+393        <font color = "red">0/1     ==>                    contract_violation_n = 1'b1;</font>
+394        <font color = "red">0/1     ==>                    violation_code_n     = VIO_EXEC_RDATA_INV;</font>
+395        <font color = "red">0/1     ==>                    state_n              = ST_IDLE;</font>
+396                                     end
+397                                     else begin
+398        1/1                            r_push          = 1'b1;
+399        1/1                            r_wdata.data    = beat_rsp_error ? '0 : beat_rsp_rdata;
+400        1/1                            r_wdata.resp    = beat_rsp_error ? RESP_SLVERR : RESP_OKAY;
+401        1/1                            r_wdata.last    = exec_complete_last_beat;
+402        1/1                            r_wdata.illegal = 1'b0;
+403                     
+404        1/1                            if (beat_rsp_error) begin
+405        1/1                              error_seen_n = 1'b1;
+406                                       end
+                        MISSING_ELSE
+407                     
+408        1/1                            if (exec_complete_last_beat) begin
+409        1/1                              state_n = ST_IDLE;
+410                                       end
+411                                       else begin
+412        1/1                              beat_complete_idx_n = beat_complete_idx + 5'd1;
+413                                       end
+414                                     end
+415                                   end
+416                                 end
+417                               end
+                        MISSING_ELSE
+418                     
+419        1/1                    if (state_n == ST_EXEC) begin
+420        1/1                      if (write_drain_illegal) begin
+421        <font color = "red">0/1     ==>                if (w_empty) begin</font>
+422        <font color = "red">0/1     ==>                  contract_violation_n = 1'b1;</font>
+423        <font color = "red">0/1     ==>                  violation_code_n     = VIO_EXEC_W_EMPTY;</font>
+424        <font color = "red">0/1     ==>                  state_n              = ST_IDLE;</font>
+425                                   end
+426                                   else begin
+427        <font color = "red">0/1     ==>                  w_pop             = 1'b1;</font>
+428        <font color = "red">0/1     ==>                  active_illegal_n  = 1'b1;</font>
+429        <font color = "red">0/1     ==>                  error_seen_n      = 1'b1;</font>
+430        <font color = "red">0/1     ==>                  final_bresp_n     = RESP_SLVERR;</font>
+431                     
+432        <font color = "red">0/1     ==>                  if (exec_complete_last_beat) begin</font>
+433        <font color = "red">0/1     ==>                    state_n = ST_WRITE_RESP;</font>
+434                                     end
+435                                     else begin
+436        <font color = "red">0/1     ==>                    beat_issue_idx_n    = beat_issue_idx + 5'd1;</font>
+437        <font color = "red">0/1     ==>                    beat_complete_idx_n = beat_complete_idx + 5'd1;</font>
+438        <font color = "red">0/1     ==>                    cur_addr_n          = next_exec_addr;</font>
+439                                     end
+440                                   end
+441                                 end
+442        1/1                      else if (exec_issue_need_more_beats) begin
+443        1/1                        if ((active_dir == DIR_WR) &amp;&amp; w_empty) begin
+444        <font color = "red">0/1     ==>                  contract_violation_n = 1'b1;</font>
+445        <font color = "red">0/1     ==>                  violation_code_n     = VIO_EXEC_W_EMPTY;</font>
+446        <font color = "red">0/1     ==>                  state_n              = ST_IDLE;</font>
+447                                   end
+448                                   else begin
+449        1/1                          beat_req_valid = 1'b1;
+450        1/1                          beat_req_write = (active_dir == DIR_WR);
+451        1/1                          beat_req_first = (beat_issue_idx == 5'd0);
+452        1/1                          beat_req_addr  = cur_addr;
+453        1/1                          beat_req_size  = active_size;
+454        1/1                          beat_req_wdata = w_head.data;
+455        1/1                          beat_req_wstrb = w_head.strb;
+456                     
+457        1/1                          if (beat_launch_fire) begin
+458        1/1                            beat_inflight_n  = 1'b1;
+459        1/1                            beat_issue_idx_n = beat_issue_idx + 5'd1;
+460        1/1                            cur_addr_n       = next_exec_addr;
+461                     
+462        1/1                            if (active_dir == DIR_WR) begin
+463        1/1                              w_pop = 1'b1;
+464                                       end
+                        MISSING_ELSE
+465                                     end
+                        MISSING_ELSE
+466                                   end
+467                                 end
+                        MISSING_ELSE
+468                               end
+                        MISSING_ELSE
+469                             end
+470                           end
+471                     
+472                           ST_WRITE_RESP: begin
+473        1/1                  b_set_valid = 1'b1;
+474        1/1                  b_set_resp  = final_bresp;
+475                     
+476        1/1                  if (b_set_ready) begin
+477        1/1                    state_n = ST_IDLE;
+478                             end
+                   <font color = "red">==>  MISSING_ELSE</font>
+479                           end
+480                     
+481                           default: begin
+482        <font color = "red">0/1     ==>          state_n = ST_IDLE;</font>
+483                           end
+484                         endcase
+485                       end
+486                     
+487                       always_ff @(posedge clk or negedge rstn) begin
+488        1/1              if (!rstn) begin
+489        1/1                state              &lt;= ST_IDLE;
+490        1/1                active_dir         &lt;= DIR_RD;
+491        1/1                cur_addr           &lt;= '0;
+492        1/1                addr_step          &lt;= '0;
+493        1/1                wrap_mask          &lt;= '0;
+494        1/1                active_burst       &lt;= BURST_INCR;
+495        1/1                active_size        &lt;= '0;
+496        1/1                beat_total         &lt;= '0;
+497        1/1                beat_issue_idx     &lt;= '0;
+498        1/1                beat_complete_idx  &lt;= '0;
+499        1/1                active_illegal     &lt;= 1'b0;
+500        1/1                error_seen         &lt;= 1'b0;
+501        1/1                beat_inflight      &lt;= 1'b0;
+502        1/1                final_bresp        &lt;= RESP_OKAY;
+503        1/1                load_is_write      &lt;= 1'b0;
+504        1/1                contract_violation &lt;= 1'b0;
+505        1/1                violation_code     &lt;= VIO_NONE;
+506                         end
+507                         else begin
+508        1/1                state              &lt;= state_n;
+509        1/1                active_dir         &lt;= active_dir_n;
+510        1/1                cur_addr           &lt;= cur_addr_n;
+511        1/1                addr_step          &lt;= addr_step_n;
+512        1/1                wrap_mask          &lt;= wrap_mask_n;
+513        1/1                active_burst       &lt;= active_burst_n;
+514        1/1                active_size        &lt;= active_size_n;
+515        1/1                beat_total         &lt;= beat_total_n;
+516        1/1                beat_issue_idx     &lt;= beat_issue_idx_n;
+517        1/1                beat_complete_idx  &lt;= beat_complete_idx_n;
+518        1/1                active_illegal     &lt;= active_illegal_n;
+519        1/1                error_seen         &lt;= error_seen_n;
+520        1/1                beat_inflight      &lt;= beat_inflight_n;
+521        1/1                final_bresp        &lt;= final_bresp_n;
+522        1/1                load_is_write      &lt;= load_is_write_n;
+523        1/1                contract_violation &lt;= contract_violation_n;
+524        1/1                violation_code     &lt;= violation_code_n;
+525                         end
+526                       end
+527                     
+528                       generate
+529                         if (DEBUG_EN) begin : g_debug_on
+530                           always_comb begin
+531        1/1                  state_dbg              = state;
+532        1/1                  active_dir_dbg         = active_dir;
+533        1/1                  beat_idx_dbg           = beat_complete_idx;
+534        1/1                  beat_total_dbg         = beat_total;
+535        1/1                  cur_addr_dbg           = cur_addr;
+536        1/1                  active_illegal_dbg     = active_illegal;
+537        1/1                  error_seen_dbg         = error_seen;
+538        1/1                  beat_inflight_dbg      = beat_inflight;
+539        1/1                  beat_launch_fire_dbg   = beat_launch_fire;
+540        1/1                  beat_complete_dbg      = beat_complete_fire;
+541        1/1                  contract_violation_dbg = contract_violation;
+542        1/1                  violation_code_dbg     = violation_code;
+</pre>
+<hr>
+<a name="Cond"></a>
+Cond Coverage for Module : <a href="mod3.html" >bridge_controller</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="3" width="82">
+<tr><th></th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s5"><td class="lf">Conditions</td><td>24</td><td>14</td><td>58.33</td></tr>
+<tr class="s5"><td class="lf">Logical</td><td>24</td><td>14</td><td>58.33</td></tr>
+<tr class="wht"><td class="lf">Non-Logical</td><td>0</td><td>0</td><td></td></tr>
+<tr class="wht"><td class="lf">Event</td><td>0</td><td>0</td><td></td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       229
+ EXPRESSION (beat_req_valid &amp;&amp; beat_req_ready)
+             -------1------    -------2------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       238
+ EXPRESSION ((active_dir == DIR_WR) &amp;&amp; (active_illegal || (((!w_empty)) &amp;&amp; w_head.illegal)))
+             -----------1----------    --------------------------2-------------------------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>1</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       238
+ SUB-EXPRESSION (active_illegal || (((!w_empty)) &amp;&amp; w_head.illegal))
+                 -------1------    ----------------2---------------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       238
+ SUB-EXPRESSION (((!w_empty)) &amp;&amp; w_head.illegal)
+                 ------1-----    -------2------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uRed"><td>0</td><td>1</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>1</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       311
+ EXPRESSION (aw_req_illegal ? RESP_SLVERR : RESP_OKAY)
+             -------1------
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       358
+ EXPRESSION (active_illegal &amp;&amp; (active_dir == DIR_RD))
+             -------1------    -----------2----------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uRed"><td>1</td><td>1</td><td class="lf">Not Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       399
+ EXPRESSION (beat_rsp_error ? '0 : beat_rsp_rdata)
+             -------1------
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       400
+ EXPRESSION (beat_rsp_error ? RESP_SLVERR : RESP_OKAY)
+             -------1------
+</pre>
+<table class="noborder">
+<col width="40">
+<tr><th>-1-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       443
+ EXPRESSION ((active_dir == DIR_WR) &amp;&amp; w_empty)
+             -----------1----------    ---2---
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>1</td><td class="lf">Not Covered</td></tr>
+</table>
+<hr>
+<a name="Toggle"></a>
+Toggle Coverage for Module : <a href="mod3.html" >bridge_controller</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s5">
+<td>Totals</td>
+<td class="rt">102</td>
+<td class="rt">60</td>
+<td class="rt">58.82 </td>
+</tr><tr class="s6">
+<td>Total Bits</td>
+<td class="rt">1560</td>
+<td class="rt">1058</td>
+<td class="rt">67.82 </td>
+</tr><tr class="s6">
+<td nowrap>Total Bits 0->1</td>
+<td class="rt">780</td>
+<td class="rt">529</td>
+<td class="rt">67.82 </td>
+</tr><tr class="s6">
+<td nowrap>Total Bits 1->0</td>
+<td class="rt">780</td>
+<td class="rt">529</td>
+<td class="rt">67.82 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s7">
+<td>Ports</td>
+<td class="rt">60</td>
+<td class="rt">42</td>
+<td class="rt">70.00 </td>
+</tr><tr class="s8">
+<td>Port Bits</td>
+<td class="rt">958</td>
+<td class="rt">804</td>
+<td class="rt">83.92 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 0->1</td>
+<td class="rt">479</td>
+<td class="rt">402</td>
+<td class="rt">83.92 </td>
+</tr><tr class="s8">
+<td nowrap>Port Bits 1->0</td>
+<td class="rt">479</td>
+<td class="rt">402</td>
+<td class="rt">83.92 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s4">
+<td>Signals</td>
+<td class="rt">42</td>
+<td class="rt">18</td>
+<td class="rt">42.86 </td>
+</tr><tr class="s4">
+<td>Signal Bits</td>
+<td class="rt">602</td>
+<td class="rt">254</td>
+<td class="rt">42.19 </td>
+</tr><tr class="s4">
+<td nowrap>Signal Bits 0->1</td>
+<td class="rt">301</td>
+<td class="rt">127</td>
+<td class="rt">42.19 </td>
+</tr><tr class="s4">
+<td nowrap>Signal Bits 1->0</td>
+<td class="rt">301</td>
+<td class="rt">127</td>
+<td class="rt">42.19 </td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Port Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td><td class="alfsrt">Direction</td></tr><tr>
+<td>clk</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>rstn</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>grant_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>grant_wr</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>grant_rd</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>grant_accept</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ctrl_busy</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_head.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.burst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.len[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_head.addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.burst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.len[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_head.addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_head.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_head.last</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_head.strb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_head.data[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_empty</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_empty</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_empty</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>r_full</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_pop</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_pop</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_pop</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_push</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_wdata.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_wdata.last</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_wdata.resp[0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_wdata.resp[1]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>r_wdata.data[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>b_set_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>b_set_ready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>b_set_resp[0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>b_set_resp[1]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_ready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>beat_req_write</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_first</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_wdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_req_wstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_rsp_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>beat_rsp_error</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>beat_rsp_rdata_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>beat_rsp_rdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>state_dbg[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>state_dbg[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>active_dir_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_idx_dbg[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_idx_dbg[4]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_total_dbg[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_addr_dbg[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>cur_addr_dbg[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>active_illegal_dbg</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>error_seen_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_launch_fire_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_inflight_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>beat_complete_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>contract_violation_dbg</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>violation_code_dbg[3:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Signal Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td></tr><tr>
+<td>state[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>state[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>state_n[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>state_n[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>active_dir</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>active_dir_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>cur_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>cur_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>cur_addr_n[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>cur_addr_n[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_step[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>addr_step[31:4]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>addr_step_n[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>addr_step_n[31:4]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wrap_mask[6:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wrap_mask[31:7]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>wrap_mask_n[6:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wrap_mask_n[31:7]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>active_burst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>active_burst_n[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>active_size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>active_size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>active_size_n[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>active_size_n[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>beat_total[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_total_n[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_issue_idx[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_issue_idx_n[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_complete_idx[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_complete_idx[4]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>beat_complete_idx_n[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_complete_idx_n[4]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>active_illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>active_illegal_n</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>error_seen</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>error_seen_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_inflight</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_inflight_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>final_bresp[0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>final_bresp[1]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>final_bresp_n[0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>final_bresp_n[1]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>load_is_write</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>load_is_write_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>contract_violation</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>contract_violation_n</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>violation_code[3:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>violation_code_n[3:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>exec_issue_need_more_beats</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>exec_complete_last_beat</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_launch_fire</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>beat_complete_fire</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>aw_req_illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>ar_req_illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>write_drain_illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr><tr>
+<td>next_exec_addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>next_exec_addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+</tr></table><br clear=all>
+<hr>
+<a name="FSM"></a>
+FSM Coverage for Module : <a href="mod3.html" >bridge_controller</a><br clear=all>
+<table align=left class="noborder">
+<caption><b>Summary for FSM :: state</b></caption>
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th><th nowrap width=200></th></tr><tr class="wht">
+<td>States</td>
+<td class="rt">4</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td>(Not included in score)</td>
+</tr><tr class="s8">
+<td>Transitions</td>
+<td class="rt">6</td>
+<td class="rt">5</td>
+<td class="rt">83.33 </td>
+<td></td>
+</tr><tr class="wht">
+<td>Sequences</td>
+<td class="rt">0</td>
+<td class="rt">0</td>
+<td></td>
+<td></td>
+</tr></table><br clear=all>
+<b>State, Transition and Sequence Details for FSM :: state</b><hr>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">states</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>ST_EXEC</td>
+<td class="rt">312</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_IDLE</td>
+<td class="rt">489</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_LOAD</td>
+<td class="rt">286</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_WRITE_RESP</td>
+<td class="rt">380</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">transitions</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>ST_EXEC->ST_IDLE</td>
+<td class="rt">489</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_EXEC->ST_WRITE_RESP</td>
+<td class="rt">380</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_IDLE->ST_LOAD</td>
+<td class="rt">286</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_LOAD->ST_EXEC</td>
+<td class="rt">312</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td nowrap>ST_LOAD->ST_IDLE</td>
+<td class="rt">489</td>
+<td>Not&nbsp;Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>ST_WRITE_RESP->ST_IDLE</td>
+<td class="rt">489</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<hr>
+<a name="Branch"></a>
+Branch Coverage for Module : <a href="mod3.html" >bridge_controller</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Line No.</th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s6">
+<td>Branches</td>
+<td></td>
+<td class="rt">40</td>
+<td class="rt">25</td>
+<td class="rt">62.50 </td>
+</tr><tr class="s6">
+<td>CASE</td>
+<td class="rt">281</td>
+<td class="rt">38</td>
+<td class="rt">23</td>
+<td class="rt">60.53 </td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">488</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+281            unique case (state)
+                      <font color = "red">-1-</font>  
+282              ST_IDLE: begin
+283                if (grant_valid) begin
+                   <font color = "green">-2-</font>  
+284                  grant_accept    = 1'b1;
+           <font color = "green">          ==></font>
+285                  load_is_write_n = grant_wr;
+286                  state_n         = ST_LOAD;
+287                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+288              end
+289        
+290              ST_LOAD: begin
+291                if (load_is_write) begin
+                   <font color = "green">-3-</font>  
+292                  if (aw_empty) begin
+                     <font color = "red">-4-</font>  
+293                    contract_violation_n = 1'b1;
+           <font color = "red">            ==></font>
+294                    violation_code_n     = VIO_LOAD_AW_EMPTY;
+295                    state_n              = ST_IDLE;
+296                  end
+297                  else begin
+298                    aw_pop               = 1'b1;
+299                    active_dir_n         = DIR_WR;
+300                    cur_addr_n           = aw_head.addr;
+301                    addr_step_n          = ADDR_WIDTH'(beat_bytes(aw_head.size));
+302                    wrap_mask_n          = calc_wrap_mask(aw_head.size, aw_head.len);
+303                    active_burst_n       = aw_head.burst;
+304                    active_size_n        = aw_head.size;
+305                    beat_total_n         = {1'b0, aw_head.len} + 5'd1;
+306                    beat_issue_idx_n     = 5'd0;
+307                    beat_complete_idx_n  = 5'd0;
+308                    active_illegal_n     = aw_req_illegal;
+309                    error_seen_n         = aw_req_illegal;
+310                    beat_inflight_n      = 1'b0;
+311                    final_bresp_n        = aw_req_illegal ? RESP_SLVERR : RESP_OKAY;
+                                                             <font color = "red">-5-</font>  
+                                                             <font color = "red">==></font>  
+                                                             <font color = "green">==></font>  
+312                    state_n              = ST_EXEC;
+313                  end
+314                end
+315                else begin
+316                  if (ar_empty) begin
+                     <font color = "red">-6-</font>  
+317                    contract_violation_n = 1'b1;
+           <font color = "red">            ==></font>
+318                    violation_code_n     = VIO_LOAD_AR_EMPTY;
+319                    state_n              = ST_IDLE;
+320                  end
+321                  else if (ar_req_illegal) begin
+                          <font color = "red">-7-</font>  
+322                    if (r_full) begin
+                       <font color = "red">-8-</font>  
+323                      contract_violation_n = 1'b1;
+           <font color = "red">              ==></font>
+324                      violation_code_n     = VIO_EXEC_R_FULL;
+325                      state_n              = ST_IDLE;
+326                    end
+327                    else begin
+328                      ar_pop          = 1'b1;
+           <font color = "red">              ==></font>
+329                      r_push          = 1'b1;
+330                      r_wdata.data    = '0;
+331                      r_wdata.resp    = RESP_SLVERR;
+332                      r_wdata.last    = 1'b1;
+333                      r_wdata.illegal = 1'b1;
+334                      state_n         = ST_IDLE;
+335                    end
+336                  end
+337                  else begin
+338                    ar_pop               = 1'b1;
+           <font color = "green">            ==></font>
+339                    active_dir_n         = DIR_RD;
+340                    cur_addr_n           = ar_head.addr;
+341                    addr_step_n          = ADDR_WIDTH'(beat_bytes(ar_head.size));
+342                    wrap_mask_n          = calc_wrap_mask(ar_head.size, ar_head.len);
+343                    active_burst_n       = ar_head.burst;
+344                    active_size_n        = ar_head.size;
+345                    beat_total_n         = {1'b0, ar_head.len} + 5'd1;
+346                    beat_issue_idx_n     = 5'd0;
+347                    beat_complete_idx_n  = 5'd0;
+348                    active_illegal_n     = 1'b0;
+349                    error_seen_n         = 1'b0;
+350                    beat_inflight_n      = 1'b0;
+351                    final_bresp_n        = RESP_OKAY;
+352                    state_n              = ST_EXEC;
+353                  end
+354                end
+355              end
+356        
+357              ST_EXEC: begin
+358                if (active_illegal && (active_dir == DIR_RD)) begin
+                   <font color = "red">-9-</font>  
+359                  contract_violation_n = 1'b1;
+           <font color = "red">          ==></font>
+360                  violation_code_n     = VIO_ILLEGAL_RD_EXEC;
+361                  state_n              = ST_IDLE;
+362                end
+363                else begin
+364                  if (beat_complete_fire) begin
+                     <font color = "green">-10-</font>  
+365                    if (!beat_inflight) begin
+                       <font color = "red">-11-</font>  
+366                      contract_violation_n = 1'b1;
+           <font color = "red">              ==></font>
+367                      violation_code_n     = VIO_SPURIOUS_RSP;
+368                      state_n              = ST_IDLE;
+369                    end
+370                    else begin
+371                      beat_inflight_n = 1'b0;
+372        
+373                      if (active_dir == DIR_WR) begin
+                         <font color = "green">-12-</font>  
+374                        if (beat_rsp_error) begin
+                           <font color = "green">-13-</font>  
+375                          error_seen_n  = 1'b1;
+           <font color = "green">                  ==></font>
+376                          final_bresp_n = RESP_SLVERR;
+377                        end
+                           MISSING_ELSE
+           <font color = "green">                ==></font>
+378        
+379                        if (exec_complete_last_beat) begin
+                           <font color = "green">-14-</font>  
+380                          state_n = ST_WRITE_RESP;
+           <font color = "green">                  ==></font>
+381                        end
+382                        else begin
+383                          beat_complete_idx_n = beat_complete_idx + 5'd1;
+           <font color = "green">                  ==></font>
+384                        end
+385                      end
+386                      else begin
+387                        if (r_full) begin
+                           <font color = "red">-15-</font>  
+388                          contract_violation_n = 1'b1;
+           <font color = "red">                  ==></font>
+389                          violation_code_n     = VIO_EXEC_R_FULL;
+390                          state_n              = ST_IDLE;
+391                        end
+392                        else if (!beat_rsp_rdata_valid) begin
+                                <font color = "red">-16-</font>  
+393                          contract_violation_n = 1'b1;
+           <font color = "red">                  ==></font>
+394                          violation_code_n     = VIO_EXEC_RDATA_INV;
+395                          state_n              = ST_IDLE;
+396                        end
+397                        else begin
+398                          r_push          = 1'b1;
+399                          r_wdata.data    = beat_rsp_error ? '0 : beat_rsp_rdata;
+                                                              <font color = "green">-17-</font>  
+                                                              <font color = "green">==></font>  
+                                                              <font color = "green">==></font>  
+400                          r_wdata.resp    = beat_rsp_error ? RESP_SLVERR : RESP_OKAY;
+                                                              <font color = "green">-18-</font>  
+                                                              <font color = "green">==></font>  
+                                                              <font color = "green">==></font>  
+401                          r_wdata.last    = exec_complete_last_beat;
+402                          r_wdata.illegal = 1'b0;
+403        
+404                          if (beat_rsp_error) begin
+                             <font color = "green">-19-</font>  
+405                            error_seen_n = 1'b1;
+           <font color = "green">                    ==></font>
+406                          end
+                             MISSING_ELSE
+           <font color = "green">                  ==></font>
+407        
+408                          if (exec_complete_last_beat) begin
+                             <font color = "green">-20-</font>  
+409                            state_n = ST_IDLE;
+           <font color = "green">                    ==></font>
+410                          end
+411                          else begin
+412                            beat_complete_idx_n = beat_complete_idx + 5'd1;
+           <font color = "green">                    ==></font>
+413                          end
+414                        end
+415                      end
+416                    end
+417                  end
+                     MISSING_ELSE
+           <font color = "green">          ==></font>
+418        
+419                  if (state_n == ST_EXEC) begin
+                     <font color = "green">-21-</font>  
+420                    if (write_drain_illegal) begin
+                       <font color = "red">-22-</font>  
+421                      if (w_empty) begin
+                         <font color = "red">-23-</font>  
+422                        contract_violation_n = 1'b1;
+           <font color = "red">                ==></font>
+423                        violation_code_n     = VIO_EXEC_W_EMPTY;
+424                        state_n              = ST_IDLE;
+425                      end
+426                      else begin
+427                        w_pop             = 1'b1;
+428                        active_illegal_n  = 1'b1;
+429                        error_seen_n      = 1'b1;
+430                        final_bresp_n     = RESP_SLVERR;
+431        
+432                        if (exec_complete_last_beat) begin
+                           <font color = "red">-24-</font>  
+433                          state_n = ST_WRITE_RESP;
+           <font color = "red">                  ==></font>
+434                        end
+435                        else begin
+436                          beat_issue_idx_n    = beat_issue_idx + 5'd1;
+           <font color = "red">                  ==></font>
+437                          beat_complete_idx_n = beat_complete_idx + 5'd1;
+438                          cur_addr_n          = next_exec_addr;
+439                        end
+440                      end
+441                    end
+442                    else if (exec_issue_need_more_beats) begin
+                            <font color = "green">-25-</font>  
+443                      if ((active_dir == DIR_WR) && w_empty) begin
+                         <font color = "red">-26-</font>  
+444                        contract_violation_n = 1'b1;
+           <font color = "red">                ==></font>
+445                        violation_code_n     = VIO_EXEC_W_EMPTY;
+446                        state_n              = ST_IDLE;
+447                      end
+448                      else begin
+449                        beat_req_valid = 1'b1;
+450                        beat_req_write = (active_dir == DIR_WR);
+451                        beat_req_first = (beat_issue_idx == 5'd0);
+452                        beat_req_addr  = cur_addr;
+453                        beat_req_size  = active_size;
+454                        beat_req_wdata = w_head.data;
+455                        beat_req_wstrb = w_head.strb;
+456        
+457                        if (beat_launch_fire) begin
+                           <font color = "green">-27-</font>  
+458                          beat_inflight_n  = 1'b1;
+459                          beat_issue_idx_n = beat_issue_idx + 5'd1;
+460                          cur_addr_n       = next_exec_addr;
+461        
+462                          if (active_dir == DIR_WR) begin
+                             <font color = "green">-28-</font>  
+463                            w_pop = 1'b1;
+           <font color = "green">                    ==></font>
+464                          end
+                             MISSING_ELSE
+           <font color = "green">                  ==></font>
+465                        end
+                           MISSING_ELSE
+           <font color = "green">                ==></font>
+466                      end
+467                    end
+                       MISSING_ELSE
+           <font color = "green">            ==></font>
+468                  end
+                     MISSING_ELSE
+           <font color = "green">          ==></font>
+469                end
+470              end
+471        
+472              ST_WRITE_RESP: begin
+473                b_set_valid = 1'b1;
+474                b_set_resp  = final_bresp;
+475        
+476                if (b_set_ready) begin
+                   <font color = "red">-29-</font>  
+477                  state_n = ST_IDLE;
+           <font color = "green">          ==></font>
+478                end
+                   MISSING_ELSE
+           <font color = "red">        ==></font>
+479              end
+480        
+481              default: begin
+482                state_n = ST_IDLE;
+           <font color = "red">        ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>-4-</th><th nowrap width=80>-5-</th><th nowrap width=80>-6-</th><th nowrap width=80>-7-</th><th nowrap width=80>-8-</th><th nowrap width=80>-9-</th><th nowrap width=80>-10-</th><th nowrap width=80>-11-</th><th nowrap width=80>-12-</th><th nowrap width=80>-13-</th><th nowrap width=80>-14-</th><th nowrap width=80>-15-</th><th nowrap width=80>-16-</th><th nowrap width=80>-17-</th><th nowrap width=80>-18-</th><th nowrap width=80>-19-</th><th nowrap width=80>-20-</th><th nowrap width=80>-21-</th><th nowrap width=80>-22-</th><th nowrap width=80>-23-</th><th nowrap width=80>-24-</th><th nowrap width=80>-25-</th><th nowrap width=80>-26-</th><th nowrap width=80>-27-</th><th nowrap width=80>-28-</th><th nowrap width=80>-29-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>ST_IDLE </td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_IDLE </td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_LOAD </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_EXEC </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>ST_WRITE_RESP </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>ST_WRITE_RESP </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td>Not Covered</td>
+</tr><tr class="uRed">
+<td align=center>default</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+488            if (!rstn) begin
+               <font color = "green">-1-</font>  
+489              state              <= ST_IDLE;
+           <font color = "green">      ==></font>
+490              active_dir         <= DIR_RD;
+491              cur_addr           <= '0;
+492              addr_step          <= '0;
+493              wrap_mask          <= '0;
+494              active_burst       <= BURST_INCR;
+495              active_size        <= '0;
+496              beat_total         <= '0;
+497              beat_issue_idx     <= '0;
+498              beat_complete_idx  <= '0;
+499              active_illegal     <= 1'b0;
+500              error_seen         <= 1'b0;
+501              beat_inflight      <= 1'b0;
+502              final_bresp        <= RESP_OKAY;
+503              load_is_write      <= 1'b0;
+504              contract_violation <= 1'b0;
+505              violation_code     <= VIO_NONE;
+506            end
+507            else begin
+508              state              <= state_n;
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center-inner-north">
+<div id="center-bread-crumb" class="breadCrumb module urg-margin-bottom">
+  <ul name="inst_tag_3">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+  <ul name="tag_bridge_controller">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="ui-layout-south">
+<table align=center><tr><td class="s0 cl">0%</td>
+<td class="s1 cl">10%</td>
+<td class="s2 cl">20%</td>
+<td class="s3 cl">30%</td>
+<td class="s4 cl">40%</td>
+<td class="s5 cl">50%</td>
+<td class="s6 cl">60%</td>
+<td class="s7 cl">70%</td>
+<td class="s8 cl">80%</td>
+<td class="s9 cl">90%</td>
+<td class="s10 cl">100%</td></tr></table></div>
+</body>
+</html>

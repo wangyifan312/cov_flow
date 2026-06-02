@@ -60,11 +60,16 @@ cov_flow/
 │       ├── services/          Project loading, evidence, summarization
 │       └── indexes/           JSON index readers
 ├── skills/               Skill Pack (SKILL.md + references for each workflow)
-├── mock_data/            Mock DMA subsystem project data
-│   └── dma_subsystem/
+├── mock_data/            Mock and real project data
+│   ├── dma_subsystem/    Mock DMA project (Phase 0-2)
+│   │   ├── project_manifest.yaml
+│   │   ├── coverage_gaps.json
+│   │   └── .dv_ai_index/      Pre-built mock indexes (committed as fixtures)
+│   └── axi2ahb/          Real AXI2AHB bridge project (Phase 3)
 │       ├── project_manifest.yaml
-│       ├── coverage_gaps.json
-│       └── .dv_ai_index/      Pre-built mock indexes (committed as fixtures)
+│       ├── urg_report/         URG HTML coverage report
+│       ├── coverage_gaps.json  Parsed gaps (982 gaps, 7 types)
+│       └── .dv_ai_index/       Generated coverage index
 ├── examples/             End-to-end usage walkthroughs
 ├── evals/                Eval YAML cases (6 cases: triage, scenario, generate-case, feedback, code coverage)
 └── tests/                Tests for schemas, scripts, and tools
@@ -72,7 +77,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 2 complete** - all acceptance checks passing.
+**Phase 3 complete** - URG HTML coverage report parser fully integrated.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -82,6 +87,7 @@ cov_flow/
 | Phase 2b | Sim tools + Coverage diff + Static patch check + Evals | **Done** |
 | Phase 2c | Eval runner + Remaining skill references | **Done** |
 | Phase 2d | Code coverage extension (7 types, 27 gaps, 181 tests) | **Done** |
+| Phase 3 | Real URG HTML coverage report parser + MCP integration | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -150,11 +156,27 @@ cov_flow/
 - **35 new tests** (total: 181), **2 new eval cases** (total: 6)
 - **12 updated skill documents** covering all workflow references
 
+### What's included in Phase 3 (URG Coverage Report Parser)
+
+- **URG HTML parser library** (`lib/urg_parser/`): parses Synopsys VCS URG reports (O-2018.09-SP2)
+  - `session.py` — session.xml metadata and per-type metrics
+  - `structure.py` — modlist.html and groups.html structure mapping
+  - `functional.py` — grp*.html functional coverage (covergroup/coverpoint/bin)
+  - `code_coverage.py` — mod*.html code coverage (line/branch/condition/toggle/fsm/assert)
+  - `gap_assembler.py` — gap ID assignment, path normalization, schema filtering
+  - `index_builder.py` — coverage_index.json and coverage_gaps.json output (MCP-compatible)
+- **CLI script** (`scripts/build_coverage_index.py`): orchestrates full parse pipeline from URG HTML to structured JSON
+- **Demo project** (`mock_data/axi2ahb/`): real AXI2AHB bridge UVM verification project
+  - 982 schema-compliant gaps across all 7 coverage types (functional 16, line 126, branch 40, condition 32, toggle 763, fsm 1, assert 4)
+  - Synopsys library file filtering (`/opt/synopsys/` paths excluded)
+  - Source file path normalization (absolute → relative)
+- **MCP integration**: coverage_index.json includes `gaps` field, all 3 coverage tools can query real project data
+- **Makefile target**: `make build-real-index`
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB)
-- No real project data (RTL/FS/register docs/UVM/coverage DB)
-- No real coverage report parser (Phase 3)
+- No real project data (RTL/FS/register docs/UVM/coverage DB) — except the URG report used as parser demo
 - No real UVM testcase generation (Phase 4)
 - No real simulation execution (Phase 5)
 - No eval runner LLM execution mode (Phase 6)
@@ -188,6 +210,7 @@ cov_flow/
 | `make validate-patch FILE=path` | Schema-validate a testcase patch file |
 | `make static-check FILE=path` | Run 6 static patch checks |
 | `make build-indexes` | Generate all 5 mock index files |
+| `make build-real-index` | Parse real URG report and generate coverage index |
 | `make lint` | Run ruff linter (0 issues required) |
 | `make typecheck` | Run mypy type checker (0 errors required) |
 | `make test` | Run all pytest tests |
@@ -214,11 +237,10 @@ See `evals/README.md` for details.
 
 ## Next Steps
 
-Phase 0–2 are complete. The following are **out of scope** and require explicit approval before starting:
+Phase 0–3 are complete. The following are **out of scope** and require explicit approval before starting:
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| Phase 3 | Real URG HTML/XML coverage report parser | Not started |
 | Phase 4 | Real UVM testcase generation | Not started |
 | Phase 5 | Real simulation tool integration (VCS, Verdi, etc.) | Not started |
 | Phase 6 | Eval runner LLM execution mode | Not started |

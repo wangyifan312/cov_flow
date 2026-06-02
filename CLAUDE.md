@@ -14,7 +14,7 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 
 ## Current Implementation Scope
 
-**Phase 0 + Phase 1 + Phase 2 mock MVP are complete.** Phase 3 (real EDA integration) and beyond require explicit user approval before any work begins.
+**Phase 0 + Phase 1 + Phase 2 mock MVP + Phase 3 URG parser are complete.** Phase 4+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
 
 ### Phase 0 — Project Scaffolding (Done)
 - `pyproject.toml`, `Makefile`, `README.md`
@@ -47,8 +47,24 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - **Total**: 181 tests, 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
 - All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
 
-### Phase 3+ — Real Integration (Out of Scope, Requires Approval)
-- Real URG HTML/XML coverage report parsing
+### Phase 3 — Real URG Coverage Report Parser (Done)
+- **URG HTML parser library** (`lib/urg_parser/`): parses Synopsys VCS URG reports (O-2018.09-SP2)
+  - `session.py` — session.xml metadata and per-type metrics
+  - `structure.py` — modlist.html and groups.html structure mapping
+  - `functional.py` — grp*.html functional coverage (covergroup/coverpoint/bin)
+  - `code_coverage.py` — mod*.html code coverage (line/branch/condition/toggle/fsm/assert)
+  - `gap_assembler.py` — gap ID assignment, path normalization, schema filtering
+  - `index_builder.py` — coverage_index.json and coverage_gaps.json output
+- **CLI script** (`scripts/build_coverage_index.py`): `--manifest PATH` orchestrates full parse pipeline
+- **Demo project** (`mock_data/axi2ahb/`): real AXI2AHB bridge UVM verification project
+  - 982 schema-compliant gaps across all 7 coverage types
+  - Synopsys library file filtering (`/opt/synopsys/` paths excluded)
+  - Source file path normalization (absolute → relative)
+- **MCP integration**: coverage_index.json includes `gaps` field compatible with existing MCP tools
+- **Makefile target**: `make build-real-index`
+- All sim tools remain **mock/dry-run only** — no real shell execution
+
+### Phase 4+ — Real Integration (Out of Scope, Requires Approval)
 - Real UVM testcase generation
 - Real simulation tool integration (VCS, Verdi, etc.)
 - Real eval suite LLM execution
@@ -59,17 +75,18 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - Create and modify Python code, JSON schemas, YAML manifests, CLI scripts, MCP server code, mock data, mock indexes, skill markdown, tests, `README.md`, `Makefile`, `pyproject.toml`.
 - Use `.venv/` for Python dependency isolation.
 - Run `pytest`, `ruff`, `make` targets to verify changes.
+- Run `make build-real-index` after modifying URG parser code or adding new URG report data.
 
 ## What Is Forbidden
 
-These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration is not.
+These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser is not.
 
 1. **No real EDA tool integration.** Do not implement real Verdi, VCS, KDB, NPI, VPI, FSDB, or any other EDA tool interfaces. All EDA-related capabilities must be implemented as adapter/stub only.
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.
 3. **No bulk-loading.** Do not bulk-load RTL/FS/TB content into the Agent context. MCP tools must return bounded, structured results.
 4. **No automatic waivers or formal conclusions.** Do not implement automatic waiver generation or formal unreachable conclusions. Those require human sign-off.
 5. **No auto-commits.** Neither the coding agent nor the review Claude may commit code without explicit user instruction. The review Claude may execute `git add` and `git commit` when the user explicitly approves a specific commit.
-6. **No Phase 3+ implementation without approval.** Do not implement real coverage report parsers, real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 3 work.
+6. **No Phase 4+ implementation without approval.** Do not implement real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 4+ work.
 7. **No complex frameworks.** Use stdlib + the declared dependencies only (see `pyproject.toml`). Python 3.11+.
 
 ## Implementation Principles
@@ -90,6 +107,7 @@ When deciding where to put a capability, follow this split (from `implementation
 - Run `make smoke-server` after modifying MCP server code or tools.
 - Run `make lint` and `make typecheck` after any Python code change — ruff 0 and mypy 0 are required.
 - Run `scripts/run_eval.py --eval-dir evals/ --dry-run` after modifying eval YAML files or the eval runner.
+- Run `make build-real-index` after modifying URG parser code to verify parsing pipeline.
 - If a change cannot be tested immediately (e.g., missing dependency), state the reason explicitly rather than skipping silently.
 
 ## Architecture Summary

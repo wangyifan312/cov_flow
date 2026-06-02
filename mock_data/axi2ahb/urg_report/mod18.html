@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="<username>"> <meta name="GENERATOR" content="urg/version [en] (platform name) [urg]">
+<title>Unified Coverage Report :: Module :: axi_req_capture</title>
+<link type="text/css" rel="stylesheet" href="css/.urg.css">
+<link type="text/css" rel="stylesheet" href="css/.layout.css">
+<link type="text/css" rel="stylesheet" href="css/.breadcrumb.css">
+<script type="text/javascript" src="js/.jquery.js"></script>
+<script type="text/javascript" src="js/.jquery-ui.js"></script>
+<script type="text/javascript" src="js/.sortable.js"></script>
+<script type="text/javascript" src="js/.layout.js"></script>
+<script type="text/javascript" src="js/.breadcrumb.js"></script>
+<script type="text/javascript">
+var layout, westLayout, centerLayout;
+$(document).ready(function () {
+  if ($("#north-bread-crumb")) {
+    $("#north-bread-crumb").jBreadCrumb({easing:'swing'})
+  }
+  layout = $("body").layout({ 
+    resizable: true,
+    spacing_open: 4,
+    spacing_closed: 4,
+    north: {
+      size: 76
+    },
+    south: {
+      size: 45,
+      initClosed: true
+    },
+    west: {
+      size: 500,
+      resizable: true,
+      initClosed: false
+    }
+  });
+  centerLayout = $('div.ui-layout-center').layout({
+    north__paneSelector: ".ui-layout-center-inner-north",
+    center__paneSelector: ".ui-layout-center-inner-center", 
+    north__size: 50,
+    spacing_open: 4,
+    spacing_closed: 4
+  });
+});
+</script>
+</head>
+<body onLoad="initPage();"><div class="ui-layout-north">
+<div class="logo"></div>
+<center class="pagetitle">Module Definition</center>
+<div align="center"><a href="dashboard.html" ><b>dashboard</b></a> | <a href="hierarchy.html" ><b>hierarchy</b></a> | <a href="modlist.html" ><b>modlist</b></a> | <a href="groups.html" ><b>groups</b></a> | <a href="tests.html" ><b>tests</b></a> | <a href="asserts.html" ><b>asserts</b></a></div>
+
+</div>
+<div class="ui-layout-west">
+<div name='tag_axi_req_capture'>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module : <a href="#"  onclick="showContent('tag_axi_req_capture')">axi_req_capture</a></span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s8 cl rt"> 89.22</td>
+<td class="s9 cl rt"><a href="mod18.html#Line" > 94.35</a></td>
+<td class="s9 cl rt"><a href="mod18.html#Cond" > 91.89</a></td>
+<td class="s7 cl rt"><a href="mod18.html#Toggle" > 70.38</a></td>
+<td class="s10 cl rt"><a href="mod18.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod18.html#Branch" > 89.47</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<span class=repname>Source File(s) : </span>
+<br clear=all>
+<a href="javascript:void(0);"  onclick="openSrcFile('/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/axi_frontend/axi_req_capture.sv')">/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification/sim/../dut/axi2ahb_bridge/axi_frontend/axi_req_capture.sv</a><br clear=all>
+<br clear=all>
+<span class=repname>Module self-instances :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="wht cl wordwrap"><a href="mod18.html#inst_tag_18"  onclick="showContent('inst_tag_18')">top_tb.dut.u_axi_frontend.u_axi_req_capture</a></td>
+<td class="s8 cl rt"> 89.22</td>
+<td class="s9 cl rt"><a href="mod18.html#Line" > 94.35</a></td>
+<td class="s9 cl rt"><a href="mod18.html#Cond" > 91.89</a></td>
+<td class="s7 cl rt"><a href="mod18.html#Toggle" > 70.38</a></td>
+<td class="s10 cl rt"><a href="mod18.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod18.html#Branch" > 89.47</a></td>
+<td class="wht cl rt"></td>
+</tr></table></div>
+</div>
+<br clear=all>
+<div name='tag_axi_req_capture'>
+<hr>
+<a name="inst_tag_18"></a>
+<div class=modhdr>
+<br clear=all>
+<span class=titlename>Module Instance : <a href="hierarchy.html#tag_urg_inst_18" >top_tb.dut.u_axi_frontend.u_axi_req_capture</a></span>
+<br clear=all>
+<br clear=all>
+<span class=repname>Instance :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s8 cl rt"> 89.22</td>
+<td class="s9 cl rt"><a href="mod18.html#Line" > 94.35</a></td>
+<td class="s9 cl rt"><a href="mod18.html#Cond" > 91.89</a></td>
+<td class="s7 cl rt"><a href="mod18.html#Toggle" > 70.38</a></td>
+<td class="s10 cl rt"><a href="mod18.html#FSM" >100.00</a></td>
+<td class="s8 cl rt"><a href="mod18.html#Branch" > 89.47</a></td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Instance's subtree :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td class="s8 cl rt"> 89.22</td>
+<td class="s9 cl rt"> 94.35</td>
+<td class="s9 cl rt"> 91.89</td>
+<td class="s7 cl rt"> 70.38</td>
+<td class="s10 cl rt">100.00</td>
+<td class="s8 cl rt"> 89.47</td>
+<td class="wht cl rt"></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Parent : </span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td><td class="alfsrt">NAME</td></tr><tr>
+<td class="s7 cl rt"> 75.70</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="s7 cl rt"> 75.70</td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td class="wht cl rt"></td>
+<td><a href="mod11.html#inst_tag_11" >u_axi_frontend</a></td>
+</tr></table><br clear=all>
+<br clear=all>
+<span class=repname>Subtrees :</span>
+<br clear=all>
+<table align=left>
+<tr class="sortablehead">
+<td class="alfsrt">NAME</td><td>SCORE</td><td>LINE</td><td>COND</td><td>TOGGLE</td><td>FSM</td><td>BRANCH</td><td>ASSERT</td></tr><tr>
+<td colspan=8>no children</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<hr>
+Since this is the module's only instance, the coverage report is the same as for the module.</div>
+<div class="ui-layout-center">
+<div class="ui-layout-center-inner-center">
+<div name='tag_axi_req_capture'>
+<a name="Line"></a>
+Line Coverage for Module : <a href="mod18.html" >axi_req_capture</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="4" width="82">
+<tr><th></th><th>Line No.</th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s9"><td class="lf">TOTAL</td><td></td><td>124</td><td>117</td><td>94.35</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>102</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>108</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s7"><td class="lf">ROUTINE</td><td>118</td><td>5</td><td>4</td><td>80.00</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>130</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s7"><td class="lf">ROUTINE</td><td>143</td><td>4</td><td>3</td><td>75.00</td></tr>
+<tr class="s9"><td class="lf">ROUTINE</td><td>167</td><td>23</td><td>22</td><td>95.65</td></tr>
+<tr class="s10"><td class="lf">ROUTINE</td><td>214</td><td>1</td><td>1</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>230</td><td>12</td><td>12</td><td>100.00</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>251</td><td>26</td><td>26</td><td>100.00</td></tr>
+<tr class="s9"><td class="lf">ALWAYS</td><td>287</td><td>13</td><td>12</td><td>92.31</td></tr>
+<tr class="s10"><td class="lf">ALWAYS</td><td>321</td><td>12</td><td>12</td><td>100.00</td></tr>
+<tr class="s8"><td class="lf">ALWAYS</td><td>340</td><td>25</td><td>22</td><td>88.00</td></tr>
+</table>
+<pre class="code"><br clear=all>
+101                       function automatic logic burst_supported(input logic [1:0] burst);
+102        1/1              burst_supported = (burst == BURST_FIXED)
+103                                        || (burst == BURST_INCR)
+104                                        || (burst == BURST_WRAP);
+105                       endfunction
+106                     
+107                       function automatic logic size_supported(input logic [2:0] size);
+108        1/1              size_supported = (int'(size) &lt;= MAX_SIZE);
+109                       endfunction
+110                     
+111                       function automatic logic is_addr_aligned(
+112                         input logic [ADDR_WIDTH-1:0] addr,
+113                         input logic [2:0]            size
+114                       );
+115                         logic [ADDR_WIDTH-1:0] mask;
+116                         int unsigned bytes;
+117                         begin
+118        1/1                if (!size_supported(size)) begin
+119        <font color = "red">0/1     ==>          is_addr_aligned = 1'b0;</font>
+120                           end
+121                           else begin
+122        1/1                  bytes           = 1 &lt;&lt; size;
+123        1/1                  mask            = ADDR_WIDTH'(bytes - 1);
+124        1/1                  is_addr_aligned = ((addr &amp; mask) == '0);
+125                           end
+126                         end
+127                       endfunction
+128                     
+129                       function automatic logic wrap_len_supported(input logic [3:0] len);
+130        1/1              wrap_len_supported = (len == 4'd1)
+131                                           || (len == 4'd3)
+132                                           || (len == 4'd7)
+133                                           || (len == 4'd15);
+134                       endfunction
+135                     
+136                       function automatic logic [ADDR_WIDTH-1:0] get_wrap_base_addr(
+137                         input logic [ADDR_WIDTH-1:0] start_addr,
+138                         input int unsigned           beat_num,
+139                         input int unsigned           beat_bytes
+140                       );
+141                         int unsigned wrap_bytes;
+142                         begin
+143        1/1                wrap_bytes = beat_num * beat_bytes;
+144                     
+145        1/1                if (wrap_bytes == 0)
+146        <font color = "red">0/1     ==>          get_wrap_base_addr = start_addr;</font>
+147                           else
+148        1/1                  get_wrap_base_addr = (start_addr / wrap_bytes) * wrap_bytes;
+149                         end
+150                       endfunction
+151                     
+152                       function automatic logic crosses_1kb_boundary(
+153                         input logic [ADDR_WIDTH-1:0] addr,
+154                         input logic [2:0]            size,
+155                         input logic [3:0]            len,
+156                         input logic [1:0]            burst
+157                       );
+158                         logic [ADDR_WIDTH-1:0] curr_addr;
+159                         logic [ADDR_WIDTH-1:0] next_addr;
+160                         logic [ADDR_WIDTH-1:0] last_addr;
+161                         logic [ADDR_WIDTH-1:0] wrap_base;
+162                         logic [ADDR_WIDTH-1:0] start_page;
+163                         int unsigned beat_num;
+164                         int unsigned beat_bytes;
+165                         int unsigned wrap_bytes;
+166                         begin
+167        1/1                crosses_1kb_boundary = 1'b0;
+168                     
+169        1/1                if (!size_supported(size))
+170        <font color = "red">0/1     ==>          return 1'b0;</font>
+                        MISSING_ELSE
+171                     
+172        1/1                beat_num   = int'(len) + 1;
+173        1/1                beat_bytes = 1 &lt;&lt; size;
+174        1/1                wrap_bytes = beat_num * beat_bytes;
+175        1/1                curr_addr  = addr;
+176        1/1                start_page = {addr[ADDR_WIDTH-1:10], 10'b0};
+177                     
+178        1/1                if (burst == BURST_WRAP)
+179        1/1                  wrap_base = get_wrap_base_addr(addr, beat_num, beat_bytes);
+180                           else
+181        1/1                  wrap_base = '0;
+182                     
+183        1/1                for (int unsigned i = 0; i &lt; beat_num; i++) begin
+184        1/1                  last_addr = curr_addr + ADDR_WIDTH'(beat_bytes - 1);
+185                     
+186        1/1                  if ((curr_addr[ADDR_WIDTH-1:10] != start_page[ADDR_WIDTH-1:10])
+187                              || (last_addr[ADDR_WIDTH-1:10] != start_page[ADDR_WIDTH-1:10])) begin
+188        1/1                    crosses_1kb_boundary = 1'b1;
+189        1/1                    return crosses_1kb_boundary;
+190                             end
+                        MISSING_ELSE
+191                     
+192        1/1                  case (burst)
+193        1/1                    BURST_FIXED: next_addr = curr_addr;
+194                               BURST_WRAP: begin
+195        1/1                      next_addr = curr_addr + ADDR_WIDTH'(beat_bytes);
+196        1/1                      if (next_addr &gt;= (wrap_base + ADDR_WIDTH'(wrap_bytes)))
+197        1/1                        next_addr = wrap_base;
+                        MISSING_ELSE
+198                               end
+199        1/1                    default: next_addr = curr_addr + ADDR_WIDTH'(beat_bytes);
+200                             endcase
+201                     
+202        1/1                  curr_addr = next_addr;
+203                           end
+204                         end
+205                       endfunction
+206                     
+207                       function automatic logic req_illegal(
+208                         input logic [ADDR_WIDTH-1:0] addr,
+209                         input logic [2:0]            size,
+210                         input logic [3:0]            len,
+211                         input logic [1:0]            burst
+212                       );
+213                         begin
+214        1/1                req_illegal = !burst_supported(burst)
+215                                      || !size_supported(size)
+216                                      || !is_addr_aligned(addr, size)
+217                                      || ((burst == BURST_WRAP)
+218                                          &amp;&amp; (!wrap_len_supported(len)))
+219                                      || crosses_1kb_boundary(addr, size, len, burst);
+220                         end
+221                       endfunction
+222                     
+223                       assign aw_illegal_comb = req_illegal(awaddr, awsize, awlen, awburst);
+224                       assign ar_illegal_comb = req_illegal(araddr, arsize, arlen, arburst);
+225                       assign illegal_write_complete = w_hs
+226                                                    &amp;&amp; ((wr_beats_received + 5'd1) == wr_beats_expected)
+227                                                    &amp;&amp; wr_req_illegal;
+228                     
+229                     	always_comb begin
+230        1/1          		awready = 1'b0;
+231        1/1          		wready  = 1'b0;
+232        1/1          		arready = 1'b0;
+233                     
+234        1/1          		if((wr_state == WR_IDLE) &amp;&amp; !aw_fifo_full) begin
+235        1/1          			awready = 1'b1;
+236                     		end
+                        MISSING_ELSE
+237                     
+238        1/1          		if((wr_state == WR_WAIT_DATA) || (wr_state == WR_RECV_DATA)) begin
+239        1/1                  if (wr_req_illegal)
+240        1/1          			  wready = 1'b1;
+241        1/1                  else if (!w_fifo_full)
+242        1/1          			  wready = 1'b1;
+                        MISSING_ELSE
+243                     		end
+                        MISSING_ELSE
+244                     
+245        1/1          		if(!ar_fifo_full) begin
+246        1/1          			arready = 1'b1;
+247                     		end
+                        MISSING_ELSE
+248                     	end
+249                     
+250                     	always_comb begin
+251        1/1          		aw_push = 1'b0;
+252        1/1          		w_push  = 1'b0;
+253        1/1          		ar_push = 1'b0;
+254                     
+255        1/1          		aw_wdata = '0;
+256        1/1          		w_wdata  = '0;
+257        1/1          		ar_wdata = '0;
+258                     
+259        1/1          		if(aw_hs &amp;&amp; !aw_illegal_comb) begin
+260        1/1          			aw_push          = 1'b1;
+261        1/1          			aw_wdata.addr    = awaddr;
+262        1/1          			aw_wdata.len     = awlen;
+263        1/1          			aw_wdata.size    = awsize;
+264        1/1          			aw_wdata.burst   = awburst;
+265        1/1          			aw_wdata.illegal = 1'b0;
+266                     		end
+                        MISSING_ELSE
+267                     
+268        1/1          		if(w_hs &amp;&amp; !wr_req_illegal) begin
+269        1/1          			w_push          = 1'b1;
+270        1/1          			w_wdata.data    = wdata;
+271        1/1          			w_wdata.strb    = wstrb;
+272        1/1          			w_wdata.last    = wlast;
+273        1/1          			w_wdata.illegal = 1'b0;
+274                     		end
+                        MISSING_ELSE
+275                     
+276        1/1          		if(ar_hs &amp;&amp; !ar_illegal_comb) begin
+277        1/1          			ar_push          = 1'b1;
+278        1/1          			ar_wdata.addr    = araddr;
+279        1/1          			ar_wdata.len     = arlen;
+280        1/1          			ar_wdata.size    = arsize;
+281        1/1          			ar_wdata.burst   = arburst;
+282        1/1          			ar_wdata.illegal = 1'b0;
+283                     		end
+                        MISSING_ELSE
+284                     	end
+285                     
+286                       always_comb begin
+287        1/1              wr_state_n = wr_state;
+288                     
+289        1/1              unique case (wr_state)
+290                           WR_IDLE: begin
+291        1/1                  if (aw_hs) begin
+292        1/1                    wr_state_n = WR_WAIT_DATA;
+293                             end
+                        MISSING_ELSE
+294                           end
+295                     
+296                           WR_WAIT_DATA: begin
+297        1/1                  if (w_hs) begin
+298        1/1                    if (wr_beats_expected == 5'd1)
+299        1/1                      wr_state_n = WR_IDLE;
+300                               else
+301        1/1                      wr_state_n = WR_RECV_DATA;
+302                             end
+                        MISSING_ELSE
+303                           end
+304                     
+305                           WR_RECV_DATA: begin
+306        1/1                  if (w_hs) begin
+307        1/1                    if (wr_beats_received + 5'd1 == wr_beats_expected)
+308        1/1                      wr_state_n = WR_IDLE;
+309                               else
+310        1/1                      wr_state_n = WR_RECV_DATA;
+311                             end
+                        MISSING_ELSE
+312                           end
+313                     
+314                           default: begin
+315        <font color = "red">0/1     ==>          wr_state_n = WR_IDLE;</font>
+316                           end
+317                         endcase
+318                       end
+319                     
+320                       always_comb begin
+321        1/1              illegal_rd_pending_n = illegal_rd_pending;
+322        1/1              illegal_wr_pending_n = illegal_wr_pending;
+323        1/1              illegal_rd_beats_n   = illegal_rd_beats;
+324                     
+325        1/1              if (ar_hs &amp;&amp; ar_illegal_comb) begin
+326        1/1                illegal_rd_pending_n = 1'b1;
+327        1/1                illegal_rd_beats_n   = {1'b0, arlen} + 5'd1;
+328                         end
+329        1/1              else if (illegal_rd_resp_fire) begin
+330        1/1                illegal_rd_pending_n = 1'b0;
+331                         end
+                        MISSING_ELSE
+332                     
+333        1/1              if (illegal_write_complete)
+334        1/1                illegal_wr_pending_n = 1'b1;
+335        1/1              else if (illegal_wr_resp_fire)
+336        1/1                illegal_wr_pending_n = 1'b0;
+                        MISSING_ELSE
+337                       end
+338                     
+339                     	always_ff @(posedge clk or negedge rstn) begin
+340        1/1          		if(!rstn) begin
+341        1/1          			wr_state &lt;= WR_IDLE;
+342        1/1          			wr_beats_expected &lt;= '0;
+343        1/1          			wr_beats_received &lt;= '0;
+344        1/1          			wr_req_illegal &lt;= 1'b0;
+345        1/1                illegal_rd_pending &lt;= 1'b0;
+346        1/1                illegal_wr_pending &lt;= 1'b0;
+347        1/1                illegal_rd_beats   &lt;= '0;
+348                     		end else begin
+349        1/1          			wr_state &lt;= wr_state_n;
+350        1/1                illegal_rd_pending &lt;= illegal_rd_pending_n;
+351        1/1                illegal_wr_pending &lt;= illegal_wr_pending_n;
+352        1/1                illegal_rd_beats   &lt;= illegal_rd_beats_n;
+353                     
+354        1/1          			if(aw_hs) begin
+355        1/1          				wr_beats_expected &lt;= {1'b0, awlen} + 5'd1;
+356        1/1          				wr_beats_received &lt;= 5'd0;
+357        1/1          				wr_req_illegal &lt;= aw_illegal_comb;
+358                     			end
+                        MISSING_ELSE
+359                     
+360        1/1          			if(w_hs) begin
+361        1/1          				wr_beats_received &lt;= wr_beats_received + 5'd1;
+362                     
+363        1/1          				if((wr_beats_received + 5'd1) &lt; wr_beats_expected) begin
+364        1/1          					if(wlast) begin
+365        <font color = "red">0/1     ==>  						wr_req_illegal &lt;= 1'b1;</font>
+366                     					end
+                        MISSING_ELSE
+367        1/1          				end else if((wr_beats_received + 5'd1) == wr_beats_expected) begin
+368        1/1          					if(!wlast) begin
+369        <font color = "red">0/1     ==>  						wr_req_illegal &lt;= 1'b1;</font>
+370                     					end
+                        MISSING_ELSE
+371                     				end else begin
+372        <font color = "red">0/1     ==>  					wr_req_illegal &lt;= 1'b1;</font>
+373                     				end
+374                             end
+                        MISSING_ELSE
+</pre>
+<hr>
+<a name="Cond"></a>
+Cond Coverage for Module : <a href="mod18.html" >axi_req_capture</a><br clear=all>
+<table class="noborder">
+<col width="122">
+<col span="3" width="82">
+<tr><th></th><th>Total</th><th>Covered</th><th>Percent</th></tr>
+<tr class="s9"><td class="lf">Conditions</td><td>37</td><td>34</td><td>91.89</td></tr>
+<tr class="s9"><td class="lf">Logical</td><td>37</td><td>34</td><td>91.89</td></tr>
+<tr class="wht"><td class="lf">Non-Logical</td><td>0</td><td>0</td><td></td></tr>
+<tr class="wht"><td class="lf">Event</td><td>0</td><td>0</td><td></td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       83
+ EXPRESSION (awvalid &amp;&amp; awready)
+             ---1---    ---2---
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       84
+ EXPRESSION (wvalid &amp;&amp; wready)
+             ---1--    ---2--
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       85
+ EXPRESSION (arvalid &amp;&amp; arready)
+             ---1---    ---2---
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       86
+ EXPRESSION (illegal_wr_resp_valid &amp;&amp; illegal_wr_resp_ready)
+             ----------1----------    ----------2----------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       87
+ EXPRESSION (illegal_rd_resp_valid &amp;&amp; illegal_rd_resp_ready)
+             ----------1----------    ----------2----------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       225
+ EXPRESSION (w_hs &amp;&amp; ((wr_beats_received + 5'b1) == wr_beats_expected) &amp;&amp; wr_req_illegal)
+             --1-    ------------------------2------------------------    -------3------
+</pre>
+<table class="noborder">
+<col span="3" width="40">
+<tr><th>-1-</th><th>-2-</th><th>-3-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       234
+ EXPRESSION ((wr_state == WR_IDLE) &amp;&amp; ((!aw_fifo_full)))
+             ----------1----------    --------2--------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uRed"><td>1</td><td>0</td><td class="lf">Not Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       238
+ EXPRESSION ((wr_state == WR_WAIT_DATA) || (wr_state == WR_RECV_DATA))
+             -------------1------------    -------------2------------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       259
+ EXPRESSION (aw_hs &amp;&amp; ((!aw_illegal_comb)))
+             --1--    ----------2---------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       268
+ EXPRESSION (w_hs &amp;&amp; ((!wr_req_illegal)))
+             --1-    ---------2---------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       276
+ EXPRESSION (ar_hs &amp;&amp; ((!ar_illegal_comb)))
+             --1--    ----------2---------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<br clear=all>
+<pre class="code"> LINE       325
+ EXPRESSION (ar_hs &amp;&amp; ar_illegal_comb)
+             --1--    -------2-------
+</pre>
+<table class="noborder">
+<col span="2" width="40">
+<tr><th>-1-</th><th>-2-</th><th>Status</th></tr>
+<tr class="uGreen"><td>0</td><td>1</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>0</td><td class="lf">Covered</td></tr>
+<tr class="uGreen"><td>1</td><td>1</td><td class="lf">Covered</td></tr>
+</table>
+<hr>
+<a name="Toggle"></a>
+Toggle Coverage for Module : <a href="mod18.html" >axi_req_capture</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s8">
+<td>Totals</td>
+<td class="rt">69</td>
+<td class="rt">57</td>
+<td class="rt">82.61 </td>
+</tr><tr class="s7">
+<td>Total Bits</td>
+<td class="rt">898</td>
+<td class="rt">632</td>
+<td class="rt">70.38 </td>
+</tr><tr class="s7">
+<td nowrap>Total Bits 0->1</td>
+<td class="rt">449</td>
+<td class="rt">316</td>
+<td class="rt">70.38 </td>
+</tr><tr class="s7">
+<td nowrap>Total Bits 1->0</td>
+<td class="rt">449</td>
+<td class="rt">316</td>
+<td class="rt">70.38 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s7">
+<td>Ports</td>
+<td class="rt">51</td>
+<td class="rt">39</td>
+<td class="rt">76.47 </td>
+</tr><tr class="s6">
+<td>Port Bits</td>
+<td class="rt">834</td>
+<td class="rt">568</td>
+<td class="rt">68.11 </td>
+</tr><tr class="s6">
+<td nowrap>Port Bits 0->1</td>
+<td class="rt">417</td>
+<td class="rt">284</td>
+<td class="rt">68.11 </td>
+</tr><tr class="s6">
+<td nowrap>Port Bits 1->0</td>
+<td class="rt">417</td>
+<td class="rt">284</td>
+<td class="rt">68.11 </td>
+</tr></table><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80></th><th nowrap width=80></th><th nowrap width=80></th></tr><tr class="s10">
+<td>Signals</td>
+<td class="rt">18</td>
+<td class="rt">18</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>Signal Bits</td>
+<td class="rt">64</td>
+<td class="rt">64</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td nowrap>Signal Bits 0->1</td>
+<td class="rt">32</td>
+<td class="rt">32</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td nowrap>Signal Bits 1->0</td>
+<td class="rt">32</td>
+<td class="rt">32</td>
+<td class="rt">100.00</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Port Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td><td class="alfsrt">Direction</td></tr><tr>
+<td>clk</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>rstn</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awaddr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awaddr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awburst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awsize[2:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awlen[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awvalid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>awready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>wdata[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>wstrb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>wlast</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>wvalid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>wready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>araddr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>araddr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>INPUT</td>
+</tr><tr>
+<td>arburst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>arsize[2:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>arlen[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>arvalid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>arready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_fifo_full</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>aw_push</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.burst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.len[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>aw_wdata.addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_fifo_full</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>w_push</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_wdata.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_wdata.last</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_wdata.strb[7:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>w_wdata.data[63:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_fifo_full</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>ar_push</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.illegal</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.burst[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.size[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.size[2]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.len[3:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.addr[16:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>ar_wdata.addr[31:17]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_wr_resp_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_wr_resp_ready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>illegal_wr_resp[1:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_rd_resp_valid</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_rd_resp_ready</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>INPUT</td>
+</tr><tr>
+<td>illegal_rd_resp[1:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_rd_data[63:0]</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td class="s3 cl">No</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>illegal_rd_beats[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>wr_state_dbg[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>wr_beats_expected_dbg[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>wr_beats_received_dbg[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr><tr>
+<td>wr_req_illegal_dbg</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td>OUTPUT</td>
+</tr></table><br clear=all>
+<table align=left class="sortable noborder">
+<caption><b>Signal Details</b></caption>
+<tr class="sortablehead">
+<td class="alfsrt">Name</td><td class="alfsrt">Toggle</td><td class="alfsrt">Toggle 1->0</td><td class="alfsrt">Toggle 0->1</td></tr><tr>
+<td>wr_state[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wr_state_n[1:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>aw_hs</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>w_hs</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>ar_hs</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_wr_resp_fire</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_rd_resp_fire</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_rd_pending</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_rd_pending_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_wr_pending</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_wr_pending_n</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_write_complete</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>illegal_rd_beats_n[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wr_beats_expected[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wr_beats_received[4:0]</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>wr_req_illegal</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>aw_illegal_comb</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr><tr>
+<td>ar_illegal_comb</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+<td class="s9 cl">Yes</td>
+</tr></table><br clear=all>
+<hr>
+<a name="FSM"></a>
+FSM Coverage for Module : <a href="mod18.html" >axi_req_capture</a><br clear=all>
+<table align=left class="noborder">
+<caption><b>Summary for FSM :: wr_state</b></caption>
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th><th nowrap width=200></th></tr><tr class="wht">
+<td>States</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+<td>(Not included in score)</td>
+</tr><tr class="s10">
+<td>Transitions</td>
+<td class="rt">4</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+<td></td>
+</tr><tr class="wht">
+<td>Sequences</td>
+<td class="rt">0</td>
+<td class="rt">0</td>
+<td></td>
+<td></td>
+</tr></table><br clear=all>
+<b>State, Transition and Sequence Details for FSM :: wr_state</b><hr>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">states</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>WR_IDLE</td>
+<td class="rt">341</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>WR_RECV_DATA</td>
+<td class="rt">301</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>WR_WAIT_DATA</td>
+<td class="rt">292</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<table align=left class="sortable noborder">
+<tr class="sortablehead">
+<td class="alfsrt">transitions</td><td>Line No.</td><td class="alfsrt">Covered</td></tr><tr class="uGreen">
+<td nowrap>WR_IDLE->WR_WAIT_DATA</td>
+<td class="rt">292</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>WR_RECV_DATA->WR_IDLE</td>
+<td class="rt">341</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>WR_WAIT_DATA->WR_IDLE</td>
+<td class="rt">341</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td nowrap>WR_WAIT_DATA->WR_RECV_DATA</td>
+<td class="rt">301</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<br clear=all>
+<hr>
+<a name="Branch"></a>
+Branch Coverage for Module : <a href="mod18.html" >axi_req_capture</a><br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=120></th><th nowrap width=80>Line No.</th><th nowrap width=80>Total</th><th nowrap width=80>Covered</th><th nowrap width=80>Percent</th></tr><tr class="s8">
+<td>Branches</td>
+<td></td>
+<td class="rt">38</td>
+<td class="rt">34</td>
+<td class="rt">89.47 </td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">234</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">238</td>
+<td class="rt">4</td>
+<td class="rt">4</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">245</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">259</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">268</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">276</td>
+<td class="rt">2</td>
+<td class="rt">2</td>
+<td class="rt">100.00</td>
+</tr><tr class="s8">
+<td>CASE</td>
+<td class="rt">289</td>
+<td class="rt">9</td>
+<td class="rt">8</td>
+<td class="rt">88.89 </td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">325</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+</tr><tr class="s10">
+<td>IF</td>
+<td class="rt">333</td>
+<td class="rt">3</td>
+<td class="rt">3</td>
+<td class="rt">100.00</td>
+</tr><tr class="s6">
+<td>IF</td>
+<td class="rt">340</td>
+<td class="rt">9</td>
+<td class="rt">6</td>
+<td class="rt">66.67 </td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+234        		if((wr_state == WR_IDLE) && !aw_fifo_full) begin
+           		<font color = "green">-1-</font>                                 
+235        			awready = 1'b1;
+           <font color = "green">			==></font>
+236        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+238        		if((wr_state == WR_WAIT_DATA) || (wr_state == WR_RECV_DATA)) begin
+           		<font color = "green">-1-</font>  
+239                if (wr_req_illegal)
+                   <font color = "green">-2-</font>  
+240        			  wready = 1'b1;
+           <font color = "green">			  ==></font>
+241                else if (!w_fifo_full)
+                        <font color = "green">-3-</font>        
+242        			  wready = 1'b1;
+           <font color = "green">			  ==></font>
+           			  MISSING_ELSE
+           <font color = "green">			  ==></font>
+243        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+245        		if(!ar_fifo_full) begin
+           		<font color = "green">-1-</font>        
+246        			arready = 1'b1;
+           <font color = "green">			==></font>
+247        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+259        		if(aw_hs && !aw_illegal_comb) begin
+           		<font color = "green">-1-</font>  
+260        			aw_push          = 1'b1;
+           <font color = "green">			==></font>
+261        			aw_wdata.addr    = awaddr;
+262        			aw_wdata.len     = awlen;
+263        			aw_wdata.size    = awsize;
+264        			aw_wdata.burst   = awburst;
+265        			aw_wdata.illegal = 1'b0;
+266        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+268        		if(w_hs && !wr_req_illegal) begin
+           		<font color = "green">-1-</font>  
+269        			w_push          = 1'b1;
+           <font color = "green">			==></font>
+270        			w_wdata.data    = wdata;
+271        			w_wdata.strb    = wstrb;
+272        			w_wdata.last    = wlast;
+273        			w_wdata.illegal = 1'b0;
+274        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+276        		if(ar_hs && !ar_illegal_comb) begin
+           		<font color = "green">-1-</font>  
+277        			ar_push          = 1'b1;
+           <font color = "green">			==></font>
+278        			ar_wdata.addr    = araddr;
+279        			ar_wdata.len     = arlen;
+280        			ar_wdata.size    = arsize;
+281        			ar_wdata.burst   = arburst;
+282        			ar_wdata.illegal = 1'b0;
+283        		end
+           		MISSING_ELSE
+           <font color = "green">		==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+289            unique case (wr_state)
+                      <font color = "red">-1-</font>  
+290              WR_IDLE: begin
+291                if (aw_hs) begin
+                   <font color = "green">-2-</font>  
+292                  wr_state_n = WR_WAIT_DATA;
+           <font color = "green">          ==></font>
+293                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+294              end
+295        
+296              WR_WAIT_DATA: begin
+297                if (w_hs) begin
+                   <font color = "green">-3-</font>  
+298                  if (wr_beats_expected == 5'd1)
+                     <font color = "green">-4-</font>  
+299                    wr_state_n = WR_IDLE;
+           <font color = "green">            ==></font>
+300                  else
+301                    wr_state_n = WR_RECV_DATA;
+           <font color = "green">            ==></font>
+302                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+303              end
+304        
+305              WR_RECV_DATA: begin
+306                if (w_hs) begin
+                   <font color = "green">-5-</font>  
+307                  if (wr_beats_received + 5'd1 == wr_beats_expected)
+                     <font color = "green">-6-</font>  
+308                    wr_state_n = WR_IDLE;
+           <font color = "green">            ==></font>
+309                  else
+310                    wr_state_n = WR_RECV_DATA;
+           <font color = "green">            ==></font>
+311                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+312              end
+313        
+314              default: begin
+315                wr_state_n = WR_IDLE;
+           <font color = "red">        ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>-4-</th><th nowrap width=80>-5-</th><th nowrap width=80>-6-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>WR_IDLE </td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_IDLE </td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_WAIT_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_WAIT_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_WAIT_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_RECV_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_RECV_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>WR_RECV_DATA </td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>default</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+325            if (ar_hs && ar_illegal_comb) begin
+               <font color = "green">-1-</font>  
+326              illegal_rd_pending_n = 1'b1;
+           <font color = "green">      ==></font>
+327              illegal_rd_beats_n   = {1'b0, arlen} + 5'd1;
+328            end
+329            else if (illegal_rd_resp_fire) begin
+                    <font color = "green">-2-</font>  
+330              illegal_rd_pending_n = 1'b0;
+           <font color = "green">      ==></font>
+331            end
+               MISSING_ELSE
+           <font color = "green">    ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+333            if (illegal_write_complete)
+               <font color = "green">-1-</font>  
+334              illegal_wr_pending_n = 1'b1;
+           <font color = "green">      ==></font>
+335            else if (illegal_wr_resp_fire)
+                    <font color = "green">-2-</font>  
+336              illegal_wr_pending_n = 1'b0;
+           <font color = "green">      ==></font>
+                 MISSING_ELSE
+           <font color = "green">      ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+<pre class="code"><br clear=all>
+340        		if(!rstn) begin
+           		<font color = "green">-1-</font>  
+341        			wr_state <= WR_IDLE;
+           <font color = "green">			==></font>
+342        			wr_beats_expected <= '0;
+343        			wr_beats_received <= '0;
+344        			wr_req_illegal <= 1'b0;
+345              illegal_rd_pending <= 1'b0;
+346              illegal_wr_pending <= 1'b0;
+347              illegal_rd_beats   <= '0;
+348        		end else begin
+349        			wr_state <= wr_state_n;
+350              illegal_rd_pending <= illegal_rd_pending_n;
+351              illegal_wr_pending <= illegal_wr_pending_n;
+352              illegal_rd_beats   <= illegal_rd_beats_n;
+353        
+354        			if(aw_hs) begin
+           			<font color = "green">-2-</font>  
+355        				wr_beats_expected <= {1'b0, awlen} + 5'd1;
+           <font color = "green">				==></font>
+356        				wr_beats_received <= 5'd0;
+357        				wr_req_illegal <= aw_illegal_comb;
+358        			end
+           			MISSING_ELSE
+           <font color = "green">			==></font>
+359        
+360        			if(w_hs) begin
+           			<font color = "green">-3-</font>  
+361        				wr_beats_received <= wr_beats_received + 5'd1;
+362        
+363        				if((wr_beats_received + 5'd1) < wr_beats_expected) begin
+           				<font color = "green">-4-</font>  
+364        					if(wlast) begin
+           					<font color = "red">-5-</font>  
+365        						wr_req_illegal <= 1'b1;
+           <font color = "red">						==></font>
+366        					end
+           					MISSING_ELSE
+           <font color = "green">					==></font>
+367        				end else if((wr_beats_received + 5'd1) == wr_beats_expected) begin
+           				         <font color = "red">-6-</font>  
+368        					if(!wlast) begin
+           					<font color = "red">-7-</font>  
+369        						wr_req_illegal <= 1'b1;
+           <font color = "red">						==></font>
+370        					end
+           					MISSING_ELSE
+           <font color = "green">					==></font>
+371        				end else begin
+372        					wr_req_illegal <= 1'b1;
+           <font color = "red">					==></font>
+373        				end
+374                end
+                   MISSING_ELSE
+           <font color = "green">        ==></font>
+</pre>
+<br clear=all>
+<span class=repname>Branches:</span>
+<br clear=all>
+<table align=left class="noborder">
+<tr>
+<th nowrap width=80>-1-</th><th nowrap width=80>-2-</th><th nowrap width=80>-3-</th><th nowrap width=80>-4-</th><th nowrap width=80>-5-</th><th nowrap width=80>-6-</th><th nowrap width=80>-7-</th><th nowrap width=80>Status</th></tr><tr class="uGreen">
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>1</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td>Covered</td>
+</tr><tr class="uRed">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>1</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td>Not Covered</td>
+</tr><tr class="uGreen">
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center>0</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td align=center nowrap>-</td>
+<td>Covered</td>
+</tr></table><br clear=all>
+</div>
+</div>
+<div class="ui-layout-center-inner-north">
+<div id="center-bread-crumb" class="breadCrumb module urg-margin-bottom">
+  <ul name="inst_tag_18">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+  <ul name="tag_axi_req_capture">
+    <li>
+      <a href="#Line">Line</a>    </li>
+    <li>
+      <a href="#Cond">Cond</a>    </li>
+    <li>
+      <a href="#Toggle">Toggle</a>    </li>
+    <li>
+      <a href="#FSM">FSM</a>    </li>
+    <li>
+      <a href="#Branch">Branch</a>    </li>
+  </ul>
+</div>
+</div>
+</div>
+<div class="ui-layout-south">
+<table align=center><tr><td class="s0 cl">0%</td>
+<td class="s1 cl">10%</td>
+<td class="s2 cl">20%</td>
+<td class="s3 cl">30%</td>
+<td class="s4 cl">40%</td>
+<td class="s5 cl">50%</td>
+<td class="s6 cl">60%</td>
+<td class="s7 cl">70%</td>
+<td class="s8 cl">80%</td>
+<td class="s9 cl">90%</td>
+<td class="s10 cl">100%</td></tr></table></div>
+</body>
+</html>

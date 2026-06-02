@@ -17,6 +17,8 @@ dependencies = [
     "mcp[cli]>=1.0.0",
     "jsonschema>=4.20.0",
     "pyyaml>=6.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
 ]
 
 [project.optional-dependencies]
@@ -29,8 +31,6 @@ dev = [
     "types-jsonschema>=4.0",
 ]
 phase2 = [
-    "beautifulsoup4>=4.12.0",
-    "lxml>=5.0.0",
     "markdown-it-py>=3.0.0",
     "rank_bm25>=0.2.2",
     "tree-sitter>=0.23.0",
@@ -50,7 +50,7 @@ warn_return_any = true
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = ["jsonschema", "jsonschema.exceptions"]
+module = ["jsonschema", "jsonschema.exceptions", "bs4", "lxml"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
