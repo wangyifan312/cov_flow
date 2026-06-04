@@ -23,6 +23,12 @@ class TestTbGetExistingTestsForFeature:
         tests = result["result"]["existing_tests"]
         assert len(seqs) >= 1
         assert len(tests) >= 1
+        # Verify api_methods field is present (list type) on all matched sequences
+        for seq in seqs:
+            assert "api_methods" in seq
+            assert isinstance(seq["api_methods"], list)
+            assert "api_methods_truncated" in seq
+            assert isinstance(seq["api_methods_truncated"], bool)
 
     def test_linked_list_feature(self) -> None:
         result = tb_get_existing_tests_for_feature(PROJECT, "linked_list")

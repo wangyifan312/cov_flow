@@ -83,10 +83,30 @@ class Manifest:
         """Return the top-level DUT instance path."""
         return str(self._data.get("top_instance", ""))
 
+    @property
+    def project_root(self) -> Path:
+        """Return the project root directory.
+
+        If 'project_root' field is set in manifest, resolve it (with env var expansion).
+        Otherwise, default to base_dir (manifest parent).
+
+        This property handles its own env var expansion to avoid infinite
+        recursion with resolve_path().
+        """
+        root_str = self._data.get("project_root")
+        if root_str:
+            expanded = os.path.expandvars(str(root_str))
+            p = Path(expanded)
+            if p.is_absolute():
+                return p
+            return self._base_dir / p
+        return self._base_dir
+
     def resolve_path(self, path_str: str | None) -> Path | None:
-        """Resolve a path string from the manifest against the base directory.
+        """Resolve a path string from the manifest against the project root.
 
         Supports environment variable expansion (e.g. $PROJ_ROOT or ${PROJ_ROOT}).
+        Relative paths resolve against project_root (which defaults to base_dir).
 
         Returns None if path_str is None or empty.
         """
@@ -96,7 +116,7 @@ class Manifest:
         p = Path(expanded)
         if p.is_absolute():
             return p
-        return self._base_dir / p
+        return self.project_root / p
 
     def get(self, *keys: str, default: Any = None) -> Any:
         """Get a nested value from the manifest data.

@@ -22,9 +22,14 @@ from dv_mcp.dv_context_server.tools.sim_tools import (
     sim_search_log,
 )
 from dv_mcp.dv_context_server.tools.spec_tools import spec_search
-from dv_mcp.dv_context_server.tools.tb_tools import tb_get_existing_tests_for_feature
+from dv_mcp.dv_context_server.tools.tb_tools import (
+    tb_find_tests_for_gap,
+    tb_get_existing_tests_for_feature,
+    tb_read_source,
+)
 
 PROJECT = "mock_data/dma_subsystem/project_manifest.yaml"
+AXI2AHB_PROJECT = "mock_data/axi2ahb/project_manifest.yaml"
 
 REQUIRED_SUCCESS_KEYS = {"ok", "tool", "project", "result", "evidence", "truncated", "next_actions"}
 REQUIRED_ERROR_KEYS = {"ok", "tool", "project", "error", "evidence", "truncated", "next_actions"}
@@ -162,3 +167,51 @@ class TestSimToolsContract:
     def test_cov_get_coverage_diff_error_bad_project(self) -> None:
         resp = cov_get_coverage_diff("nonexistent_project_xyz")
         _check_error(resp, "cov_get_coverage_diff")
+
+
+class TestTbToolContractsAxi2ahb:
+    """Envelope contract tests using axi2ahb real TB data."""
+
+    def test_tb_get_tests_success_axi2ahb(self) -> None:
+        resp = tb_get_existing_tests_for_feature(AXI2AHB_PROJECT, "burst")
+        _check_success(resp, "tb_get_existing_tests_for_feature")
+
+    def test_tb_get_tests_scope_tests_axi2ahb(self) -> None:
+        resp = tb_get_existing_tests_for_feature(AXI2AHB_PROJECT, "burst", scope="tests")
+        _check_success(resp, "tb_get_existing_tests_for_feature")
+
+    def test_tb_get_tests_scope_sequences_axi2ahb(self) -> None:
+        resp = tb_get_existing_tests_for_feature(AXI2AHB_PROJECT, "burst", scope="sequences")
+        _check_success(resp, "tb_get_existing_tests_for_feature")
+
+
+class TestTbFindTestsForGapContract:
+    """Envelope contract tests for tb_find_tests_for_gap."""
+
+    def test_success(self) -> None:
+        resp = tb_find_tests_for_gap(AXI2AHB_PROJECT, "GAP_0003")
+        _check_success(resp, "tb_find_tests_for_gap")
+
+    def test_error_bad_gap(self) -> None:
+        resp = tb_find_tests_for_gap(PROJECT, "GAP_9999")
+        _check_error(resp, "tb_find_tests_for_gap")
+
+    def test_error_bad_project(self) -> None:
+        resp = tb_find_tests_for_gap("nonexistent_project_xyz", "GAP_0001")
+        _check_error(resp, "tb_find_tests_for_gap")
+
+
+class TestTbReadSourceContract:
+    """Envelope contract tests for tb_read_source."""
+
+    def test_error_invalid_component_type(self) -> None:
+        resp = tb_read_source(AXI2AHB_PROJECT, "invalid", "any")
+        _check_error(resp, "tb_read_source")
+
+    def test_error_bad_project(self) -> None:
+        resp = tb_read_source("nonexistent_project_xyz", "sequence", "any")
+        _check_error(resp, "tb_read_source")
+
+    def test_error_component_not_found(self) -> None:
+        resp = tb_read_source(AXI2AHB_PROJECT, "sequence", "nonexistent_seq_xyz")
+        _check_error(resp, "tb_read_source")

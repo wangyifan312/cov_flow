@@ -20,6 +20,10 @@
       "type": "string",
       "description": "Default top-level DUT or block instance path (e.g. tb_top.u_dut.u_dma)."
     },
+    "project_root": {
+      "type": "string",
+      "description": "Root directory of the project source files. Supports environment variable expansion (e.g. $AXI2AHB_ROOT). All relative paths resolve against this directory. Defaults to the manifest file's parent directory if not set."
+    },
     "coverage": {
       "type": "object",
       "required": ["reports_root", "coverage_model_root"],
@@ -41,7 +45,7 @@
           "default": "urg_html"
         },
         "coverage_model_root": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Root directory for coverage model SystemVerilog source files."
         }
       }
@@ -52,7 +56,7 @@
       "additionalProperties": false,
       "properties": {
         "filelist": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Path to the RTL filelist (.f file)."
         },
         "design_db": {
@@ -95,22 +99,22 @@
       "properties": {
         "source": {
           "type": "object",
-          "required": ["type", "path"],
+          "required": ["type"],
           "additionalProperties": false,
           "properties": {
             "type": {
               "type": "string",
-              "enum": ["ipxact", "yaml", "csv", "excel", "ral_model"],
+              "enum": ["ipxact", "yaml", "csv", "excel", "ral_model", "none"],
               "description": "Register definition source format."
             },
             "path": {
-              "type": "string",
+              "type": ["string", "null"],
               "description": "Path to the register definition file."
             }
           }
         },
         "ral_root": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Root directory for UVM RAL model source files."
         },
         "index_path": {
@@ -130,16 +134,28 @@
           "description": "Testbench methodology type."
         },
         "env_root": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Root directory for the UVM testbench environment."
         },
         "base_test": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Name of the base test class to extend."
         },
         "sequence_root": {
-          "type": "string",
+          "type": ["string", "null"],
           "description": "Root directory for UVM sequences."
+        },
+        "agent_root": {
+          "type": "string",
+          "description": "Root directory for UVM agent source files."
+        },
+        "config_root": {
+          "type": "string",
+          "description": "Root directory for UVM configuration classes."
+        },
+        "test_root": {
+          "type": "string",
+          "description": "Root directory for UVM test classes."
         },
         "index_path": {
           "type": "string",

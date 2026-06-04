@@ -25,7 +25,11 @@ from dv_mcp.dv_context_server.tools.sim_tools import (
     sim_search_log,
 )
 from dv_mcp.dv_context_server.tools.spec_tools import spec_search
-from dv_mcp.dv_context_server.tools.tb_tools import tb_get_existing_tests_for_feature
+from dv_mcp.dv_context_server.tools.tb_tools import (
+    tb_find_tests_for_gap,
+    tb_get_existing_tests_for_feature,
+    tb_read_source,
+)
 
 mcp = FastMCP(
     "dv-context",
@@ -111,6 +115,36 @@ def tool_tb_get_existing_tests_for_feature(
 ) -> dict:
     """Find existing UVM tests and sequences related to a feature."""
     return tb_get_existing_tests_for_feature(project, feature)
+
+
+@mcp.tool()
+def tool_tb_find_tests_for_gap(
+    project: str,
+    gap_id: str,
+) -> dict:
+    """Find existing tests/sequences that may cover a coverage gap.
+
+    Extracts semantic keywords from the gap's coverpoint/bin names,
+    searches the TB index, and assesses whether existing tests likely
+    cover the gap. Only supports functional coverage gaps.
+    """
+    return tb_find_tests_for_gap(project, gap_id)
+
+
+@mcp.tool()
+def tool_tb_read_source(
+    project: str,
+    component_type: str,
+    name: str,
+    max_lines: int = 500,
+) -> dict:
+    """Read the source code of a testbench component (sequence, test, base_test, or env file).
+
+    Reads from the TB index with security boundaries (path traversal protection,
+    max_lines/max_bytes caps). Use this to inspect sequence API signatures,
+    constraint patterns, and coding style for testcase generation.
+    """
+    return tb_read_source(project, component_type, name, max_lines=max_lines)
 
 
 # ---------------------------------------------------------------------------

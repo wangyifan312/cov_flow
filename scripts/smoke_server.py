@@ -16,6 +16,8 @@ EXPECTED_TOOLS = [
     "tool_spec_search",
     "tool_reg_find_fields_affecting_feature",
     "tool_tb_get_existing_tests_for_feature",
+    "tool_tb_find_tests_for_gap",
+    "tool_tb_read_source",
     "tool_rtl_find_signal",
     "tool_sim_run_targeted_test",
     "tool_sim_get_test_result",

@@ -18,12 +18,13 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - Phase 2: Skills, eval dry-run, validation scripts
 - Phase 3: URG HTML coverage report parser
 - Phase 4: Source resolver + Project registry + EDA adapter skeleton
+- Phase 5a: TB Index Builder + MCP integration
 
 For current phase status, refer to the README.md status table. The `implementation_plan.md` remains authoritative for architecture, module boundaries, and schema definitions, but not for phase numbering.
 
 ## Current Implementation Scope
 
-**Phase 0 through Phase 4 are complete.** Phase 5+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
+**Phase 0 through Phase 4 are complete. Phase 5a is complete (WP-1 through WP-4 done).** Phase 5+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
 
 ### Phase 0 — Project Scaffolding (Done)
 - `pyproject.toml`, `Makefile`, `README.md`
@@ -84,6 +85,13 @@ For current phase status, refer to the README.md status table. The `implementati
 - **`cov_get_coverpoint_source` upgraded**: now returns `source_mode: "real"` when reading from coverage_model_root, falls back to `source_mode: "mock_fallback"` when file unavailable
 - **MCP tools support project name input**: `cov_list_uncovered(project="dma_subsystem")` works without manifest path
 
+### Phase 5a — TB Index Builder + MCP Integration (Done)
+- **WP-1 SV Parser + TB Index Builder** (Done): `lib/sv_parser.py` (generic regex-based SV parser, 13 patterns, 12 public functions), `scripts/build_tb_index.py` (manifest-driven CLI indexer), 47 tests
+- **WP-2 MCP TB Tool Integration** (Done): `tb_get_existing_tests_for_feature` upgraded with scope filter and api_methods display
+- **WP-3 Gap→TB Semantic Bridge** (Done): `tb_find_tests_for_gap` — auto-extracts semantic keywords from coverpoint/bin names, searches TB index, assesses coverage; `lib/semantic_matcher.py` module; 44 tests
+- **WP-4 Targeted Testcase Generation** (Done): `tb_read_source` MCP tool (4 component types: sequence/test/base_test/env, SourceResolver security boundaries, max_lines=1000/max_bytes=64KB); generic testcase generation prompt (`prompts/testcase_gen_generic_prompt.md`); axi2ahb GAP_0006 validation (wrap8 targeted sequence generated)
+- **Total**: 13 MCP tools, 414 tests, 5 prompts, ruff 0, mypy 0
+
 ### Phase 5+ — Real Integration (Out of Scope, Requires Approval)
 - Real UVM testcase generation
 - Real simulation tool integration (VCS, Verdi, etc.)
@@ -99,7 +107,7 @@ For current phase status, refer to the README.md status table. The `implementati
 
 ## What Is Forbidden
 
-These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser and SourceResolver is not.
+These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser, SourceResolver, and TB Indexer is not.
 
 1. **No real EDA tool integration.** Do not implement real Verdi, VCS, KDB, NPI, VPI, FSDB, or any other EDA tool interfaces. All EDA-related capabilities must be implemented as adapter/stub only.
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.

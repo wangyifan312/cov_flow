@@ -1,3 +1,8 @@
+# axi2ahb project manifest
+# Set AXI2AHB_ROOT before running validate/indexer:
+#   export AXI2AHB_ROOT=/path/to/AXI2AHB-Lite-Bridge-UVM-Verification
+project_root: $AXI2AHB_ROOT
+
 project: axi2ahb
 owner_team: dv_axi2ahb
 top_instance: top_tb
@@ -6,34 +11,36 @@ coverage:
   default_report_id: urgReport_seed_1
   reports_root: urg_report
   format: urg_html
-  coverage_model_root: null
+  coverage_model_root: env    # axi2ahb_cov.sv 在 env/ 目录
 
 rtl:
-  filelist: null
+  filelist: sim/filelist.f
   design_db:
     type: none
   index_path: .dv_ai_index
 
 spec:
   fs:
-    path: null
+    path: spec/spec.md        # 手动创建的 markdown spec
     index_path: .dv_ai_index
   micro_arch:
-    path: null
+    path: doc/spec.pdf
     index_path: .dv_ai_index
 
 registers:
   source:
-    type: yaml
-    path: null
+    type: none                # axi2ahb 无寄存器模型
   ral_root: null
   index_path: .dv_ai_index
 
 testbench:
   type: uvm
-  env_root: null
-  base_test: null
-  sequence_root: null
+  env_root: env
+  base_test: tests/base_test.sv
+  sequence_root: seq_lib
+  agent_root: agent
+  config_root: config
+  test_root: tests
   index_path: .dv_ai_index
 
 simulation:

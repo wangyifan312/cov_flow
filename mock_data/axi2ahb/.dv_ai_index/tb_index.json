@@ -1,0 +1,1614 @@
+{
+  "schema_version": "tb_index.v1",
+  "env_root": "env",
+  "sequence_root": "seq_lib",
+  "generated_at": "2026-06-03T03:53:11.330517+00:00",
+  "base_tests": [
+    {
+      "name": "base_test",
+      "file": "tests/base_test.sv",
+      "extends": "uvm_test",
+      "description": "",
+      "config_knobs": []
+    }
+  ],
+  "sequences": [
+    {
+      "name": "backend_exception_virt_seq",
+      "file": "seq_lib/backend_exception_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "backend",
+        "error",
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "watch_dut_activity",
+          "signature": "ref bit done,\n    output int unsigned aw_push_seen,\n    output int unsigned w_push_seen,\n    output int unsigned ar_push_seen,\n    output int unsigned r_push_seen,\n    output int unsigned core_launch_seen,\n    output int unsigned core_grant_seen,\n    output int unsigned illegal_seen,\n    output int unsigned b_fire_seen,\n    output int unsigned r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_write_monitored",
+          "signature": "input int unsigned           idx,\n    input bit [`DATA_WIDTH-1:0]  beats[],\n    output axi_resp_e            resp,\n    output int unsigned          aw_push_seen,\n    output int unsigned          w_push_seen,\n    output int unsigned          ar_push_seen,\n    output int unsigned          r_push_seen,\n    output int unsigned          core_launch_seen,\n    output int unsigned          core_grant_seen,\n    output int unsigned          illegal_seen,\n    output int unsigned          b_fire_seen,\n    output int unsigned          r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_read_monitored",
+          "signature": "input int unsigned           idx,\n    output bit [`DATA_WIDTH-1:0] beats[],\n    output axi_resp_e            resp[],\n    output int unsigned          aw_push_seen,\n    output int unsigned          w_push_seen,\n    output int unsigned          ar_push_seen,\n    output int unsigned          r_push_seen,\n    output int unsigned          core_launch_seen,\n    output int unsigned          core_grant_seen,\n    output int unsigned          illegal_seen,\n    output int unsigned          b_fire_seen,\n    output int unsigned          r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"backend_exception_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            beat_size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "base_virtual_sequence",
+      "file": "seq_lib/base_virt_seq.sv",
+      "extends": "uvm_sequence",
+      "description": "--------------------------------------------------------------------------",
+      "feature_tags": [
+        "burst",
+        "error",
+        "fixed",
+        "read",
+        "reset",
+        "wrap",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "post_body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_reset_signal_asserted",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_reset_signal_released",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_cycles",
+          "signature": "int n = 1",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_ready_for_stim",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "sink_response",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n \tbit [`DATA_WIDTH-1:0] data,\n \tbit [`STRB_WIDTH-1:0] byteen = {`STRB_WIDTH{1'b1}}",
+          "is_task": true,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "bd_write_num_beats",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t \tint no_of_beats,\n\t \tbit [`DATA_WIDTH-1:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] addr,\n\t \toutput bit [`DATA_WIDTH-1:0] data",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_num_beats",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] addr,\n\t \tinput  int no_of_words,\n\t \toutput bit [`DATA_WIDTH-1:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_byte",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr, bit [7:0] data",
+          "is_task": true,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "bd_write_num_byte",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr, int no_of_bytes, bit [7:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_byte",
+          "signature": "input bit [`ADDR_WIDTH-1:0] addr, output bit [7:0] data",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_num_byte",
+          "signature": "input bit [`ADDR_WIDTH-1:0] addr, input int no_of_bytes, output bit [7:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr, bit [31:0] data",
+          "is_task": true,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "bd_write_num_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr, int no_of_words, bit [31:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_word",
+          "signature": "input bit [`ADDR_WIDTH-1:0] addr, output bit [31:0] data",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_num_word",
+          "signature": "input bit [`ADDR_WIDTH-1:0] addr, input int no_of_words, output bit [31:0] data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_burst",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    axi_burst_type_e      burst,\n    axi_size_e            size,\n    output bit [`DATA_WIDTH-1:0] data[],\n    output axi_resp_e     resp[]",
+          "is_task": true,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "fd_write_burst",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_beats,\n\t\tbit [`DATA_WIDTH-1:0] data[],\n\t\taxi_burst_type_e      burst,\n\t\taxi_size_e            size,\n\t\toutput axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_num_beats",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    bit [`DATA_WIDTH-1:0] data[],\n    output axi_resp_e     resp",
+          "is_task": true,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "fd_read_num_beats",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    output bit [`DATA_WIDTH-1:0] data[],\n    output axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_wrap",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    bit [`DATA_WIDTH-1:0] data[],\n    axi_size_e            size,\n    output axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_fixed",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    bit [`DATA_WIDTH-1:0] data[],\n    axi_size_e            size,\n    output axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_wrap",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    axi_size_e            size,\n    output bit [`DATA_WIDTH-1:0] data[],\n    output axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_fixed",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int                   no_of_beats,\n    axi_size_e            size,\n    output bit [`DATA_WIDTH-1:0] data[],\n    output axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_num_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\tbit [31:0]            data[],\n\t\toutput axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_num_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\toutput bit [31:0]     data[],\n\t\toutput axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_wrap_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\tbit [31:0]            data[],\n\t\toutput axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_write_fixed_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\tbit [31:0]            data[],\n\t\toutput axi_resp_e     resp",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_wrap_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\toutput bit [31:0]     data[],\n\t\toutput axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "fd_read_fixed_word",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n\t\tint                   no_of_words,\n\t\toutput bit [31:0]     data[],\n\t\toutput axi_resp_e     resp[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"base_virtual_sequence\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "get_config",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_check_tag",
+          "signature": "string tag, string description = \"\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "set_check_state",
+          "signature": "check_state_enum state, string tag = \"\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "set_check_state_by_check_error_num",
+          "signature": "string tag = \"\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "review_check_tags",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "compare_data",
+          "signature": "logic [`DATA_WIDTH-1:0] val1,\n\t \tlogic [`DATA_WIDTH-1:0] val2,\n\t \tstring id1 = \"val1\",\n\t \tstring id2 = \"val2\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "get_bytes_per_beat",
+          "signature": "axi_size_e size",
+          "is_task": false,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "check_burst_len_legal",
+          "signature": "int              beat_num,\n    axi_burst_type_e burst,\n    output bit       legal",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "beats_convert_to_bytes",
+          "signature": "input  bit [`DATA_WIDTH-1:0] darr[],\n    output bit [7:0]             barr[]",
+          "is_task": false,
+          "description": "--------------------------------------------------------------------------"
+        },
+        {
+          "name": "bytes_convert_to_beats",
+          "signature": "input  bit [7:0]             barr[],\n    output bit [`DATA_WIDTH-1:0] darr[]",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "bd_write_fd_read_virt_seq",
+      "file": "seq_lib/bd_write_fd_read_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"bd_write_fd_read_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "fd_write_bd_read_virt_seq",
+      "file": "seq_lib/fd_write_bd_read_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"fd_write_bd_read_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "fifo_full_stress_virt_seq",
+      "file": "seq_lib/fifo_full_stress_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "backend",
+        "fifo",
+        "frontend",
+        "read",
+        "stress",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_frontend_write_fifo_full",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_frontend_read_fifo_full",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_backend_return_fifo_full",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_write_req_no_rsp",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int unsigned          no_of_beats,\n    bit [`DATA_WIDTH-1:0] data[],\n    axi_burst_type_e      burst,\n    axi_size_e            size",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_read_req_no_rsp",
+          "signature": "bit [`ADDR_WIDTH-1:0] addr,\n    int unsigned          no_of_beats,\n    axi_burst_type_e      burst,\n    axi_size_e            size",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "check_read_response",
+          "signature": "input string             check_name,\n    input axi_transaction    rsp,\n    input bit [`DATA_WIDTH-1:0] exp_data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_for_fifo_count",
+          "signature": "input string       fifo_name,\n    input int unsigned target_count",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_for_fifo_pressure",
+          "signature": "input string       pressure_name,\n    input int unsigned target_aw_ar_count,\n    input int unsigned target_w_r_count,\n    input bit          use_ar_count,\n    input bit          use_r_count",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_for_dut_idle",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"fifo_full_stress_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "build_packet_data",
+          "signature": "input int unsigned         packet_idx,\n    input int unsigned         no_of_beats,\n    output bit [`DATA_WIDTH-1:0] data[]",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "fixed_random_len_size_wr_virt_seq",
+      "file": "seq_lib/fixed_random_len_size_wr_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "fixed",
+        "random",
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_fd_write_bd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_bd_write_fd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_payload",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] beat_addr,\n    input  axi_size_e            size,\n    output bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"fixed_random_len_size_wr_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "encode_last_payload",
+          "signature": "ref bit [63:0] payloads[],\n    input int unsigned beat_count,\n    input axi_size_e size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "unpack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [`DATA_WIDTH-1:0] beat_word",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "mask_payload",
+          "signature": "input bit [63:0] payload,\n    input axi_size_e size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "compare_payload",
+          "signature": "input bit [63:0] expected,\n    input bit [63:0] actual,\n    input axi_size_e size,\n    input string     exp_id,\n    input string     act_id",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "frontend_exception_virt_seq",
+      "file": "seq_lib/frontend_exception_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "burst",
+        "error",
+        "frontend",
+        "random",
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_illegal_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_illegal_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "check_blocked_downstream",
+          "signature": "input int unsigned idx,\n    input bit          is_write,\n    input int unsigned aw_before,\n    input int unsigned w_before,\n    input int unsigned ar_before,\n    input int unsigned r_before,\n    input int unsigned aw_after,\n    input int unsigned w_after,\n    input int unsigned ar_after,\n    input int unsigned r_after,\n    input int unsigned aw_push_seen,\n    input int unsigned w_push_seen,\n    input int unsigned ar_push_seen,\n    input int unsigned r_push_seen,\n    input int unsigned core_launch_seen,\n    input int unsigned core_grant_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "sample_path_counts",
+          "signature": "output int unsigned aw_count_val,\n    output int unsigned w_count_val,\n    output int unsigned ar_count_val,\n    output int unsigned r_count_val",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "watch_dut_activity",
+          "signature": "ref bit done,\n    output int unsigned aw_push_seen,\n    output int unsigned w_push_seen,\n    output int unsigned ar_push_seen,\n    output int unsigned r_push_seen,\n    output int unsigned core_launch_seen,\n    output int unsigned core_grant_seen,\n    output int unsigned illegal_seen,\n    output int unsigned b_fire_seen,\n    output int unsigned r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_raw_write_monitored",
+          "signature": "input bit [`ADDR_WIDTH-1:0]   req_addr,\n    input int unsigned            req_len,\n    input axi_burst_type_e        req_burst,\n    input axi_size_e              req_size,\n    input bit [`DATA_WIDTH-1:0]   req_data[],\n    output axi_resp_e             resp,\n    output int unsigned           aw_push_seen,\n    output int unsigned           w_push_seen,\n    output int unsigned           ar_push_seen,\n    output int unsigned           r_push_seen,\n    output int unsigned           core_launch_seen,\n    output int unsigned           core_grant_seen,\n    output int unsigned           illegal_seen,\n    output int unsigned           b_fire_seen,\n    output int unsigned           r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_raw_read_monitored",
+          "signature": "input bit [`ADDR_WIDTH-1:0]   req_addr,\n    input int unsigned            req_len,\n    input axi_burst_type_e        req_burst,\n    input axi_size_e              req_size,\n    output bit [`DATA_WIDTH-1:0]  data[],\n    output axi_resp_e             resp[],\n    output int unsigned           aw_push_seen,\n    output int unsigned           w_push_seen,\n    output int unsigned           ar_push_seen,\n    output int unsigned           r_push_seen,\n    output int unsigned           core_launch_seen,\n    output int unsigned           core_grant_seen,\n    output int unsigned           illegal_seen,\n    output int unsigned           b_fire_seen,\n    output int unsigned           r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"frontend_exception_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "post_randomize",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "select_burst",
+          "signature": "frontend_exc_kind_e exc_kind",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "get_declared_bytes",
+          "signature": "axi_size_e burst_size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "kind_name",
+          "signature": "frontend_exc_kind_e exc_kind",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "burst_name",
+          "signature": "axi_burst_type_e burst_kind",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "incr_random_len_size_wr_virt_seq",
+      "file": "seq_lib/incr_random_len_size_wr_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "incr",
+        "random",
+        "read",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_fd_write_bd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_bd_write_fd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_payload",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] beat_addr,\n    input  axi_size_e            size,\n    output bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"incr_random_len_size_wr_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "unpack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [`DATA_WIDTH-1:0] beat_word",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "mask_payload",
+          "signature": "input bit [63:0] payload,\n    input axi_size_e size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "compare_payload",
+          "signature": "input bit [63:0] expected,\n    input bit [63:0] actual,\n    input axi_size_e size,\n    input string     exp_id,\n    input string     act_id",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "mixed_random_traffic_virt_seq",
+      "file": "seq_lib/mixed_random_traffic_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "backend",
+        "burst",
+        "frontend",
+        "mixed",
+        "random",
+        "read",
+        "traffic",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_legal_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_legal_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_frontend_illegal_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_frontend_illegal_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_backend_illegal_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_backend_illegal_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "wait_for_dut_idle",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "sample_path_counts",
+          "signature": "output int unsigned aw_count_val,\n    output int unsigned w_count_val,\n    output int unsigned ar_count_val,\n    output int unsigned r_count_val",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "check_blocked_downstream",
+          "signature": "input int unsigned idx,\n    input bit          is_write,\n    input int unsigned aw_before,\n    input int unsigned w_before,\n    input int unsigned ar_before,\n    input int unsigned r_before,\n    input int unsigned aw_after,\n    input int unsigned w_after,\n    input int unsigned ar_after,\n    input int unsigned r_after,\n    input int unsigned aw_push_seen,\n    input int unsigned w_push_seen,\n    input int unsigned ar_push_seen,\n    input int unsigned r_push_seen,\n    input int unsigned core_launch_seen,\n    input int unsigned core_grant_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "watch_dut_activity",
+          "signature": "ref bit done,\n    output int unsigned aw_push_seen,\n    output int unsigned w_push_seen,\n    output int unsigned ar_push_seen,\n    output int unsigned r_push_seen,\n    output int unsigned core_launch_seen,\n    output int unsigned core_grant_seen,\n    output int unsigned illegal_seen,\n    output int unsigned b_fire_seen,\n    output int unsigned r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_write_monitored",
+          "signature": "input int unsigned           idx,\n    input bit [`DATA_WIDTH-1:0]  beats[],\n    output axi_resp_e            resp,\n    output int unsigned          aw_push_seen,\n    output int unsigned          w_push_seen,\n    output int unsigned          ar_push_seen,\n    output int unsigned          r_push_seen,\n    output int unsigned          core_launch_seen,\n    output int unsigned          core_grant_seen,\n    output int unsigned          illegal_seen,\n    output int unsigned          b_fire_seen,\n    output int unsigned          r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_read_monitored",
+          "signature": "input int unsigned           idx,\n    output bit [`DATA_WIDTH-1:0] beats[],\n    output axi_resp_e            resp[],\n    output int unsigned          aw_push_seen,\n    output int unsigned          w_push_seen,\n    output int unsigned          ar_push_seen,\n    output int unsigned          r_push_seen,\n    output int unsigned          core_launch_seen,\n    output int unsigned          core_grant_seen,\n    output int unsigned          illegal_seen,\n    output int unsigned          b_fire_seen,\n    output int unsigned          r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_raw_write_monitored",
+          "signature": "input bit [`ADDR_WIDTH-1:0]   req_addr,\n    input int unsigned            req_len,\n    input axi_burst_type_e        req_burst,\n    input axi_size_e              req_size,\n    input bit [`DATA_WIDTH-1:0]   req_data[],\n    output axi_resp_e             resp,\n    output int unsigned           aw_push_seen,\n    output int unsigned           w_push_seen,\n    output int unsigned           ar_push_seen,\n    output int unsigned           r_push_seen,\n    output int unsigned           core_launch_seen,\n    output int unsigned           core_grant_seen,\n    output int unsigned           illegal_seen,\n    output int unsigned           b_fire_seen,\n    output int unsigned           r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "send_raw_read_monitored",
+          "signature": "input bit [`ADDR_WIDTH-1:0]   req_addr,\n    input int unsigned            req_len,\n    input axi_burst_type_e        req_burst,\n    input axi_size_e              req_size,\n    output bit [`DATA_WIDTH-1:0]  data[],\n    output axi_resp_e             resp[],\n    output int unsigned           aw_push_seen,\n    output int unsigned           w_push_seen,\n    output int unsigned           ar_push_seen,\n    output int unsigned           r_push_seen,\n    output int unsigned           core_launch_seen,\n    output int unsigned           core_grant_seen,\n    output int unsigned           illegal_seen,\n    output int unsigned           b_fire_seen,\n    output int unsigned           r_fire_seen",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"mixed_random_traffic_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "post_randomize",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            beat_size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "select_frontend_burst",
+          "signature": "frontend_exc_kind_e exc_kind",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "get_supported_bytes",
+          "signature": "axi_size_e beat_size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "get_declared_bytes",
+          "signature": "axi_size_e beat_size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "frontend_kind_name",
+          "signature": "frontend_exc_kind_e exc_kind",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "burst_name",
+          "signature": "axi_burst_type_e burst_kind",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "random_traffic_virt_seq",
+      "file": "seq_lib/random_traffic_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "random",
+        "read",
+        "traffic",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_write",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"random_traffic_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "reset_recovery_virt_seq",
+      "file": "seq_lib/reset_recovery_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "read",
+        "reset",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_write_read_case",
+          "signature": "input bit [`ADDR_WIDTH-1:0] addr,\n    input bit [15:0]            seed,\n    input string                phase_name",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "trigger_mid_test_reset",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "check_dut_initial_state",
+          "signature": "input string phase_name",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "compare_beat_arrays",
+          "signature": "input string                 phase_name,\n    input bit [`DATA_WIDTH-1:0] exp_data[],\n    input bit [`DATA_WIDTH-1:0] act_data[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"reset_recovery_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "build_data",
+          "signature": "input bit [15:0]             seed,\n    input int unsigned           beat_num,\n    output bit [`DATA_WIDTH-1:0] data[]",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "single_write_read_virt_seq",
+      "file": "seq_lib/single_write_read_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "read",
+        "single",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_case",
+          "signature": "input int unsigned idx,\n    input boundary_case_t tc",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_fd_write_bd_check",
+          "signature": "input int unsigned     idx,\n    input boundary_case_t  tc,\n    input bit [63:0]       exp_payloads[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_bd_write_fd_check",
+          "signature": "input int unsigned     idx,\n    input boundary_case_t  tc,\n    input bit [63:0]       exp_payloads[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input  boundary_case_t      tc,\n    input  bit [63:0]           payload_words[],\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_payload",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] beat_addr,\n    input  axi_size_e            size,\n    output bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"single_write_read_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "build_boundary_cases",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_case_pair",
+          "signature": "input string           base_name,\n    input axi_burst_type_e burst,\n    input axi_size_e       size,\n    input int unsigned     len,\n    input bit [31:0]       addr",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "case_is_legal",
+          "signature": "input boundary_case_t tc",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "build_payloads",
+          "signature": "input  int unsigned    idx,\n    input  boundary_case_t tc,\n    output bit [63:0]      beats[]",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "unpack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [`DATA_WIDTH-1:0] beat_word",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "mask_payload",
+          "signature": "input bit [63:0] payload,\n    input axi_size_e size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "compare_payload",
+          "signature": "input bit [63:0] exp_payload,\n    input bit [63:0] act_payload,\n    input axi_size_e size,\n    input string     exp_id,\n    input string     act_id",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "wrap_random_len_size_wr_virt_seq",
+      "file": "seq_lib/wrap_random_len_size_wr_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "",
+      "feature_tags": [
+        "random",
+        "read",
+        "wrap",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_fd_write_bd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "run_bd_write_fd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_write_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "bd_read_payload",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] beat_addr,\n    input  axi_size_e            size,\n    output bit [63:0]            payload",
+          "is_task": true,
+          "description": ""
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"wrap_random_len_size_wr_virt_seq\"",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "unpack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [`DATA_WIDTH-1:0] beat_word",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "mask_payload",
+          "signature": "input bit [63:0] payload,\n    input axi_size_e size",
+          "is_task": false,
+          "description": ""
+        },
+        {
+          "name": "compare_payload",
+          "signature": "input bit [63:0] expected,\n    input bit [63:0] actual,\n    input axi_size_e size,\n    input string     exp_id,\n    input string     act_id",
+          "is_task": false,
+          "description": ""
+        }
+      ]
+    }
+  ],
+  "existing_tests": [
+    {
+      "name": "backend_exception_test",
+      "file": "tests/backend_exception_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "backend_exception_virt_seq"
+      ],
+      "feature_tags": [
+        "backend",
+        "error",
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "bd_write_fd_read_test",
+      "file": "tests/bd_write_fd_read_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "bd_write_fd_read_virt_seq"
+      ],
+      "feature_tags": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "fd_write_bd_read_test",
+      "file": "tests/fd_write_bd_read_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "fd_write_bd_read_virt_seq"
+      ],
+      "feature_tags": [
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "fifo_full_stress_test",
+      "file": "tests/fifo_full_stress_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "fifo_full_stress_virt_seq"
+      ],
+      "feature_tags": [
+        "backend",
+        "fifo",
+        "frontend",
+        "read",
+        "stress",
+        "write"
+      ]
+    },
+    {
+      "name": "fixed_random_len_size_wr_test",
+      "file": "tests/fixed_random_len_size_wr_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "fixed_random_len_size_wr_virt_seq"
+      ],
+      "feature_tags": [
+        "fixed",
+        "random",
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "frontend_exception_test",
+      "file": "tests/frontend_exception_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "frontend_exception_virt_seq"
+      ],
+      "feature_tags": [
+        "burst",
+        "error",
+        "frontend",
+        "random",
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "incr_random_len_size_wr_test",
+      "file": "tests/incr_random_len_size_wr_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "incr_random_len_size_wr_virt_seq"
+      ],
+      "feature_tags": [
+        "incr",
+        "random",
+        "read",
+        "write"
+      ]
+    },
+    {
+      "name": "mixed_random_traffic_test",
+      "file": "tests/mixed_random_traffic_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "mixed_random_traffic_virt_seq"
+      ],
+      "feature_tags": [
+        "backend",
+        "burst",
+        "frontend",
+        "mixed",
+        "random",
+        "read",
+        "traffic",
+        "write"
+      ]
+    },
+    {
+      "name": "random_traffic_test",
+      "file": "tests/random_traffic_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "random_traffic_virt_seq"
+      ],
+      "feature_tags": [
+        "random",
+        "read",
+        "traffic",
+        "write"
+      ]
+    },
+    {
+      "name": "reset_recovery_test",
+      "file": "tests/reset_recovery_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "reset_recovery_virt_seq"
+      ],
+      "feature_tags": [
+        "read",
+        "reset",
+        "write"
+      ]
+    },
+    {
+      "name": "single_write_read_test",
+      "file": "tests/single_write_read_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "single_write_read_virt_seq"
+      ],
+      "feature_tags": [
+        "read",
+        "single",
+        "write"
+      ]
+    },
+    {
+      "name": "wrap_random_len_size_wr_test",
+      "file": "tests/wrap_random_len_size_wr_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "wrap_random_len_size_wr_virt_seq"
+      ],
+      "feature_tags": [
+        "random",
+        "read",
+        "wrap",
+        "write"
+      ]
+    }
+  ],
+  "config_knobs": [
+    {
+      "name": "valid",
+      "type": "bit",
+      "default": "1",
+      "plusarg": ""
+    },
+    {
+      "name": "events",
+      "type": "uvm_event_pool",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "mem",
+      "type": "memory",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "mem_min_addr",
+      "type": "bit",
+      "default": "32'h0000_0000",
+      "plusarg": ""
+    },
+    {
+      "name": "mem_max_addr",
+      "type": "bit",
+      "default": "32'h0000_ffff",
+      "plusarg": ""
+    },
+    {
+      "name": "meminit_value",
+      "type": "bit",
+      "default": "32'h0000_0000",
+      "plusarg": ""
+    },
+    {
+      "name": "is_active",
+      "type": "uvm_active_passive_enum",
+      "default": "UVM_ACTIVE",
+      "plusarg": ""
+    },
+    {
+      "name": "wait_enable",
+      "type": "int",
+      "default": "1",
+      "plusarg": ""
+    },
+    {
+      "name": "force_hready_low",
+      "type": "bit",
+      "default": "0",
+      "plusarg": ""
+    },
+    {
+      "name": "force_bready_low",
+      "type": "bit",
+      "default": "0",
+      "plusarg": ""
+    },
+    {
+      "name": "force_rready_low",
+      "type": "bit",
+      "default": "0",
+      "plusarg": ""
+    },
+    {
+      "name": "mst_cfg",
+      "type": "axi_master_config",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "slv_cfg",
+      "type": "ahb_slave_config",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "seq_check_count",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "seq_check_error",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "seq_desired_check_count",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "scb_check_count",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "scb_check_error",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "scb_desired_check_count",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "timeout",
+      "type": "int unsigned",
+      "default": "1_000_000",
+      "plusarg": ""
+    },
+    {
+      "name": "test_error_count",
+      "type": "int unsigned",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "test_is_passed",
+      "type": "bit",
+      "default": "",
+      "plusarg": ""
+    },
+    {
+      "name": "scoreboard_enable",
+      "type": "bit",
+      "default": "1",
+      "plusarg": ""
+    },
+    {
+      "name": "coverage_enable",
+      "type": "bit",
+      "default": "1",
+      "plusarg": ""
+    }
+  ]
+}

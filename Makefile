@@ -1,4 +1,4 @@
-.PHONY: help validate validate-gaps validate-scenario validate-patch static-check build-indexes build-real-index test smoke-server run-server lint format typecheck clean
+.PHONY: help validate validate-gaps validate-scenario validate-patch static-check build-indexes build-real-index build-real-tb-index test smoke-server run-server lint format typecheck clean
 
 MANIFEST ?= mock_data/dma_subsystem/project_manifest.yaml
 PYTHON ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python3)
@@ -36,6 +36,9 @@ build-indexes: ## Build all mock indexes from manifest data
 
 build-real-index: ## Build coverage index from real URG report (axi2ahb)
 	$(PYTHON) scripts/build_coverage_index.py --manifest mock_data/axi2ahb/project_manifest.yaml
+
+build-real-tb-index: ## Build TB index from real UVM sources (axi2ahb, requires AXI2AHB_ROOT)
+	$(PYTHON) scripts/build_tb_index.py --manifest mock_data/axi2ahb/project_manifest.yaml --out mock_data/axi2ahb/.dv_ai_index
 
 # ---------------------------------------------------------------------------
 # MCP Server

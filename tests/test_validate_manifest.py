@@ -124,3 +124,89 @@ class TestSchemaValidation:
         }
         errors = validate(bad_data, schema, raise_on_error=False)
         assert any("allow_direct_file_modification" in e["path"] for e in errors)
+
+
+class TestProjectRoot:
+    """Tests for the project_root property and path resolution."""
+
+    def test_project_root_from_manifest_field(self, tmp_path: Path) -> None:
+        """When project_root is set, paths resolve against it."""
+        project_dir = tmp_path / "real_project"
+        project_dir.mkdir()
+        manifest_file = tmp_path / "manifest_dir" / "project_manifest.yaml"
+        manifest_file.parent.mkdir()
+        manifest_file.write_text(
+            f"project: test\n"
+            f"top_instance: tb_top\n"
+            f"project_root: {project_dir}\n"
+            f"coverage:\n"
+            f"  reports_root: cov_reports\n"
+            f"  coverage_model_root: cov_model\n"
+            f"rtl:\n"
+            f"  filelist: rtl.f\n"
+            f"registers:\n"
+            f"  source:\n"
+            f"    type: none\n"
+            f"testbench:\n"
+            f"  type: uvm\n"
+            f"  env_root: env\n"
+            f"policy:\n"
+            f"  allow_direct_file_modification: false\n"
+            f"  allow_running_simulation: false\n"
+            f"  require_human_review_before_commit: true\n",
+            encoding="utf-8",
+        )
+        manifest = Manifest.load(manifest_file)
+        assert manifest.project_root == project_dir
+        # resolve_path uses project_root, not manifest parent
+        resolved = manifest.resolve_path("rtl.f")
+        assert resolved == project_dir / "rtl.f"
+
+    def test_project_root_fallback_to_base_dir(self, mock_manifest_path: Path) -> None:
+        """When project_root is not set, falls back to base_dir (manifest parent)."""
+        manifest = Manifest.load(mock_manifest_path)
+        assert manifest.project_root == mock_manifest_path.parent
+
+    def test_project_root_env_var_expansion(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Environment variables in project_root are expanded."""
+        project_dir = tmp_path / "env_project"
+        project_dir.mkdir()
+        monkeypatch.setenv("TEST_PROJECT_ROOT", str(project_dir))
+
+        manifest_file = tmp_path / "manifest.yaml"
+        manifest_file.write_text(
+            "project: test\n"
+            "top_instance: tb_top\n"
+            "project_root: $TEST_PROJECT_ROOT\n"
+            "coverage:\n"
+            "  reports_root: cov\n"
+            "  coverage_model_root: cov\n"
+            "rtl:\n"
+            "  filelist: rtl.f\n"
+            "registers:\n"
+            "  source:\n"
+            "    type: none\n"
+            "testbench:\n"
+            "  type: uvm\n"
+            "  env_root: env\n"
+            "policy:\n"
+            "  allow_direct_file_modification: false\n"
+            "  allow_running_simulation: false\n"
+            "  require_human_review_before_commit: true\n",
+            encoding="utf-8",
+        )
+        manifest = Manifest.load(manifest_file)
+        assert manifest.project_root == project_dir
+        resolved = manifest.resolve_path("rtl.f")
+        assert resolved == project_dir / "rtl.f"
+
+    def test_dma_subsystem_no_project_root(self, mock_manifest_path: Path) -> None:
+        """dma_subsystem has no project_root — base_dir is used, backward compatible."""
+        manifest = Manifest.load(mock_manifest_path)
+        assert manifest.project_root == mock_manifest_path.parent
+        # Verify get_path still resolves correctly
+        reports = manifest.get_path("coverage", "reports_root")
+        assert reports is not None
+        assert reports == mock_manifest_path.parent / "coverage" / "urg_report"

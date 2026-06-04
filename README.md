@@ -78,7 +78,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 4 complete** - Source resolver + Project registry + EDA adapter skeleton fully integrated.
+**Phase 5a in progress** - TB Index Builder + MCP TB tool integration with real axi2ahb data.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -90,6 +90,7 @@ cov_flow/
 | Phase 2d | Code coverage extension (7 types, 27 gaps) | **Done** |
 | Phase 3 | Real URG HTML coverage report parser + MCP integration | **Done** |
 | Phase 4 | Source resolver + Project registry + EDA adapter skeleton | **Done** |
+| Phase 5a | TB Index Builder + MCP TB tool integration | **In Progress** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -186,12 +187,23 @@ cov_flow/
 - **`cov_get_coverpoint_source` upgraded**: now returns `source_mode: "real"` when reading from coverage_model_root, falls back to `source_mode: "mock_fallback"` when file unavailable
 - **MCP tools support project name input**: `cov_list_uncovered(project="dma_subsystem")` works without manifest path
 
+### What's included in Phase 5a (TB Index Builder + MCP Integration)
+
+- **Generic SV Parser** (`lib/sv_parser.py`): regex-based SystemVerilog parser (13 patterns, 12 public functions) — class/module/method/config_db/plusarg extraction, feature tag inference, UVM role classification, test-to-sequence linking
+- **TB Index Builder** (`scripts/build_tb_index.py`): manifest-driven CLI that parses UVM source directories and generates `tb_index.json` (schema_version: tb_index.v1)
+- **axi2ahb real TB data**: pre-built `mock_data/axi2ahb/.dv_ai_index/tb_index.json` with 1 base test, 12 concrete tests, 13 sequences (base_virtual_sequence: 44 api_methods), 24 config knobs
+- **`tb_get_existing_tests_for_feature` upgraded**: scope filter parameter (all/tests/sequences), api_methods included in matched sequences with base-sequence truncation (10 methods max, api_methods_truncated flag)
+- **`tb_find_tests_for_gap`** (new): auto-extracts semantic keywords from coverpoint/bin names, searches TB index for matching tests/sequences, assesses whether existing TB likely covers the gap (existing_test_likely_covers / partial_coverage / new_stimulus_needed)
+- **Semantic Matcher** (`lib/semantic_matcher.py`): keyword extraction (prefix stripping, letter↔digit splitting, cross-bin parsing), TB entry scoring, gap coverage assessment
+- **Makefile target**: `make build-real-tb-index` (requires AXI2AHB_ROOT env var)
+- **Integration tests**: `tests/test_mcp_tb_tools_axi2ahb.py` (14 tests), `tests/test_tb_find_tests_for_gap.py` (18 tests), `tests/test_semantic_matcher.py` (26 tests), contract tests for axi2ahb
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB) — EDA adapters are mock/stub only
 - No real project data (RTL/FS/register docs/UVM/coverage DB) — the URG report is sanitized demo data only
-- No real UVM testcase generation (Phase 5)
-- No real simulation execution (Phase 5)
+- No real UVM testcase generation (Phase 5b)
+- No real simulation execution (Phase 5b)
 - No eval runner LLM execution mode (Phase 6)
 
 ## Coverage Types
@@ -250,11 +262,12 @@ See `evals/README.md` for details.
 
 ## Next Steps
 
-Phase 0–4 are complete. The following are **out of scope** and require explicit approval before starting:
+Phase 0–4 are complete. Phase 5a is in progress. The following are **out of scope** and require explicit approval before starting:
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| Phase 5 | Real UVM testcase generation + Real simulation tool integration | Not started |
+| Phase 5a | TB Index Builder + MCP TB tool integration | **In Progress** (WP-1 done, WP-2 in progress) |
+| Phase 5b | Real UVM testcase generation + Real simulation tool integration | Not started |
 | Phase 6 | Eval runner LLM execution mode | Not started |
 
 See `implementation_plan.md` §13 and CLAUDE.md for constraints.
