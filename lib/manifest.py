@@ -178,6 +178,32 @@ class Manifest:
         return dict(self._data.get("simulation", {}))
 
     @property
+    def sim_mode(self) -> str:
+        """Return simulation mode: 'mock' or 'real'. Default: 'mock'."""
+        return str(self.get("simulation", "mode") or "mock")
+
+    @property
+    def sim_results_root(self) -> Path:
+        """Resolve simulation results root against project_root."""
+        root = self.get("simulation", "results_root") or "sim_results"
+        resolved = self.resolve_path(str(root))
+        if resolved is not None:
+            return resolved
+        return self.project_root / "sim_results"
+
+    @property
+    def sim_timeout(self) -> int:
+        """Return simulation timeout in seconds. Default: 600."""
+        val = self.get("simulation", "timeout_seconds")
+        return int(val) if val is not None else 600
+
+    @property
+    def sim_urg_timeout(self) -> int:
+        """Return URG timeout in seconds. Default: 300."""
+        val = self.get("simulation", "urg_timeout_seconds")
+        return int(val) if val is not None else 300
+
+    @property
     def policy(self) -> dict[str, Any]:
         """Return the policy configuration block."""
         return dict(self._data.get("policy", {}))

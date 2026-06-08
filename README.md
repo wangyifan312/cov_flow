@@ -45,6 +45,37 @@ make accept
 make run-server
 ```
 
+## Server Deployment
+
+For production use with real VCS simulation and Claude Code integration:
+
+```bash
+# 1. Clone on server
+git clone https://github.com/your-org/cov_flow.git
+cd cov_flow
+
+# 2. Install dependencies
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+
+# 3. Set environment variables
+export AXI2AHB_ROOT=/path/to/AXI2AHB-Lite-Bridge-UVM-Verification
+
+# 4. Configure real-mode manifest
+cp mock_data/axi2ahb/project_manifest_real.yaml.example mock_data/axi2ahb/project_manifest_real.yaml
+
+# 5. Build real indexes
+make build-real-tb-index
+
+# 6. Configure MCP for Claude Code
+cp .mcp.json.example .mcp.json
+
+# 7. Start Claude Code
+claude
+```
+
+See [docs/server_setup_guide.md](docs/server_setup_guide.md) for detailed instructions and [docs/quick_start_checklist.md](docs/quick_start_checklist.md) for step-by-step verification.
+
 ## Project Structure
 
 ```
@@ -53,7 +84,7 @@ cov_flow/
 ├── projects.yaml          Project name → manifest path registry
 ├── schemas/              JSON Schema definitions for all outputs
 ├── scripts/              Offline indexer CLIs and validators
-├── lib/                  Shared Python library (manifest, URG parser, source resolver, registry, EDA adapters)
+├── lib/                  Shared Python library (manifest, URG parser, source resolver, registry, EDA adapters, sim executor, log parser)
 ├── dv_mcp/               DV Context MCP Server (FastMCP-based)
 │   └── dv_context_server/
 │       ├── server.py          FastMCP entry point (thin wrapper)
@@ -61,6 +92,7 @@ cov_flow/
 │       ├── services/          Project loading, evidence, summarization
 │       └── indexes/           JSON index readers
 ├── skills/               Skill Pack (SKILL.md + references for each workflow)
+├── docs/                 Server setup and usage documentation
 ├── mock_data/            Mock and real project data
 │   ├── dma_subsystem/    Mock DMA project (Phase 0-2)
 │   │   ├── project_manifest.yaml
@@ -78,7 +110,7 @@ cov_flow/
 
 ## Current Status
 
-**Phase 5a in progress** - TB Index Builder + MCP TB tool integration with real axi2ahb data.
+**Phase 5b complete** - Real simulation execution infrastructure with mock/real dual-mode support.
 
 | Phase | Scope | Status |
 |-------|-------|--------|
@@ -90,7 +122,8 @@ cov_flow/
 | Phase 2d | Code coverage extension (7 types, 27 gaps) | **Done** |
 | Phase 3 | Real URG HTML coverage report parser + MCP integration | **Done** |
 | Phase 4 | Source resolver + Project registry + EDA adapter skeleton | **Done** |
-| Phase 5a | TB Index Builder + MCP TB tool integration | **In Progress** |
+| Phase 5a | TB Index Builder + MCP TB tool integration | **Done** |
+| Phase 5b | Real simulation execution infrastructure | **Done** |
 
 ### What's included in Phase 1 Mock MVP
 
@@ -198,12 +231,23 @@ cov_flow/
 - **Makefile target**: `make build-real-tb-index` (requires AXI2AHB_ROOT env var)
 - **Integration tests**: `tests/test_mcp_tb_tools_axi2ahb.py` (14 tests), `tests/test_tb_find_tests_for_gap.py` (18 tests), `tests/test_semantic_matcher.py` (26 tests), contract tests for axi2ahb
 
+### What's included in Phase 5b (Real Simulation Execution Infrastructure)
+
+- **SimExecutor** (`lib/sim_executor.py`): subprocess executor with security boundaries — test name validation (regex + path traversal rejection), seed validation, `shlex.split()` + `shell=False`, cwd locked to project_root, timeout enforcement, log capture with stderr separation, 50-line stdout tail, result persistence to JSON
+- **SimLogParser** (`lib/sim_log_parser.py`): VCS/UVM log parsing with priority-based pass/fail detection (explicit markers > UVM_FATAL > UVM_ERROR > $finish > unknown), UVM message counting (INFO/WARNING/ERROR/FATAL), bracket format support
+- **UrgRunner** (`lib/urg_runner.py`): URG report generation via subprocess with timeout, report parsing via existing `lib/urg_parser` pipeline, coverage_db.v1 schema output compatible with `compute_diff()`
+- **Manifest Schema Extension**: 7 new optional fields in `simulation` block (`mode: mock|real`, `urg_cmd_template`, `urg_binary`, `urg_timeout_seconds`, `timeout_seconds`, `results_root`, `vdb_dir_template`), 4 convenience properties in `lib/manifest.py`
+- **Real-mode manifest template**: `mock_data/axi2ahb/project_manifest_real.yaml.example` with VCS/URG command templates
+- **4 MCP tools upgraded** with real mode branching: `sim_run_targeted_test` (compile→run→urg pipeline), `sim_get_test_result` (loads persisted SimResult or parses run.log), `sim_search_log` (bounded 20 matches with total_matches), `cov_get_coverage_diff` (auto-discovers latest URG reports)
+- **CLI upgrade**: `scripts/sim_runner.py --real` flag with mode check, test name/seed validation, pipeline execution, human-readable summary, exit codes (0=pass, 1=run fail, 2=compile fail)
+- **Mock/real dual-mode**: `mode: mock` (default, safe) returns fake data; `mode: real` executes VCS subprocess with full security boundaries
+- **521 tests total**: 102 new tests for foundation libraries, 21 new tests for MCP tool real mode branching
+
 ### What's explicitly NOT included (see CLAUDE.md)
 
 - No real EDA tool integration (Verdi/VCS/KDB/NPI/VPI/FSDB) — EDA adapters are mock/stub only
 - No real project data (RTL/FS/register docs/UVM/coverage DB) — the URG report is sanitized demo data only
-- No real UVM testcase generation (Phase 5b)
-- No real simulation execution (Phase 5b)
+- Real simulation execution requires VCS installed and `mode: real` in manifest (Phase 5b provides infrastructure, not VCS itself)
 - No eval runner LLM execution mode (Phase 6)
 
 ## Coverage Types
@@ -239,7 +283,7 @@ cov_flow/
 | `make lint` | Run ruff linter (0 issues required) |
 | `make typecheck` | Run mypy type checker (0 errors required) |
 | `make test` | Run all pytest tests |
-| `make smoke-server` | Verify server imports and 11 tools registered |
+| `make smoke-server` | Verify server imports and 13 tools registered |
 | `make run-server` | Start MCP server (manual, blocking) |
 | `make accept` | Run all acceptance checks |
 
@@ -262,12 +306,10 @@ See `evals/README.md` for details.
 
 ## Next Steps
 
-Phase 0–4 are complete. Phase 5a is in progress. The following are **out of scope** and require explicit approval before starting:
+Phase 0–5b are complete. The following are **out of scope** and require explicit approval before starting:
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| Phase 5a | TB Index Builder + MCP TB tool integration | **In Progress** (WP-1 done, WP-2 in progress) |
-| Phase 5b | Real UVM testcase generation + Real simulation tool integration | Not started |
 | Phase 6 | Eval runner LLM execution mode | Not started |
 
 See `implementation_plan.md` §13 and CLAUDE.md for constraints.

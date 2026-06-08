@@ -33,3 +33,10 @@ htmlcov/
 
 # NOTE: Do NOT ignore mock_data/dma_subsystem/.dv_ai_index/
 # These are Phase 1 mock index fixtures and must be committed.
+
+# Simulation results (Phase 5b)
+sim_results/
+**/sim_results/
+
+# Accidental directories from unset env vars (e.g. $AXI2AHB_ROOT)
+**/\$*/

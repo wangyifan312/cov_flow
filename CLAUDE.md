@@ -19,12 +19,13 @@ This is **not** a documentation-only repository. It contains Python code, JSON s
 - Phase 3: URG HTML coverage report parser
 - Phase 4: Source resolver + Project registry + EDA adapter skeleton
 - Phase 5a: TB Index Builder + MCP integration
+- Phase 5b: Real simulation execution infrastructure
 
 For current phase status, refer to the README.md status table. The `implementation_plan.md` remains authoritative for architecture, module boundaries, and schema definitions, but not for phase numbering.
 
 ## Current Implementation Scope
 
-**Phase 0 through Phase 4 are complete. Phase 5a is complete (WP-1 through WP-4 done).** Phase 5+ (real UVM generation, real sim integration) require explicit user approval before any work begins.
+**Phase 0 through Phase 5b are complete.** Phase 6+ (eval LLM execution, multi-project) require explicit user approval before any work begins.
 
 ### Phase 0 — Project Scaffolding (Done)
 - `pyproject.toml`, `Makefile`, `README.md`
@@ -56,8 +57,10 @@ For current phase status, refer to the README.md status table. The `implementati
 - **Phase 2d**: Code coverage extension — 7 coverage types (functional, line, branch, condition, toggle, fsm, assert), unified schema with `anyOf` conditional required fields, type-aware MCP tools and diff computation, 12 new mock gaps (27 total), 4 new classifications (10 total), 35 new tests, 2 new eval cases (6 total)
 - **Phase 3**: URG HTML parser — 982 real gaps from axi2ahb URG report
 - **Phase 4**: Source resolver + registry + EDA adapters — 90 new tests (271 total), 11 MCP tools
-- **Total**: 11 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
-- All sim tools are **mock/dry-run only** — no real shell execution, no real coverage parsing
+- **Phase 5a**: TB Index Builder + MCP integration — 13 MCP tools, 414 tests
+- **Phase 5b**: Real simulation execution infrastructure — SimExecutor + SimLogParser + UrgRunner, mock/real dual-mode, 521 tests
+- **Total**: 13 MCP tools, 15 skill reference documents, 6 eval cases, ruff 0, mypy 0, make accept clean
+- Phase 5b adds real subprocess execution (VCS/URG) via manifest `mode: real` with security boundaries (test name validation, path traversal rejection, shlex + shell=False, cwd lock, timeout)
 
 ### Phase 3 — Real URG Coverage Report Parser (Done)
 - **URG HTML parser library** (`lib/urg_parser/`): parses Synopsys VCS URG reports (O-2018.09-SP2)
@@ -74,7 +77,7 @@ For current phase status, refer to the README.md status table. The `implementati
   - Source file path normalization (absolute → relative)
 - **MCP integration**: coverage_index.json includes `gaps` field compatible with existing MCP tools
 - **Makefile target**: `make build-real-index`
-- All sim tools remain **mock/dry-run only** — no real shell execution
+- All sim tools support **mock/dry-run mode** (default) and **real mode** (manifest `mode: real`) — real mode executes VCS/URG subprocess via SimExecutor with security boundaries
 
 ### Phase 4 — Source Resolver + Project Registry + EDA Adapters (Done)
 - **Bounded Source Snippet Resolver** (`lib/source_resolver.py`): reads real SV source snippets with security boundaries (path traversal protection, allowlist, max_lines/max_bytes)
@@ -92,9 +95,16 @@ For current phase status, refer to the README.md status table. The `implementati
 - **WP-4 Targeted Testcase Generation** (Done): `tb_read_source` MCP tool (4 component types: sequence/test/base_test/env, SourceResolver security boundaries, max_lines=1000/max_bytes=64KB); generic testcase generation prompt (`prompts/testcase_gen_generic_prompt.md`); axi2ahb GAP_0006 validation (wrap8 targeted sequence generated)
 - **Total**: 13 MCP tools, 414 tests, 5 prompts, ruff 0, mypy 0
 
-### Phase 5+ — Real Integration (Out of Scope, Requires Approval)
-- Real UVM testcase generation
-- Real simulation tool integration (VCS, Verdi, etc.)
+### Phase 5b — Real Simulation Execution Infrastructure (Done)
+- **WP-1 Foundation Libraries** (Done): `lib/sim_executor.py` (subprocess executor with security: test name validation, path traversal rejection, shlex.split + shell=False, cwd locked to project_root, timeout), `lib/sim_log_parser.py` (VCS/UVM log parsing with priority-based pass/fail detection), `lib/urg_runner.py` (URG report generation + parsing pipeline), 102 tests
+- **WP-2 Manifest Schema Extension** (Done): 7 new optional fields in `simulation` block (`mode: mock|real`, `urg_cmd_template`, `urg_binary`, `urg_timeout_seconds`, `timeout_seconds`, `results_root`, `vdb_dir_template`), 4 convenience properties in `lib/manifest.py`, real-mode manifest template (`project_manifest_real.yaml.example`)
+- **WP-3 MCP Tool Upgrades** (Done): 4 sim tools (`sim_run_targeted_test`, `sim_get_test_result`, `sim_search_log`, `cov_get_coverage_diff`) support real mode branching via `manifest.sim_mode`, mock mode unchanged, `_sim_result_to_dict` helper for SimResult serialization
+- **WP-4 CLI Script Upgrade** (Done): `scripts/sim_runner.py --real` flag, mode check (rejects mock manifests), test name/seed validation, SimExecutor pipeline execution, human-readable summary, exit codes (0=pass, 1=run fail, 2=compile fail)
+- **WP-5 Tests** (Done): `tests/test_sim_tools_real_mode.py` (21 tests covering all 4 MCP tools in real mode), added tests to existing files
+- **Total**: 13 MCP tools, 521 tests, ruff 0, mypy 0
+- Mock/real dual-mode: `mode: mock` (default) returns fake data, `mode: real` executes VCS subprocess via SimExecutor
+
+### Phase 6+ — Out of Scope (Requires Approval)
 - Real eval suite LLM execution
 - Multi-project support (beyond registry lookup)
 
@@ -107,14 +117,14 @@ For current phase status, refer to the README.md status table. The `implementati
 
 ## What Is Forbidden
 
-These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser, SourceResolver, and TB Indexer is not.
+These rules are non-negotiable. Phase 2 mock implementations (dry-run, stub data, no real tool calls) are allowed; real tool integration beyond the URG parser, SourceResolver, TB Indexer, and SimExecutor is not.
 
 1. **No real EDA tool integration.** Do not implement real Verdi, VCS, KDB, NPI, VPI, FSDB, or any other EDA tool interfaces. All EDA-related capabilities must be implemented as adapter/stub only.
 2. **No real project data.** Do not read, assume, or generate real company RTL, FS, register documents, UVM environments, real coverage databases, or waveforms.
 3. **No bulk-loading.** Do not bulk-load RTL/FS/TB content into the Agent context. MCP tools must return bounded, structured results.
 4. **No automatic waivers or formal conclusions.** Do not implement automatic waiver generation or formal unreachable conclusions. Those require human sign-off.
 5. **No auto-commits.** Neither the coding agent nor the review Claude may commit code without explicit user instruction. The review Claude may execute `git add` and `git commit` when the user explicitly approves a specific commit.
-6. **No Phase 5+ implementation without approval.** Do not implement real UVM testcase generation, real simulation runners, or eval suites with LLM execution unless the user explicitly approves Phase 5+ work.
+6. **No Phase 6+ implementation without approval.** Do not implement eval suites with LLM execution or multi-project support unless the user explicitly approves Phase 6+ work.
 7. **No complex frameworks.** Use stdlib + the declared dependencies only (see `pyproject.toml`). Python 3.11+.
 
 ## Implementation Principles

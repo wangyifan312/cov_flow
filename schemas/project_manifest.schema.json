@@ -167,6 +167,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["mock", "real"],
+          "default": "mock",
+          "description": "Simulation execution mode. 'mock' returns fake data (safe default). 'real' executes VCS subprocess."
+        },
         "compile_cmd_template": {
           "type": "string",
           "description": "Compile command template. Use {test} placeholder.",
@@ -181,6 +187,39 @@
           "type": "string",
           "description": "Coverage collection command template.",
           "examples": ["make cov TEST={test}"]
+        },
+        "urg_cmd_template": {
+          "type": "string",
+          "description": "URG report generation command template. Placeholders: {vdb_dir}, {report_dir}"
+        },
+        "urg_binary": {
+          "type": "string",
+          "default": "urg",
+          "description": "Path to urg binary"
+        },
+        "urg_timeout_seconds": {
+          "type": "integer",
+          "default": 300,
+          "minimum": 30,
+          "maximum": 1800,
+          "description": "Timeout for URG report generation in seconds"
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 3600,
+          "description": "Timeout for compile/run simulation in seconds"
+        },
+        "results_root": {
+          "type": "string",
+          "default": "sim_results",
+          "description": "Directory for simulation results, relative to project_root"
+        },
+        "vdb_dir_template": {
+          "type": "string",
+          "default": "sim_results/coverage/{test}_{seed}.vdb",
+          "description": "Template for VDB directory path. Placeholders: {test}, {seed}"
         }
       }
     },
