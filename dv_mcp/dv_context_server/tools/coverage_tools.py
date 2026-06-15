@@ -211,7 +211,7 @@ def cov_get_coverpoint_source(
 
     Tries to read a real source file snippet via SourceResolver if
     coverage_model_root is configured in the manifest. Falls back to
-    generated mock snippets when real files are unavailable.
+    a synthetic snippet (representative SV code) when real files are unavailable.
 
     Args:
         project: Project ID or manifest path.
@@ -240,7 +240,7 @@ def cov_get_coverpoint_source(
 
     # Try to resolve real source via SourceResolver
     snippet: SourceSnippet | None = None
-    source_mode = "mock_fallback"
+    source_mode = "synthetic"
 
     try:
         manifest = get_manifest(project)
@@ -254,9 +254,9 @@ def cov_get_coverpoint_source(
             if snippet.status == "ok":
                 source_mode = "real"
     except (FileNotFoundError, Exception):
-        # Manifest load failure — proceed with mock fallback
+        # Manifest load failure — proceed with synthetic fallback
         snippet = None
-        source_mode = "mock_fallback"
+        source_mode = "synthetic"
 
     # Build the source snippet content
     if source_mode == "real" and snippet is not None:
@@ -267,9 +267,9 @@ def cov_get_coverpoint_source(
         )
         was_truncated = snippet.truncated
     else:
-        # Mock fallback — original MVP behavior
+        # Synthetic fallback — source file not available
         source_content = _generate_mock_source(gap, cov_type, source_file, source_line)
-        note = "Mock MVP: source snippet is generated, not read from actual file."
+        note = "Synthetic snippet: source file not available, generated representative SV code."
         was_truncated = False
 
     evidence = [
@@ -365,4 +365,84 @@ def _generate_mock_source(
     return (
         f"// Mock coverage source for {gap.get('gap_id', 'unknown')}\n"
         f"// Source: {source_file}:{source_line}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Simulation history tool
+# ---------------------------------------------------------------------------
+
+_SIM_HISTORY_INDEX = "sim_history.json"
+
+
+def cov_get_hit_history(
+    project: str,
+    gap_id: str,
+) -> dict[str, Any]:
+    """Get simulation hit history for a coverage gap.
+
+    Reads sim_history.json to find the gap's hit history across multiple
+    regression runs, including trend analysis and first-covered information.
+
+    Args:
+        project: Project ID or manifest path.
+        gap_id: The gap identifier (e.g. 'GAP_0001').
+
+    Returns:
+        Envelope with hit history, trend, and first_covered info.
+    """
+    tool = "cov_get_hit_history"
+    try:
+        reader = get_index_reader(project)
+    except FileNotFoundError as e:
+        return error_envelope(tool, project, str(e))
+
+    # Try reading from the built index first
+    sim_history: dict | None = None
+    try:
+        sim_history = reader.read(_SIM_HISTORY_INDEX)
+    except (FileNotFoundError, IndexNotFoundError):
+        pass
+
+    if sim_history is None:
+        return error_envelope(
+            tool, project,
+            "sim_history.json not found. Run build_sim_history_index first.",
+        )
+
+    # Find the gap in gap_history
+    gap_history = sim_history.get("gap_history", [])
+    gap_entry = next(
+        (g for g in gap_history if g.get("gap_id") == gap_id),
+        None,
+    )
+
+    if gap_entry is None:
+        return error_envelope(
+            tool, project,
+            f"Gap not found in sim history: {gap_id}",
+        )
+
+    evidence_list = [
+        coverage_evidence(
+            gap_id, "hit_history",
+            "sim_history.json",
+            f"Hit history for {gap_id}: trend={gap_entry.get('trend', '?')}, "
+            f"first_covered={gap_entry.get('first_covered', 'never')}",
+        )
+    ]
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "gap_id": gap_id,
+            "hit_history": gap_entry.get("hit_history", []),
+            "trend": gap_entry.get("trend", "unknown"),
+            "first_covered": gap_entry.get("first_covered"),
+            "total_runs": len(gap_entry.get("hit_history", [])),
+        },
+        evidence=evidence_list,
+        truncated=False,
+        next_actions=["cov_get_gap_detail", "cov_list_uncovered"],
     )

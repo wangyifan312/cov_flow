@@ -35,7 +35,7 @@ that describes what stimulus is needed to close the gap.
 - `spec_search` — required for semantic context.
 - `reg_find_fields_affecting_feature` — required for config dependencies.
 - `tb_get_existing_tests_for_feature` — required to avoid duplication.
-- `rtl_find_signal` — optional, only when controllability is unclear.
+- `rtl_find_signal` — optional, only when signal controllability or data path is unclear.
 
 ## Coverage Type Support
 

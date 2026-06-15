@@ -1,8 +1,8 @@
 """Abstract base class for EDA tool adapters.
 
 Defines the interface that all EDA tool adapters (Verdi, VCS, etc.) must
-implement. Mock adapters return stub data; real adapters (Phase 5+) will
-provide actual tool integration.
+implement. Stub adapters return representative data; real adapters (Phase 5+)
+will provide actual tool integration.
 """
 
 from __future__ import annotations
@@ -15,14 +15,14 @@ class EDAAdapter(ABC):
     """Abstract base class for EDA tool adapters.
 
     All methods return structured dicts for compatibility with the MCP
-    envelope format. Mock implementations must include mode='mock' in
+    envelope format. Stub implementations must include mode='stub' in
     their return values.
     """
 
     @property
     @abstractmethod
     def name(self) -> str:
-        """Return the adapter name (e.g. 'verdi_mock', 'vcs_mock')."""
+        """Return the adapter name (e.g. 'verdi_stub', 'vcs_stub')."""
         ...
 
     @property
@@ -36,7 +36,7 @@ class EDAAdapter(ABC):
         """Check if the EDA tool is available (license, path, etc.).
 
         Returns:
-            Dict with keys: available (bool), mode ('mock' or 'real'),
+            Dict with keys: available (bool), mode ('stub' or 'real'),
             version (str or None), note (str).
         """
         ...
@@ -49,7 +49,7 @@ class EDAAdapter(ABC):
             path: Path to the waveform file.
 
         Returns:
-            Dict with keys: status ('mock' or 'ok'), path (str),
+            Dict with keys: status ('stub' or 'ok'), path (str),
             signals (list), mode (str).
         """
         ...

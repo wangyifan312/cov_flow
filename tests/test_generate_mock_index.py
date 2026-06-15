@@ -103,7 +103,7 @@ class TestGenerateMockIndex:
         # Related spec section exists
         spec_section = next(
             s for s in spec["sections"]
-            if s["section_id"] == "spec_dma_linked_list"
+            if s["section_id"] == "spec_linked_list_descriptor_mode"
         )
         assert "linked_list" in spec_section["feature_tags"]
 

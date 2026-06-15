@@ -4,6 +4,10 @@ Tools:
   - tb_get_existing_tests_for_feature: find existing tests/sequences for a feature
   - tb_find_tests_for_gap: find tests/sequences that may cover a specific gap
   - tb_read_source: read the full source code of a testbench component
+  - tb_find_sequence: find a sequence by name (fuzzy match)
+  - tb_get_base_test_template: get base test info with config_knobs
+  - tb_find_config_knob: find a config knob by name
+  - tb_get_sequence_source_snippet: get source snippet for a sequence by name
 """
 
 from __future__ import annotations
@@ -590,4 +594,330 @@ def tb_read_source(
         evidence=ev,
         truncated=was_truncated,
         next_actions=["tb_get_existing_tests_for_feature", "tb_find_tests_for_gap"],
+    )
+
+
+def tb_find_sequence(
+    project: str,
+    sequence_name: str,
+) -> dict[str, Any]:
+    """Find a sequence by name (supports fuzzy/substring matching).
+
+    Args:
+        project: Project ID or manifest path.
+        sequence_name: Sequence name or substring to search for.
+
+    Returns:
+        Envelope with matching sequences including file, extends,
+        feature_tags, api_methods, and description.
+    """
+    tool = "tb_find_sequence"
+    try:
+        reader = get_index_reader(project)
+        data = reader.read(_TB_INDEX)
+    except (FileNotFoundError, IndexNotFoundError) as e:
+        return error_envelope(tool, project, str(e))
+
+    sequences = data.get("sequences", [])
+    search_lower = sequence_name.lower()
+
+    matches: list[dict] = []
+    evidence_list: list[dict] = []
+
+    for seq in sequences:
+        seq_name = seq.get("name", "")
+        if search_lower in seq_name.lower():
+            # Build api_methods output
+            all_methods = seq.get("api_methods", [])
+            methods_out = [
+                {
+                    "name": m.get("name"),
+                    "signature": m.get("signature", ""),
+                    "is_task": m.get("is_task", False),
+                }
+                for m in all_methods
+            ]
+
+            matches.append({
+                "name": seq_name,
+                "file": seq.get("file"),
+                "extends": seq.get("extends"),
+                "description": seq.get("description"),
+                "feature_tags": seq.get("feature_tags"),
+                "api_methods": methods_out,
+            })
+            evidence_list.append(
+                tb_evidence(
+                    "sequence",
+                    seq_name,
+                    seq.get("file", ""),
+                    seq.get("description", ""),
+                )
+            )
+
+    if not matches:
+        return error_envelope(
+            tool, project, f"Sequence not found: {sequence_name}",
+        )
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "query": sequence_name,
+            "matches": matches,
+            "total_matches": len(matches),
+        },
+        evidence=evidence_list,
+        truncated=False,
+        next_actions=["tb_get_existing_tests_for_feature", "tb_get_base_test_template"],
+    )
+
+
+def tb_get_base_test_template(
+    project: str,
+    base_test_name: str | None = None,
+) -> dict[str, Any]:
+    """Get base test info with config_knobs.
+
+    If base_test_name is provided, returns that specific base test.
+    Otherwise returns all base tests.
+
+    Args:
+        project: Project ID or manifest path.
+        base_test_name: Optional base test name (case-insensitive).
+
+    Returns:
+        Envelope with base_tests list containing name, file, extends,
+        description, and config_knobs.
+    """
+    tool = "tb_get_base_test_template"
+    try:
+        reader = get_index_reader(project)
+        data = reader.read(_TB_INDEX)
+    except (FileNotFoundError, IndexNotFoundError) as e:
+        return error_envelope(tool, project, str(e))
+
+    base_tests = data.get("base_tests", [])
+
+    if base_test_name is not None:
+        name_lower = base_test_name.lower()
+        found = next(
+            (bt for bt in base_tests if bt.get("name", "").lower() == name_lower),
+            None,
+        )
+        if found is None:
+            available = [bt.get("name") for bt in base_tests]
+            return error_envelope(
+                tool, project,
+                f"Base test not found: {base_test_name}. "
+                f"Available: {available}",
+            )
+        result_tests = [found]
+    else:
+        result_tests = base_tests
+
+    evidence_list: list[dict] = []
+    for bt in result_tests:
+        evidence_list.append(
+            tb_evidence(
+                "base_test",
+                bt.get("name", "unknown"),
+                bt.get("file", ""),
+                bt.get("description", ""),
+            )
+        )
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "base_tests": result_tests,
+        },
+        evidence=evidence_list,
+        truncated=False,
+        next_actions=["tb_find_sequence", "tb_find_config_knob"],
+    )
+
+
+def tb_find_config_knob(
+    project: str,
+    knob_name: str,
+) -> dict[str, Any]:
+    """Find a config knob by name (supports fuzzy/substring matching).
+
+    Args:
+        project: Project ID or manifest path.
+        knob_name: Config knob name or substring to search for.
+
+    Returns:
+        Envelope with matching config knobs including name, type,
+        default value, and plusarg string.
+    """
+    tool = "tb_find_config_knob"
+    try:
+        reader = get_index_reader(project)
+        data = reader.read(_TB_INDEX)
+    except (FileNotFoundError, IndexNotFoundError) as e:
+        return error_envelope(tool, project, str(e))
+
+    config_knobs = data.get("config_knobs", [])
+    search_lower = knob_name.lower()
+
+    matches: list[dict] = []
+    evidence_list: list[dict] = []
+
+    for knob in config_knobs:
+        knob_name_val = knob.get("name", "")
+        if search_lower in knob_name_val.lower():
+            matches.append({
+                "name": knob_name_val,
+                "type": knob.get("type"),
+                "default": knob.get("default"),
+                "plusarg": knob.get("plusarg"),
+            })
+            evidence_list.append(
+                tb_evidence(
+                    "config_knob",
+                    knob_name_val,
+                    "testbench",
+                    f"Config knob {knob_name_val}",
+                )
+            )
+
+    if not matches:
+        return error_envelope(
+            tool, project, f"Config knob not found: {knob_name}",
+        )
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "query": knob_name,
+            "matches": matches,
+            "total_matches": len(matches),
+        },
+        evidence=evidence_list,
+        truncated=False,
+        next_actions=["tb_get_base_test_template", "tb_find_sequence"],
+    )
+
+
+def tb_get_sequence_source_snippet(
+    project: str,
+    sequence_name: str,
+    max_lines: int = 40,
+) -> dict[str, Any]:
+    """Get source snippet for a sequence by name.
+
+    Convenience wrapper around tb_read_source that only requires sequence_name.
+    Looks up the sequence in tb_index.json (exact match first, then fuzzy
+    fallback), then reads the source file with SourceResolver security
+    boundaries.
+
+    Args:
+        project: Project ID or manifest path.
+        sequence_name: Sequence name (exact) or substring (fuzzy fallback).
+        max_lines: Maximum lines to return (default 40, capped at 1000).
+
+    Returns:
+        Envelope with sequence name, file path, source snippet, and metadata.
+    """
+    tool = "tb_get_sequence_source_snippet"
+
+    # --- Load TB index ---
+    try:
+        reader = get_index_reader(project)
+        data = reader.read(_TB_INDEX)
+    except (FileNotFoundError, IndexNotFoundError) as e:
+        return error_envelope(tool, project, str(e))
+
+    # --- Find sequence: exact match first, then fuzzy ---
+    sequences = data.get("sequences", [])
+    name_lower = sequence_name.lower()
+
+    match: dict | None = None
+    for seq in sequences:
+        if seq.get("name", "").lower() == name_lower:
+            match = seq
+            break
+
+    if match is None:
+        for seq in sequences:
+            if name_lower in seq.get("name", "").lower():
+                match = seq
+                break
+
+    if match is None:
+        available = [s.get("name") for s in sequences]
+        return error_envelope(
+            tool, project,
+            f"Sequence not found: {sequence_name}. "
+            f"Available sequences: {available}",
+        )
+
+    file_rel = match.get("file", "")
+    matched_name = match.get("name", sequence_name)
+
+    # --- Load manifest and determine allowed root ---
+    try:
+        manifest = get_manifest(project)
+    except (FileNotFoundError, Exception) as e:
+        return error_envelope(tool, project, f"Manifest load failure: {e}")
+
+    allowed_root = manifest.project_root
+    if not allowed_root.is_dir():
+        allowed_root = manifest.base_dir
+
+    # --- Security validation via SourceResolver ---
+    resolver = SourceResolver(allowed_roots=[allowed_root], max_lines=1, max_bytes=1)
+    probe = resolver.resolve(file_rel, source_line=1, context_lines=1)
+
+    if probe.status == "access_denied":
+        return error_envelope(
+            tool, project, f"Access denied: {probe.message}",
+        )
+    if probe.status == "file_not_found":
+        return error_envelope(
+            tool, project, f"File not found: {file_rel} (under {allowed_root})",
+        )
+    if probe.status != "ok":
+        return error_envelope(
+            tool, project,
+            f"Source resolver error: {probe.status} — {probe.message}",
+        )
+
+    # --- Resolve and read file ---
+    resolved_path, status = _resolve_tb_file(allowed_root, file_rel)
+    if resolved_path is None or status != "ok":
+        return error_envelope(
+            tool, project, f"Cannot read file: {status} — {file_rel}",
+        )
+
+    capped_lines = min(max_lines, _MAX_READ_LINES)
+    content, total_lines, was_truncated = _read_file_bounded(
+        resolved_path, capped_lines, _MAX_READ_BYTES,
+    )
+
+    ev = [
+        tb_evidence(
+            "sequence", matched_name, file_rel,
+            f"Source snippet for sequence '{matched_name}' ({total_lines} lines)",
+        ),
+    ]
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "name": matched_name,
+            "file": file_rel,
+            "source_snippet": content,
+            "total_lines": total_lines,
+            "max_lines": capped_lines,
+        },
+        evidence=ev,
+        truncated=was_truncated,
+        next_actions=["tb_find_sequence", "tb_get_existing_tests_for_feature"],
     )

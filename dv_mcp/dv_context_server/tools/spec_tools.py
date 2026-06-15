@@ -2,6 +2,7 @@
 
 Tools:
   - spec_search: search spec sections by keyword or feature tag
+  - spec_get_section: get a full spec section by section_id
 """
 
 from __future__ import annotations
@@ -104,4 +105,57 @@ def spec_search(
         evidence=evidence_list,
         truncated=was_truncated,
         next_actions=["reg_find_fields_affecting_feature", "rtl_find_signal"],
+    )
+
+
+def spec_get_section(
+    project: str,
+    section_id: str,
+) -> dict[str, Any]:
+    """Get a full spec section by section_id.
+
+    Performs exact match against section_id in the spec index.
+
+    Args:
+        project: Project ID or manifest path.
+        section_id: Section identifier (e.g. 'spec_linked_list_descriptor_mode').
+
+    Returns:
+        Envelope with the full section details including title, text,
+        page_range, and feature_tags.
+    """
+    tool = "spec_get_section"
+    try:
+        reader = get_index_reader(project)
+        data = reader.read(_SPEC_INDEX)
+    except (FileNotFoundError, IndexNotFoundError) as e:
+        return error_envelope(tool, project, str(e))
+
+    sections = data.get("sections", [])
+    section = next((s for s in sections if s.get("section_id") == section_id), None)
+
+    if section is None:
+        return error_envelope(tool, project, f"Section not found: {section_id}")
+
+    evidence_list = [
+        spec_evidence(
+            section_id,
+            data.get("source", "unknown"),
+            section.get("title", ""),
+        ),
+    ]
+
+    return envelope(
+        tool=tool,
+        project=project,
+        result={
+            "section_id": section.get("section_id"),
+            "title": section.get("title"),
+            "text": section.get("summary"),
+            "page_range": section.get("page_range"),
+            "feature_tags": section.get("feature_tags"),
+        },
+        evidence=evidence_list,
+        truncated=False,
+        next_actions=["spec_search", "reg_find_fields_affecting_feature"],
     )

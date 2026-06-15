@@ -25,6 +25,20 @@ The orchestrator skill (`dv-coverage-closure`) routes to sub-skills based on `ta
 4. Feedback      →  after simulation, analyze results and coverage diff
 ```
 
+## Feedback Loop
+
+When feedback reports `gap_closed=false`, route by root cause:
+
+| Root Cause | Next Action |
+|------------|-------------|
+| Stimulus did not reach | Return to **Scenario** (Stage 2): redesign stimulus with adjusted config/path |
+| Configuration not enabled | Return to **Scenario** (Stage 2): add missing required_config entries |
+| Sampling condition not met | Flag for **engineer review** (coverage model issue) |
+| Simulation failure | Fix compile/runtime error, then re-run **Feedback** (Stage 4) |
+| Gap closed but regressed others | Investigate side effects; may need **Scenario** adjustment |
+
+Maximum iteration: 2 loops per gap. If still not closed after 2 attempts, escalate to engineer review.
+
 ## Coverage Type Support
 
 The workflow supports 7 coverage types: `functional`, `line`, `branch`, `condition`, `toggle`, `fsm`, `assert`. Each type has type-specific:

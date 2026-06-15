@@ -179,8 +179,8 @@ class Manifest:
 
     @property
     def sim_mode(self) -> str:
-        """Return simulation mode: 'mock' or 'real'. Default: 'mock'."""
-        return str(self.get("simulation", "mode") or "mock")
+        """Return simulation mode. Always 'real' (mock mode removed)."""
+        return "real"
 
     @property
     def sim_results_root(self) -> Path:

@@ -3,7 +3,7 @@
   "report_id": "urgReport_seed_1",
   "schema_version": "coverage_index.v1",
   "report_dir": "mock_data/axi2ahb/urg_report",
-  "generated_at": "2026-06-04T17:46:00.578032",
+  "generated_at": "2026-06-11T16:30:22.480782",
   "metrics": {
     "Line": {
       "covered": 708,

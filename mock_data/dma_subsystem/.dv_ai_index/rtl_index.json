@@ -291,17 +291,13 @@
     }
   ],
   "hierarchy": {
-    "tb_top": {
-      "u_dut": {
-        "u_dma_subsys": {
-          "u_dma": {
-            "u_desc_parser": {},
-            "u_axi_master": {},
-            "u_int_ctrl": {},
-            "u_power": {},
-            "u_monitor": {}
-          }
-        }
+    "dma_subsystem": {
+      "u_dma": {
+        "u_desc_parser": {},
+        "u_axi_master": {},
+        "u_int_ctrl": {},
+        "u_power": {},
+        "u_monitor": {}
       }
     }
   }

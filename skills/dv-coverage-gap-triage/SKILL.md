@@ -39,6 +39,7 @@ classification, priority ranking, root cause hypothesis, and next action.
 - `cov_get_coverpoint_source` — required per gap.
 - `cov_get_coverage_diff` — optional, for comparing before/after coverage databases.
 - `spec_search`, `reg_find_fields_affecting_feature` — only when needed for classification.
+- `rtl_find_signal` — optional, only when signal controllability or data path is unclear.
 
 ## Hard Restrictions
 

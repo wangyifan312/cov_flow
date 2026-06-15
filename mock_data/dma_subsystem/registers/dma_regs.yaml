@@ -1,2 +1,157 @@
-# Mock register definition for dma_subsystem (Phase 1 MVP placeholder)
-# Real register definitions come from IP-XACT/YAML/CSV sources.
+# DMA Subsystem Register Definition
+# Phase 6B: expanded for build_reg_index.py indexer
+
+block: DMA
+ral_root: ral.dma
+
+registers:
+  - register: DMA_CFG
+    offset: "0x000"
+    description: "DMA configuration register"
+    fields:
+      - field: LL_MODE_EN
+        bit_range: "[0]"
+        access: RW
+        reset: "0"
+        description: "Enable linked-list descriptor mode"
+        feature_tags:
+          - linked_list
+          - descriptor
+
+      - field: SG_MODE_EN
+        bit_range: "[1]"
+        access: RW
+        reset: "0"
+        description: "Enable scatter-gather descriptor mode"
+        feature_tags:
+          - scatter_gather
+          - descriptor
+
+      - field: CH_ENABLE
+        bit_range: "[7:4]"
+        access: RW
+        reset: "0"
+        description: "Channel enable bits (4 channels)"
+        feature_tags:
+          - channel
+          - control
+
+  - register: DMA_DESC_CTRL
+    offset: "0x010"
+    description: "Descriptor control register"
+    fields:
+      - field: XFER_SIZE
+        bit_range: "[15:0]"
+        access: RW
+        reset: "0"
+        description: "Transfer size in bytes (max 4096)"
+        feature_tags:
+          - descriptor
+          - transfer
+
+      - field: DESC_TYPE
+        bit_range: "[17:16]"
+        access: RW
+        reset: "0"
+        description: "Descriptor type: 0=normal, 1=linked, 2=scatter-gather"
+        feature_tags:
+          - descriptor
+
+  - register: DMA_INT_MASK
+    offset: "0x020"
+    description: "Interrupt mask register"
+    fields:
+      - field: COMP_MASK
+        bit_range: "[0]"
+        access: RW
+        reset: "1"
+        description: "Mask completion interrupt"
+        feature_tags:
+          - interrupt
+          - completion
+
+      - field: ERROR_MASK
+        bit_range: "[1]"
+        access: RW
+        reset: "1"
+        description: "Mask error interrupt"
+        feature_tags:
+          - interrupt
+          - error
+
+  - register: DMA_INT_COAL
+    offset: "0x024"
+    description: "Interrupt coalescing register"
+    fields:
+      - field: COUNT_THRESH
+        bit_range: "[7:0]"
+        access: RW
+        reset: "1"
+        description: "Interrupt coalescing count threshold"
+        feature_tags:
+          - interrupt
+          - coalescing
+
+      - field: TIMEOUT_VAL
+        bit_range: "[23:8]"
+        access: RW
+        reset: "0"
+        description: "Interrupt coalescing timeout value (cycles)"
+        feature_tags:
+          - interrupt
+          - coalescing
+          - timeout
+
+      - field: COAL_EN
+        bit_range: "[24]"
+        access: RW
+        reset: "0"
+        description: "Enable interrupt coalescing"
+        feature_tags:
+          - interrupt
+          - coalescing
+
+  - register: DMA_POWER
+    offset: "0x030"
+    description: "Power management register"
+    fields:
+      - field: CLOCK_GATE_EN
+        bit_range: "[0]"
+        access: RW
+        reset: "0"
+        description: "Enable clock gating on idle channels"
+        feature_tags:
+          - power
+          - clock_gating
+
+      - field: RET_EN
+        bit_range: "[1]"
+        access: RW
+        reset: "0"
+        description: "Enable retention mode (silicon rev B+)"
+        feature_tags:
+          - power
+          - retention
+
+  - register: DMA_BURST_CTRL
+    offset: "0x040"
+    description: "AXI burst control register"
+    fields:
+      - field: WRAP_EN
+        bit_range: "[0]"
+        access: RW
+        reset: "0"
+        description: "Enable AXI WRAP burst type"
+        feature_tags:
+          - burst
+          - axi
+          - wrap
+
+      - field: MAX_LEN
+        bit_range: "[8:1]"
+        access: RW
+        reset: "16"
+        description: "Maximum burst length (1-256)"
+        feature_tags:
+          - burst
+          - axi

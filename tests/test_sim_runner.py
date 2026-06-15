@@ -1,4 +1,4 @@
-"""Tests for sim_runner.py."""
+"""Tests for sim_runner.py (dry-run and real execution via SimExecutor)."""
 
 import json
 import subprocess
@@ -12,31 +12,41 @@ PYTHON = sys.executable
 MANIFEST = "mock_data/dma_subsystem/project_manifest.yaml"
 
 
-def _run(manifest: str = MANIFEST, test: str = "dma_linked_list_desc_test",
-         seed: int = 1, out: str = "result.json") -> subprocess.CompletedProcess:
+def _run_dry(manifest: str = MANIFEST, test: str = "dma_linked_list_desc_test",
+             seed: int = 1) -> subprocess.CompletedProcess:
+    """Run sim_runner.py with --dry-run flag."""
     return subprocess.run(
-        [PYTHON, SCRIPT, "--manifest", manifest, "--test", test, "--seed", str(seed), "--out", out],
+        [PYTHON, SCRIPT, "--manifest", manifest, "--test", test,
+         "--seed", str(seed), "--dry-run"],
         capture_output=True,
         text=True,
     )
 
 
-class TestSimRunner:
-    def test_dry_run_produces_valid_output(self, tmp_path: Path) -> None:
-        out_path = tmp_path / "result.json"
-        result = _run(out=str(out_path))
+def _run_real(manifest: str = MANIFEST, test: str = "dma_linked_list_desc_test",
+              seed: int = 1) -> subprocess.CompletedProcess:
+    """Run sim_runner.py in real execution mode (no --dry-run)."""
+    return subprocess.run(
+        [PYTHON, SCRIPT, "--manifest", manifest, "--test", test,
+         "--seed", str(seed)],
+        capture_output=True,
+        text=True,
+    )
+
+
+class TestSimRunnerDryRun:
+    def test_dry_run_produces_valid_output(self) -> None:
+        result = _run_dry()
         assert result.returncode == 0
-        data = json.loads(out_path.read_text(encoding="utf-8"))
+        data = json.loads(result.stdout)
         assert data["ok"] is True
         assert data["dry_run"] is True
         assert data["test"] == "dma_linked_list_desc_test"
         assert data["seed"] == 1
-        assert data["compile_status"] == "pass"
-        assert data["sim_status"] == "pass"
-        assert data["policy_checked"] is True
+        assert "compile_command" in data
+        assert "run_command" in data
 
     def test_policy_blocks_when_false(self, tmp_path: Path) -> None:
-        # Create a manifest with allow_running_simulation: false
         with open(MANIFEST, encoding="utf-8") as f:
             manifest_data = yaml.safe_load(f)
         manifest_data["policy"]["allow_running_simulation"] = False
@@ -44,18 +54,16 @@ class TestSimRunner:
         restricted_manifest = tmp_path / "manifest.yaml"
         restricted_manifest.write_text(yaml.dump(manifest_data), encoding="utf-8")
 
-        out_path = tmp_path / "result.json"
-        result = _run(manifest=str(restricted_manifest), out=str(out_path))
+        result = _run_dry(manifest=str(restricted_manifest))
         assert result.returncode == 1
-        data = json.loads(out_path.read_text(encoding="utf-8"))
+        data = json.loads(result.stdout)
         assert data["ok"] is False
         assert "not allowed" in data["error"].lower() or "policy" in data["error"].lower()
 
-    def test_command_template_rendering(self, tmp_path: Path) -> None:
-        out_path = tmp_path / "result.json"
-        result = _run(test="my_custom_test", seed=42, out=str(out_path))
+    def test_command_template_rendering(self) -> None:
+        result = _run_dry(test="my_custom_test", seed=42)
         assert result.returncode == 0
-        data = json.loads(out_path.read_text(encoding="utf-8"))
+        data = json.loads(result.stdout)
         assert "my_custom_test" in data["compile_command"]
         assert "42" in data["run_command"]
 
@@ -67,17 +75,47 @@ class TestSimRunner:
         no_sim_manifest = tmp_path / "manifest.yaml"
         no_sim_manifest.write_text(yaml.dump(manifest_data), encoding="utf-8")
 
-        out_path = tmp_path / "result.json"
-        result = _run(manifest=str(no_sim_manifest), out=str(out_path))
+        result = _run_dry(manifest=str(no_sim_manifest))
         assert result.returncode == 1
-        data = json.loads(out_path.read_text(encoding="utf-8"))
+        data = json.loads(result.stdout)
         assert data["ok"] is False
         assert "simulation" in data["error"].lower()
 
-    def test_seed_validation_negative(self, tmp_path: Path) -> None:
-        out_path = tmp_path / "result.json"
-        result = _run(seed=-1, out=str(out_path))
+    def test_seed_validation_negative(self) -> None:
+        result = _run_dry(seed=-1)
         assert result.returncode == 1
-        data = json.loads(out_path.read_text(encoding="utf-8"))
+        data = json.loads(result.stdout)
         assert data["ok"] is False
         assert "seed" in data["error"].lower()
+
+
+class TestSimRunnerRealExecution:
+    """Real execution tests using echo-based commands (no VCS dependency)."""
+
+    def test_successful_run(self) -> None:
+        """dma_subsystem manifest uses echo commands, so real execution succeeds."""
+        result = _run_real()
+        assert result.returncode == 0
+        assert "Running simulation" in result.stdout
+        assert "compile" in result.stdout
+
+    def test_compile_failure_exit_code(self, tmp_path: Path) -> None:
+        """Compile failure returns exit code 2."""
+        manifest_path = tmp_path / "manifest.yaml"
+        manifest_path.write_text(
+            f"""
+project: test_fail
+project_root: {tmp_path}
+simulation:
+  compile_cmd_template: "false"
+  run_cmd_template: "echo run"
+  results_root: sim_results
+policy:
+  allow_running_simulation: true
+""",
+            encoding="utf-8",
+        )
+        (tmp_path / "sim_results").mkdir()
+
+        result = _run_real(manifest=str(manifest_path))
+        assert result.returncode == 2

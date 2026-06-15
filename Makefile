@@ -1,7 +1,7 @@
-.PHONY: help validate validate-gaps validate-scenario validate-patch static-check build-indexes build-real-index build-real-tb-index test smoke-server run-server lint format typecheck clean
+.PHONY: help validate validate-gaps validate-scenario validate-patch validate-feedback static-check build-indexes build-real-index build-real-tb-index build-spec-index build-reg-index build-rtl-index build-dma-indexes build-sim-history-index test smoke-server run-server lint format typecheck clean
 
 MANIFEST ?= mock_data/dma_subsystem/project_manifest.yaml
-PYTHON ?= $(shell test -x .venv/bin/python && echo .venv/bin/python || echo python3)
+PYTHON ?= python3
 FILE ?=
 
 help: ## Show this help
@@ -24,6 +24,9 @@ validate-scenario: ## Validate a scenario card (usage: make validate-scenario FI
 validate-patch: ## Validate a testcase patch (usage: make validate-patch FILE=path/to/patch.json)
 	$(PYTHON) scripts/validate_patch_metadata.py --file $(FILE)
 
+validate-feedback: ## Validate a feedback report (usage: make validate-feedback FILE=path/to/report.json)
+	$(PYTHON) scripts/validate_feedback_report.py --feedback $(FILE)
+
 static-check: ## Run static patch checks (usage: make static-check FILE=path/to/patch.json MANIFEST=path/to/manifest.yaml)
 	$(PYTHON) scripts/static_patch_check.py --file $(FILE) --manifest $(MANIFEST)
 
@@ -39,6 +42,20 @@ build-real-index: ## Build coverage index from real URG report (axi2ahb)
 
 build-real-tb-index: ## Build TB index from real UVM sources (axi2ahb, requires AXI2AHB_ROOT)
 	$(PYTHON) scripts/build_tb_index.py --manifest mock_data/axi2ahb/project_manifest.yaml --out mock_data/axi2ahb/.dv_ai_index
+
+build-spec-index: ## Build spec index from markdown FS (dma_subsystem)
+	$(PYTHON) scripts/build_spec_index.py --manifest $(MANIFEST)
+
+build-reg-index: ## Build register index from YAML definitions (dma_subsystem)
+	$(PYTHON) scripts/build_reg_index.py --manifest $(MANIFEST)
+
+build-rtl-index: ## Build RTL index from SV sources (dma_subsystem)
+	$(PYTHON) scripts/build_rtl_index.py --manifest $(MANIFEST)
+
+build-sim-history-index: ## Build simulation history index (dma_subsystem)
+	$(PYTHON) scripts/build_sim_history_index.py --manifest $(MANIFEST)
+
+build-dma-indexes: build-spec-index build-reg-index build-rtl-index build-sim-history-index ## Build all indexes for dma_subsystem
 
 # ---------------------------------------------------------------------------
 # MCP Server
@@ -73,7 +90,7 @@ typecheck: ## Run mypy type checker
 # Full acceptance
 # ---------------------------------------------------------------------------
 
-accept: validate validate-gaps build-indexes build-real-index lint typecheck test smoke-server ## Run all acceptance checks
+accept: validate validate-gaps build-indexes build-dma-indexes build-real-index lint typecheck test smoke-server ## Run all acceptance checks
 
 # ---------------------------------------------------------------------------
 # Cleanup

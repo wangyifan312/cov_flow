@@ -1,4 +1,4 @@
-"""Mock Verdi adapter — returns stub data, never calls real Verdi.
+"""Stub Verdi adapter — returns stub data, never calls real Verdi.
 
 This adapter is for architecture scaffolding only. A real Verdi adapter
 (Phase 5+) would integrate with the Verdi API to open waveforms, query
@@ -12,12 +12,12 @@ from typing import Any
 from lib.eda_adapters.base import EDAAdapter
 
 
-class MockVerdiAdapter(EDAAdapter):
-    """Mock Verdi adapter — returns stub data, never calls real Verdi."""
+class StubVerdiAdapter(EDAAdapter):
+    """Stub Verdi adapter — returns stub data, never calls real Verdi."""
 
     @property
     def name(self) -> str:
-        return "verdi_mock"
+        return "verdi_stub"
 
     @property
     def capabilities(self) -> list[str]:
@@ -26,15 +26,15 @@ class MockVerdiAdapter(EDAAdapter):
     def check_availability(self) -> dict[str, Any]:
         return {
             "available": True,
-            "mode": "mock",
+            "mode": "stub",
             "version": None,
-            "note": "Mock Verdi adapter — no real Verdi connection.",
+            "note": "Stub Verdi adapter — no real Verdi connection.",
         }
 
     def open_waveform(self, path: str) -> dict[str, Any]:
         return {
-            "status": "mock",
-            "mode": "mock",
+            "status": "stub",
+            "mode": "stub",
             "path": path,
             "signals": [
                 {"name": "clk", "type": "wire", "width": 1},
@@ -48,8 +48,8 @@ class MockVerdiAdapter(EDAAdapter):
         self, signal_path: str, time_range: tuple[int, int] | None = None,
     ) -> dict[str, Any]:
         return {
-            "status": "mock",
-            "mode": "mock",
+            "status": "stub",
+            "mode": "stub",
             "signal_path": signal_path,
             "time_range": time_range,
             "values": [

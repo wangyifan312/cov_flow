@@ -1,21 +1,21 @@
 # EDA Tool Adapters
 
-Abstract adapter interface and mock implementations for EDA tool integration.
+Abstract adapter interface and stub implementations for EDA tool integration.
 
 ## Architecture
 
 - __init__.py — Adapter registry and factory
 - base.py — EDAAdapter abstract base class
-- mock_verdi.py — Mock Verdi adapter (stub data)
-- mock_vcs.py — Mock VCS adapter (stub data)
+- stub_verdi.py — Stub Verdi adapter (stub data)
+- stub_vcs.py — Stub VCS adapter (stub data)
 
 ## Current Status
 
-**Phase 4**: Mock adapters only. No real EDA tool integration.
+**Phase 4**: Stub adapters only. No real EDA tool integration.
 
-All mock adapters:
+All stub adapters:
 - Return structured dict responses
-- Include "mode": "mock" in every response
+- Include "mode": "stub" in every response
 - Never call real EDA tool APIs (Verdi, VCS, KDB, NPI, VPI, FSDB)
 - Implement the full EDAAdapter interface
 
@@ -38,9 +38,9 @@ All adapters must implement:
         print(f"{a['name']}: {a['capabilities']}")
 
     # Get a specific adapter
-    verdi = get_adapter("verdi_mock")
+    verdi = get_adapter("verdi_stub")
     result = verdi.check_availability()
-    assert result["mode"] == "mock"
+    assert result["mode"] == "stub"
 
 ## Phase 5+ (Out of Scope)
 

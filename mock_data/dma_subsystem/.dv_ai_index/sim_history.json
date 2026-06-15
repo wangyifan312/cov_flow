@@ -1,0 +1,305 @@
+{
+  "schema_version": "sim_history.v1",
+  "generated_at": "2026-06-11T08:30:20.491771+00:00",
+  "project": "dma_subsystem",
+  "total_simulations": 15,
+  "tests": [
+    {
+      "test": "dma_axi_burst_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 15.6,
+      "log_path": "sim_results/dma_axi_burst_test_1/run.log"
+    },
+    {
+      "test": "dma_axi_burst_test",
+      "seed": 100,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 14.8,
+      "log_path": "sim_results/dma_axi_burst_test_100/run.log"
+    },
+    {
+      "test": "dma_chaining_stress_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 45.2,
+      "log_path": "sim_results/dma_chaining_stress_test_1/run.log"
+    },
+    {
+      "test": "dma_error_handling_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 20.3,
+      "log_path": "sim_results/dma_error_handling_test_1/run.log"
+    },
+    {
+      "test": "dma_error_handling_test",
+      "seed": 77,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 19.5,
+      "log_path": "sim_results/dma_error_handling_test_77/run.log"
+    },
+    {
+      "test": "dma_interrupt_coal_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 18.7,
+      "log_path": "sim_results/dma_interrupt_coal_test_1/run.log"
+    },
+    {
+      "test": "dma_interrupt_coal_test",
+      "seed": 55,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 17.9,
+      "log_path": "sim_results/dma_interrupt_coal_test_55/run.log"
+    },
+    {
+      "test": "dma_linked_list_desc_test",
+      "seed": 1,
+      "compile_status": "unknown",
+      "sim_status": "unknown",
+      "duration_seconds": 0.0,
+      "log_path": "sim_results/dma_linked_list_desc_test_1/run.log"
+    },
+    {
+      "test": "dma_linked_list_desc_test",
+      "seed": 99,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 24.1,
+      "log_path": "sim_results/dma_linked_list_desc_test_99/run.log"
+    },
+    {
+      "test": "dma_normal_desc_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 12.3,
+      "log_path": "sim_results/dma_normal_desc_test_1/run.log"
+    },
+    {
+      "test": "dma_normal_desc_test",
+      "seed": 42,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 11.8,
+      "log_path": "sim_results/dma_normal_desc_test_42/run.log"
+    },
+    {
+      "test": "dma_power_mgmt_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 22.1,
+      "log_path": "sim_results/dma_power_mgmt_test_1/run.log"
+    },
+    {
+      "test": "dma_power_mgmt_test",
+      "seed": 33,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 21.5,
+      "log_path": "sim_results/dma_power_mgmt_test_33/run.log"
+    },
+    {
+      "test": "dma_sg_desc_test",
+      "seed": 1,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 30.5,
+      "log_path": "sim_results/dma_sg_desc_test_1/run.log"
+    },
+    {
+      "test": "dma_sg_desc_test",
+      "seed": 7,
+      "compile_status": "pass",
+      "sim_status": "pass",
+      "duration_seconds": 29.2,
+      "log_path": "sim_results/dma_sg_desc_test_7/run.log"
+    }
+  ],
+  "gap_history": [
+    {
+      "gap_id": "GAP_0001",
+      "hit_history": [
+        {
+          "test": "dma_chaining_stress_test",
+          "seed": 1,
+          "hit_count": 12
+        },
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 99,
+          "hit_count": 5
+        }
+      ],
+      "trend": "stable",
+      "first_covered": "dma_chaining_stress_test seed=1"
+    },
+    {
+      "gap_id": "GAP_0002",
+      "hit_history": [
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 99,
+          "hit_count": 3
+        }
+      ],
+      "trend": "improving",
+      "first_covered": "dma_linked_list_desc_test seed=99"
+    },
+    {
+      "gap_id": "GAP_0003",
+      "hit_history": [
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 1,
+          "hit_count": 2
+        },
+        {
+          "test": "dma_linked_list_desc_test",
+          "seed": 99,
+          "hit_count": 2
+        }
+      ],
+      "trend": "stable",
+      "first_covered": "dma_linked_list_desc_test seed=1"
+    },
+    {
+      "gap_id": "GAP_0004",
+      "hit_history": [
+        {
+          "test": "dma_sg_desc_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_sg_desc_test",
+          "seed": 7,
+          "hit_count": 0
+        }
+      ],
+      "trend": "never_covered",
+      "first_covered": null
+    },
+    {
+      "gap_id": "GAP_0005",
+      "hit_history": [
+        {
+          "test": "dma_sg_desc_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_sg_desc_test",
+          "seed": 7,
+          "hit_count": 8
+        }
+      ],
+      "trend": "improving",
+      "first_covered": "dma_sg_desc_test seed=7"
+    },
+    {
+      "gap_id": "GAP_0006",
+      "hit_history": [
+        {
+          "test": "dma_interrupt_coal_test",
+          "seed": 1,
+          "hit_count": 4
+        },
+        {
+          "test": "dma_interrupt_coal_test",
+          "seed": 55,
+          "hit_count": 10
+        }
+      ],
+      "trend": "improving",
+      "first_covered": "dma_interrupt_coal_test seed=1"
+    },
+    {
+      "gap_id": "GAP_0007",
+      "hit_history": [
+        {
+          "test": "dma_interrupt_coal_test",
+          "seed": 1,
+          "hit_count": 5
+        },
+        {
+          "test": "dma_interrupt_coal_test",
+          "seed": 55,
+          "hit_count": 5
+        }
+      ],
+      "trend": "stable",
+      "first_covered": "dma_interrupt_coal_test seed=1"
+    },
+    {
+      "gap_id": "GAP_0008",
+      "hit_history": [
+        {
+          "test": "dma_power_mgmt_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_power_mgmt_test",
+          "seed": 33,
+          "hit_count": 0
+        }
+      ],
+      "trend": "never_covered",
+      "first_covered": null
+    },
+    {
+      "gap_id": "GAP_0009",
+      "hit_history": [
+        {
+          "test": "dma_power_mgmt_test",
+          "seed": 1,
+          "hit_count": 3
+        },
+        {
+          "test": "dma_power_mgmt_test",
+          "seed": 33,
+          "hit_count": 0
+        }
+      ],
+      "trend": "regressing",
+      "first_covered": "dma_power_mgmt_test seed=1"
+    },
+    {
+      "gap_id": "GAP_0010",
+      "hit_history": [
+        {
+          "test": "dma_axi_burst_test",
+          "seed": 1,
+          "hit_count": 0
+        },
+        {
+          "test": "dma_axi_burst_test",
+          "seed": 100,
+          "hit_count": 7
+        }
+      ],
+      "trend": "improving",
+      "first_covered": "dma_axi_burst_test seed=100"
+    }
+  ]
+}

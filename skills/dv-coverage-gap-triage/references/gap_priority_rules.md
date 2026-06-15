@@ -67,3 +67,7 @@ This is a default mapping. Override based on feature criticality.
 | Coverage Model Issue | P3 | Requires model fix, not stimulus |
 | Monitor Sampling Issue | P3 | Requires monitor fix, not stimulus |
 | Unreachable Candidate | P3 | Requires formal/human review |
+| Dead Code | P3 | Structurally unreachable; requires formal proof/waiver |
+| Defensive Code | P2 or P3 | P2 if error-injection is feasible; P3 if waiver needed |
+| Unreachable State | P3 | FSM state gated by parameter/config; requires formal review |
+| Insufficient Toggle | P1 or P2 | P1 if signal is directly controllable; P2 if cross-module |

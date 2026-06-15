@@ -18,9 +18,6 @@ spec:
   fs:
     path: spec/dma_fs.md
     index_path: .dv_ai_index
-  micro_arch:
-    path: spec/dma_uarch.md
-    index_path: .dv_ai_index
 
 registers:
   source:
@@ -37,10 +34,10 @@ testbench:
   index_path: .dv_ai_index
 
 simulation:
-  mode: mock
-  compile_cmd_template: "make compile TEST={test}"
-  run_cmd_template: "make run TEST={test} SEED={seed}"
-  coverage_cmd_template: "make cov TEST={test}"
+  results_root: sim_results
+  compile_cmd_template: "echo compile {test}"
+  run_cmd_template: "echo run {test} SEED={seed} && echo Test PASSED"
+  coverage_cmd_template: "echo cov {test}"
 
 policy:
   allow_direct_file_modification: false

@@ -14,20 +14,36 @@ from mcp.server.fastmcp import FastMCP
 from dv_mcp.dv_context_server.tools.coverage_tools import (
     cov_get_coverpoint_source,
     cov_get_gap_detail,
+    cov_get_hit_history,
     cov_list_uncovered,
 )
-from dv_mcp.dv_context_server.tools.register_tools import reg_find_fields_affecting_feature
-from dv_mcp.dv_context_server.tools.rtl_tools import rtl_find_signal
+from dv_mcp.dv_context_server.tools.register_tools import (
+    reg_find_field,
+    reg_find_fields_affecting_feature,
+    reg_get_ral_path,
+    reg_search_by_description,
+)
+from dv_mcp.dv_context_server.tools.rtl_tools import (
+    rtl_find_signal,
+    rtl_get_instance_info,
+    rtl_get_source_snippet,
+    rtl_trace_fanin,
+)
 from dv_mcp.dv_context_server.tools.sim_tools import (
     cov_get_coverage_diff,
     sim_get_test_result,
     sim_run_targeted_test,
     sim_search_log,
+    wave_check_condition,
 )
-from dv_mcp.dv_context_server.tools.spec_tools import spec_search
+from dv_mcp.dv_context_server.tools.spec_tools import spec_get_section, spec_search
 from dv_mcp.dv_context_server.tools.tb_tools import (
+    tb_find_config_knob,
+    tb_find_sequence,
     tb_find_tests_for_gap,
+    tb_get_base_test_template,
     tb_get_existing_tests_for_feature,
+    tb_get_sequence_source_snippet,
     tb_read_source,
 )
 
@@ -77,6 +93,19 @@ def tool_cov_get_coverpoint_source(
     return cov_get_coverpoint_source(project, gap_id, max_lines=max_lines)
 
 
+@mcp.tool()
+def tool_cov_get_hit_history(
+    project: str,
+    gap_id: str,
+) -> dict:
+    """Get simulation hit history for a coverage gap.
+
+    Returns hit history across multiple regression runs, including trend
+    analysis (improving/stable/regressing/never_covered) and first_covered info.
+    """
+    return cov_get_hit_history(project, gap_id)
+
+
 # ---------------------------------------------------------------------------
 # Spec tools
 # ---------------------------------------------------------------------------
@@ -91,6 +120,15 @@ def tool_spec_search(
     return spec_search(project, query, max_results=max_results)
 
 
+@mcp.tool()
+def tool_spec_get_section(
+    project: str,
+    section_id: str,
+) -> dict:
+    """Get a full spec section by section_id."""
+    return spec_get_section(project, section_id)
+
+
 # ---------------------------------------------------------------------------
 # Register tools
 # ---------------------------------------------------------------------------
@@ -102,6 +140,33 @@ def tool_reg_find_fields_affecting_feature(
 ) -> dict:
     """Find register fields likely controlling a given feature."""
     return reg_find_fields_affecting_feature(project, feature)
+
+
+@mcp.tool()
+def tool_reg_find_field(
+    project: str,
+    field_name: str,
+) -> dict:
+    """Find a register field by exact name (case-insensitive)."""
+    return reg_find_field(project, field_name)
+
+
+@mcp.tool()
+def tool_reg_search_by_description(
+    project: str,
+    query: str,
+) -> dict:
+    """Search register fields by description keyword."""
+    return reg_search_by_description(project, query)
+
+
+@mcp.tool()
+def tool_reg_get_ral_path(
+    project: str,
+    field_name: str,
+) -> dict:
+    """Get the RAL access path for a register field."""
+    return reg_get_ral_path(project, field_name)
 
 
 # ---------------------------------------------------------------------------
@@ -147,6 +212,48 @@ def tool_tb_read_source(
     return tb_read_source(project, component_type, name, max_lines=max_lines)
 
 
+@mcp.tool()
+def tool_tb_find_sequence(
+    project: str,
+    sequence_name: str,
+) -> dict:
+    """Find a sequence by name (supports fuzzy/substring matching)."""
+    return tb_find_sequence(project, sequence_name)
+
+
+@mcp.tool()
+def tool_tb_get_base_test_template(
+    project: str,
+    base_test_name: str | None = None,
+) -> dict:
+    """Get base test info with config_knobs."""
+    return tb_get_base_test_template(project, base_test_name=base_test_name)
+
+
+@mcp.tool()
+def tool_tb_find_config_knob(
+    project: str,
+    knob_name: str,
+) -> dict:
+    """Find a config knob by name (supports fuzzy/substring matching)."""
+    return tb_find_config_knob(project, knob_name)
+
+
+@mcp.tool()
+def tool_tb_get_sequence_source_snippet(
+    project: str,
+    sequence_name: str,
+    max_lines: int = 40,
+) -> dict:
+    """Get source snippet for a sequence by name.
+
+    Convenience wrapper around tb_read_source that only requires sequence_name.
+    Looks up the sequence in tb_index.json (exact match first, then fuzzy
+    fallback), then reads the source file with security boundaries.
+    """
+    return tb_get_sequence_source_snippet(project, sequence_name, max_lines=max_lines)
+
+
 # ---------------------------------------------------------------------------
 # RTL tools
 # ---------------------------------------------------------------------------
@@ -159,6 +266,47 @@ def tool_rtl_find_signal(
 ) -> dict:
     """Find RTL signals matching a name pattern."""
     return rtl_find_signal(project, signal_name, module_filter=module_filter)
+
+
+@mcp.tool()
+def tool_rtl_get_instance_info(
+    project: str,
+    module_name: str | None = None,
+    instance_path: str | None = None,
+) -> dict:
+    """Get module or instance details from the RTL index."""
+    return rtl_get_instance_info(project, module_name=module_name, instance_path=instance_path)
+
+
+@mcp.tool()
+def tool_rtl_get_source_snippet(
+    project: str,
+    signal_name: str,
+    module_filter: str | None = None,
+    context_lines: int = 5,
+) -> dict:
+    """Read source snippet for a signal definition.
+
+    Finds the signal in the RTL index, then reads a bounded snippet from
+    the source file using SourceResolver security boundaries.
+    """
+    return rtl_get_source_snippet(
+        project, signal_name, module_filter=module_filter, context_lines=context_lines,
+    )
+
+
+@mcp.tool()
+def tool_rtl_trace_fanin(
+    project: str,
+    signal_name: str,
+    module_filter: str | None = None,
+) -> dict:
+    """Trace same-module signals that may affect a target signal (mock stub).
+
+    Returns other signals and ports in the same module as potential fan-in
+    sources. Full cross-module fan-in tracing requires elaboration data.
+    """
+    return rtl_trace_fanin(project, signal_name, module_filter=module_filter)
 
 
 # ---------------------------------------------------------------------------
@@ -207,6 +355,21 @@ def tool_cov_get_coverage_diff(
 ) -> dict:
     """Compute coverage diff between before/after databases."""
     return cov_get_coverage_diff(project, gap_id=gap_id)
+
+
+@mcp.tool()
+def tool_wave_check_condition(
+    project: str,
+    signal_path: str,
+    condition: str,
+    time_range: str | None = None,
+) -> dict:
+    """Check signal condition in waveform (mock stub).
+
+    Permanent mock stub — real waveform analysis requires Verdi/NPI integration
+    which is not available per project rules. Uses StubVerdiAdapter internally.
+    """
+    return wave_check_condition(project, signal_path, condition, time_range)
 
 
 # ---------------------------------------------------------------------------

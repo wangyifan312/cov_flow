@@ -34,7 +34,7 @@ the stimulus described in a scenario card, reusing existing TB templates.
 - `tb_get_existing_tests_for_feature` — required before generation (identifies base test and reusable sequences).
 - `tb_get_existing_tests_for_feature` — required to avoid duplication.
 - `reg_find_fields_affecting_feature` — required for RAL paths.
-- `rtl_find_signal` — only for signal-level verification.
+- `rtl_find_signal` — optional, only when signal controllability or data path is unclear.
 
 ## Coverage Type Support
 

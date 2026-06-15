@@ -6,6 +6,7 @@ import pytest
 
 # Project root is the parent of the tests/ directory
 PROJECT_ROOT = Path(__file__).parent.parent
+# Mock data directory — contains synthetic project data for testing (not real project data)
 MOCK_DATA_DIR = PROJECT_ROOT / "mock_data" / "dma_subsystem"
 SCHEMAS_DIR = PROJECT_ROOT / "schemas"
 

@@ -31,6 +31,16 @@ whether a target gap was closed and what to do next.
    - Simulation failure prevented coverage collection
 5. Output feedback report with delta, root cause, and next action.
 
+## Seed Strategy
+
+When a gap is not closed on the first run:
+
+1. **Single seed** (seed=1): Initial run. If gap not hit, check root cause before re-running.
+2. **Targeted seeds** (3-5 seeds): If root cause is constraint randomization, re-run with 3-5 different seeds to check stochastic coverage.
+3. **Escalation**: If 5 seeds all miss the gap, the stimulus or config approach likely needs redesign — return to Scenario stage rather than sweeping more seeds.
+
+Do not blindly sweep seeds without analyzing root cause first. Each re-run should be informed by the previous feedback.
+
 ## MCP Tool Policy
 
 - `sim_get_test_result` — required first call.

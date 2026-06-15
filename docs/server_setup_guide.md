@@ -31,9 +31,9 @@ git commit -m "feat(phase-5b): real simulation execution infrastructure
 - SimExecutor: subprocess management with security (test name validation, path traversal rejection, shlex+shell=False, cwd lock)
 - SimLogParser: VCS/UVM log parsing with priority-based pass/fail detection
 - UrgRunner: URG report generation and parsing pipeline
-- Manifest schema: mode: mock|real, 7 new simulation fields
+- Manifest schema: 6 new simulation fields
 - MCP tools: real mode branching for 4 sim tools
-- CLI: sim_runner.py --real flag
+- CLI: sim_runner.py --dry-run flag
 - Tests: 521 total, 123 new tests for Phase 5b
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>"
@@ -71,10 +71,6 @@ cd cov_flow
 ### 2.3 安装 Python 依赖
 
 ```bash
-# 创建虚拟环境
-python3 -m venv .venv
-source .venv/bin/activate
-
 # 安装项目 (editable mode + dev dependencies)
 pip install -e ".[dev]"
 ```
@@ -131,16 +127,13 @@ echo 'export AXI2AHB_ROOT=/home/user/projects/AXI2AHB-Lite-Bridge-UVM-Verificati
 source ~/.bashrc
 ```
 
-### 3.3 创建真实项目 manifest
+### 3.3 配置项目 manifest
 
 ```bash
 cd /path/to/cov_flow
 
-# 复制 real-mode 模板
-cp mock_data/axi2ahb/project_manifest_real.yaml.example mock_data/axi2ahb/project_manifest_real.yaml
-
-# 编辑配置 (根据你的 VCS 环境调整)
-nano mock_data/axi2ahb/project_manifest_real.yaml
+# 编辑 manifest 配置 VCS 命令
+nano mock_data/axi2ahb/project_manifest.yaml
 ```
 
 **关键配置项**:
@@ -149,7 +142,6 @@ nano mock_data/axi2ahb/project_manifest_real.yaml
 project_root: $AXI2AHB_ROOT
 
 simulation:
-  mode: real                    # ← 启用真实执行
   compile_cmd_template: "make compile TEST={test}"
   run_cmd_template: "make run TEST={test} SEED={seed}"
   urg_cmd_template: "urg -dir {vdb_dir} -report {report_dir} -format html"
@@ -171,13 +163,10 @@ nano projects.yaml
 projects:
   dma_subsystem:
     manifest: mock_data/dma_subsystem/project_manifest.yaml
-    description: "Mock DMA project (Phase 0-2 demo)"
+    description: "Sample DMA project (Phase 0-2 demo)"
   axi2ahb:
     manifest: mock_data/axi2ahb/project_manifest.yaml
-    description: "Sample AXI2AHB bridge URG report (Phase 3 demo)"
-  axi2ahb_real:                    # ← 新增
-    manifest: mock_data/axi2ahb/project_manifest_real.yaml
-    description: "Real AXI2AHB project with VCS execution"
+    description: "AXI2AHB project with VCS execution"
 ```
 
 ### 3.5 构建真实索引
@@ -209,7 +198,7 @@ cat .mcp.json
 # {
 #   "mcpServers": {
 #     "dv-context": {
-#       "command": ".venv/bin/python",
+#       "command": "python3",
 #       "args": ["-m", "dv_mcp.dv_context_server.server"],
 #       "env": {
 #         "PYTHONPATH": "."
@@ -226,7 +215,7 @@ cat .mcp.json
 make run-server
 
 # 在另一个终端验证
-.venv/bin/python -c "
+python3 -c "
 from dv_mcp.dv_context_server.tools.coverage_tools import cov_list_uncovered
 result = cov_list_uncovered('axi2ahb_real', coverage_type='functional', top_n=5)
 print('OK:', result['ok'])
@@ -278,38 +267,33 @@ ls sim_results/base_test_1/
 
 ## 步骤 6: 端到端测试
 
-### 6.1 Mock 模式测试 (安全)
+### 6.1 Dry-run 模式测试 (安全)
 
 ```bash
 cd /path/to/cov_flow
 
-# 使用 mock manifest
+# 使用 dry-run 模式渲染命令（不执行）
 python scripts/sim_runner.py \
   --manifest mock_data/axi2ahb/project_manifest.yaml \
   --test base_test \
   --seed 1 \
-  --out /tmp/mock_result.json
-
-# 验证输出
-cat /tmp/mock_result.json | jq '.status'
-# 期望: "dry_run"
+  --dry-run
 ```
 
 ### 6.2 Real 模式测试 (需要 VCS)
 
 ```bash
-# 使用 real manifest
+# 执行真实仿真
 python scripts/sim_runner.py \
-  --manifest mock_data/axi2ahb/project_manifest_real.yaml \
+  --manifest mock_data/axi2ahb/project_manifest.yaml \
   --test base_test \
-  --seed 1 \
-  --real
+  --seed 1
 
 # 检查输出
 ls mock_data/axi2ahb/sim_results/base_test_1/
 # 期望: run.log, sim_result.json, coverage/
 
-cat mock_data/axi2ahb/sim_results/base_test_1/sim_result.json | jq '.status'
+cat mock_data/axi2ahb/sim_results/base_test_1/sim_result.json | jq '.run.status'
 # 期望: "pass"
 ```
 
@@ -318,11 +302,9 @@ cat mock_data/axi2ahb/sim_results/base_test_1/sim_result.json | jq '.status'
 ```bash
 # 手动触发 URG
 python scripts/sim_runner.py \
-  --manifest mock_data/axi2ahb/project_manifest_real.yaml \
+  --manifest mock_data/axi2ahb/project_manifest.yaml \
   --test base_test \
-  --seed 1 \
-  --real \
-  --urg
+  --seed 1
 
 # 检查 URG 输出
 ls mock_data/axi2ahb/sim_results/base_test_1/urg_report/
@@ -334,13 +316,12 @@ ls mock_data/axi2ahb/sim_results/base_test_1/urg_report/
 ```bash
 # 再跑一个测试
 python scripts/sim_runner.py \
-  --manifest mock_data/axi2ahb/project_manifest_real.yaml \
+  --manifest mock_data/axi2ahb/project_manifest.yaml \
   --test base_test \
-  --seed 2 \
-  --real
+  --seed 2
 
 # 计算 diff
-.venv/bin/python -c "
+python3 -c "
 from lib.coverage_diff import compute_diff
 import json
 
@@ -465,7 +446,7 @@ urg -dir sim_results/base_test_1/coverage/base_test_1.vdb \
 cat .mcp.json | python -m json.tool
 
 # 手动测试 server
-.venv/bin/python -m dv_mcp.dv_context_server.server --help
+python3 -m dv_mcp.dv_context_server.server --help
 
 # 检查 Claude Code 是否识别 MCP server
 # 在 Claude Code 中输入: /mcp
@@ -485,9 +466,9 @@ echo $AXI2AHB_ROOT
 export AXI2AHB_ROOT=/path/to/AXI2AHB-Lite-Bridge-UVM-Verification
 
 # 验证 manifest 能解析
-.venv/bin/python -c "
+python3 -c "
 from lib.manifest import Manifest
-m = Manifest.load('mock_data/axi2ahb/project_manifest_real.yaml')
+m = Manifest.load('mock_data/axi2ahb/project_manifest.yaml')
 print('project_root:', m.get('project_root'))
 print('Resolved:', m.resolve_path(m.get('project_root')))
 "
@@ -553,12 +534,12 @@ cat > SERVER_CONFIG.md << 'EOF'
 - AXI2AHB_ROOT: /home/user/projects/AXI2AHB-Lite-Bridge-UVM-Verification
 
 ## MCP Server
-- Command: .venv/bin/python -m dv_mcp.dv_context_server.server
+- Command: python3 -m dv_mcp.dv_context_server.server
 - Env: PYTHONPATH=.
 
 ## Projects
-- dma_subsystem: mock (Phase 0-2 demo)
-- axi2ahb: mock (Phase 3 demo)
+- dma_subsystem: sample (Phase 0-2 demo)
+- axi2ahb: sample (Phase 3 demo)
 - axi2ahb_real: real (VCS execution enabled)
 
 ## Test Results
@@ -584,14 +565,14 @@ git push
 - [ ] Git clone on server
 - [ ] Install Python dependencies
 - [ ] Set AXI2AHB_ROOT environment variable
-- [ ] Create project_manifest_real.yaml
+- [ ] Configure project_manifest.yaml with VCS commands
 - [ ] Update projects.yaml
 - [ ] Build real indexes (tb_index.json, coverage_index.json)
 - [ ] Configure .mcp.json
 - [ ] Test MCP server
 - [ ] Verify VCS availability
 - [ ] Test compile/run/urg commands
-- [ ] Run mock mode test
+- [ ] Run dry-run mode test
 - [ ] Run real mode test
 - [ ] Start Claude Code
 - [ ] Test 4 workflows (triage, scenario, generation, feedback)

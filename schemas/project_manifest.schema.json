@@ -167,12 +167,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "mode": {
-          "type": "string",
-          "enum": ["mock", "real"],
-          "default": "mock",
-          "description": "Simulation execution mode. 'mock' returns fake data (safe default). 'real' executes VCS subprocess."
-        },
         "compile_cmd_template": {
           "type": "string",
           "description": "Compile command template. Use {test} placeholder.",

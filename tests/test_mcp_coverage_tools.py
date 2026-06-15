@@ -6,6 +6,7 @@ from dv_mcp.dv_context_server.services.project_loader import clear_cache
 from dv_mcp.dv_context_server.tools.coverage_tools import (
     cov_get_coverpoint_source,
     cov_get_gap_detail,
+    cov_get_hit_history,
     cov_list_uncovered,
 )
 
@@ -150,29 +151,29 @@ class TestCovGetCoverpointSource:
         assert "dma_desc_cg" in result["result"]["source_snippet"]
         assert "desc_mode_cp" in result["result"]["source_snippet"]
 
-    def test_code_coverage_gap_mock_fallback(self) -> None:
+    def test_code_coverage_gap_synthetic(self) -> None:
         """GAP_L001 source_file (rtl/dma_desc_parser.sv) is not under coverage_model_root."""
         result = cov_get_coverpoint_source(PROJECT, "GAP_L001")
         assert result["ok"] is True
-        assert result["result"]["source_mode"] == "mock_fallback"
+        assert result["result"]["source_mode"] == "synthetic"
         assert "Mock line coverage source" in result["result"]["source_snippet"]
 
     def test_source_mode_field_present(self) -> None:
         result = cov_get_coverpoint_source(PROJECT, "GAP_0001")
         assert "source_mode" in result["result"]
-        assert result["result"]["source_mode"] in ("real", "mock_fallback")
+        assert result["result"]["source_mode"] in ("real", "synthetic")
 
     def test_toggle_gap_source(self) -> None:
         result = cov_get_coverpoint_source(PROJECT, "GAP_T001")
         assert result["ok"] is True
-        assert result["result"]["source_mode"] == "mock_fallback"
+        assert result["result"]["source_mode"] == "synthetic"
         assert "Mock toggle coverage source" in result["result"]["source_snippet"]
         assert "burst_wrap" in result["result"]["source_snippet"]
 
     def test_fsm_gap_source(self) -> None:
         result = cov_get_coverpoint_source(PROJECT, "GAP_M001")
         assert result["ok"] is True
-        assert result["result"]["source_mode"] == "mock_fallback"
+        assert result["result"]["source_mode"] == "synthetic"
         assert "Mock FSM coverage source" in result["result"]["source_snippet"]
         assert "PARSE_SG" in result["result"]["source_snippet"]
 
@@ -183,14 +184,47 @@ AXI2AHB_PROJECT = "mock_data/axi2ahb/project_manifest.yaml"
 class TestCovGetCoverpointSourceAxi2ahb:
     """Test source resolver behavior with axi2ahb (coverage_model_root=null)."""
 
-    def test_mock_fallback_when_no_coverage_model_root(self) -> None:
-        """axi2ahb has coverage_model_root=null, so all gaps use mock_fallback."""
+    def test_synthetic_when_no_coverage_model_root(self) -> None:
+        """axi2ahb has coverage_model_root=null, so all gaps use synthetic."""
         result = cov_get_coverpoint_source(AXI2AHB_PROJECT, "GAP_L001")
         assert result["ok"] is True
-        assert result["result"]["source_mode"] == "mock_fallback"
+        assert result["result"]["source_mode"] == "synthetic"
         assert "Mock" in result["result"]["source_snippet"]
 
-    def test_functional_gap_mock_fallback(self) -> None:
+    def test_functional_gap_synthetic(self) -> None:
         result = cov_get_coverpoint_source(AXI2AHB_PROJECT, "GAP_0001")
         assert result["ok"] is True
-        assert result["result"]["source_mode"] == "mock_fallback"
+        assert result["result"]["source_mode"] == "synthetic"
+
+
+class TestCovGetHitHistory:
+    """Tests for cov_get_hit_history MCP tool."""
+
+    def test_improving_gap(self) -> None:
+        result = cov_get_hit_history(PROJECT, "GAP_0002")
+        assert result["ok"] is True
+        assert result["result"]["gap_id"] == "GAP_0002"
+        assert result["result"]["trend"] == "improving"
+        assert result["result"]["first_covered"] is not None
+        assert len(result["result"]["hit_history"]) >= 1
+
+    def test_never_covered_gap(self) -> None:
+        result = cov_get_hit_history(PROJECT, "GAP_0004")
+        assert result["ok"] is True
+        assert result["result"]["trend"] == "never_covered"
+        assert result["result"]["first_covered"] is None
+
+    def test_stable_gap(self) -> None:
+        result = cov_get_hit_history(PROJECT, "GAP_0003")
+        assert result["ok"] is True
+        assert result["result"]["trend"] == "stable"
+
+    def test_gap_not_found(self) -> None:
+        result = cov_get_hit_history(PROJECT, "GAP_9999")
+        assert result["ok"] is False
+        assert "not found" in result["error"].lower()
+
+    def test_has_evidence(self) -> None:
+        result = cov_get_hit_history(PROJECT, "GAP_0001")
+        assert len(result["evidence"]) > 0
+        assert result["evidence"][0]["source_type"] == "coverage_report"

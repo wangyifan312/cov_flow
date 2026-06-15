@@ -1,5 +1,7 @@
 # Server Migration Quick Checklist
 
+> **新项目接入**请使用 [项目接入指南](project_onboarding.md)。本文档专注于已有项目的服务器迁移场景。
+
 ## 本地操作 (当前机器)
 
 ```bash
@@ -12,9 +14,9 @@ git commit -m "feat(phase-5b): real simulation execution infrastructure
 - SimExecutor: subprocess management with security boundaries
 - SimLogParser: VCS/UVM log parsing with priority-based pass/fail detection  
 - UrgRunner: URG report generation and parsing pipeline
-- Manifest schema: mode: mock|real, 7 new simulation fields
+- Manifest schema: 6 new simulation fields
 - MCP tools: real mode branching for 4 sim tools
-- CLI: sim_runner.py --real flag
+- CLI: sim_runner.py --dry-run flag
 - Tests: 521 total, 123 new tests for Phase 5b
 
 Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>"
@@ -32,8 +34,6 @@ git clone https://github.com/your-org/cov_flow.git
 cd cov_flow
 
 # 3. 安装依赖
-python3 -m venv .venv
-source .venv/bin/activate
 pip install -e ".[dev]"
 
 # 4. 验证安装
@@ -45,15 +45,14 @@ make typecheck   # mypy 0
 export AXI2AHB_ROOT=/home/user/projects/AXI2AHB-Lite-Bridge-UVM-Verification
 echo 'export AXI2AHB_ROOT=/home/user/projects/AXI2AHB-Lite-Bridge-UVM-Verification' >> ~/.bashrc
 
-# 6. 创建 real manifest
-cp mock_data/axi2ahb/project_manifest_real.yaml.example mock_data/axi2ahb/project_manifest_real.yaml
-# 编辑确认配置正确
+# 6. 编辑 manifest 配置真实仿真命令
+# 编辑 mock_data/axi2ahb/project_manifest.yaml，设置 VCS 命令模板
 
 # 7. 更新项目注册表
 cat >> projects.yaml << 'EOF'
   axi2ahb_real:
-    manifest: mock_data/axi2ahb/project_manifest_real.yaml
-    description: "Real AXI2AHB project with VCS execution"
+    manifest: mock_data/axi2ahb/project_manifest.yaml
+    description: "AXI2AHB project with VCS execution"
 EOF
 
 # 8. 构建真实索引
@@ -76,16 +75,15 @@ ls simv
 # 12. 返回 cov_flow
 cd -
 
-# 13. 测试 mock 模式
+# 13. 测试 dry-run 模式
 python scripts/sim_runner.py \
   --manifest mock_data/axi2ahb/project_manifest.yaml \
-  --test base_test --seed 1 --out /tmp/test.json
-cat /tmp/test.json | grep dry_run
+  --test base_test --seed 1 --dry-run
 
 # 14. 测试 real 模式 (如果步骤 11 成功)
 python scripts/sim_runner.py \
-  --manifest mock_data/axi2ahb/project_manifest_real.yaml \
-  --test base_test --seed 1 --real
+  --manifest mock_data/axi2ahb/project_manifest.yaml \
+  --test base_test --seed 1
 
 # 15. 启动 Claude Code
 claude
@@ -113,7 +111,7 @@ echo "3. Lint + typecheck..."
 make lint | grep "0 issues" && make typecheck | grep "0 errors"
 
 echo "4. MCP server..."
-.venv/bin/python -c "from dv_mcp.dv_context_server.server import mcp; print('✓ OK')"
+python3 -c "from dv_mcp.dv_context_server.server import mcp; print('✓ OK')"
 
 echo "5. AXI2AHB_ROOT..."
 [ -n "$AXI2AHB_ROOT" ] && echo "✓ $AXI2AHB_ROOT"

@@ -83,6 +83,16 @@ A gap may have multiple contributing factors. Use compound labels when appropria
 
 List the primary classification first, followed by secondary factors.
 
+## Cross-Coverage Bins
+
+Cross-coverage bins (where two or more coverpoints are crossed) require special handling:
+
+- **Overly specific cross**: If the cross condition combines values that are mutually exclusive or practically unreachable together, classify as **Coverage Model Issue** and flag for engineer review.
+- **Missing stimulus for cross**: If both individual coverpoints are hit but the cross bin is not, classify as **Missing Stimulus** — the testbench needs a scenario that exercises both dimensions simultaneously.
+- **Config-dependent cross**: If one dimension of the cross requires specific configuration, classify as **Config Missing + Missing Stimulus** (compound).
+
+When triaging cross-coverage gaps, always check the individual coverpoint hit counts first. If individual bins are also uncovered, address those before the cross.
+
 ## Follow-Up Actions by Classification
 
 | Classification | Next Step |

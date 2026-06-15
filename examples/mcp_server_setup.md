@@ -5,7 +5,7 @@ Closure Skill Pack.
 
 ## Prerequisites
 
-- Python 3.11+, project venv created, dependencies installed
+- Python 3.11+, dependencies installed (`pip install -e ".[dev]"`)
 - Claude Code CLI available on `$PATH`
 
 ## Step 1 — Configure `.mcp.json`
@@ -14,7 +14,7 @@ Copy `.mcp.json.example` from the project root and adjust the Python path:
 
 ```bash
 cp .mcp.json.example .mcp.json
-# Edit .mcp.json: replace <VENV_PATH> with your venv path (e.g., .venv)
+# Ensure .mcp.json uses python3 as command
 ```
 
 The resulting `.mcp.json` should look like:
@@ -23,7 +23,7 @@ The resulting `.mcp.json` should look like:
 {
   "mcpServers": {
     "dv-context": {
-      "command": ".venv/bin/python",
+      "command": "python3",
       "args": ["-m", "dv_mcp.dv_context_server.server"],
       "env": { "PYTHONPATH": "." }
     }
@@ -33,7 +33,7 @@ The resulting `.mcp.json` should look like:
 
 | Field | Purpose |
 |---|---|
-| `command` | Python interpreter inside the project venv |
+| `command` | System Python 3.11+ interpreter |
 | `args` | Module path to the MCP server entry point |
 | `env.PYTHONPATH` | Adds project root to `sys.path` for `lib/`, `dv_mcp/` |
 
@@ -81,7 +81,7 @@ Claude: [calls cov_list_uncovered]
 ## Troubleshooting
 
 **Server not found** — Verify `.mcp.json` is in the project root and `command`
-points to a valid interpreter (`.venv/bin/python --version`). Restart Claude
+points to a valid interpreter (`python3 --version`). Restart Claude
 Code after editing `.mcp.json`.
 
 **Tool returns an error** — Confirm mock indexes exist under
@@ -89,10 +89,10 @@ Code after editing `.mcp.json`.
 `make validate`.
 
 **Import errors** (`ModuleNotFoundError: No module named 'dv_mcp'`) — Ensure
-`PYTHONPATH=.` is set in `.mcp.json`. Reinstall: `.venv/bin/pip install -e ".[dev]"`.
+`PYTHONPATH=.` is set in `.mcp.json`. Reinstall: `pip install -e ".[dev]"`.
 
 **Smoke test fails** — Run directly for verbose output:
-`PYTHONPATH=. .venv/bin/python scripts/smoke_server.py`
+`PYTHONPATH=. python3 scripts/smoke_server.py`
 
 ## Next Steps
 

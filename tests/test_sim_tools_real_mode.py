@@ -286,9 +286,8 @@ class TestSimGetTestResultRealMode:
             test="nonexistent",
             seed=999,
         )
-        # Should fall through to mock behavior or return not_found
-        assert result["ok"] is True
-        assert result["result"]["sim_status"] in ["not_found", "unknown"]
+        # Should return not_found error
+        assert result["ok"] is False
 
 
 class TestSimSearchLogRealMode:
@@ -553,15 +552,15 @@ policy:
 class TestSimGetTestResultEdgeCases:
     """Additional edge case tests for sim_get_test_result."""
 
-    def test_null_seed_falls_back_to_mock(self, real_manifest: Path):
-        """Tool falls back to mock behavior when seed is None."""
+    def test_null_seed_returns_not_found(self, real_manifest: Path):
+        """Tool returns not_found status when seed is None."""
         result = sim_get_test_result(
             project=str(real_manifest),
             test="my_test",
             seed=None,
         )
         assert result["ok"] is True
-        # Should return mock/default result
+        # Should return not_found status (seed required to locate results)
         assert "sim_status" in result["result"]
 
     def test_result_persistence_across_queries(self, real_manifest: Path):

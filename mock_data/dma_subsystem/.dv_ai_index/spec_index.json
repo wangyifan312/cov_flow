@@ -3,7 +3,7 @@
   "source": "spec/dma_fs.md",
   "sections": [
     {
-      "section_id": "spec_dma_overview",
+      "section_id": "spec_subsystem_overview",
       "title": "1. DMA Subsystem Overview",
       "page_range": "1-5",
       "feature_tags": [
@@ -13,7 +13,7 @@
       "summary": "High-level architecture of the DMA subsystem including block diagram, address map, and operating modes."
     },
     {
-      "section_id": "spec_dma_descriptor_format",
+      "section_id": "spec_descriptor_format",
       "title": "2. Descriptor Format",
       "page_range": "6-15",
       "feature_tags": [
@@ -24,7 +24,7 @@
       "summary": "Defines the normal descriptor layout: source address, destination address, transfer size, control flags."
     },
     {
-      "section_id": "spec_dma_linked_list",
+      "section_id": "spec_linked_list_descriptor_mode",
       "title": "3. Linked-List Descriptor Mode",
       "page_range": "16-22",
       "feature_tags": [
@@ -35,7 +35,7 @@
       "summary": "Linked-list mode allows chaining multiple descriptors via a next-pointer field. Enabled by DMA_CFG.LL_MODE_EN. Parser transitions to LINK_DESC state when ll_mode_en is asserted."
     },
     {
-      "section_id": "spec_dma_scatter_gather",
+      "section_id": "spec_scatter_gather_descriptor_mode",
       "title": "4. Scatter-Gather Descriptor Mode",
       "page_range": "23-30",
       "feature_tags": [
@@ -45,7 +45,7 @@
       "summary": "Scatter-gather mode supports non-contiguous memory regions. Enabled by DMA_CFG.SG_MODE_EN."
     },
     {
-      "section_id": "spec_dma_chaining",
+      "section_id": "spec_descriptor_chaining",
       "title": "5. Descriptor Chaining",
       "page_range": "31-38",
       "feature_tags": [
@@ -56,7 +56,7 @@
       "summary": "Descriptor chaining allows back-to-back descriptor processing without CPU intervention. Chain of 3+ descriptors exercises the pipeline depth."
     },
     {
-      "section_id": "spec_dma_alignment",
+      "section_id": "spec_address_alignment_rules",
       "title": "6. Address Alignment Rules",
       "page_range": "39-42",
       "feature_tags": [
@@ -67,7 +67,7 @@
       "summary": "Source and destination addresses must be aligned to transfer size. Misaligned addresses trigger an error interrupt."
     },
     {
-      "section_id": "spec_dma_interrupts",
+      "section_id": "spec_interrupt_system",
       "title": "7. Interrupt System",
       "page_range": "43-55",
       "feature_tags": [
@@ -78,7 +78,7 @@
       "summary": "DMA supports completion, error, and coalescing interrupts. Coalescing can be by count threshold or timeout. Masked interrupts remain pending until unmasked."
     },
     {
-      "section_id": "spec_dma_errors",
+      "section_id": "spec_error_handling",
       "title": "8. Error Handling",
       "page_range": "56-62",
       "feature_tags": [
@@ -89,7 +89,7 @@
       "summary": "Error conditions: bus error, descriptor fetch error, alignment error, timeout. Each generates an error interrupt if unmasked."
     },
     {
-      "section_id": "spec_dma_power",
+      "section_id": "spec_power_management",
       "title": "9. Power Management",
       "page_range": "63-70",
       "feature_tags": [
@@ -100,7 +100,7 @@
       "summary": "Clock gating on idle channels. Retention mode preserves register state during power-down. Retention mode is only available in specific silicon revisions."
     },
     {
-      "section_id": "spec_dma_burst",
+      "section_id": "spec_axi_burst_configuration",
       "title": "10. AXI Burst Configuration",
       "page_range": "71-80",
       "feature_tags": [
@@ -112,7 +112,7 @@
       "summary": "Supports INCR, WRAP, and FIXED burst types. Max burst length configurable up to 256 beats. WRAP burst wraps at power-of-2 boundaries."
     },
     {
-      "section_id": "spec_dma_performance",
+      "section_id": "spec_performance_characteristics",
       "title": "11. Performance Characteristics",
       "page_range": "81-90",
       "feature_tags": [

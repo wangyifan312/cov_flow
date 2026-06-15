@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "dv-context": {
-      "command": "<VENV_PATH>/bin/python",
+      "command": "python3",
       "args": ["-m", "dv_mcp.dv_context_server.server"],
       "env": {
         "PYTHONPATH": "."

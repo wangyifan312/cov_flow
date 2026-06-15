@@ -33,7 +33,7 @@ MOCK_SPEC_INDEX = {
     "source": "spec/dma_fs.md",
     "sections": [
         {
-            "section_id": "spec_dma_overview",
+            "section_id": "spec_subsystem_overview",
             "title": "1. DMA Subsystem Overview",
             "page_range": "1-5",
             "feature_tags": ["dma", "overview"],
@@ -43,7 +43,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_descriptor_format",
+            "section_id": "spec_descriptor_format",
             "title": "2. Descriptor Format",
             "page_range": "6-15",
             "feature_tags": ["descriptor", "normal_mode", "descriptor_format"],
@@ -53,7 +53,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_linked_list",
+            "section_id": "spec_linked_list_descriptor_mode",
             "title": "3. Linked-List Descriptor Mode",
             "page_range": "16-22",
             "feature_tags": ["descriptor", "linked_list", "chaining"],
@@ -64,7 +64,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_scatter_gather",
+            "section_id": "spec_scatter_gather_descriptor_mode",
             "title": "4. Scatter-Gather Descriptor Mode",
             "page_range": "23-30",
             "feature_tags": ["descriptor", "scatter_gather"],
@@ -74,7 +74,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_chaining",
+            "section_id": "spec_descriptor_chaining",
             "title": "5. Descriptor Chaining",
             "page_range": "31-38",
             "feature_tags": ["descriptor", "chaining", "back_to_back"],
@@ -85,7 +85,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_alignment",
+            "section_id": "spec_address_alignment_rules",
             "title": "6. Address Alignment Rules",
             "page_range": "39-42",
             "feature_tags": ["descriptor", "alignment", "error"],
@@ -95,7 +95,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_interrupts",
+            "section_id": "spec_interrupt_system",
             "title": "7. Interrupt System",
             "page_range": "43-55",
             "feature_tags": ["interrupt", "coalescing", "masking"],
@@ -106,7 +106,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_errors",
+            "section_id": "spec_error_handling",
             "title": "8. Error Handling",
             "page_range": "56-62",
             "feature_tags": ["error", "interrupt", "bus_error"],
@@ -117,7 +117,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_power",
+            "section_id": "spec_power_management",
             "title": "9. Power Management",
             "page_range": "63-70",
             "feature_tags": ["power", "clock_gating", "retention"],
@@ -128,7 +128,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_burst",
+            "section_id": "spec_axi_burst_configuration",
             "title": "10. AXI Burst Configuration",
             "page_range": "71-80",
             "feature_tags": ["burst", "axi", "wrap", "increment"],
@@ -139,7 +139,7 @@ MOCK_SPEC_INDEX = {
             )
         },
         {
-            "section_id": "spec_dma_performance",
+            "section_id": "spec_performance_characteristics",
             "title": "11. Performance Characteristics",
             "page_range": "81-90",
             "feature_tags": ["performance", "throughput", "back_to_back"],
@@ -444,17 +444,13 @@ MOCK_RTL_INDEX = {
         }
     ],
     "hierarchy": {
-        "tb_top": {
-            "u_dut": {
-                "u_dma_subsys": {
-                    "u_dma": {
-                        "u_desc_parser": {},
-                        "u_axi_master": {},
-                        "u_int_ctrl": {},
-                        "u_power": {},
-                        "u_monitor": {}
-                    }
-                }
+        "dma_subsystem": {
+            "u_dma": {
+                "u_desc_parser": {},
+                "u_axi_master": {},
+                "u_int_ctrl": {},
+                "u_power": {},
+                "u_monitor": {}
             }
         }
     }

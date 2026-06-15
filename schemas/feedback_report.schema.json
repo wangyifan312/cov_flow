@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "feedback_report.schema.json",
+  "title": "Feedback Report",
+  "description": "Structured report from simulation feedback analysis for a coverage gap.",
+  "type": "object",
+  "required": [
+    "gap_id",
+    "test",
+    "seed",
+    "compile_status",
+    "sim_status",
+    "coverage_delta",
+    "root_cause",
+    "next_actions",
+    "confidence"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "gap_id": {
+      "type": "string",
+      "pattern": "^GAP_(?:[A-Z][0-9]{3}|[0-9]{4})$",
+      "description": "Target gap identifier."
+    },
+    "test": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the test that was run."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Random seed used for the simulation."
+    },
+    "compile_status": {
+      "type": "string",
+      "enum": ["pass", "fail", "unknown"],
+      "description": "Compilation result status."
+    },
+    "sim_status": {
+      "type": "string",
+      "enum": ["pass", "fail", "timeout", "unknown", "not_found"],
+      "description": "Simulation result status."
+    },
+    "coverage_delta": {
+      "type": "object",
+      "description": "Coverage change per gap_id: {gap_id: {before: int, after: int, delta: int}}",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["before", "after", "delta"],
+        "additionalProperties": false,
+        "properties": {
+          "before": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Hit count before the test."
+          },
+          "after": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Hit count after the test."
+          },
+          "delta": {
+            "type": "integer",
+            "description": "Change in hit count (after - before)."
+          }
+        }
+      }
+    },
+    "root_cause": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Analysis of why the gap remains uncovered."
+    },
+    "next_actions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Recommended next steps to close the gap."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low"],
+      "description": "Confidence level of the root cause analysis."
+    },
+    "log_summary": {
+      "type": "string",
+      "description": "Summary of relevant simulation log messages."
+    },
+    "uvm_counts": {
+      "type": "object",
+      "description": "UVM message counts from the simulation log.",
+      "additionalProperties": false,
+      "properties": {
+        "info": { "type": "integer", "minimum": 0 },
+        "warning": { "type": "integer", "minimum": 0 },
+        "error": { "type": "integer", "minimum": 0 },
+        "fatal": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidence_id": { "type": "string" },
+          "source_type": { "type": "string" },
+          "source_ref": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      },
+      "description": "Supporting evidence entries for the analysis."
+    }
+  }
+}

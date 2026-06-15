@@ -1,7 +1,7 @@
 # UVM Code Generation Rules
 
 Detailed rules for generating UVM testcases, sequences, and components.
-This extends the generic testcase_generation_rules.md with UVM-specific guidance.
+This extends the generic rules defined in `skills/dv-coverage-closure/references/testcase_generation_rules.md` with UVM-specific guidance.
 
 ## Inheritance and Reuse Requirements
 
