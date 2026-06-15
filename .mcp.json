@@ -4,7 +4,7 @@
       "command": "python3",
       "args": ["-m", "dv_mcp.dv_context_server.server"],
       "env": {
-        "PYTHONPATH": "."
+        "PYTHONPATH": "${CLAUDE_PLUGIN_ROOT}"
       }
     }
   }

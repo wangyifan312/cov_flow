@@ -1,0 +1,15 @@
+{
+  "name": "dv-coverage-closure",
+  "displayName": "DV AI Coverage Closure",
+  "version": "0.6.0",
+  "description": "数字IC验证覆盖率闭环工具包 — 26个MCP工具 + 5个Skill，覆盖triage、场景生成、testcase生成、仿真反馈全流程",
+  "author": {
+    "name": "wangyifan312",
+    "email": "w1259032138@gmail.com"
+  },
+  "repository": "https://github.com/wangyifan312/cov_flow",
+  "license": "Proprietary - Internal use only",
+  "keywords": ["verification", "coverage", "uvm", "systemverilog", "ic", "eda"],
+  "skills": "./skills/",
+  "homepage": "https://github.com/wangyifan312/cov_flow#readme"
+}
