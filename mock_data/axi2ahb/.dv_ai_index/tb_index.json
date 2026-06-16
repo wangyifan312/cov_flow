@@ -2,7 +2,7 @@
   "schema_version": "tb_index.v1",
   "env_root": "env",
   "sequence_root": "seq_lib",
-  "generated_at": "2026-06-03T03:53:11.330517+00:00",
+  "generated_at": "2026-06-16T10:35:50.446050+00:00",
   "base_tests": [
     {
       "name": "base_test",
@@ -1207,6 +1207,91 @@
       ]
     },
     {
+      "name": "wrap8_targeted_virt_seq",
+      "file": "seq_lib/wrap8_targeted_virt_seq.sv",
+      "extends": "base_virtual_sequence",
+      "description": "---------------------------------------------------------------------------",
+      "feature_tags": [
+        "read",
+        "wrap",
+        "write"
+      ],
+      "api_methods": [
+        {
+          "name": "body",
+          "signature": "",
+          "is_task": true,
+          "description": "---- Body ---------------------------------------------------------------"
+        },
+        {
+          "name": "run_fd_write_bd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": "---- FD Write + BD Read -------------------------------------------------"
+        },
+        {
+          "name": "run_bd_write_fd_read",
+          "signature": "int unsigned idx",
+          "is_task": true,
+          "description": "---- BD Write + FD Read -------------------------------------------------"
+        },
+        {
+          "name": "build_frontdoor_beats",
+          "signature": "input int unsigned idx,\n    output bit [`DATA_WIDTH-1:0] beats[]",
+          "is_task": true,
+          "description": "---- Helper: build frontdoor beats (copied from template) ----------------"
+        },
+        {
+          "name": "bd_write_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": true,
+          "description": "---- Helper: backdoor write payload (copied from template) ---------------"
+        },
+        {
+          "name": "bd_read_payload",
+          "signature": "input  bit [`ADDR_WIDTH-1:0] beat_addr,\n    input  axi_size_e            size,\n    output bit [63:0]            payload",
+          "is_task": true,
+          "description": "---- Helper: backdoor read payload (copied from template) ----------------"
+        },
+        {
+          "name": "new",
+          "signature": "string name = \"wrap8_targeted_virt_seq\"",
+          "is_task": false,
+          "description": "---- Constructor --------------------------------------------------------"
+        },
+        {
+          "name": "add_tag",
+          "signature": "",
+          "is_task": false,
+          "description": "---- Tag ----------------------------------------------------------------"
+        },
+        {
+          "name": "pack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [63:0]            payload",
+          "is_task": false,
+          "description": "---- Helper: pack payload into frontdoor word (copied from template) -----"
+        },
+        {
+          "name": "unpack_frontdoor_payload",
+          "signature": "input bit [`ADDR_WIDTH-1:0] beat_addr,\n    input axi_size_e            size,\n    input bit [`DATA_WIDTH-1:0] beat_word",
+          "is_task": false,
+          "description": "---- Helper: unpack frontdoor word to payload (copied from template) -----"
+        },
+        {
+          "name": "mask_payload",
+          "signature": "input bit [63:0] payload,\n    input axi_size_e size",
+          "is_task": false,
+          "description": "---- Helper: mask payload to active bytes (copied from template) ---------"
+        },
+        {
+          "name": "compare_payload",
+          "signature": "input bit [63:0] expected,\n    input bit [63:0] actual,\n    input axi_size_e size,\n    input string     exp_id,\n    input string     act_id",
+          "is_task": false,
+          "description": "---- Helper: compare expected vs actual payload (copied from template) ---"
+        }
+      ]
+    },
+    {
       "name": "wrap_random_len_size_wr_virt_seq",
       "file": "seq_lib/wrap_random_len_size_wr_virt_seq.sv",
       "extends": "base_virtual_sequence",
@@ -1447,6 +1532,19 @@
       "feature_tags": [
         "read",
         "single",
+        "write"
+      ]
+    },
+    {
+      "name": "wrap8_targeted_test",
+      "file": "tests/wrap8_targeted_test.sv",
+      "extends": "base_test",
+      "sequences": [
+        "wrap8_targeted_virt_seq"
+      ],
+      "feature_tags": [
+        "read",
+        "wrap",
         "write"
       ]
     },

@@ -173,216 +173,204 @@ Line Coverage for Module : <a href="mod22.html" >uvm_custom_install_verdi_record
 <tr class="s0"><td class="lf">ROUTINE</td><td>786</td><td>47</td><td>0</td><td>0.00</td></tr>
 </table>
 <pre class="code"><br clear=all>
-<span style="margin-left:8px;"></span>102                     `ifdef VCS
-<span style="margin-left:8px;"></span>103        <font color = "red">0/1     ==>  import &quot;DPI-C&quot; function string getenv(input string env_name);</font>
-<span style="margin-left:8px;"></span>104                     `endif
-<span style="margin-left:8px;"></span>105                        `include &quot;uvm_verdi_pli.svh&quot; //Hide dumper tasks inside this module
-<span style="margin-left:8px;"></span>106                        static uvm_cmdline_processor clp;
-<span style="margin-left:8px;"></span>107                        string tr_args[$];
-<span style="margin-left:8px;"></span>108                        uvm_coreservice_t cs;
-<span style="margin-left:8px;"></span>109                        uvm_verdi_tr_database verdi_db;
-<span style="margin-left:8px;"></span>110                        uvm_factory factory;
-<span style="margin-left:8px;"></span>111                     `ifndef UVM_VERDI_NO_FACTORY_RECORDING
-<span style="margin-left:8px;"></span>112                        uvm_verdi_factory verdi_factory;
-<span style="margin-left:8px;"></span>113                     `endif
-<span style="margin-left:8px;"></span>114                        process p;
-<span style="margin-left:8px;"></span>115                        string rand_state;
-<span style="margin-left:8px;"></span>116                     `ifdef VCS
-<span style="margin-left:8px;"></span>117                        string env_str,vc_env_str=&quot;&quot;,sanity_file_name=&quot;&quot;;
-<span style="margin-left:8px;"></span>118                        int file_handle=0, is_sanity_exist=0, is_vpd_record = 0;
-<span style="margin-left:8px;"></span>119                        string env_vcs_home = &quot;&quot;, env_vcs_uvm_home =&quot;&quot;;
-<span style="margin-left:8px;"></span>120                        int is_vcs_home_exist = 0, is_vcs_uvm_home_exist = 0;
-<span style="margin-left:8px;"></span>121                     `endif 
-<span style="margin-left:8px;"></span>122                     
-<span style="margin-left:8px;"></span>123                        initial begin
-<span style="margin-left:8px;"></span>124        1/1               p = process::self();
-<span style="margin-left:8px;"></span>125        1/1               if (p != null)
-<span style="margin-left:8px;"></span>126        1/1                   rand_state = p.get_randstate();
+102                     `ifdef VCS
+103        <font color = "red">0/1     ==>  import &quot;DPI-C&quot; function string getenv(input string env_name);</font>
+104                     `endif
+105                        `include &quot;uvm_verdi_pli.svh&quot; //Hide dumper tasks inside this module
+106                        static uvm_cmdline_processor clp;
+107                        string tr_args[$];
+108                        uvm_coreservice_t cs;
+109                        uvm_verdi_tr_database verdi_db;
+110                        uvm_factory factory;
+111                     `ifndef UVM_VERDI_NO_FACTORY_RECORDING
+112                        uvm_verdi_factory verdi_factory;
+113                     `endif
+114                        process p;
+115                        string rand_state;
+116                     `ifdef VCS
+117                        string env_str,vc_env_str=&quot;&quot;,sanity_file_name=&quot;&quot;;
+118                        int file_handle=0, is_sanity_exist=0, is_vpd_record = 0;
+119                        string env_vcs_home = &quot;&quot;, env_vcs_uvm_home =&quot;&quot;;
+120                        int is_vcs_home_exist = 0, is_vcs_uvm_home_exist = 0;
+121                     `endif 
+122                     
+123                        initial begin
+124        1/1               p = process::self();
+125        1/1               if (p != null)
+126        1/1                   rand_state = p.get_randstate();
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>127        1/1               verdi_clp = verdi_cmdline_processor::get_inst();
-<span style="margin-left:8px;"></span>128        1/1               clp = uvm_cmdline_processor::get_inst();
-<span style="margin-left:8px;"></span>129        1/1               pli_inst = uvm_verdi_pli::get_inst();
-<span style="margin-left:8px;"></span>130        1/1               cs = uvm_coreservice_t::get();
-<span style="margin-left:8px;"></span>131                     `ifdef VCS
-<span style="margin-left:8px;"></span>132        1/1               env_vcs_home = getenv(&quot;VCS_HOME&quot;);
-<span style="margin-left:8px;"></span>133        1/1               if (env_vcs_home!=&quot;&quot;)
-<span style="margin-left:8px;"></span>134        1/1                   is_vcs_home_exist = 1;
+127        1/1               verdi_clp = verdi_cmdline_processor::get_inst();
+128        1/1               clp = uvm_cmdline_processor::get_inst();
+129        1/1               pli_inst = uvm_verdi_pli::get_inst();
+130        1/1               cs = uvm_coreservice_t::get();
+131                     `ifdef VCS
+132        1/1               env_vcs_home = getenv(&quot;VCS_HOME&quot;);
+133        1/1               if (env_vcs_home!=&quot;&quot;)
+134        1/1                   is_vcs_home_exist = 1;
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>135        1/1               env_vcs_uvm_home = getenv(&quot;VCS_UVM_HOME&quot;);
-<span style="margin-left:8px;"></span>136        1/1               if (env_vcs_uvm_home!=&quot;&quot;)
-<span style="margin-left:8px;"></span>137        <font color = "red">0/1     ==>           is_vcs_uvm_home_exist = 1;</font>
+135        1/1               env_vcs_uvm_home = getenv(&quot;VCS_UVM_HOME&quot;);
+136        1/1               if (env_vcs_uvm_home!=&quot;&quot;)
+137        <font color = "red">0/1     ==>           is_vcs_uvm_home_exist = 1;</font>
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>138        1/1               if (clp.get_arg_matches(&quot;+UVM_VPD_RECORD&quot;, tr_args))
-<span style="margin-left:8px;"></span>139        <font color = "red">0/1     ==>           is_vpd_record = 1;</font>
+138        1/1               if (clp.get_arg_matches(&quot;+UVM_VPD_RECORD&quot;, tr_args))
+139        <font color = "red">0/1     ==>           is_vpd_record = 1;</font>
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>140        1/1               env_str = getenv(&quot;SNPS_SIM_DEFAULT_GUI&quot;);
-<span style="margin-left:8px;"></span>141        1/1               vc_env_str = getenv(&quot;VC_HOME&quot;);
-<span style="margin-left:8px;"></span>142        1/1               if (vc_env_str!=&quot;&quot;)begin
-<span style="margin-left:8px;"></span>143        <font color = "red">0/1     ==>           sanity_file_name = {vc_env_str,&quot;/etc/.sanity&quot;};</font>
-<span style="margin-left:8px;"></span>144        <font color = "red">0/1     ==>           file_handle = $fopen(sanity_file_name,&quot;r&quot;);</font>
-<span style="margin-left:8px;"></span>145        <font color = "red">0/1     ==>           if (file_handle!=0) begin</font>
-<span style="margin-left:8px;"></span>146        <font color = "red">0/1     ==>               if (is_vpd_record)</font>
-<span style="margin-left:8px;"></span>147        <font color = "red">0/1     ==>                   is_sanity_exist = 0;</font>
-<span style="margin-left:8px;"></span>148                                  else
-<span style="margin-left:8px;"></span>149        <font color = "red">0/1     ==>                   is_sanity_exist = 1;</font>
-<span style="margin-left:8px;"></span>150        <font color = "red">0/1     ==>               $fclose(file_handle);</font>
-<span style="margin-left:8px;"></span>151                              end
+140        1/1               env_str = getenv(&quot;SNPS_SIM_DEFAULT_GUI&quot;);
+141        1/1               vc_env_str = getenv(&quot;VC_HOME&quot;);
+142        1/1               if (vc_env_str!=&quot;&quot;)begin
+143        <font color = "red">0/1     ==>           sanity_file_name = {vc_env_str,&quot;/etc/.sanity&quot;};</font>
+144        <font color = "red">0/1     ==>           file_handle = $fopen(sanity_file_name,&quot;r&quot;);</font>
+145        <font color = "red">0/1     ==>           if (file_handle!=0) begin</font>
+146        <font color = "red">0/1     ==>               if (is_vpd_record)</font>
+147        <font color = "red">0/1     ==>                   is_sanity_exist = 0;</font>
+148                                  else
+149        <font color = "red">0/1     ==>                   is_sanity_exist = 1;</font>
+150        <font color = "red">0/1     ==>               $fclose(file_handle);</font>
+151                              end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>152                          end
+152                          end
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>153                     `endif 
-<span style="margin-left:8px;"></span>154                     
-<span style="margin-left:8px;"></span>155                     `ifndef UVM_NO_VERDI_RECORD
-<span style="margin-left:8px;"></span>156        1/1               if (verdi_clp.is_verdi_trace_ral()) begin
-<span style="margin-left:8px;"></span>157                              uvm_root r_obj;
-<span style="margin-left:8px;"></span>158                              // 9001338477
-<span style="margin-left:8px;"></span>159                              string verb_settings[$];
-<span style="margin-left:8px;"></span>160                              string verb_string;
-<span style="margin-left:8px;"></span>161                              int verb_count;
-<span style="margin-left:8px;"></span>162                              //
-<span style="margin-left:8px;"></span>163                     
-<span style="margin-left:8px;"></span>164                              // 9001338477
-<span style="margin-left:8px;"></span>165        <font color = "red">0/1     ==>           verb_count = clp.get_arg_values(&quot;+UVM_VERBOSITY=&quot;,verb_settings);</font>
-<span style="margin-left:8px;"></span>166        <font color = "red">0/1     ==>           if (verb_count &gt; 0) begin</font>
-<span style="margin-left:8px;"></span>167        <font color = "red">0/1     ==>               verb_string = verb_settings[0];</font>
-<span style="margin-left:8px;"></span>168        <font color = "red">0/1     ==>               case(verb_string)</font>
-<span style="margin-left:8px;"></span>169        <font color = "red">0/1     ==>                &quot;UVM_NONE&quot;    : user_verbosity = UVM_NONE;</font>
-<span style="margin-left:8px;"></span>170        <font color = "red">0/1     ==>                &quot;NONE&quot;        : user_verbosity = UVM_NONE;</font>
-<span style="margin-left:8px;"></span>171        <font color = "red">0/1     ==>                &quot;UVM_LOW&quot;     : user_verbosity = UVM_LOW;</font>
-<span style="margin-left:8px;"></span>172        <font color = "red">0/1     ==>                &quot;LOW&quot;         : user_verbosity = UVM_LOW;</font>
-<span style="margin-left:8px;"></span>173        <font color = "red">0/1     ==>                &quot;UVM_MEDIUM&quot;  : user_verbosity = UVM_MEDIUM;</font>
-<span style="margin-left:8px;"></span>174        <font color = "red">0/1     ==>                &quot;MEDIUM&quot;      : user_verbosity = UVM_MEDIUM;</font>
-<span style="margin-left:8px;"></span>175        <font color = "red">0/1     ==>                &quot;UVM_HIGH&quot;    : user_verbosity = UVM_HIGH;</font>
-<span style="margin-left:8px;"></span>176        <font color = "red">0/1     ==>                &quot;HIGH&quot;        : user_verbosity = UVM_HIGH;</font>
-<span style="margin-left:8px;"></span>177        <font color = "red">0/1     ==>                &quot;UVM_FULL&quot;    : user_verbosity = UVM_FULL;</font>
-<span style="margin-left:8px;"></span>178        <font color = "red">0/1     ==>                &quot;FULL&quot;        : user_verbosity = UVM_FULL;</font>
-<span style="margin-left:8px;"></span>179        <font color = "red">0/1     ==>                &quot;UVM_DEBUG&quot;   : user_verbosity = UVM_DEBUG;</font>
-<span style="margin-left:8px;"></span>180        <font color = "red">0/1     ==>                &quot;DEBUG&quot;       : user_verbosity = UVM_DEBUG;</font>
-<span style="margin-left:8px;"></span>181                                   default       : begin
-<span style="margin-left:8px;"></span>182        <font color = "red">0/1     ==>                  user_verbosity = verb_string.atoi();</font>
-<span style="margin-left:8px;"></span>183        <font color = "red">0/1     ==>                  if(user_verbosity &gt; 0)</font>
-<span style="margin-left:8px;"></span>184        <font color = "red">0/1     ==>                     uvm_report_info(&quot;NSTVERB&quot;, $sformatf(&quot;Non-standard verbosity value, using provided '%0d'.&quot;, user_verbosity), UVM_NONE);</font>
+153                     `endif 
+154                     
+155                     `ifndef UVM_NO_VERDI_RECORD
+156        1/1               if (verdi_clp.is_verdi_trace_ral()) begin
+157                              uvm_root r_obj;
+158                              // 9001338477
+159                              string verb_settings[$];
+160                              string verb_string;
+161                              int verb_count;
+162                              //
+163                     
+164                              // 9001338477
+165        <font color = "red">0/1     ==>           verb_count = clp.get_arg_values(&quot;+UVM_VERBOSITY=&quot;,verb_settings);</font>
+166        <font color = "red">0/1     ==>           if (verb_count &gt; 0) begin</font>
+167        <font color = "red">0/1     ==>               verb_string = verb_settings[0];</font>
+168        <font color = "red">0/1     ==>               case(verb_string)</font>
+169        <font color = "red">0/1     ==>                &quot;UVM_NONE&quot;    : user_verbosity = UVM_NONE;</font>
+170        <font color = "red">0/1     ==>                &quot;NONE&quot;        : user_verbosity = UVM_NONE;</font>
+171        <font color = "red">0/1     ==>                &quot;UVM_LOW&quot;     : user_verbosity = UVM_LOW;</font>
+172        <font color = "red">0/1     ==>                &quot;LOW&quot;         : user_verbosity = UVM_LOW;</font>
+173        <font color = "red">0/1     ==>                &quot;UVM_MEDIUM&quot;  : user_verbosity = UVM_MEDIUM;</font>
+174        <font color = "red">0/1     ==>                &quot;MEDIUM&quot;      : user_verbosity = UVM_MEDIUM;</font>
+175        <font color = "red">0/1     ==>                &quot;UVM_HIGH&quot;    : user_verbosity = UVM_HIGH;</font>
+176        <font color = "red">0/1     ==>                &quot;HIGH&quot;        : user_verbosity = UVM_HIGH;</font>
+177        <font color = "red">0/1     ==>                &quot;UVM_FULL&quot;    : user_verbosity = UVM_FULL;</font>
+178        <font color = "red">0/1     ==>                &quot;FULL&quot;        : user_verbosity = UVM_FULL;</font>
+179        <font color = "red">0/1     ==>                &quot;UVM_DEBUG&quot;   : user_verbosity = UVM_DEBUG;</font>
+180        <font color = "red">0/1     ==>                &quot;DEBUG&quot;       : user_verbosity = UVM_DEBUG;</font>
+181                                   default       : begin
+182        <font color = "red">0/1     ==>                  user_verbosity = verb_string.atoi();</font>
+183        <font color = "red">0/1     ==>                  if(user_verbosity &gt; 0)</font>
+184        <font color = "red">0/1     ==>                     uvm_report_info(&quot;NSTVERB&quot;, $sformatf(&quot;Non-standard verbosity value, using provided '%0d'.&quot;, user_verbosity), UVM_NONE);</font>
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>185        <font color = "red">0/1     ==>                  if(user_verbosity == 0) begin</font>
-<span style="margin-left:8px;"></span>186        <font color = "red">0/1     ==>                     user_verbosity = UVM_MEDIUM;</font>
-<span style="margin-left:8px;"></span>187        <font color = "red">0/1     ==>                     uvm_report_warning(&quot;ILLVERB&quot;, &quot;Illegal verbosity value, using default of UVM_MEDIUM.&quot;, UVM_NONE);</font>
-<span style="margin-left:8px;"></span>188                                     end
+185        <font color = "red">0/1     ==>                  if(user_verbosity == 0) begin</font>
+186        <font color = "red">0/1     ==>                     user_verbosity = UVM_MEDIUM;</font>
+187        <font color = "red">0/1     ==>                     uvm_report_warning(&quot;ILLVERB&quot;, &quot;Illegal verbosity value, using default of UVM_MEDIUM.&quot;, UVM_NONE);</font>
+188                                     end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>189                                   end
-<span style="margin-left:8px;"></span>190                                 endcase
-<span style="margin-left:8px;"></span>191                              end
+189                                   end
+190                                 endcase
+191                              end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>192                              //
-<span style="margin-left:8px;"></span>193        <font color = "red">0/1     ==>           r_obj = uvm_root::get();</font>
-<span style="margin-left:8px;"></span>194        <font color = "red">0/1     ==>           r_obj.set_report_id_verbosity(&quot;RegModel&quot;, UVM_HIGH);</font>
-<span style="margin-left:8px;"></span>195        <font color = "red">0/1     ==>           r_obj.set_report_id_verbosity(&quot;uvm_reg_map&quot;, UVM_FULL);</font>
-<span style="margin-left:8px;"></span>196                          end
+192                              //
+193        <font color = "red">0/1     ==>           r_obj = uvm_root::get();</font>
+194        <font color = "red">0/1     ==>           r_obj.set_report_id_verbosity(&quot;RegModel&quot;, UVM_HIGH);</font>
+195        <font color = "red">0/1     ==>           r_obj.set_report_id_verbosity(&quot;uvm_reg_map&quot;, UVM_FULL);</font>
+196                          end
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>197                     `endif
-<span style="margin-left:8px;"></span>198                     
-<span style="margin-left:8px;"></span>199                          // Register the verdi_catcher to dump messages into FSDB
-<span style="margin-left:8px;"></span>200                     `ifdef VCS
-<span style="margin-left:8px;"></span>201        1/1               if ((clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
-<span style="margin-left:8px;"></span>202                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;(env_str==&quot;verdi&quot;))
-<span style="margin-left:8px;"></span>203                              ||verdi_clp.is_verdi_trace_fac()||verdi_clp.is_verdi_trace_msg()||verdi_clp.is_verdi_trace_uvm_aware()
-<span style="margin-left:8px;"></span>204                              ||verdi_clp.is_verdi_trace_ral()||verdi_clp.is_verdi_trace_dht()
-<span style="margin-left:8px;"></span>205                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args) &amp;&amp; verdi_clp.is_minus_gui_verdi())
-<span style="margin-left:8px;"></span>206                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;is_sanity_exist)
-<span style="margin-left:8px;"></span>207                              ||verdi_clp.is_verdi_trace_ralwave()||verdi_clp.is_verdi_trace_compwave())
-<span style="margin-left:8px;"></span>208                          begin
-<span style="margin-left:8px;"></span>209                     `else
-<span style="margin-left:8px;"></span>210                          if ((clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
-<span style="margin-left:8px;"></span>211                              ||verdi_clp.is_verdi_trace_fac()||verdi_clp.is_verdi_trace_msg()
-<span style="margin-left:8px;"></span>212                              ||verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_ral()
-<span style="margin-left:8px;"></span>213                              ||verdi_clp.is_verdi_trace_dht())
-<span style="margin-left:8px;"></span>214                          begin
-<span style="margin-left:8px;"></span>215                     `endif
-<span style="margin-left:8px;"></span>216                            static verdi_report_catcher _verdi_catcher;
-<span style="margin-left:8px;"></span>217                     
-<span style="margin-left:8px;"></span>218        <font color = "red">0/1     ==>         _verdi_catcher = new();</font>
-<span style="margin-left:8px;"></span>219        <font color = "red">0/1     ==>         uvm_report_cb::add(null,_verdi_catcher);</font>
-<span style="margin-left:8px;"></span>220        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_compwave()||verdi_clp.is_verdi_trace_dht()</font>
-<span style="margin-left:8px;"></span>221                                ||verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_ral()) begin
-<span style="margin-left:8px;"></span>222                                uvm_dhier_component dhier_comp;
-<span style="margin-left:8px;"></span>223                     
-<span style="margin-left:8px;"></span>224        <font color = "red">0/1     ==>             dhier_comp = new(&quot;DHIER_COMP&quot;, uvm_root::get());</font>
-<span style="margin-left:8px;"></span>225                            end
+197                     `endif
+198                     
+199                          // Register the verdi_catcher to dump messages into FSDB
+200                     `ifdef VCS
+201        1/1               if ((clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
+202                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;(env_str==&quot;verdi&quot;))
+203                              ||verdi_clp.is_verdi_trace_fac()||verdi_clp.is_verdi_trace_msg()||verdi_clp.is_verdi_trace_uvm_aware()
+204                              ||verdi_clp.is_verdi_trace_ral()||verdi_clp.is_verdi_trace_dht()
+205                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args) &amp;&amp; verdi_clp.is_minus_gui_verdi())
+206                              ||(clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;is_sanity_exist)
+207                              ||verdi_clp.is_verdi_trace_ralwave()||verdi_clp.is_verdi_trace_compwave())
+208                          begin
+209                     `else
+210                          if ((clp.get_arg_matches(&quot;+UVM_LOG_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
+211                              ||verdi_clp.is_verdi_trace_fac()||verdi_clp.is_verdi_trace_msg()
+212                              ||verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_ral()
+213                              ||verdi_clp.is_verdi_trace_dht())
+214                          begin
+215                     `endif
+216                            static verdi_report_catcher _verdi_catcher;
+217                     
+218        <font color = "red">0/1     ==>         _verdi_catcher = new();</font>
+219        <font color = "red">0/1     ==>         uvm_report_cb::add(null,_verdi_catcher);</font>
+220        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_compwave()||verdi_clp.is_verdi_trace_dht()</font>
+221                                ||verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_ral()) begin
+222                                uvm_dhier_component dhier_comp;
+223                     
+224        <font color = "red">0/1     ==>             dhier_comp = new(&quot;DHIER_COMP&quot;, uvm_root::get());</font>
+225                            end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>226                     `ifdef UVM_VERDI_RALWAVE
-<span style="margin-left:8px;"></span>227                            if (verdi_clp.is_verdi_trace_ralwave()) begin
-<span style="margin-left:8px;"></span>228                                if (is_vcs_uvm_home_exist)
-<span style="margin-left:8px;"></span>229                                    pli_inst.dump_class_object_by_file(&quot;${VCS_UVM_HOME}/verdi/register.config&quot;);
-<span style="margin-left:8px;"></span>230                                else if (is_vcs_home_exist)
-<span style="margin-left:8px;"></span>231                                    pli_inst.dump_class_object_by_file(&quot;${VCS_HOME}/etc/uvm-1.2/verdi/register.config&quot;);
-<span style="margin-left:8px;"></span>232                            end
-<span style="margin-left:8px;"></span>233                     `endif
-<span style="margin-left:8px;"></span>234                     `ifndef UVM_VERDI_NO_COMPWAVE
-<span style="margin-left:8px;"></span>235                     `ifdef VCS
-<span style="margin-left:8px;"></span>236        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_compwave()) begin</font>
-<span style="margin-left:8px;"></span>237        <font color = "red">0/1     ==>             if (is_vcs_uvm_home_exist)</font>
-<span style="margin-left:8px;"></span>238        <font color = "red">0/1     ==>                 pli_inst.dump_comp_object_by_file(&quot;${VCS_UVM_HOME}/verdi/component.config&quot;);</font>
-<span style="margin-left:8px;"></span>239        <font color = "red">0/1     ==>             else if (is_vcs_home_exist)</font>
-<span style="margin-left:8px;"></span>240        <font color = "red">0/1     ==>                 pli_inst.dump_comp_object_by_file(&quot;${VCS_HOME}/etc/uvm-1.2/verdi/component.config&quot;);</font>
+226                     `ifdef UVM_VERDI_RALWAVE
+227                            if (verdi_clp.is_verdi_trace_ralwave()) begin
+228                                if (is_vcs_uvm_home_exist)
+229                                    pli_inst.dump_class_object_by_file(&quot;${VCS_UVM_HOME}/verdi/register.config&quot;);
+230                                else if (is_vcs_home_exist)
+231                                    pli_inst.dump_class_object_by_file(&quot;${VCS_HOME}/etc/uvm-1.2/verdi/register.config&quot;);
+232                            end
+233                     `endif
+234                     `ifndef UVM_VERDI_NO_COMPWAVE
+235                     `ifdef VCS
+236        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_compwave()) begin</font>
+237        <font color = "red">0/1     ==>             if (is_vcs_uvm_home_exist)</font>
+238        <font color = "red">0/1     ==>                 pli_inst.dump_comp_object_by_file(&quot;${VCS_UVM_HOME}/verdi/component.config&quot;);</font>
+239        <font color = "red">0/1     ==>             else if (is_vcs_home_exist)</font>
+240        <font color = "red">0/1     ==>                 pli_inst.dump_comp_object_by_file(&quot;${VCS_HOME}/etc/uvm-1.2/verdi/component.config&quot;);</font>
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>241                            end
+241                            end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>242                     `endif
-<span style="margin-left:8px;"></span>243                     `endif
-<span style="margin-left:8px;"></span>244        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_fac()) begin</font>
-<span style="margin-left:8px;"></span>245        <font color = "red">0/1     ==>             factory = cs.get_factory();</font>
-<span style="margin-left:8px;"></span>246                     `ifndef UVM_VERDI_NO_FACTORY_RECORDING
-<span style="margin-left:8px;"></span>247                                // create new factory
-<span style="margin-left:8px;"></span>248        <font color = "red">0/1     ==>             verdi_factory = new();</font>
-<span style="margin-left:8px;"></span>249                                // set the delegate
-<span style="margin-left:8px;"></span>250        <font color = "red">0/1     ==>             verdi_factory.delegate=factory;</font>
-<span style="margin-left:8px;"></span>251                                // enable new factory
-<span style="margin-left:8px;"></span>252        <font color = "red">0/1     ==>             cs.set_factory(verdi_factory);</font>
-<span style="margin-left:8px;"></span>253                     `endif
-<span style="margin-left:8px;"></span>254                            end
+242                     `endif
+243                     `endif
+244        <font color = "red">0/1     ==>         if (verdi_clp.is_verdi_trace_uvm_aware()||verdi_clp.is_verdi_trace_fac()) begin</font>
+245        <font color = "red">0/1     ==>             factory = cs.get_factory();</font>
+246                     `ifndef UVM_VERDI_NO_FACTORY_RECORDING
+247                                // create new factory
+248        <font color = "red">0/1     ==>             verdi_factory = new();</font>
+249                                // set the delegate
+250        <font color = "red">0/1     ==>             verdi_factory.delegate=factory;</font>
+251                                // enable new factory
+252        <font color = "red">0/1     ==>             cs.set_factory(verdi_factory);</font>
+253                     `endif
+254                            end
                    <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>255                          end
+255                          end
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>256                     
-<span style="margin-left:8px;"></span>257                          // Register the uvm_verdi_recorder to record transactions into FSDB
-<span style="margin-left:8px;"></span>258                     `ifdef VCS
-<span style="margin-left:8px;"></span>259        1/1               if ((clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
-<span style="margin-left:8px;"></span>260                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;(env_str==&quot;verdi&quot;))
-<span style="margin-left:8px;"></span>261                              ||verdi_clp.is_verdi_trace_tlm()
-<span style="margin-left:8px;"></span>262                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;verdi_clp.is_minus_gui_verdi())
-<span style="margin-left:8px;"></span>263                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;is_sanity_exist))
-<span style="margin-left:8px;"></span>264                          begin
-<span style="margin-left:8px;"></span>265                     `else
-<span style="margin-left:8px;"></span>266                          if ((clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
-<span style="margin-left:8px;"></span>267                              ||verdi_clp.is_verdi_trace_tlm())
-<span style="margin-left:8px;"></span>268                          begin
-<span style="margin-left:8px;"></span>269                     `endif
-<span style="margin-left:8px;"></span>270        <font color = "red">0/1     ==>           verdi_db = new();</font>
-<span style="margin-left:8px;"></span>271        <font color = "red">0/1     ==>           cs.set_default_tr_database(verdi_db);</font>
-<span style="margin-left:8px;"></span>272        <font color = "red">0/1     ==>           if (clp.get_arg_matches(&quot;+UVM_DISABLE_AUTO_COMPONENT&quot;, tr_args)) begin</font>
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAWklEQVQoU2P8DwQMeAATPkmQHOPdu3f/d3R0MEhJSaGoffHiBUNeXh4DA8iK5ORkkDUoODAwECT1H6wABIqLi+EKEhMTYcIIBSCRtLS0/0FBQXBJEIORYl8AAFaWVAK2EPn+AAAAAElFTkSuQmCC" onclick="var macroSpan=$(this).next().next('#macro_1161439237_273');if (macroSpan.css('display')=='none') {macroSpan.css('display', 'block');this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAWklEQVQoU2P8DwQMeAATPkmQHOPdu3f/d3R0MEhJSaGoffHiBUNeXh4DA8iK5ORkkDUoODAwECT1H6wABIqLi+EKEhMTYcIIBSCRtLS0/0FBQXBJEIORYl8AAFaWVAK2EPn+AAAAAElFTkSuQmCC';} else {macroSpan.css('display', 'none');this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAV0lEQVQoU4VP2w3AIAi8dg3ngwVwDSZAR3MVak2KiamJ98Pd5Xjh+dBaC7rUayi8YGa4O0opQ07cwVJKqLUi57wPhKuqIKL/hKVttyI8EYGZzcjxSJze7GaHXHvKclWLAAAAAElFTkSuQmCC';}">273        <span onclick="var macroSpan=$(this).next('#macro_1161439237_273');if (macroSpan.css('display')=='none') {macroSpan.css('display', 'block');} else {macroSpan.css('display', 'none');}"><font color = "red">0/2     ==>               `uvm_info(&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_DISABLE_AUTO_COMPONENT enabled but transaction recording enabled, usage model requires user to explicitly set recording_detail on components&quot;, UVM_MEDIUM)</font><br/></span><span id="macro_1161439237_273" style="background-color:#F0F0F0; display:block;"><span style="margin-left:8px;"></span><a href="/opt/synopsys/vcs-mx/O-2018.09-SP2/etc/uvm-1.2/macros/uvm_message_defines.svh" target="_blank">uvm_info("VERDI_TR_AUTO", "+UVM_DISABLE_AUTO_COMPONENT enabled but transaction recording enabled, usage model requires user to explicitly set recording_detail on components", UVM_MEDIUM):</a>
-<span style="margin-left:8px;"></span>273.1                   `ifdef ZEMI4UVM 
-<span style="margin-left:8px;"></span>273.2                         (* zemi4_uvm_attribute=1 *) 
-<span style="margin-left:8px;"></span>273.3                      `endif 
-<span style="margin-left:8px;"></span>273.4                      begin 
-<span style="margin-left:8px;"></span>273.5      <font color = "red">0/1     ==>       if (uvm_report_enabled(UVM_MEDIUM,UVM_INFO,&quot;VERDI_TR_AUTO&quot;)) </font>
-<span style="margin-left:8px;"></span>273.6      <font color = "red">0/1     ==>         uvm_report_info (&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_DISABLE_AUTO_COMPONENT enabled but transaction recording enabled, usage model requires user to explicitly set recording_detail on components&quot;, UVM_MEDIUM, &quot;/opt/synopsys/vcs-mx/O-2018.09-SP2/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv&quot;, 273, &quot;&quot;, 1); </font>
-<span style="margin-left:8px;"></span>273.7                      end</span>                   <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>274                              end
-<span style="margin-left:8px;"></span>275                              else begin
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAWklEQVQoU2P8DwQMeAATPkmQHOPdu3f/d3R0MEhJSaGoffHiBUNeXh4DA8iK5ORkkDUoODAwECT1H6wABIqLi+EKEhMTYcIIBSCRtLS0/0FBQXBJEIORYl8AAFaWVAK2EPn+AAAAAElFTkSuQmCC" onclick="var macroSpan=$(this).next().next('#macro_1161439237_276');if (macroSpan.css('display')=='none') {macroSpan.css('display', 'block');this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAWklEQVQoU2P8DwQMeAATPkmQHOPdu3f/d3R0MEhJSaGoffHiBUNeXh4DA8iK5ORkkDUoODAwECT1H6wABIqLi+EKEhMTYcIIBSCRtLS0/0FBQXBJEIORYl8AAFaWVAK2EPn+AAAAAElFTkSuQmCC';} else {macroSpan.css('display', 'none');this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAV0lEQVQoU4VP2w3AIAi8dg3ngwVwDSZAR3MVak2KiamJ98Pd5Xjh+dBaC7rUayi8YGa4O0opQ07cwVJKqLUi57wPhKuqIKL/hKVttyI8EYGZzcjxSJze7GaHXHvKclWLAAAAAElFTkSuQmCC';}">276        <span onclick="var macroSpan=$(this).next('#macro_1161439237_276');if (macroSpan.css('display')=='none') {macroSpan.css('display', 'block');} else {macroSpan.css('display', 'none');}"><font color = "red">0/2     ==>               `uvm_info(&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_TR_RECORD implicitly enables recording_details to UVM_FULL for all components. For explicit control use +UVM_DISABLE_AUTO_COMPONENT and set recording_detail on components accordingly&quot;, UVM_MEDIUM)</font><br/></span><span id="macro_1161439237_276" style="background-color:#F0F0F0; display:block;"><span style="margin-left:8px;"></span><a href="/opt/synopsys/vcs-mx/O-2018.09-SP2/etc/uvm-1.2/macros/uvm_message_defines.svh" target="_blank">uvm_info("VERDI_TR_AUTO", "+UVM_TR_RECORD implicitly enables recording_details to UVM_FULL for all components. For explicit control use +UVM_DISABLE_AUTO_COMPONENT and set recording_detail on components accordingly", UVM_MEDIUM):</a>
-<span style="margin-left:8px;"></span>276.1                   `ifdef ZEMI4UVM 
-<span style="margin-left:8px;"></span>276.2                         (* zemi4_uvm_attribute=1 *) 
-<span style="margin-left:8px;"></span>276.3                      `endif 
-<span style="margin-left:8px;"></span>276.4                      begin 
-<span style="margin-left:8px;"></span>276.5      <font color = "red">0/1     ==>       if (uvm_report_enabled(UVM_MEDIUM,UVM_INFO,&quot;VERDI_TR_AUTO&quot;)) </font>
-<span style="margin-left:8px;"></span>276.6      <font color = "red">0/1     ==>         uvm_report_info (&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_TR_RECORD implicitly enables recording_details to UVM_FULL for all components. For explicit control use +UVM_DISABLE_AUTO_COMPONENT and set recording_detail on components accordingly&quot;, UVM_MEDIUM, &quot;/opt/synopsys/vcs-mx/O-2018.09-SP2/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv&quot;, 276, &quot;&quot;, 1); </font>
-<span style="margin-left:8px;"></span>276.7                      end</span>                   <font color = "red">==>  MISSING_ELSE</font>
-<span style="margin-left:8px;"></span>277        <font color = "red">0/1     ==>               uvm_config_db#(uvm_bitstream_t)::set(uvm_root::get(), &quot;*&quot;, &quot;recording_detail&quot;, UVM_FULL);</font>
-<span style="margin-left:8px;"></span>278                              end
-<span style="margin-left:8px;"></span>279                          end
+256                     
+257                          // Register the uvm_verdi_recorder to record transactions into FSDB
+258                     `ifdef VCS
+259        1/1               if ((clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
+260                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;(env_str==&quot;verdi&quot;))
+261                              ||verdi_clp.is_verdi_trace_tlm()
+262                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;verdi_clp.is_minus_gui_verdi())
+263                              ||(clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;is_sanity_exist))
+264                          begin
+265                     `else
+266                          if ((clp.get_arg_matches(&quot;+UVM_TR_RECORD&quot;, tr_args)&amp;&amp;clp.get_arg_matches(&quot;+UVM_VERDI_TRACE&quot;, tr_args))
+267                              ||verdi_clp.is_verdi_trace_tlm())
+268                          begin
+269                     `endif
+270        <font color = "red">0/1     ==>           verdi_db = new();</font>
+271        <font color = "red">0/1     ==>           cs.set_default_tr_database(verdi_db);</font>
+272        <font color = "red">0/1     ==>           if (clp.get_arg_matches(&quot;+UVM_DISABLE_AUTO_COMPONENT&quot;, tr_args)) begin</font>
+273        <font color = "red">0/2     ==>               `uvm_info(&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_DISABLE_AUTO_COMPONENT enabled but transaction recording enabled, usage model requires user to explicitly set recording_detail on components&quot;, UVM_MEDIUM)</font>
+                   <font color = "red">==>  MISSING_ELSE</font>
+274                              end
+275                              else begin
+276        <font color = "red">0/2     ==>               `uvm_info(&quot;VERDI_TR_AUTO&quot;, &quot;+UVM_TR_RECORD implicitly enables recording_details to UVM_FULL for all components. For explicit control use +UVM_DISABLE_AUTO_COMPONENT and set recording_detail on components accordingly&quot;, UVM_MEDIUM)</font>
+                   <font color = "red">==>  MISSING_ELSE</font>
+277        <font color = "red">0/1     ==>               uvm_config_db#(uvm_bitstream_t)::set(uvm_root::get(), &quot;*&quot;, &quot;recording_detail&quot;, UVM_FULL);</font>
+278                              end
+279                          end
                         MISSING_ELSE
-<span style="margin-left:8px;"></span>280        1/1               if (p != null)
-<span style="margin-left:8px;"></span>281        1/1                   p.set_randstate(rand_state);
+280        1/1               if (p != null)
+281        1/1                   p.set_randstate(rand_state);
                    <font color = "red">==>  MISSING_ELSE</font>
 </pre>
 <pre class="code"><br clear=all>

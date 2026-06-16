@@ -217,6 +217,30 @@
         }
       }
     },
+    "remote": {
+      "type": "object",
+      "description": "Remote execution configuration via SSH. Omit for local execution.",
+      "required": ["host", "project_root"],
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "SSH host alias (must be configured in ~/.ssh/config).",
+          "examples": ["aliyun"]
+        },
+        "project_root": {
+          "type": "string",
+          "description": "Server-side project root directory path.",
+          "examples": ["/root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification"]
+        },
+        "env_setup": {
+          "type": "string",
+          "default": "",
+          "description": "Optional shell commands to source before each step.",
+          "examples": ["source /opt/synopsys/setup.sh"]
+        }
+      }
+    },
     "policy": {
       "type": "object",
       "required": ["allow_direct_file_modification", "allow_running_simulation", "require_human_review_before_commit"],

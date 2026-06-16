@@ -1,0 +1,271 @@
+{
+  "schema_version": "spec_index.v1",
+  "source": "spec/spec.md",
+  "sections": [
+    {
+      "section_id": "spec_axi2ahb_lite_bridge_specification",
+      "title": "AXI2AHB-Lite Bridge Specification",
+      "page_range": "1-7",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": "AXI2AHB-Lite Bridge Specification & Test Report Document Version: V1.0 Date: 2026.03.26 Target Design: Parameterized AXI Slave to AHB-Lite Master Bridge"
+    },
+    {
+      "section_id": "spec_overview",
+      "title": "1. Overview",
+      "page_range": "7-14",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "overview"
+      ],
+      "summary": "This design implements a parameterized AXI-to-AHB-Lite protocol bridge that receives AXI read/write requests, buffers transactions, converts AXI bursts into a sequence of AHB-Lite beats, and return..."
+    },
+    {
+      "section_id": "spec_module_architecture",
+      "title": "2. Module Architecture",
+      "page_range": "14-25",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "wrap"
+      ],
+      "summary": "The bridge consists of four major building blocks with clear partitioning and dedicated file paths. Block Name Key File Path Core Function AXI Frontend axi_frontend.sv Capture AXI requests; generat..."
+    },
+    {
+      "section_id": "spec_1_axi_frontend_sub_functions",
+      "title": "2.1 AXI Frontend Sub-functions",
+      "page_range": "25-26",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_axi_req_capture_capture_awwar_transactions_perform_legality_check_push_to",
+      "title": "1. axi_req_capture: Capture AW/W/AR transactions, perform legality check, push to",
+      "page_range": "26-28",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": "FIFOs"
+    },
+    {
+      "section_id": "spec_axi_rresp_gen_drive_axi_r_channel_directly_from_read_response_fifo",
+      "title": "2. axi_rresp_gen: Drive AXI R channel directly from read-response FIFO",
+      "page_range": "28-29",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_axi_bresp_gen_single_entry_write_response_buffer",
+      "title": "3. axi_bresp_gen: Single-entry write response buffer",
+      "page_range": "29-30",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_2_bridge_control_core_sub_functions",
+      "title": "2.2 Bridge Control Core Sub-functions",
+      "page_range": "30-31",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_bridge_fifo_ctrl_evaluate_request_validity_resource_availability",
+      "title": "1. bridge_fifo_ctrl: Evaluate request validity & resource availability",
+      "page_range": "31-32",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_bridge_arbiter_fair_arbitration_between_readwrite_requests",
+      "title": "2. bridge_arbiter: Fair arbitration between read/write requests",
+      "page_range": "32-33",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_bridge_controller_expand_axi_bursts_to_ahb_beats_track_execution",
+      "title": "3. bridge_controller: Expand AXI bursts to AHB beats; track execution",
+      "page_range": "33-34",
+      "feature_tags": [
+        "axi",
+        "burst"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_3_ahb_backend",
+      "title": "2.3 AHB Backend",
+      "page_range": "34-38",
+      "feature_tags": [
+        "burst"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_functional_behavior",
+      "title": "3. Functional Behavior",
+      "page_range": "38-39",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_1_supported_features",
+      "title": "3.1 Supported Features",
+      "page_range": "39-45",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "increment",
+        "wrap"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_2_unsupported_features",
+      "title": "3.2 Unsupported Features",
+      "page_range": "45-48",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_3_illegal_request_handling",
+      "title": "3.3 Illegal Request Handling",
+      "page_range": "48-52",
+      "feature_tags": [],
+      "summary": "Transaction Type Handling Logic Illegal Read No AHB traffic; return SLVERR directly Illegal Write Drain W beats; no AHB execution; return SLVERR"
+    },
+    {
+      "section_id": "spec_ordering_throughput_model",
+      "title": "4. Ordering & Throughput Model",
+      "page_range": "52-53",
+      "feature_tags": [
+        "performance"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_request_buffering_configurable_fifo_depth_for_queuing_incoming_requests",
+      "title": "1. Request buffering: Configurable FIFO depth for queuing incoming requests",
+      "page_range": "53-54",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_execution_model_strictly_serialized_only_one_active_transaction_at_a_time",
+      "title": "2. Execution model: Strictly serialized (only one active transaction at a time)",
+      "page_range": "54-55",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_response_ordering_in_order_completion_natural_axi_response_ordering",
+      "title": "3. Response ordering: In-order completion; natural AXI response ordering",
+      "page_range": "55-56",
+      "feature_tags": [
+        "axi",
+        "completion"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_response_buffer",
+      "title": "4. Response buffer:",
+      "page_range": "56-59",
+      "feature_tags": [],
+      "summary": "o Write response: Single-entry buffer o Read response: FIFO-buffered, FWFT direct drive"
+    },
+    {
+      "section_id": "spec_protocol_feature_limits",
+      "title": "5. Protocol & Feature Limits",
+      "page_range": "59-64",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "increment"
+      ],
+      "summary": "logic"
+    },
+    {
+      "section_id": "spec_concise_specification_summary",
+      "title": "6. Concise Specification Summary",
+      "page_range": "64-73",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "increment",
+        "wrap"
+      ],
+      "summary": "✅ AXI Slave → AHB-Lite Master bridge ✅ FIXED/INCR/WRAP bursts supported ✅ Aligned transfers & narrow transfers supported ❌ Unaligned transfers prohibited ✅ Configurable FIFO for AW/W/AR/R ✅ Serial ..."
+    },
+    {
+      "section_id": "spec_test_plan_verification_result",
+      "title": "7. Test Plan & Verification Result",
+      "page_range": "73-74",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_1_test_list_coverage",
+      "title": "7.1 Test List & Coverage",
+      "page_range": "74-92",
+      "feature_tags": [
+        "axi",
+        "burst",
+        "error",
+        "increment",
+        "wrap"
+      ],
+      "summary": "All tests passed; full functional & exception coverage achieved. Test Case File Test Objective Test Result base_test.sv Basic environment & connectivity Pass check single_write_read_test.sv Basic s..."
+    },
+    {
+      "section_id": "spec_2_test_conclusion",
+      "title": "7.2 Test Conclusion",
+      "page_range": "92-93",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_function_axi_to_ahb_lite_conversion_burst_splitting_response_generation_fully",
+      "title": "1. Function: AXI-to-AHB-Lite conversion, burst splitting, response generation fully",
+      "page_range": "93-95",
+      "feature_tags": [
+        "axi",
+        "burst"
+      ],
+      "summary": "correct"
+    },
+    {
+      "section_id": "spec_protocol_axiahb_lite_signal_behavior_compliant_no_protocol_violation",
+      "title": "2. Protocol: AXI/AHB-Lite signal behavior compliant; no protocol violation",
+      "page_range": "95-96",
+      "feature_tags": [
+        "axi"
+      ],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_exception_illegal_requests_fifo_full_reset_handled_as_spec",
+      "title": "3. Exception: Illegal requests, FIFO full, reset handled as spec",
+      "page_range": "96-97",
+      "feature_tags": [],
+      "summary": ""
+    },
+    {
+      "section_id": "spec_reliability_stress_recovery_tests_passed_stable_under_corner_conditions",
+      "title": "4. Reliability: Stress & recovery tests passed; stable under corner conditions",
+      "page_range": "97-101",
+      "feature_tags": [],
+      "summary": "*Figure1.Code coverage*"
+    }
+  ]
+}

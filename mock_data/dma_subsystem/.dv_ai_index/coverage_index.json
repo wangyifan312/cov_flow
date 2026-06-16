@@ -453,22 +453,22 @@
   ],
   "total_gaps": 27,
   "clusters": [
-    "dma_code_toggle",
-    "dma_int_types",
+    "dma_code_assert",
     "dma_int_mask",
+    "dma_monitor",
     "dma_code_fsm",
+    "dma_int_types",
+    "dma_code_condition",
     "dma_power",
     "dma_code_branch",
     "dma_desc_error",
-    "dma_int_coalesce",
-    "dma_code_assert",
-    "dma_code_line",
-    "dma_desc_boundary",
-    "dma_monitor",
-    "dma_desc_timing",
     "dma_desc_mode",
+    "dma_code_toggle",
+    "dma_desc_timing",
     "dma_desc_chaining",
+    "dma_int_coalesce",
     "dma_burst",
-    "dma_code_condition"
+    "dma_code_line",
+    "dma_desc_boundary"
   ]
 }

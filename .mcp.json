@@ -4,7 +4,8 @@
       "command": "python3",
       "args": ["-m", "dv_mcp.dv_context_server.server"],
       "env": {
-        "PYTHONPATH": "${CLAUDE_PLUGIN_ROOT}"
+        "PYTHONPATH": "${CLAUDE_PLUGIN_ROOT}",
+        "AXI2AHB_ROOT": "/Users/wangyifan/Desktop/AI/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification"
       }
     }
   }

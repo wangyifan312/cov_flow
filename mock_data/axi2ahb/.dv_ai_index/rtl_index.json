@@ -1,0 +1,2438 @@
+{
+  "schema_version": "rtl_index.v1",
+  "source": "text_analysis",
+  "elaborated": false,
+  "modules": [
+    {
+      "name": "axi_req_capture",
+      "file": "../dut/axi2ahb_bridge/axi_frontend/axi_req_capture.sv",
+      "line_range": [
+        3,
+        389
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "awaddr",
+        "awburst",
+        "awsize",
+        "awlen",
+        "awvalid",
+        "awready",
+        "wdata",
+        "wstrb",
+        "wlast",
+        "wvalid",
+        "wready",
+        "araddr",
+        "arburst",
+        "arsize",
+        "arlen",
+        "arvalid",
+        "arready",
+        "aw_fifo_full",
+        "aw_push",
+        "aw_item_t",
+        "w_fifo_full",
+        "w_push",
+        "w_item_t",
+        "ar_fifo_full",
+        "ar_push",
+        "ar_item_t",
+        "illegal_wr_resp_valid",
+        "illegal_wr_resp_ready",
+        "illegal_wr_resp",
+        "illegal_rd_resp_valid",
+        "illegal_rd_resp_ready",
+        "illegal_rd_resp",
+        "illegal_rd_data",
+        "illegal_rd_beats",
+        "wr_state_dbg",
+        "wr_beats_expected_dbg",
+        "wr_beats_received_dbg",
+        "wr_req_illegal_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        }
+      ],
+      "signals": [
+        {
+          "name": "illegal_wr_resp_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 76
+        },
+        {
+          "name": "illegal_rd_resp_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 77
+        },
+        {
+          "name": "illegal_write_complete",
+          "type": "logic",
+          "width": 1,
+          "line": 80
+        },
+        {
+          "name": "illegal_rd_beats_n",
+          "type": "logic",
+          "width": 5,
+          "line": 81
+        },
+        {
+          "name": "wr_beats_expected",
+          "type": "logic",
+          "width": 5,
+          "line": 89
+        },
+        {
+          "name": "wr_beats_received",
+          "type": "logic",
+          "width": 5,
+          "line": 90
+        },
+        {
+          "name": "wr_req_illegal",
+          "type": "logic",
+          "width": 1,
+          "line": 91
+        },
+        {
+          "name": "aw_illegal_comb",
+          "type": "logic",
+          "width": 1,
+          "line": 92
+        },
+        {
+          "name": "ar_illegal_comb",
+          "type": "logic",
+          "width": 1,
+          "line": 93
+        },
+        {
+          "name": "mask",
+          "type": "logic",
+          "width": 1,
+          "line": 115
+        },
+        {
+          "name": "bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 116
+        },
+        {
+          "name": "wrap_bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 141
+        },
+        {
+          "name": "curr_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 158
+        },
+        {
+          "name": "next_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 159
+        },
+        {
+          "name": "last_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 160
+        },
+        {
+          "name": "wrap_base",
+          "type": "logic",
+          "width": 1,
+          "line": 161
+        },
+        {
+          "name": "start_page",
+          "type": "logic",
+          "width": 1,
+          "line": 162
+        },
+        {
+          "name": "beat_num",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 163
+        },
+        {
+          "name": "beat_bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 164
+        },
+        {
+          "name": "crosses_1kb_boundary",
+          "type": "begin",
+          "width": 1,
+          "line": 166
+        },
+        {
+          "name": "req_illegal",
+          "type": "begin",
+          "width": 1,
+          "line": 213
+        }
+      ],
+      "fsm_states": [
+        "WR_IDLE",
+        "WR_WAIT_DATA",
+        "WR_RECV_DATA"
+      ]
+    },
+    {
+      "name": "axi_bresp_gen",
+      "file": "../dut/axi2ahb_bridge/axi_frontend/axi_bresp_gen.sv",
+      "line_range": [
+        1,
+        75
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "set_valid",
+        "set_ready",
+        "set_resp",
+        "fe_set_valid",
+        "fe_set_ready",
+        "fe_set_resp",
+        "bvalid",
+        "bready",
+        "bresp",
+        "pending_dbg",
+        "set_fire_dbg",
+        "b_fire_dbg"
+      ],
+      "instances": [],
+      "parameters": [],
+      "signals": [
+        {
+          "name": "src_set_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 28
+        },
+        {
+          "name": "b_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 29
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "axi_rresp_gen",
+      "file": "../dut/axi2ahb_bridge/axi_frontend/axi_rresp_gen.sv",
+      "line_range": [
+        3,
+        90
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "r_fifo_empty",
+        "r_item_t",
+        "r_pop",
+        "fe_set_valid",
+        "fe_set_ready",
+        "fe_set_data",
+        "fe_set_resp",
+        "fe_set_beats",
+        "rvalid",
+        "rready",
+        "rdata",
+        "rresp",
+        "rlast",
+        "r_fire_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        }
+      ],
+      "signals": [
+        {
+          "name": "r_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 36
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "axi_frontend",
+      "file": "../dut/axi2ahb_bridge/axi_frontend/axi_frontend.sv",
+      "line_range": [
+        3,
+        171
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "awvalid",
+        "awready",
+        "awaddr",
+        "awlen",
+        "awsize",
+        "awburst",
+        "wvalid",
+        "wready",
+        "wdata",
+        "wstrb",
+        "wlast",
+        "bvalid",
+        "bready",
+        "bresp",
+        "arvalid",
+        "arready",
+        "araddr",
+        "arlen",
+        "arsize",
+        "arburst",
+        "rvalid",
+        "rready",
+        "rdata",
+        "rresp",
+        "rlast",
+        "aw_fifo_full",
+        "aw_push",
+        "aw_item_t",
+        "w_fifo_full",
+        "w_push",
+        "w_item_t",
+        "ar_fifo_full",
+        "ar_push",
+        "ar_item_t",
+        "r_fifo_empty",
+        "r_item_t",
+        "r_pop",
+        "b_set_valid",
+        "b_set_ready",
+        "b_set_resp",
+        "wr_state_dbg",
+        "wr_beats_expected_dbg",
+        "wr_beats_rcvd_dbg",
+        "wr_req_illegal_dbg",
+        "r_fire_dbg",
+        "b_pending_dbg",
+        "b_set_fire_dbg",
+        "b_fire_dbg"
+      ],
+      "instances": [
+        {
+          "module": "axi_bresp_gen",
+          "name": "u_axi_bresp_gen",
+          "line": 153
+        }
+      ],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        }
+      ],
+      "signals": [
+        {
+          "name": "fe_b_set_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 77
+        },
+        {
+          "name": "fe_b_set_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 78
+        },
+        {
+          "name": "fe_b_set_resp",
+          "type": "logic",
+          "width": 2,
+          "line": 79
+        },
+        {
+          "name": "fe_r_set_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 80
+        },
+        {
+          "name": "fe_r_set_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 81
+        },
+        {
+          "name": "fe_r_set_data",
+          "type": "logic",
+          "width": 1,
+          "line": 82
+        },
+        {
+          "name": "fe_r_set_resp",
+          "type": "logic",
+          "width": 2,
+          "line": 83
+        },
+        {
+          "name": "fe_r_set_beats",
+          "type": "logic",
+          "width": 5,
+          "line": 84
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "sync_fifo",
+      "file": "../dut/axi2ahb_bridge/fifo/sync_fifo.sv",
+      "line_range": [
+        1,
+        197
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "write_en",
+        "logic",
+        "read_en",
+        "data_out",
+        "full",
+        "empty",
+        "almost_full",
+        "almost_empty",
+        "count",
+        "wr_fire",
+        "rd_fire",
+        "overflow_pulse",
+        "underflow_pulse",
+        "wr_ptr_dbg",
+        "rd_ptr_dbg",
+        "head_dbg",
+        "tail_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "DEPTH",
+          "default": "32"
+        },
+        {
+          "name": "WIDTH",
+          "default": "64"
+        },
+        {
+          "name": "AFULL_TH",
+          "default": "(DEPTH > 1) ? (DEPTH - 1) : 1"
+        },
+        {
+          "name": "AEMPTY_TH",
+          "default": "1"
+        }
+      ],
+      "signals": [
+        {
+          "name": "wr_ptr",
+          "type": "logic",
+          "width": 1,
+          "line": 59
+        },
+        {
+          "name": "rd_ptr",
+          "type": "logic",
+          "width": 1,
+          "line": 60
+        },
+        {
+          "name": "count_n",
+          "type": "logic",
+          "width": 1,
+          "line": 62
+        },
+        {
+          "name": "wr_ptr_n",
+          "type": "logic",
+          "width": 1,
+          "line": 64
+        },
+        {
+          "name": "rd_ptr_n",
+          "type": "logic",
+          "width": 1,
+          "line": 65
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "fifo_wrapper",
+      "file": "../dut/axi2ahb_bridge/fifo/fifo_wrapper.sv",
+      "line_range": [
+        1,
+        287
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "aw_push",
+        "axi_frontend_pkg",
+        "aw_pop",
+        "axi_frontend_pkg",
+        "aw_full",
+        "aw_empty",
+        "aw_almost_full",
+        "aw_almost_empty",
+        "aw_count",
+        "w_push",
+        "axi_frontend_pkg",
+        "w_pop",
+        "axi_frontend_pkg",
+        "w_full",
+        "w_empty",
+        "w_almost_full",
+        "w_almost_empty",
+        "w_count",
+        "ar_push",
+        "axi_frontend_pkg",
+        "ar_pop",
+        "axi_frontend_pkg",
+        "ar_full",
+        "ar_empty",
+        "ar_almost_full",
+        "ar_almost_empty",
+        "ar_count",
+        "r_push",
+        "axi_frontend_pkg",
+        "r_pop",
+        "axi_frontend_pkg",
+        "r_full",
+        "r_empty",
+        "r_almost_full",
+        "r_almost_empty",
+        "r_count",
+        "aw_wr_fire_dbg",
+        "aw_rd_fire_dbg",
+        "aw_overflow_dbg",
+        "aw_underflow_dbg",
+        "aw_wr_ptr_dbg",
+        "aw_rd_ptr_dbg",
+        "aw_head_raw_dbg",
+        "aw_tail_raw_dbg",
+        "w_wr_fire_dbg",
+        "w_rd_fire_dbg",
+        "w_overflow_dbg",
+        "w_underflow_dbg",
+        "w_wr_ptr_dbg",
+        "w_rd_ptr_dbg",
+        "w_head_raw_dbg",
+        "w_tail_raw_dbg",
+        "ar_wr_fire_dbg",
+        "ar_rd_fire_dbg",
+        "ar_overflow_dbg",
+        "ar_underflow_dbg",
+        "ar_wr_ptr_dbg",
+        "ar_rd_ptr_dbg",
+        "ar_head_raw_dbg",
+        "ar_tail_raw_dbg",
+        "r_wr_fire_dbg",
+        "r_rd_fire_dbg",
+        "r_overflow_dbg",
+        "r_underflow_dbg",
+        "r_wr_ptr_dbg",
+        "r_rd_ptr_dbg",
+        "r_head_raw_dbg",
+        "r_tail_raw_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "AW_DEPTH",
+          "default": "8"
+        },
+        {
+          "name": "W_DEPTH",
+          "default": "128"
+        },
+        {
+          "name": "AR_DEPTH",
+          "default": "8"
+        },
+        {
+          "name": "R_DEPTH",
+          "default": "128"
+        }
+      ],
+      "signals": [
+        {
+          "name": "aw_wdata_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 114
+        },
+        {
+          "name": "aw_head_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 115
+        },
+        {
+          "name": "w_wdata_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 117
+        },
+        {
+          "name": "w_head_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 118
+        },
+        {
+          "name": "ar_wdata_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 120
+        },
+        {
+          "name": "ar_head_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 121
+        },
+        {
+          "name": "r_wdata_raw",
+          "type": "logic",
+          "width": 1,
+          "line": 123
+        },
+        {
+          "name": "r_head_raw_local",
+          "type": "logic",
+          "width": 1,
+          "line": 124
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "bridge_fifo_ctrl",
+      "file": "../dut/axi2ahb_bridge/bridge_core/bridge_fifo_ctrl.sv",
+      "line_range": [
+        1,
+        245
+      ],
+      "ports": [
+        "accept_enable",
+        "aw_empty",
+        "axi_frontend_pkg",
+        "ar_empty",
+        "axi_frontend_pkg",
+        "w_empty",
+        "w_count",
+        "r_full",
+        "r_count",
+        "wr_present",
+        "rd_present",
+        "wr_issue_ok",
+        "rd_issue_ok",
+        "wr_candidate",
+        "rd_candidate",
+        "wr_beats",
+        "rd_beats",
+        "wr_need_beats",
+        "rd_need_slots",
+        "r_free_slots",
+        "wr_payload_ready",
+        "rd_resp_space_ready",
+        "wr_illegal_dbg",
+        "rd_illegal_dbg",
+        "wr_block_reason",
+        "rd_block_reason"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "4"
+        },
+        {
+          "name": "LEN_WIDTH",
+          "default": "4"
+        },
+        {
+          "name": "W_COUNT_WIDTH",
+          "default": "8"
+        },
+        {
+          "name": "R_COUNT_WIDTH",
+          "default": "8"
+        },
+        {
+          "name": "R_FIFO_DEPTH",
+          "default": "64"
+        }
+      ],
+      "signals": [
+        {
+          "name": "mask",
+          "type": "logic",
+          "width": 1,
+          "line": 81
+        },
+        {
+          "name": "bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 82
+        },
+        {
+          "name": "total_bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 108
+        },
+        {
+          "name": "req_illegal",
+          "type": "begin",
+          "width": 1,
+          "line": 127
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "bridge_arbiter",
+      "file": "../dut/axi2ahb_bridge/bridge_core/bridge_arbiter.sv",
+      "line_range": [
+        1,
+        154
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "accept_enable",
+        "wr_candidate",
+        "rd_candidate",
+        "grant_accept",
+        "grant_valid",
+        "grant_wr",
+        "grant_rd",
+        "last_grant_dbg",
+        "arb_state_dbg",
+        "tie_break_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "DEBUG_EN",
+          "default": "1'b0"
+        }
+      ],
+      "signals": [
+        {
+          "name": "last_grant",
+          "type": "last_grant_e",
+          "width": 1,
+          "line": 49
+        },
+        {
+          "name": "candidate_vec",
+          "type": "logic",
+          "width": 2,
+          "line": 51
+        },
+        {
+          "name": "tie_break_hit",
+          "type": "logic",
+          "width": 1,
+          "line": 52
+        }
+      ],
+      "fsm_states": [
+        "LAST_RD",
+        "LAST_WR"
+      ]
+    },
+    {
+      "name": "bridge_controller",
+      "file": "../dut/axi2ahb_bridge/bridge_core/bridge_controller.sv",
+      "line_range": [
+        1,
+        563
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "grant_valid",
+        "grant_wr",
+        "grant_rd",
+        "grant_accept",
+        "ctrl_busy",
+        "axi_frontend_pkg",
+        "axi_frontend_pkg",
+        "axi_frontend_pkg",
+        "aw_empty",
+        "ar_empty",
+        "w_empty",
+        "r_full",
+        "aw_pop",
+        "ar_pop",
+        "w_pop",
+        "r_push",
+        "axi_frontend_pkg",
+        "b_set_valid",
+        "b_set_ready",
+        "b_set_resp",
+        "beat_req_valid",
+        "beat_req_ready",
+        "beat_req_write",
+        "beat_req_first",
+        "beat_req_addr",
+        "beat_req_size",
+        "beat_req_wdata",
+        "beat_req_wstrb",
+        "beat_rsp_valid",
+        "beat_rsp_error",
+        "beat_rsp_rdata_valid",
+        "beat_rsp_rdata",
+        "state_dbg",
+        "active_dir_dbg",
+        "beat_idx_dbg",
+        "beat_total_dbg",
+        "cur_addr_dbg",
+        "active_illegal_dbg",
+        "error_seen_dbg",
+        "beat_launch_fire_dbg",
+        "beat_inflight_dbg",
+        "beat_complete_dbg",
+        "contract_violation_dbg",
+        "violation_code_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        },
+        {
+          "name": "DEBUG_EN",
+          "default": "1'b0"
+        }
+      ],
+      "signals": [
+        {
+          "name": "exec_issue_need_more_beats",
+          "type": "logic",
+          "width": 1,
+          "line": 112
+        },
+        {
+          "name": "exec_complete_last_beat",
+          "type": "logic",
+          "width": 1,
+          "line": 113
+        },
+        {
+          "name": "beat_launch_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 114
+        },
+        {
+          "name": "beat_complete_fire",
+          "type": "logic",
+          "width": 1,
+          "line": 115
+        },
+        {
+          "name": "aw_req_illegal",
+          "type": "logic",
+          "width": 1,
+          "line": 116
+        },
+        {
+          "name": "ar_req_illegal",
+          "type": "logic",
+          "width": 1,
+          "line": 117
+        },
+        {
+          "name": "write_drain_illegal",
+          "type": "logic",
+          "width": 1,
+          "line": 118
+        },
+        {
+          "name": "next_exec_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 119
+        },
+        {
+          "name": "mask",
+          "type": "logic",
+          "width": 1,
+          "line": 142
+        },
+        {
+          "name": "bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 143
+        },
+        {
+          "name": "total_bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 169
+        },
+        {
+          "name": "req_illegal",
+          "type": "begin",
+          "width": 1,
+          "line": 188
+        },
+        {
+          "name": "linear_next",
+          "type": "logic",
+          "width": 1,
+          "line": 217
+        }
+      ],
+      "fsm_states": [
+        "ST_IDLE",
+        "ST_LOAD",
+        "ST_EXEC",
+        "ST_WRITE_RESP",
+        "DIR_RD",
+        "DIR_WR"
+      ]
+    },
+    {
+      "name": "bridge_core",
+      "file": "../dut/axi2ahb_bridge/bridge_core/bridge_core.sv",
+      "line_range": [
+        1,
+        373
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "axi_frontend_pkg",
+        "axi_frontend_pkg",
+        "axi_frontend_pkg",
+        "aw_empty",
+        "ar_empty",
+        "w_empty",
+        "r_full",
+        "w_count",
+        "r_count",
+        "aw_pop",
+        "ar_pop",
+        "w_pop",
+        "r_push",
+        "axi_frontend_pkg",
+        "b_set_valid",
+        "b_set_ready",
+        "b_set_resp",
+        "beat_req_valid",
+        "beat_req_ready",
+        "beat_req_write",
+        "beat_req_first",
+        "beat_req_addr",
+        "beat_req_size",
+        "beat_req_wdata",
+        "beat_req_wstrb",
+        "beat_rsp_valid",
+        "beat_rsp_error",
+        "beat_rsp_rdata_valid",
+        "beat_rsp_rdata",
+        "accept_enable_dbg",
+        "ctrl_busy_dbg",
+        "grant_valid_dbg",
+        "grant_wr_dbg",
+        "grant_rd_dbg",
+        "grant_accept_dbg",
+        "wr_present_dbg",
+        "rd_present_dbg",
+        "wr_issue_ok_dbg",
+        "rd_issue_ok_dbg",
+        "wr_candidate_dbg",
+        "rd_candidate_dbg",
+        "wr_beats_dbg",
+        "rd_beats_dbg",
+        "wr_need_beats_dbg",
+        "rd_need_slots_dbg",
+        "r_free_slots_dbg",
+        "wr_payload_ready_dbg",
+        "rd_resp_space_ready_dbg",
+        "wr_illegal_fifo_dbg",
+        "rd_illegal_fifo_dbg",
+        "wr_block_reason_dbg",
+        "rd_block_reason_dbg",
+        "last_grant_dbg",
+        "arb_state_dbg",
+        "tie_break_dbg",
+        "ctrl_state_dbg",
+        "active_dir_dbg",
+        "beat_idx_dbg",
+        "beat_total_dbg",
+        "cur_addr_dbg",
+        "active_illegal_dbg",
+        "error_seen_dbg",
+        "beat_launch_fire_dbg",
+        "beat_inflight_dbg",
+        "beat_complete_dbg",
+        "contract_violation_dbg",
+        "violation_code_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        },
+        {
+          "name": "LEN_WIDTH",
+          "default": "4"
+        },
+        {
+          "name": "W_COUNT_WIDTH",
+          "default": "8"
+        },
+        {
+          "name": "R_COUNT_WIDTH",
+          "default": "8"
+        },
+        {
+          "name": "R_FIFO_DEPTH",
+          "default": "64"
+        },
+        {
+          "name": "DEBUG_EN",
+          "default": "1'b0"
+        }
+      ],
+      "signals": [
+        {
+          "name": "accept_enable",
+          "type": "logic",
+          "width": 1,
+          "line": 123
+        },
+        {
+          "name": "wr_present",
+          "type": "logic",
+          "width": 1,
+          "line": 126
+        },
+        {
+          "name": "rd_present",
+          "type": "logic",
+          "width": 1,
+          "line": 127
+        },
+        {
+          "name": "wr_issue_ok",
+          "type": "logic",
+          "width": 1,
+          "line": 128
+        },
+        {
+          "name": "rd_issue_ok",
+          "type": "logic",
+          "width": 1,
+          "line": 129
+        },
+        {
+          "name": "wr_candidate",
+          "type": "logic",
+          "width": 1,
+          "line": 130
+        },
+        {
+          "name": "rd_candidate",
+          "type": "logic",
+          "width": 1,
+          "line": 131
+        },
+        {
+          "name": "wr_beats",
+          "type": "logic",
+          "width": 1,
+          "line": 133
+        },
+        {
+          "name": "rd_beats",
+          "type": "logic",
+          "width": 1,
+          "line": 134
+        },
+        {
+          "name": "wr_need_beats",
+          "type": "logic",
+          "width": 1,
+          "line": 135
+        },
+        {
+          "name": "rd_need_slots",
+          "type": "logic",
+          "width": 1,
+          "line": 136
+        },
+        {
+          "name": "r_free_slots",
+          "type": "logic",
+          "width": 1,
+          "line": 137
+        },
+        {
+          "name": "wr_payload_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 138
+        },
+        {
+          "name": "rd_resp_space_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 139
+        },
+        {
+          "name": "wr_illegal_fifo",
+          "type": "logic",
+          "width": 1,
+          "line": 140
+        },
+        {
+          "name": "rd_illegal_fifo",
+          "type": "logic",
+          "width": 1,
+          "line": 141
+        },
+        {
+          "name": "wr_block_reason",
+          "type": "logic",
+          "width": 3,
+          "line": 142
+        },
+        {
+          "name": "rd_block_reason",
+          "type": "logic",
+          "width": 3,
+          "line": 143
+        },
+        {
+          "name": "grant_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 146
+        },
+        {
+          "name": "grant_wr",
+          "type": "logic",
+          "width": 1,
+          "line": 147
+        },
+        {
+          "name": "grant_rd",
+          "type": "logic",
+          "width": 1,
+          "line": 148
+        },
+        {
+          "name": "grant_accept",
+          "type": "logic",
+          "width": 1,
+          "line": 149
+        },
+        {
+          "name": "ctrl_busy",
+          "type": "logic",
+          "width": 1,
+          "line": 152
+        },
+        {
+          "name": "state_dbg_int",
+          "type": "logic",
+          "width": 3,
+          "line": 155
+        },
+        {
+          "name": "active_dir_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 156
+        },
+        {
+          "name": "beat_idx_dbg_int",
+          "type": "logic",
+          "width": 5,
+          "line": 157
+        },
+        {
+          "name": "beat_total_dbg_int",
+          "type": "logic",
+          "width": 5,
+          "line": 158
+        },
+        {
+          "name": "cur_addr_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 159
+        },
+        {
+          "name": "active_illegal_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 160
+        },
+        {
+          "name": "error_seen_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 161
+        },
+        {
+          "name": "beat_launch_fire_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 162
+        },
+        {
+          "name": "beat_inflight_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 163
+        },
+        {
+          "name": "beat_complete_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 164
+        },
+        {
+          "name": "contract_violation_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 165
+        },
+        {
+          "name": "violation_code_dbg_int",
+          "type": "logic",
+          "width": 4,
+          "line": 166
+        },
+        {
+          "name": "last_grant_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 169
+        },
+        {
+          "name": "arb_state_dbg_int",
+          "type": "logic",
+          "width": 2,
+          "line": 170
+        },
+        {
+          "name": "tie_break_dbg_int",
+          "type": "logic",
+          "width": 1,
+          "line": 171
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "ahb_beat_executor",
+      "file": "../dut/axi2ahb_bridge/ahb_backend/ahb_beat_executor.sv",
+      "line_range": [
+        1,
+        286
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "req_valid",
+        "req_ready",
+        "req_write",
+        "req_first",
+        "req_addr",
+        "req_size",
+        "req_wdata",
+        "req_wstrb",
+        "rsp_valid",
+        "rsp_error",
+        "rsp_rdata_valid",
+        "rsp_rdata",
+        "busy",
+        "haddr",
+        "htrans",
+        "hwrite",
+        "hsize",
+        "hburst",
+        "hwdata",
+        "hstrb",
+        "hrdata",
+        "hready",
+        "hresp",
+        "inflight_dbg",
+        "accepted_dbg",
+        "completed_dbg",
+        "cur_addr_dbg",
+        "cur_write_dbg",
+        "cur_size_dbg",
+        "cur_wdata_dbg",
+        "cur_wstrb_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH / 8"
+        }
+      ],
+      "signals": [
+        {
+          "name": "accept_req",
+          "type": "logic",
+          "width": 1,
+          "line": 83
+        },
+        {
+          "name": "complete_beat",
+          "type": "logic",
+          "width": 1,
+          "line": 84
+        },
+        {
+          "name": "bus_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 85
+        },
+        {
+          "name": "bus_write",
+          "type": "logic",
+          "width": 1,
+          "line": 86
+        },
+        {
+          "name": "bus_first",
+          "type": "logic",
+          "width": 1,
+          "line": 87
+        },
+        {
+          "name": "bus_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 88
+        },
+        {
+          "name": "bus_size",
+          "type": "logic",
+          "width": 3,
+          "line": 89
+        },
+        {
+          "name": "bus_wdata",
+          "type": "logic",
+          "width": 1,
+          "line": 90
+        },
+        {
+          "name": "bus_wstrb",
+          "type": "logic",
+          "width": 1,
+          "line": 91
+        },
+        {
+          "name": "narrow_mask",
+          "type": "logic",
+          "width": 1,
+          "line": 116
+        },
+        {
+          "name": "active_bytes",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 117
+        },
+        {
+          "name": "lane_shift",
+          "type": "int unsigned",
+          "width": 1,
+          "line": 118
+        },
+        {
+          "name": "gen_hstrb",
+          "type": "end",
+          "width": 1,
+          "line": 134
+        }
+      ],
+      "fsm_states": []
+    },
+    {
+      "name": "ahb_backend",
+      "file": "../dut/axi2ahb_bridge/ahb_backend/ahb_backend.sv",
+      "line_range": [
+        1,
+        102
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "beat_req_valid",
+        "beat_req_ready",
+        "beat_req_write",
+        "beat_req_first",
+        "beat_req_addr",
+        "beat_req_size",
+        "beat_req_wdata",
+        "beat_req_wstrb",
+        "beat_rsp_valid",
+        "beat_rsp_error",
+        "beat_rsp_rdata_valid",
+        "beat_rsp_rdata",
+        "beat_busy_dbg",
+        "haddr",
+        "htrans",
+        "hwrite",
+        "hsize",
+        "hburst",
+        "hwdata",
+        "hstrb",
+        "hrdata",
+        "hready",
+        "hresp",
+        "inflight_dbg",
+        "accepted_dbg",
+        "completed_dbg",
+        "cur_addr_dbg",
+        "cur_write_dbg",
+        "cur_size_dbg",
+        "cur_wdata_dbg",
+        "cur_wstrb_dbg"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        }
+      ],
+      "signals": [],
+      "fsm_states": []
+    },
+    {
+      "name": "axi2ahb_bridge_top",
+      "file": "../dut/axi2ahb_bridge/axi2ahb_bridge_top.sv",
+      "line_range": [
+        3,
+        495
+      ],
+      "ports": [
+        "clk",
+        "rstn",
+        "awvalid",
+        "awready",
+        "awaddr",
+        "awlen",
+        "awsize",
+        "awburst",
+        "wvalid",
+        "wready",
+        "wdata",
+        "wstrb",
+        "wlast",
+        "bvalid",
+        "bready",
+        "bresp",
+        "arvalid",
+        "arready",
+        "araddr",
+        "arlen",
+        "arsize",
+        "arburst",
+        "rvalid",
+        "rready",
+        "rdata",
+        "rresp",
+        "rlast",
+        "haddr",
+        "htrans",
+        "hwrite",
+        "hsize",
+        "hburst",
+        "hwdata",
+        "hstrb",
+        "hrdata",
+        "hready",
+        "hresp"
+      ],
+      "instances": [],
+      "parameters": [
+        {
+          "name": "ADDR_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "DATA_WIDTH",
+          "default": "32"
+        },
+        {
+          "name": "STRB_WIDTH",
+          "default": "DATA_WIDTH/8"
+        },
+        {
+          "name": "AW_DEPTH",
+          "default": "8"
+        },
+        {
+          "name": "W_DEPTH",
+          "default": "128"
+        },
+        {
+          "name": "AR_DEPTH",
+          "default": "8"
+        },
+        {
+          "name": "R_DEPTH",
+          "default": "128"
+        },
+        {
+          "name": "LEN_WIDTH",
+          "default": "4"
+        },
+        {
+          "name": "W_COUNT_WIDTH",
+          "default": "$clog2(W_DEPTH+1)"
+        },
+        {
+          "name": "R_COUNT_WIDTH",
+          "default": "$clog2(R_DEPTH+1)"
+        }
+      ],
+      "signals": [
+        {
+          "name": "aw_push",
+          "type": "logic",
+          "width": 1,
+          "line": 72
+        },
+        {
+          "name": "aw_wdata",
+          "type": "aw_item_t",
+          "width": 1,
+          "line": 73
+        },
+        {
+          "name": "aw_pop",
+          "type": "logic",
+          "width": 1,
+          "line": 74
+        },
+        {
+          "name": "aw_head",
+          "type": "aw_item_t",
+          "width": 1,
+          "line": 75
+        },
+        {
+          "name": "aw_full",
+          "type": "logic",
+          "width": 1,
+          "line": 76
+        },
+        {
+          "name": "aw_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 77
+        },
+        {
+          "name": "aw_almost_full",
+          "type": "logic",
+          "width": 1,
+          "line": 78
+        },
+        {
+          "name": "aw_almost_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 79
+        },
+        {
+          "name": "aw_count",
+          "type": "logic",
+          "width": 1,
+          "line": 80
+        },
+        {
+          "name": "w_push",
+          "type": "logic",
+          "width": 1,
+          "line": 82
+        },
+        {
+          "name": "w_wdata",
+          "type": "w_item_t",
+          "width": 1,
+          "line": 83
+        },
+        {
+          "name": "w_pop",
+          "type": "logic",
+          "width": 1,
+          "line": 84
+        },
+        {
+          "name": "w_head",
+          "type": "w_item_t",
+          "width": 1,
+          "line": 85
+        },
+        {
+          "name": "w_full",
+          "type": "logic",
+          "width": 1,
+          "line": 86
+        },
+        {
+          "name": "w_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 87
+        },
+        {
+          "name": "w_almost_full",
+          "type": "logic",
+          "width": 1,
+          "line": 88
+        },
+        {
+          "name": "w_almost_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 89
+        },
+        {
+          "name": "w_count",
+          "type": "logic",
+          "width": 1,
+          "line": 90
+        },
+        {
+          "name": "ar_push",
+          "type": "logic",
+          "width": 1,
+          "line": 92
+        },
+        {
+          "name": "ar_wdata",
+          "type": "ar_item_t",
+          "width": 1,
+          "line": 93
+        },
+        {
+          "name": "ar_pop",
+          "type": "logic",
+          "width": 1,
+          "line": 94
+        },
+        {
+          "name": "ar_head",
+          "type": "ar_item_t",
+          "width": 1,
+          "line": 95
+        },
+        {
+          "name": "ar_full",
+          "type": "logic",
+          "width": 1,
+          "line": 96
+        },
+        {
+          "name": "ar_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 97
+        },
+        {
+          "name": "ar_almost_full",
+          "type": "logic",
+          "width": 1,
+          "line": 98
+        },
+        {
+          "name": "ar_almost_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 99
+        },
+        {
+          "name": "ar_count",
+          "type": "logic",
+          "width": 1,
+          "line": 100
+        },
+        {
+          "name": "r_push",
+          "type": "logic",
+          "width": 1,
+          "line": 102
+        },
+        {
+          "name": "r_wdata",
+          "type": "r_item_t",
+          "width": 1,
+          "line": 103
+        },
+        {
+          "name": "r_pop",
+          "type": "logic",
+          "width": 1,
+          "line": 104
+        },
+        {
+          "name": "r_head",
+          "type": "r_item_t",
+          "width": 1,
+          "line": 105
+        },
+        {
+          "name": "r_full",
+          "type": "logic",
+          "width": 1,
+          "line": 106
+        },
+        {
+          "name": "r_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 107
+        },
+        {
+          "name": "r_almost_full",
+          "type": "logic",
+          "width": 1,
+          "line": 108
+        },
+        {
+          "name": "r_almost_empty",
+          "type": "logic",
+          "width": 1,
+          "line": 109
+        },
+        {
+          "name": "r_count",
+          "type": "logic",
+          "width": 1,
+          "line": 110
+        },
+        {
+          "name": "b_set_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 115
+        },
+        {
+          "name": "b_set_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 116
+        },
+        {
+          "name": "b_set_resp",
+          "type": "logic",
+          "width": 2,
+          "line": 117
+        },
+        {
+          "name": "beat_req_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 122
+        },
+        {
+          "name": "beat_req_ready",
+          "type": "logic",
+          "width": 1,
+          "line": 123
+        },
+        {
+          "name": "beat_req_write",
+          "type": "logic",
+          "width": 1,
+          "line": 124
+        },
+        {
+          "name": "beat_req_first",
+          "type": "logic",
+          "width": 1,
+          "line": 125
+        },
+        {
+          "name": "beat_req_addr",
+          "type": "logic",
+          "width": 1,
+          "line": 126
+        },
+        {
+          "name": "beat_req_size",
+          "type": "logic",
+          "width": 3,
+          "line": 127
+        },
+        {
+          "name": "beat_req_wdata",
+          "type": "logic",
+          "width": 1,
+          "line": 128
+        },
+        {
+          "name": "beat_req_wstrb",
+          "type": "logic",
+          "width": 1,
+          "line": 129
+        },
+        {
+          "name": "beat_rsp_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 131
+        },
+        {
+          "name": "beat_rsp_error",
+          "type": "logic",
+          "width": 1,
+          "line": 132
+        },
+        {
+          "name": "beat_rsp_rdata_valid",
+          "type": "logic",
+          "width": 1,
+          "line": 133
+        },
+        {
+          "name": "beat_rsp_rdata",
+          "type": "logic",
+          "width": 1,
+          "line": 134
+        },
+        {
+          "name": "frontend_wr_state_dbg",
+          "type": "logic",
+          "width": 2,
+          "line": 139
+        },
+        {
+          "name": "frontend_wr_beats_expected_dbg",
+          "type": "logic",
+          "width": 5,
+          "line": 140
+        },
+        {
+          "name": "frontend_wr_beats_rcvd_dbg",
+          "type": "logic",
+          "width": 5,
+          "line": 141
+        },
+        {
+          "name": "frontend_wr_req_illegal_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 142
+        },
+        {
+          "name": "frontend_r_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 143
+        },
+        {
+          "name": "frontend_b_pending_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 144
+        },
+        {
+          "name": "frontend_b_set_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 145
+        },
+        {
+          "name": "frontend_b_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 146
+        },
+        {
+          "name": "aw_wr_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 148
+        },
+        {
+          "name": "aw_rd_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 149
+        },
+        {
+          "name": "aw_overflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 150
+        },
+        {
+          "name": "aw_underflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 151
+        },
+        {
+          "name": "aw_wr_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 152
+        },
+        {
+          "name": "aw_rd_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 153
+        },
+        {
+          "name": "aw_head_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 154
+        },
+        {
+          "name": "aw_tail_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 155
+        },
+        {
+          "name": "w_wr_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 157
+        },
+        {
+          "name": "w_rd_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 158
+        },
+        {
+          "name": "w_overflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 159
+        },
+        {
+          "name": "w_underflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 160
+        },
+        {
+          "name": "w_wr_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 161
+        },
+        {
+          "name": "w_rd_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 162
+        },
+        {
+          "name": "w_head_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 163
+        },
+        {
+          "name": "w_tail_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 164
+        },
+        {
+          "name": "ar_wr_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 166
+        },
+        {
+          "name": "ar_rd_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 167
+        },
+        {
+          "name": "ar_overflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 168
+        },
+        {
+          "name": "ar_underflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 169
+        },
+        {
+          "name": "ar_wr_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 170
+        },
+        {
+          "name": "ar_rd_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 171
+        },
+        {
+          "name": "ar_head_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 172
+        },
+        {
+          "name": "ar_tail_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 173
+        },
+        {
+          "name": "r_wr_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 175
+        },
+        {
+          "name": "r_rd_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 176
+        },
+        {
+          "name": "r_overflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 177
+        },
+        {
+          "name": "r_underflow_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 178
+        },
+        {
+          "name": "r_wr_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 179
+        },
+        {
+          "name": "r_rd_ptr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 180
+        },
+        {
+          "name": "r_head_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 181
+        },
+        {
+          "name": "r_tail_raw_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 182
+        },
+        {
+          "name": "core_accept_enable_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 184
+        },
+        {
+          "name": "core_ctrl_busy_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 185
+        },
+        {
+          "name": "core_grant_valid_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 186
+        },
+        {
+          "name": "core_grant_wr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 187
+        },
+        {
+          "name": "core_grant_rd_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 188
+        },
+        {
+          "name": "core_grant_accept_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 189
+        },
+        {
+          "name": "core_wr_present_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 190
+        },
+        {
+          "name": "core_rd_present_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 191
+        },
+        {
+          "name": "core_wr_issue_ok_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 192
+        },
+        {
+          "name": "core_rd_issue_ok_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 193
+        },
+        {
+          "name": "core_wr_candidate_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 194
+        },
+        {
+          "name": "core_rd_candidate_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 195
+        },
+        {
+          "name": "core_wr_beats_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 196
+        },
+        {
+          "name": "core_rd_beats_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 197
+        },
+        {
+          "name": "core_wr_need_beats_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 198
+        },
+        {
+          "name": "core_rd_need_slots_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 199
+        },
+        {
+          "name": "core_r_free_slots_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 200
+        },
+        {
+          "name": "core_wr_payload_ready_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 201
+        },
+        {
+          "name": "core_rd_resp_space_ready_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 202
+        },
+        {
+          "name": "core_wr_illegal_fifo_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 203
+        },
+        {
+          "name": "core_rd_illegal_fifo_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 204
+        },
+        {
+          "name": "core_wr_block_reason_dbg",
+          "type": "logic",
+          "width": 3,
+          "line": 205
+        },
+        {
+          "name": "core_rd_block_reason_dbg",
+          "type": "logic",
+          "width": 3,
+          "line": 206
+        },
+        {
+          "name": "core_last_grant_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 207
+        },
+        {
+          "name": "core_arb_state_dbg",
+          "type": "logic",
+          "width": 2,
+          "line": 208
+        },
+        {
+          "name": "core_tie_break_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 209
+        },
+        {
+          "name": "core_ctrl_state_dbg",
+          "type": "logic",
+          "width": 3,
+          "line": 210
+        },
+        {
+          "name": "core_active_dir_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 211
+        },
+        {
+          "name": "core_beat_idx_dbg",
+          "type": "logic",
+          "width": 5,
+          "line": 212
+        },
+        {
+          "name": "core_beat_total_dbg",
+          "type": "logic",
+          "width": 5,
+          "line": 213
+        },
+        {
+          "name": "core_cur_addr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 214
+        },
+        {
+          "name": "core_active_illegal_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 215
+        },
+        {
+          "name": "core_error_seen_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 216
+        },
+        {
+          "name": "core_beat_launch_fire_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 217
+        },
+        {
+          "name": "core_beat_inflight_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 218
+        },
+        {
+          "name": "core_beat_complete_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 219
+        },
+        {
+          "name": "core_contract_violation_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 220
+        },
+        {
+          "name": "core_violation_code_dbg",
+          "type": "logic",
+          "width": 4,
+          "line": 221
+        },
+        {
+          "name": "backend_busy_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 223
+        },
+        {
+          "name": "backend_inflight_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 224
+        },
+        {
+          "name": "backend_accepted_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 225
+        },
+        {
+          "name": "backend_completed_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 226
+        },
+        {
+          "name": "backend_cur_addr_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 227
+        },
+        {
+          "name": "backend_cur_write_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 228
+        },
+        {
+          "name": "backend_cur_size_dbg",
+          "type": "logic",
+          "width": 3,
+          "line": 229
+        },
+        {
+          "name": "backend_cur_wdata_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 230
+        },
+        {
+          "name": "backend_cur_wstrb_dbg",
+          "type": "logic",
+          "width": 1,
+          "line": 231
+        }
+      ],
+      "fsm_states": []
+    }
+  ],
+  "hierarchy": {
+    "ahb_backend": {},
+    "ahb_beat_executor": {},
+    "axi2ahb_bridge_top": {},
+    "axi_frontend": {
+      "u_axi_bresp_gen": {}
+    },
+    "axi_req_capture": {},
+    "axi_rresp_gen": {},
+    "bridge_arbiter": {},
+    "bridge_controller": {},
+    "bridge_core": {},
+    "bridge_fifo_ctrl": {},
+    "fifo_wrapper": {},
+    "sync_fifo": {}
+  }
+}

@@ -44,9 +44,18 @@ testbench:
   index_path: .dv_ai_index
 
 simulation:
-  compile_cmd_template: "make compile TEST={test}"
-  run_cmd_template: "make run TEST={test} SEED={seed}"
-  coverage_cmd_template: "make cov TEST={test}"
+  compile_cmd_template: "make -C sim elab TESTNAME={test}"
+  run_cmd_template: "make -C sim run TESTNAME={test} SEED={seed}"
+  coverage_cmd_template: "make -C sim merge_cov"
+  urg_cmd_template: "make -C sim merge_cov"
+  timeout_seconds: 300
+  urg_timeout_seconds: 120
+  results_root: sim_results
+
+remote:
+  host: aliyun
+  project_root: /root/project_x2h/AXI2AHB-Lite-Bridge-UVM-Verification
+  env_setup: ""
 
 policy:
   allow_direct_file_modification: false

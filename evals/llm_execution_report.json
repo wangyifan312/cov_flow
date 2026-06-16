@@ -1,0 +1,154 @@
+{
+  "report": "eval_llm_execution",
+  "executed_at": "2026-06-15",
+  "model": "Claude Code (deepseek-v4-pro)",
+  "summary": {
+    "total": 6,
+    "pass": 6,
+    "partial": 0,
+    "fail": 0
+  },
+  "cases": [
+    {
+      "eval_id": "triage_gap_0001",
+      "project": "axi2ahb",
+      "target": "GAP_0001",
+      "task_mode": "triage",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "cov_get_gap_detail ✅, cov_get_coverpoint_source ✅ (2/2)"
+        },
+        "classification": {
+          "result": "PASS",
+          "expected": "Missing Stimulus",
+          "actual": "Missing Stimulus",
+          "detail": "seq AHB transfer bin never generated — correct classification"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "classification ✅, priority ✅, recommended_action ✅ (3/3)"
+        }
+      },
+      "overall": "PASS"
+    },
+    {
+      "eval_id": "triage_code_coverage_fsm",
+      "project": "axi2ahb",
+      "target": "GAP_M001",
+      "task_mode": "triage",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "cov_get_gap_detail ✅, cov_get_coverpoint_source ✅ (2/2)"
+        },
+        "classification": {
+          "result": "PASS",
+          "expected": "Unreachable State",
+          "actual": "Unreachable State",
+          "detail": "bridge_controller ST_LOAD→ST_IDLE transition — design artifact"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "classification ✅, priority ✅, recommended_action ✅ (3/3)"
+        }
+      },
+      "overall": "PASS"
+    },
+    {
+      "eval_id": "triage_code_coverage_line",
+      "project": "axi2ahb",
+      "target": "GAP_L001",
+      "task_mode": "triage",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "cov_get_gap_detail ✅, cov_get_coverpoint_source ✅ (2/2)"
+        },
+        "classification": {
+          "result": "PASS",
+          "expected": "Dead Code",
+          "actual": "Dead Code",
+          "detail": "tb/top_tb.sv:129 — testbench defensive code, P2 priority"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "classification ✅, priority ✅, recommended_action ✅ (3/3)"
+        }
+      },
+      "overall": "PASS"
+    },
+    {
+      "eval_id": "scenario_gen_0001",
+      "project": "axi2ahb",
+      "target": "GAP_0006",
+      "task_mode": "scenario",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "cov_get_gap_detail ✅, cov_get_coverpoint_source ✅, spec_search ✅ (empty: no spec_index.json), reg_find_fields_affecting_feature ✅ (empty: reg type=none), tb_get_existing_tests_for_feature ✅ (5/5 called, 3 returned data, 2 empty by design)"
+        },
+        "classification": {
+          "result": "PASS",
+          "expected": "Missing Stimulus",
+          "actual": "Missing Stimulus",
+          "detail": "wrap8 burst bin never generated — correct classification"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "gap_id ✅, target_coverage ✅, required_config ✅, stimulus ✅, confidence ✅, risk ✅, expected_coverage_impact ✅ (7/7)"
+        }
+      },
+      "notes": "spec_search and reg_find_fields_affecting_feature returned empty because axi2ahb has no spec_index.json (spec is PDF) and registers.type=none. This is a data format limitation, not a tool failure.",
+      "overall": "PASS"
+    },
+    {
+      "eval_id": "generate_case_0001",
+      "project": "axi2ahb",
+      "target": "GAP_0006",
+      "task_mode": "generate-case",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "tb_get_existing_tests_for_feature ✅, reg_find_fields_affecting_feature ✅ (empty by design), cov_get_gap_detail ✅ (3/3 called). tb_read_source ❌ (AXI2AHB_ROOT env var not passed to MCP server)"
+        },
+        "classification": {
+          "result": "N/A",
+          "detail": "generate-case mode has no classification requirement"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "patch_id ✅, gap_id ✅, new_files ✅, modified_files ✅, base_reuse ✅, compile_command ✅, run_command ✅, coverage_target ✅, review_checklist ✅ (9/9)"
+        }
+      },
+      "notes": "tb_read_source failed because MCP server was started without AXI2AHB_ROOT env var. Patch was generated using TB index data alone, which proved sufficient.",
+      "overall": "PASS"
+    },
+    {
+      "eval_id": "simulation_feedback_0001",
+      "project": "dma_subsystem",
+      "target": "dma_linked_list_desc_test (seed=1)",
+      "task_mode": "feedback",
+      "scores": {
+        "tool_calls": {
+          "result": "PASS",
+          "detail": "sim_get_test_result ✅, cov_get_coverage_diff ✅, cov_get_gap_detail ✅ (3/3)"
+        },
+        "classification": {
+          "result": "N/A",
+          "detail": "feedback mode has no classification requirement"
+        },
+        "output_completeness": {
+          "result": "PASS",
+          "detail": "gap_id ✅, before_status ✅, after_status ✅, simulation_result ✅, coverage_delta ✅, recommendation ✅ (6/6)"
+        }
+      },
+      "overall": "PASS"
+    }
+  ],
+  "infrastructure_notes": [
+    "axi2ahb spec is in PDF format (doc/spec.pdf); build_spec_index.py only supports Markdown. Consider adding PDF parsing support.",
+    "axi2ahb registers.type=none — no register model exists. This is expected for an AHB bridge.",
+    "AXI2AHB_ROOT env var was not passed to MCP server, causing tb_read_source to fail. Fix: set in .mcp.json env block."
+  ]
+}

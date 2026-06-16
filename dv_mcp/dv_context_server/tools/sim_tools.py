@@ -20,6 +20,7 @@ from dv_mcp.dv_context_server.services.evidence import simulation_evidence
 from dv_mcp.dv_context_server.services.project_loader import get_manifest
 from dv_mcp.dv_context_server.services.summarizer import envelope, error_envelope
 from lib.coverage_diff import compute_diff
+from lib.remote_executor import RemoteSimExecutor
 
 if TYPE_CHECKING:
     from lib.sim_executor import SimResult
@@ -48,6 +49,28 @@ def _sim_result_to_dict(sr: SimResult, test: str, seed: int) -> dict:
         "finished_at": sr.finished_at,
         "dry_run": False,
     }
+
+
+
+def _create_executor(manifest: Any) -> Any:
+    """Create a SimExecutor or RemoteSimExecutor based on manifest config."""
+    from lib.sim_executor import SimExecutor
+
+    if manifest.is_remote and manifest.remote_host:
+        return RemoteSimExecutor(
+            host=manifest.remote_host,
+            project_root=Path(manifest.remote_project_root or str(manifest.project_root)),
+            results_root=manifest.sim_results_root,
+            timeout_seconds=manifest.sim_timeout,
+            urg_timeout_seconds=manifest.sim_urg_timeout,
+            env_setup=manifest.remote_env_setup,
+        )
+    return SimExecutor(
+        project_root=manifest.project_root,
+        results_root=manifest.sim_results_root,
+        timeout_seconds=manifest.sim_timeout,
+        urg_timeout_seconds=manifest.sim_urg_timeout,
+    )
 
 
 def sim_run_targeted_test(
@@ -98,15 +121,8 @@ def sim_run_targeted_test(
     compile_template = sim_config.get("compile_cmd_template", "make compile TEST={test}")
     run_template = sim_config.get("run_cmd_template", "make run TEST={test} SEED={seed}")
 
-    # === Real simulation execution ===
-    from lib.sim_executor import SimExecutor
-
-    executor = SimExecutor(
-        project_root=manifest.project_root,
-        results_root=manifest.sim_results_root,
-        timeout_seconds=manifest.sim_timeout,
-        urg_timeout_seconds=manifest.sim_urg_timeout,
-    )
+    # === Real simulation execution (local or remote) ===
+    executor = _create_executor(manifest)
 
     # Validate inputs
     try:
@@ -177,12 +193,7 @@ def sim_get_test_result(
         return error_envelope(tool_name, project, f"Cannot load project: {e}")
 
     if seed is not None:
-        from lib.sim_executor import SimExecutor
-
-        executor = SimExecutor(
-            project_root=manifest.project_root,
-            results_root=manifest.sim_results_root,
-        )
+        executor = _create_executor(manifest)
 
         # 1. Try loading persisted SimResult
         sim_result = executor.load_result(test, seed)
@@ -259,12 +270,7 @@ def sim_search_log(
     except (FileNotFoundError, Exception) as e:
         return error_envelope(tool_name, project, f"Cannot load project: {e}")
 
-    from lib.sim_executor import SimExecutor
-
-    executor = SimExecutor(
-        project_root=manifest.project_root,
-        results_root=manifest.sim_results_root,
-    )
+    executor = _create_executor(manifest)
 
     search_result = executor.search_log(test, seed, keyword, step="run")
     if search_result["total_matches"] > 0 or executor.read_log(test, seed, "run") is not None:

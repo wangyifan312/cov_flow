@@ -208,6 +208,39 @@ class Manifest:
         """Return the policy configuration block."""
         return dict(self._data.get("policy", {}))
 
+    # ---- Remote execution ----
+
+    @property
+    def remote_config(self) -> dict[str, Any] | None:
+        """Return the remote execution config, or None if not configured."""
+        remote = self._data.get("remote")
+        if isinstance(remote, dict) and remote.get("host"):
+            return dict(remote)
+        return None
+
+    @property
+    def is_remote(self) -> bool:
+        """Return True if remote execution is configured."""
+        return self.remote_config is not None
+
+    @property
+    def remote_host(self) -> str | None:
+        """Return the SSH host alias for remote execution."""
+        cfg = self.remote_config
+        return str(cfg["host"]) if cfg else None
+
+    @property
+    def remote_project_root(self) -> str | None:
+        """Return the server-side project root path."""
+        cfg = self.remote_config
+        return str(cfg.get("project_root", "")) if cfg else None
+
+    @property
+    def remote_env_setup(self) -> str:
+        """Return remote environment setup commands, or empty string."""
+        cfg = self.remote_config
+        return str(cfg.get("env_setup", "")) if cfg else ""
+
     def get_simulation_command(self, cmd_type: str, test: str, seed: int) -> str:
         """Render a simulation command from manifest templates.
 

@@ -1,8 +1,8 @@
-<session version="1.1" release="O-2018.09-SP2" timestp="2026-06-01 03:10:11 GMT">
+<session version="1.1" release="O-2018.09-SP2" timestp="2026-06-16 11:17:49 GMT">
   <info>
-    <attr name="datetime" value="Mon Jun  1 11:10:56 2026
+    <attr name="datetime" value="Tue Jun 16 19:18:35 2026
 "/>
-    <attr name="command" value="urg -dir out/single_write_read_test_seed_1/cov.vdb -dir out/bd_write_fd_read_test_seed_1/cov.vdb -dir out/fd_write_bd_read_test_seed_1/cov.vdb -dir out/incr_random_len_size_wr_test_seed_1/cov.vdb -dir out/wrap_random_len_size_wr_test_seed_1/cov.vdb -dir out/fixed_random_len_size_wr_test_seed_1/cov.vdb -dir out/random_traffic_test_seed_1/cov.vdb -dir out/mixed_random_traffic_test_seed_1/cov.vdb -dir out/frontend_exception_test_seed_1/cov.vdb -dir out/backend_exception_test_seed_1/cov.vdb -dir out/fifo_full_stress_test_seed_1/cov.vdb -dir out/reset_recovery_test_seed_1/cov.vdb -dbname out/merged_cov_seed_1 -report out/urgReport_seed_1"/>
+    <attr name="command" value="urg -dir out/arbiter_gate_backpressure_test_seed_1/cov.vdb -dir out/dual_channel_contention_test_seed_1/cov.vdb -dir out/wr_resp_bp_test_seed_1/cov.vdb -dir out/single_write_read_test_seed_1/cov.vdb -dir out/fd_write_bd_read_test_seed_1/cov.vdb -dir out/bd_write_fd_read_test_seed_1/cov.vdb -dir out/incr_random_len_wr_test_seed_1/cov.vdb -dir out/wrap_random_len_wr_test_seed_1/cov.vdb -dir out/fixed_random_len_write_test_seed_1/cov.vdb -dir out/fixed_random_len_read_test_seed_1/cov.vdb -dir out/fixed_read_boundary_combo_test_seed_1/cov.vdb -dbname out/merged_all_cov"/>
     <attr name="top_instance" value="uvm_custom_install_verdi_recording,top_tb"/>
   </info>
   <hvp>
@@ -18,22 +18,22 @@
   </hvp>
   <old_coverage>
   <scope type="top" name="top">
-    <metric name="Line" value="708/1194" />
-    <metric name="Cond" value="192/231" />
-    <metric name="Toggle" value="14859/18988" />
+    <metric name="Line" value="689/1194" />
+    <metric name="Cond" value="145/231" />
+    <metric name="Toggle" value="14261/18988" />
     <metric name="FSM" value="9/10" />
-    <metric name="Branch" value="211/295" />
+    <metric name="Branch" value="191/295" />
     <metric name="Assert" value="16/20" />
-    <metric name="Group" value="82.7381%" />
+    <metric name="Group" value="62.7976%" />
   </scope>
   <scope type="instance" name="top">
   </scope>
   <scope type="group" name="top">
     <scope type="group" name="axi2ahb_pkg::axi2ahb_coverage::ahb_cg">
-      <metric name="Group" value="65.4762%" />
+      <metric name="Group" value="51.1905%" />
     </scope>
     <scope type="group" name="axi2ahb_pkg::axi2ahb_coverage::axi_cg">
-      <metric name="Group" value="100%" />
+      <metric name="Group" value="74.4048%" />
     </scope>
   </scope>
   <scope type="assert" name="Statistics">
